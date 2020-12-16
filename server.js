@@ -14,9 +14,8 @@ app.use(bodyParser.json());
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
-
+//db
 mongoose.Promise = global.Promise;
-
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db){
   if (err){
     log.error(err);
