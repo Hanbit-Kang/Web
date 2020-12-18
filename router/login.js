@@ -6,14 +6,11 @@ router.get('/', function(req, res){
   res.render('login');
 });
 
-router.post('/', function(req, res){
-  console.log(req.body); //!!!!!!!!!!!!!!!!!!!!!!!! 왜 req.body가 {}로 나오는가..(입력한 값으로 나와야함)
-  //Account.findOne({id:req.body.id, password:req.body.password}, function(err, account){
-
-    //if(err) return console.log(req.body);
-    //if(!account) return console.log(req.body);
-    //res.redirect('../');
-  //});
+router.post('/', function(req, res){ //Login
+  Account.findOne({id:req.body.id, password:req.body.password}, function(err, account){
+    if(err || !account) return res.json(err);
+    res.redirect('/');
+  });
 });
 
 module.exports = router;
