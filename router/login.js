@@ -8,7 +8,7 @@ router.get('/', function(req, res){
 
 router.post('/', function(req, res){ //Login
   Account.findOne({id:req.body.id, password:req.body.password}, function(err, account){
-    if(err || !account) return res.json(err);
+    if(err || !account) return res.json(err); //TODO: 로그인 실패 시 이쁘게 나오게
     res.redirect('/');
   });
 });

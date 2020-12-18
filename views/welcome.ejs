@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <%- include('./partials/head') %>
+    <script src="/public/js/login.js"></script>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="content">
+        <style>
+          .welcome_area{
+            margin-top: 70px;
+            margin-bottom: 70px;
+            width:600px;
+            height:250px;
+            border: 1px solid #dfe3e6;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-around;
+          }
+          .welcome_title{
+            margin-top: 40px;
+          }
+          .btn_login{
+            text-decoration: none !important;
+            margin-top: -20px;
+            border: 1px solid #dfe3e6;
+            border-radius: 0px;
+            width: 300px;
+            height: 52px;
+            margin-bottom: 20px;
+            color: white !important;
+            font-size: 20px;
+            text-align: center;
+            padding-top:10px;
+          }
+        </style>
+
+        <div class="welcome_area">
+          <h1 class="welcome_title"> 회원가입을 축하합니다! </h1>
+          <a href="/login" class="btn_login bg-dark"> 로그인 하러 가기 </a>
+        </div>
+      </div>
+
+      <div class="footer">
+        <%- include('./partials/footer') %>
+      </div>
+    </div>
+  </body>
+</html>

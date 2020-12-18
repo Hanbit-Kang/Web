@@ -1,6 +1,7 @@
 <html>
   <head>
     <%- include('./partials/head') %>
+    <script src="/public/js/login.js"></script>
   </head>
 
   <body>
@@ -21,7 +22,7 @@
         .login_title{
           margin-top: 40px;
         }
-        .login_fs{
+        .login_form{
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -42,6 +43,7 @@
         .login_footer{
           display: flex;
           justify-content: space-around;
+          margin-top:-30px;
         }
         .login_footer a{
           color: gray;
@@ -56,7 +58,7 @@
 
       <div class="login_area">
         <h1 class="login_title"> 계정 로그인 <h1>
-        <form action="/login" class="login_fs" method="post">
+        <form action="/login" class="login_form" method="post">
           <input type="text" name="id" id="id" placeholder="아이디">
           <input type="password" name="password" id="password" placeholder="비밀번호">
           <input type="submit" title="로그인" alt="로그인" value="로그인" class="btn_login bg-dark">

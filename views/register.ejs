@@ -1,0 +1,89 @@
+<html>
+  <head>
+    <%- include('./partials/head') %>
+    <script src="/public/js/register.js"></script>
+  </head>
+
+  <body>
+    <div class="wrap">
+
+    <div class="content">
+      <style>
+        .register_area{
+          margin-top: 70px;
+          margin-bottom: 70px;
+          width:500px;
+          border: 1px solid #dfe3e6;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+        }
+        .register_title{
+          margin-top: 40px;
+        }
+        .register_form{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-top: 20px;
+        }
+        .input_area{
+          display: flex;
+          flex-direction: column;
+        }
+        .register_area input{
+          border: 1px solid #dfe3e6;
+          border-radius: 0px;
+          width: 300px;
+          height: 50px;
+          font-size: 18px;
+          margin-bottom: 20px;
+        }
+        .register_area a{
+          text-decoration: none;
+          font-size: 12px;
+          color: red;
+          margin-top: -10px;
+          margin-bottom: 10px;
+          display: flex;
+          width: 300px;
+        }
+        .btn_register{
+          color: white;
+          font-size: 20px !important;
+        }
+        .none{
+          display: none !important;
+        }
+      </style>
+
+      <div class="register_area">
+        <h1 class="register_title"> 회원가입 <h1>
+        <div class="register_form">
+          <div class="input_area">
+            <input type="text" id="id" placeholder="아이디">
+            <a class="id_error none"> default </a>
+          </div>
+          <div class="input_area">
+            <input type="password" id="password" placeholder="비밀번호">
+            <a class="pw_error none"> default </a>
+          </div>
+          <div class="input_area">
+            <input type="password" id="password2" placeholder="비밀번호 확인">
+            <a class="pw2_error none"> default </a>
+          </div>
+          <div class="input_area">
+            <input type="text" id="email" placeholder="이메일">
+            <a class="email_error none"> default </a>
+          </div>
+          <input type="button" title="가입하기" alt="가입하기" value="가입하기" class="btn_register bg-dark">
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <%- include('./partials/footer') %>
+    </div>
+    </div>
+  </body>
+</html>

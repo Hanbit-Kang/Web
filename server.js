@@ -38,3 +38,4 @@ var server = app.listen(port, function(){
 //routes
 app.use('/', require('./router/main'));
 app.use('/login', require('./router/login'));
+app.use('/register', require('./router/register'));
