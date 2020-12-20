@@ -61,7 +61,10 @@
         <h1 class="register_title"> 회원가입 <h1>
         <div class="register_form">
           <div class="input_area">
-            <input type="text" id="id" placeholder="아이디">
+            <input type="text" id="id" value="<%= id %>" placeholder="아이디">
+            <% if (errors.id){ %>
+            <a class="id_error"> 이미 존재하는 아이디입니다. </a>
+            <% } %>
             <a class="id_error none"> default </a>
           </div>
           <div class="input_area">
@@ -73,7 +76,7 @@
             <a class="pw2_error none"> default </a>
           </div>
           <div class="input_area">
-            <input type="text" id="email" placeholder="이메일">
+            <input type="text" id="email" value="<%= email %>" placeholder="이메일">
             <a class="email_error none"> default </a>
           </div>
           <input type="button" title="가입하기" alt="가입하기" value="가입하기" class="btn_register bg-dark">

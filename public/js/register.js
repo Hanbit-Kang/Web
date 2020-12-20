@@ -9,37 +9,55 @@ function IsVaild(){
   var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
   var flag = 1;
-  //TODO 중복체크 이쁘게
   if(id==''){
     $('#id').focus();
     idError.innerHTML = "아이디를 입력하세요.";
     $('.id_error').removeClass('none');
     flag = 0;
-  }else{$('.id_error').addClass('none');}
-  if(!idRegex.test(id)){
-    $('#id').focus();
-    idError.innerHTML = "아이디가 유효하지 않습니다. (5-13자, 소문자만 허용)";
-    $('.id_error').removeClass('none');
-    flag = 0;
-  }else{$('.id_error').addClass('none');}
-  if(!pwRegex.test(pw)){
-    $('#password').focus();
-    pwError.innerHTML = "비밀번호가 유효하지 않습니다. (8-20자, 특수문자 \'!@#$%^&*()-_\' 허용";
+  }else{
+    if(!idRegex.test(id)){
+      $('#id').focus();
+      idError.innerHTML = "아이디가 유효하지 않습니다. (5-13자, 소문자만 허용)";
+      $('.id_error').removeClass('none');
+      flag = 0;
+    }else{$('.id_error').addClass('none');}
+  }
+
+  if(pw==''){
+    $('#pw').focus();
+    pwError.innerHTML = "비밀번호를 입력하세요.";
     $('.pw_error').removeClass('none');
     flag = 0;
-  }else{$('.pw_error').addClass('none');}
+  }else{
+    if(!pwRegex.test(pw)){
+      $('#password').focus();
+      pwError.innerHTML = "비밀번호가 유효하지 않습니다. (8-20자, 특수문자 \'!@#$%^&*()-_\' 허용";
+      $('.pw_error').removeClass('none');
+      flag = 0;
+    }else{$('.pw_error').addClass('none');}
+  }
+
   if(pw != $('#password2').val()){
     $('#password2').focus();
     pw2Error.innerHTML = "비밀번호가 일치하지 않습니다.";
     $('.pw2_error').removeClass('none');
     flag = 0;
   }else{$('.pw2_error').addClass('none');}
-  if(!emailRegex.test(email)){
+
+  if(email==''){
     $('#email').focus();
-    emailError.innerHTML = "이메일이 유효하지 않습니다.";
+    emailError.innerHTML = "이메일을 입력하세요.";
     $('.email_error').removeClass('none');
     flag = 0;
-  }else{$('.email_error').addClass('none');}
+  }else{
+    if(!emailRegex.test(email)){
+      $('#email').focus();
+      emailError.innerHTML = "이메일이 유효하지 않습니다.";
+      $('.email_error').removeClass('none');
+      flag = 0;
+    }else{$('.email_error').addClass('none');}
+  }
+
   return flag;
 }
 

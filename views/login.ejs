@@ -36,6 +36,15 @@
           font-size: 18px;
           margin-bottom: 20px;
         }
+        .login_form a{
+          text-decoration: none;
+          font-size: 12px;
+          color: red;
+          margin-top: -10px;
+          margin-bottom: 10px;
+          display: flex;
+          width: 300px;
+        }
         .btn_login{
           color: white;
           font-size: 20px !important;
@@ -54,13 +63,24 @@
           color: gray;
           opacity: 50%;
         }
+        .redline{
+          border-color: red !important;
+        }
+        .none{
+          display: none !important;
+        }
       </style>
 
       <div class="login_area">
         <h1 class="login_title"> 계정 로그인 <h1>
         <form action="/login" class="login_form" method="post">
-          <input type="text" name="id" id="id" placeholder="아이디">
-          <input type="password" name="password" id="password" placeholder="비밀번호">
+          <input class="input_id" type="text" name="id" id="id" value="<%= id %>" placeholder="아이디">
+          <% if(errors.login){ %>
+            <a class="id_error"> <%=errors.login %> </a>
+          <% } %>
+          <a class="id_error none"> default </a>
+          <input class="input_pw" type="password" name="password" id="password" placeholder="비밀번호">
+          <a class="pw_error none"> default </a>
           <input type="submit" title="로그인" alt="로그인" value="로그인" class="btn_login bg-dark">
         </form>
         <div class="login_footer">
