@@ -2,13 +2,12 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var Account = require('../models/Account');
 
-passport.serializeUser(function(account, done){
-  done(null, account.id);
+passport.serializeUser(function(user, done) {
+  done(null, user);
 });
-passport.deserializeUser(function(id, done){
-  Account.findOne({id:id}, function(err, account){
-    done(err, account);
-  });
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
 });
 
 //local Strategy

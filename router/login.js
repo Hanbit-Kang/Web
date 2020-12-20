@@ -1,16 +1,38 @@
 var express = require('express');
 var router = express.Router();
-var Account = require('../models/Account');
+var passport = require('passport');
+require('../config/passport');
 
 router.get('/', function(req, res){
-  res.render('login');
+  var id = req.flash('id')[0];
+  var errors = req.flash('errors')[0] || {};
+  res.render('login',{
+    id:id,
+    errors:errors
+  });
 });
 
-router.post('/', function(req, res){ //Login
-  Account.findOne({id:req.body.id, password:req.body.password}, function(err, account){
-    if(err || !account) return res.json(err); //TODO: 로그인 실패 시 이쁘게 나오게
-    res.redirect('/');
-  });
+router.post('/',
+  function(req, res, next){
+    var errors = {};
+    var isValid = true;
+
+    if(isValid){
+      next();
+    }else{
+      req.flash('errors', errors);
+      res.redirect('/');
+    }
+  },
+  passport.authenticate('local-login', {
+    successRedirect : '/',
+    failureRedirect : '/login'
+  })
+);
+
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
 });
 
 module.exports = router;
