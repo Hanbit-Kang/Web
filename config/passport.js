@@ -18,6 +18,7 @@ passport.use('local-login',
     passReqToCallback : true
   },
   function(req, id, password, done){
+    console.log('로그인시도');
     Account.findOne({id:id})
       .select({password:1})
       .exec(function(err, account){

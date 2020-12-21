@@ -3,16 +3,17 @@ var router = express.Router();
 var passport = require('passport');
 require('../config/passport');
 
-router.get('/', function(req, res){
+router.get('/login', function(req, res){
   var id = req.flash('id')[0];
   var errors = req.flash('errors')[0] || {};
+  console.log(id, errors);
   res.render('login',{
     id:id,
     errors:errors
   });
 });
 
-router.post('/',
+router.post('/login',
   function(req, res, next){
     var errors = {};
     var isValid = true;

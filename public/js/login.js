@@ -8,7 +8,6 @@ function IsVaild(){
   if(id==''){
     $('#id').focus();
     idError.innerHTML = "아이디를 입력하세요.";
-    $('.input_id').removeClass('redline');
     $('.id_error').removeClass('none');
     flag = 0;
   }else{$('.id_error').addClass('none');}
@@ -48,7 +47,7 @@ $(document).ready(function(){
   $('.btn_login').click(function(e){
     e.preventDefault();
     if (IsVaild()){
-      post_to_url('login',
+      post_to_url('/login',
       {
         id:$('#id').val(),
         password:$('#password').val()

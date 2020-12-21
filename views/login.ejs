@@ -36,10 +36,10 @@
           font-size: 18px;
           margin-bottom: 20px;
         }
-        .login_form a{
-          text-decoration: none;
+        .error{
+          text-decoration: none !important;
           font-size: 12px;
-          color: red;
+          color: red !important;
           margin-top: -10px;
           margin-bottom: 10px;
           display: flex;
@@ -76,11 +76,11 @@
         <form action="/login" class="login_form" method="post">
           <input class="input_id" type="text" name="id" id="id" value="<%= id %>" placeholder="아이디">
           <% if(errors.login){ %>
-            <a class="id_error"> <%=errors.login %> </a>
+            <a class="error id_error"> <%=errors.login %> </a>
           <% } %>
-          <a class="id_error none"> default </a>
+          <a class="error id_error none"> default </a>
           <input class="input_pw" type="password" name="password" id="password" placeholder="비밀번호">
-          <a class="pw_error none"> default </a>
+          <a class="error pw_error none"> default </a>
           <input type="submit" title="로그인" alt="로그인" value="로그인" class="btn_login bg-dark">
         </form>
         <div class="login_footer">
@@ -88,7 +88,7 @@
           <a class="dot"> · </a>
           <a class="find_pw"> 비밀번호 찾기 </a>
           <a class="dot"> · </a>
-          <a class="register"> 회원가입 </a>
+          <a href="/register" class="register"> 회원가입 </a>
         </div>
       </div>
     </div>

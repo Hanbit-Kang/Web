@@ -1,7 +1,7 @@
 <html>
   <head>
     <%- include('./partials/head') %>
-    <script src="/public/js/register.js"></script>
+    <script src="/public/js/edit.js"></script>
   </head>
 
   <body>
@@ -9,7 +9,7 @@
 
     <div class="content">
       <style>
-        .register_area{
+        .edit_area{
           margin-top: 70px;
           margin-bottom: 70px;
           width:500px;
@@ -18,10 +18,10 @@
           align-items: center;
           flex-direction: column;
         }
-        .register_title{
+        .edit_title{
           margin-top: 40px;
         }
-        .register_form{
+        .edit_form{
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -31,7 +31,7 @@
           display: flex;
           flex-direction: column;
         }
-        .register_area input{
+        .edit_area input{
           border: 1px solid #dfe3e6;
           border-radius: 0px;
           width: 300px;
@@ -48,7 +48,14 @@
           display: flex;
           width: 300px;
         }
-        .btn_register{
+        .access_error{
+          color: black !important;
+          font-size: 16px !important;
+          margin-left:90px;
+          margin-top: 10px !important;
+          margin-bottom: 20px !important;
+        }
+        .btn_edit{
           color: white;
           font-size: 20px !important;
         }
@@ -56,37 +63,28 @@
           display: none !important;
         }
       </style>
+      <div class="edit_area">
+        <h1 class="edit_title"> 회원정보수정 <h1>
+        <div class="edit_form">
+          <% if(user) {%>
+          <div class="userid" var="<%=user.id%>"></div>
+          <div class="input_area">
 
-      <div class="register_area">
-        <h1 class="register_title"> 회원가입 <h1>
-        <div class="register_form">
-          <div class="input_area">
-            <input type="text" id="id" value="<%= id %>" placeholder="아이디">
-            <% if (errors.id){ %>
-            <a class="error id_error"> <%= errors.id.message %> </a>
-            <% } %>
-            <a class="error id_error none"> default </a>
-          </div>
-          <div class="input_area">
-            <input type="text" id="nickname" value="<%= nickname %>" placeholder="닉네임">
+            <input type="text" id="nickname" value="<%= user.nickname %>" placeholder="닉네임">
+
             <% if (errors.nickname){ %>
-            <a class="error nickname_error"> <%= errors.nickname.message %> </a>
+            <a class="error nickname_error"> <%=errors.nickname%> </a>
             <% } %>
             <a class="error nickname_error none"> default </a>
           </div>
           <div class="input_area">
-            <input type="password" id="password" placeholder="비밀번호">
-            <a class="error pw_error none"> default </a>
-          </div>
-          <div class="input_area">
-            <input type="password" id="password2" placeholder="비밀번호 확인">
-            <a class="error pw2_error none"> default </a>
-          </div>
-          <div class="input_area">
-            <input type="text" id="email" value="<%= email %>" placeholder="이메일">
+            <input type="text" id="email" value="<%= user.email %>" placeholder="이메일">
             <a class="error email_error none"> default </a>
           </div>
-          <input type="button" title="가입하기" alt="가입하기" value="가입하기" class="btn_register bg-dark">
+          <input type="button" title="수정하기" alt="수정하기" value="수정하기" class="btn_edit bg-dark">
+          <%}else{%>
+          <a class="access_error"> 존재하지 않는 아이디입니다. </a>
+          <%}%>
         </div>
       </div>
     </div>
