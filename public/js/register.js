@@ -1,3 +1,4 @@
+//TODO: 닉네임 regex 설정 한글영어숫자8글자까지
 var idError, pwError, pw2Error, emailError;
 
 function IsVaild(){

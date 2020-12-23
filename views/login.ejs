@@ -2,100 +2,102 @@
   <head>
     <%- include('./partials/head') %>
     <script src="/public/js/login.js"></script>
+    <style>
+      .wrap{
+        display:flex;
+        align-items: center;
+        flex-direction: column;
+      }
+    </style>
   </head>
 
   <body>
     <div class="wrap">
+      <div class="header">
+        <%- include('./partials/header') %>
+      </div>
+      <div class="content">
+        <style>
+          .login_area{
+            margin-top: 70px;
+            margin-bottom: 70px;
+            width:600px;
+            height:400px;
+            border: 1px solid #dfe3e6;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+          }
+          .login_title{
+            margin-top: 40px;
+          }
+          .login_form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+          }
+          .login_area input{
+            border: 1px solid #dfe3e6;
+            border-radius: 0px;
+            width: 300px;
+            height: 50px;
+            font-size: 18px;
+            margin-bottom: 20px;
+          }
+          .error{
+            text-decoration: none !important;
+            font-size: 12px;
+            color: red !important;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: flex;
+            width: 300px;
+          }
+          .btn_login{
+            color: white;
+            font-size: 20px !important;
+          }
+          .login_footer{
+            display: flex;
+            justify-content: space-around;
+            margin-top:-30px;
+          }
+          .login_footer a{
+            color: gray;
+            font-size: 16px;
+            cursor: pointer;
+          }
+          .redline{
+            border-color: red !important;
+          }
+        </style>
 
-    <div class="content">
-      <style>
-        .login_area{
-          margin-top: 70px;
-          margin-bottom: 70px;
-          width:600px;
-          height:400px;
-          border: 1px solid #dfe3e6;
-          display: flex;
-          align-items: center;
-          flex-direction: column;
-        }
-        .login_title{
-          margin-top: 40px;
-        }
-        .login_form{
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          margin-top: 20px;
-        }
-        .login_area input{
-          border: 1px solid #dfe3e6;
-          border-radius: 0px;
-          width: 300px;
-          height: 50px;
-          font-size: 18px;
-          margin-bottom: 20px;
-        }
-        .error{
-          text-decoration: none !important;
-          font-size: 12px;
-          color: red !important;
-          margin-top: -10px;
-          margin-bottom: 10px;
-          display: flex;
-          width: 300px;
-        }
-        .btn_login{
-          color: white;
-          font-size: 20px !important;
-        }
-        .login_footer{
-          display: flex;
-          justify-content: space-around;
-          margin-top:-30px;
-        }
-        .login_footer a{
-          color: gray;
-          font-size: 16px;
-          cursor: pointer;
-        }
-        .dot{
-          color: gray;
-          opacity: 50%;
-        }
-        .redline{
-          border-color: red !important;
-        }
-        .none{
-          display: none !important;
-        }
-      </style>
-
-      <div class="login_area">
-        <h1 class="login_title"> 계정 로그인 <h1>
-        <form action="/login" class="login_form" method="post">
-          <input class="input_id" type="text" name="id" id="id" value="<%= id %>" placeholder="아이디">
-          <% if(errors.login){ %>
-            <a class="error id_error"> <%=errors.login %> </a>
-          <% } %>
-          <a class="error id_error none"> default </a>
-          <input class="input_pw" type="password" name="password" id="password" placeholder="비밀번호">
-          <a class="error pw_error none"> default </a>
-          <input type="submit" title="로그인" alt="로그인" value="로그인" class="btn_login bg-dark">
-        </form>
-        <div class="login_footer">
-          <a class="find_id"> 아이디 찾기 </a>
-          <a class="dot"> · </a>
-          <a class="find_pw"> 비밀번호 찾기 </a>
-          <a class="dot"> · </a>
-          <a href="/register" class="register"> 회원가입 </a>
+        <div class="login_area">
+          <h1 class="login_title"> 계정 로그인 <h1>
+          <form action="/login" class="login_form" method="post">
+            <input class="input_id" type="text" name="id" id="id" value="<%= id %>" placeholder="아이디">
+            <% if(errors.login){ %>
+              <a class="error id_error"> <%=errors.login %> </a>
+            <% } %>
+            <a class="error id_error none"> default </a>
+            <input class="input_pw" type="password" name="password" id="password" placeholder="비밀번호">
+            <a class="error pw_error none"> default </a>
+            <input type="submit" title="로그인" alt="로그인" value="로그인" class="btn_login bg-dark">
+          </form>
+          <div class="login_footer">
+            <a class="find_id"> 아이디 찾기 </a>
+            <a class="dot"> · </a>
+            <a class="find_pw"> 비밀번호 찾기 </a>
+            <a class="dot"> · </a>
+            <a href="/register" class="register"> 회원가입 </a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="footer">
-      <%- include('./partials/footer') %>
-    </div>
+      <div class="footer">
+        <%- include('./partials/footer') %>
+      </div>
     </div>
   </body>
 </html>

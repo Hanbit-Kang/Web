@@ -4,80 +4,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
-<script src="/public/js/head.js"></script>
 <style>
   html, head, body{
     margin:0;
   }
 </style>
-
-<div class="header">
-  <style>
-    .wrap{
-      display:flex;
-      align-items: center;
-      flex-direction: column;
-    }
-    .header{
-      width: 100%;
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-    }
-    .menubar{
-      display: flex;
-      justify-content:space-between;
-      align-items: center;
-      width:100%;
-      height: 50px;
-      border-bottom: solid 1px #dfe3e6;
-    }
-    .mb_left{
-      margin-left: 20px;
-    }
-    .mb_middle{
-      display: flex;
-      justify-content:space-around;
-      width: 400px;
-    }
-    .mb_middle a{
-      display: flex;
-      cursor: pointer;
-    }
-    .mb_right{
-      display: flex;
-      width: 130px;
-      margin-right: 20px;
-      justify-content: space-between;
-    }
-    .mb_right a{
-      display: flex;
-      font-family: "Montserrat", sans-sans-serif;
-      cursor: pointer;
-      color: black;
-      text-decoration: none;
-    }
-  </style>
-  <div class="menubar">
-    <span class="mb_left">
-      <a href="/"> <img src="/public/images/classicalLogo.png" width="150px"></img> </a>
-    </span>
-    <span class="mb_middle">
-      <a> 공지사항 </a>
-      <a> 공연정보 </a>
-      <a> 음악공유 </a>
-      <a> 자유게시판 </a>
-    </span>
-    <span class="mb_right">
-      <% if(isAuthenticated){ %>
-        <a class="logout"> Logout </a>
-        <a class="dot"> | </a>
-        <a href="/mypage"> 내 정보 </a>
-      <% } else { %>
-        <a href="/login"> Login </a>
-        <a class="dot"> | </a>
-        <a href="/register"> Register </a>
-      <% } %>
-    </span>
-  </div>
-</div>

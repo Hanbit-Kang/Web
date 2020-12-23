@@ -54,3 +54,4 @@ app.use('/', require('./router/main'));
 app.use('/', require('./router/login'));
 app.use('/', require('./router/register'));
 app.use('/', require('./router/edit'));
+app.use('/', require('./router/post'));

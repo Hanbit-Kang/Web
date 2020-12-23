@@ -2,10 +2,20 @@
   <head>
     <%- include('./partials/head') %>
     <script src="/public/js/login.js"></script>
+    <style>
+      .wrap{
+        display:flex;
+        align-items: center;
+        flex-direction: column;
+      }
+    </style>
   </head>
 
   <body>
     <div class="wrap">
+      <div class="header">
+        <%- include('./partials/header') %>
+      </div>
       <div class="content">
         <style>
           .welcome_area{

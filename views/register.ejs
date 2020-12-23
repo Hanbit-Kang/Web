@@ -2,98 +2,104 @@
   <head>
     <%- include('./partials/head') %>
     <script src="/public/js/register.js"></script>
+    <style>
+      .wrap{
+        display:flex;
+        align-items: center;
+        flex-direction: column;
+      }
+    </style>
   </head>
 
   <body>
     <div class="wrap">
+      <div class="header">
+        <%- include('./partials/header') %>
+      </div>
+      <div class="content">
+        <style>
+          .register_area{
+            margin-top: 70px;
+            margin-bottom: 70px;
+            width:500px;
+            border: 1px solid #dfe3e6;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+          }
+          .register_title{
+            margin-top: 40px;
+          }
+          .register_form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+          }
+          .input_area{
+            display: flex;
+            flex-direction: column;
+          }
+          .register_area input{
+            border: 1px solid #dfe3e6;
+            border-radius: 0px;
+            width: 300px;
+            height: 50px;
+            font-size: 18px;
+            margin-bottom: 20px;
+          }
+          .error{
+            text-decoration: none !important;
+            font-size: 12px;
+            color: red !important;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: flex;
+            width: 300px;
+          }
+          .btn_register{
+            color: white;
+            font-size: 20px !important;
+          }
+        </style>
 
-    <div class="content">
-      <style>
-        .register_area{
-          margin-top: 70px;
-          margin-bottom: 70px;
-          width:500px;
-          border: 1px solid #dfe3e6;
-          display: flex;
-          align-items: center;
-          flex-direction: column;
-        }
-        .register_title{
-          margin-top: 40px;
-        }
-        .register_form{
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          margin-top: 20px;
-        }
-        .input_area{
-          display: flex;
-          flex-direction: column;
-        }
-        .register_area input{
-          border: 1px solid #dfe3e6;
-          border-radius: 0px;
-          width: 300px;
-          height: 50px;
-          font-size: 18px;
-          margin-bottom: 20px;
-        }
-        .error{
-          text-decoration: none !important;
-          font-size: 12px;
-          color: red !important;
-          margin-top: -10px;
-          margin-bottom: 10px;
-          display: flex;
-          width: 300px;
-        }
-        .btn_register{
-          color: white;
-          font-size: 20px !important;
-        }
-        .none{
-          display: none !important;
-        }
-      </style>
-
-      <div class="register_area">
-        <h1 class="register_title"> 회원가입 <h1>
-        <div class="register_form">
-          <div class="input_area">
-            <input type="text" id="id" value="<%= id %>" placeholder="아이디">
-            <% if (errors.id){ %>
-            <a class="error id_error"> <%= errors.id.message %> </a>
-            <% } %>
-            <a class="error id_error none"> default </a>
+        <div class="register_area">
+          <h1 class="register_title"> 회원가입 <h1>
+          <div class="register_form">
+            <div class="input_area">
+              <input type="text" id="id" value="<%= id %>" placeholder="아이디">
+              <% if (errors.id){ %>
+              <a class="error id_error"> <%= errors.id.message %> </a>
+              <% } %>
+              <a class="error id_error none"> default </a>
+            </div>
+            <div class="input_area">
+              <input type="text" id="nickname" value="<%= nickname %>" placeholder="닉네임">
+              <% if (errors.nickname){ %>
+              <a class="error nickname_error"> <%= errors.nickname.message %> </a>
+              <% } %>
+              <a class="error nickname_error none"> default </a>
+            </div>
+            <div class="input_area">
+              <input type="password" id="password" placeholder="비밀번호">
+              <a class="error pw_error none"> default </a>
+            </div>
+            <div class="input_area">
+              <input type="password" id="password2" placeholder="비밀번호 확인">
+              <a class="error pw2_error none"> default </a>
+            </div>
+            <div class="input_area">
+              <input type="text" id="email" value="<%= email %>" placeholder="이메일">
+              <a class="error email_error none"> default </a>
+            </div>
+            <input type="button" title="가입하기" alt="가입하기" value="가입하기" class="btn_register bg-dark">
           </div>
-          <div class="input_area">
-            <input type="text" id="nickname" value="<%= nickname %>" placeholder="닉네임">
-            <% if (errors.nickname){ %>
-            <a class="error nickname_error"> <%= errors.nickname.message %> </a>
-            <% } %>
-            <a class="error nickname_error none"> default </a>
-          </div>
-          <div class="input_area">
-            <input type="password" id="password" placeholder="비밀번호">
-            <a class="error pw_error none"> default </a>
-          </div>
-          <div class="input_area">
-            <input type="password" id="password2" placeholder="비밀번호 확인">
-            <a class="error pw2_error none"> default </a>
-          </div>
-          <div class="input_area">
-            <input type="text" id="email" value="<%= email %>" placeholder="이메일">
-            <a class="error email_error none"> default </a>
-          </div>
-          <input type="button" title="가입하기" alt="가입하기" value="가입하기" class="btn_register bg-dark">
         </div>
       </div>
-    </div>
 
-    <div class="footer">
-      <%- include('./partials/footer') %>
-    </div>
+      <div class="footer">
+        <%- include('./partials/footer') %>
+      </div>
     </div>
   </body>
 </html>
