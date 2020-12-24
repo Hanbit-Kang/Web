@@ -2,13 +2,6 @@
   <head>
     <%- include('./partials/head') %>
     <script src="/public/js/edit.js"></script>
-    <style>
-      .wrap{
-        display:flex;
-        align-items: center;
-        flex-direction: column;
-      }
-    </style>
   </head>
 
   <body>
@@ -18,9 +11,18 @@
       </div>
       <div class="content">
         <style>
+          .content{
+            display:flex;
+            align-items: center;
+            flex-direction: column;
+            background-color: #F8F8FF;
+            width:100%;
+          }
           .edit_area{
+            background-color: white;
             margin-top: 70px;
             margin-bottom: 70px;
+            padding-bottom: 20px;
             width:500px;
             border: 1px solid #dfe3e6;
             display: flex;
@@ -29,6 +31,7 @@
           }
           .edit_title{
             margin-top: 40px;
+            letter-spacing: 10px;
           }
           .edit_form{
             display: flex;
@@ -60,8 +63,6 @@
           .access_error{
             color: black !important;
             font-size: 16px !important;
-            margin-left:90px;
-            margin-top: 10px !important;
             margin-bottom: 20px !important;
           }
           .btn_edit{

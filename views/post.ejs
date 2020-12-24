@@ -11,6 +11,12 @@
       </div>
       <div class="content">
         <style>
+          .content{
+            background-color: #F8F8FF;
+            width:100%;
+            padding-top:30px;
+            padding-bottom: 60px;
+          }
           @media(min-width:750px){
             .post_area{
               margin-left: 5%;
@@ -18,10 +24,9 @@
             }
           }
           .post_area{
-            margin-top:30px;
-            margin-bottom: 30px;
             border: 1px solid #dfe3e6;
             width: 750px;
+            background-color: white;
           }
           .post_header{
             margin-left: 30px;
@@ -92,7 +97,7 @@
             font-size: 24px;
           }
           .like{
-            color: red !important;
+            color: #de0581 !important;
             font-size: 40px;
             margin-left: 10px;
           }
@@ -254,13 +259,6 @@
                     </span>
                   </div>
 
-                  <div class="cmt_input_area input_reply">
-                    <textarea class="input_cmt" placeholder="답글을 입력하세요."></textarea>
-                    <div class="cmt_input_btn alert-secondary">
-                      <a href="#" class="a_basic"> 등록 </a>
-                    </div>
-                  </div>
-
                   <div class="cmt_reply">
                     <span class="cmt_left">
                       <span class="cmt_nickname">
@@ -309,6 +307,13 @@
                     </span>
                   </div>
                 </li>
+
+                <div class="cmt_input_area input_reply none">
+                  <textarea class="input_cmt" placeholder="답글을 입력하세요."></textarea>
+                  <div class="cmt_input_btn alert-secondary">
+                    <a href="#" class="a_basic"> 등록 </a>
+                  </div>
+                </div>
 
                 <div class="cmt_input_area">
                   <textarea class="input_cmt" placeholder="댓글을 입력하세요."></textarea>

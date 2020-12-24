@@ -1,6 +1,7 @@
 //TODO: 페이지 들어왔을 때, 이 게시글 좋아요 했었으면 하트 채워지게
 $(document).ready(function(){
   var JQlike = $('.like');
+
   JQlike.click(function(e){
     e.preventDefault();
     if(JQlike.hasClass('like_off')){
@@ -14,5 +15,13 @@ $(document).ready(function(){
       $('.like_cmt').css('opacity', '0%');
       JQlike.html("♡");
     }
+  });
+
+  $('.cmt_content').each(function(i){
+    $(this).click(function(e){
+      e.preventDefault();
+      $(".input_reply").removeClass('none');
+      $(".input_reply").insertAfter($(this).parents('.comment_main'));
+    });
   });
 });

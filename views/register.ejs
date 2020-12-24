@@ -2,13 +2,6 @@
   <head>
     <%- include('./partials/head') %>
     <script src="/public/js/register.js"></script>
-    <style>
-      .wrap{
-        display:flex;
-        align-items: center;
-        flex-direction: column;
-      }
-    </style>
   </head>
 
   <body>
@@ -18,7 +11,15 @@
       </div>
       <div class="content">
         <style>
+          .content{
+            display:flex;
+            align-items: center;
+            flex-direction: column;
+            background-color: #F8F8FF;
+            width:100%;
+          }
           .register_area{
+            background-color: white;
             margin-top: 70px;
             margin-bottom: 70px;
             width:500px;
@@ -29,12 +30,14 @@
           }
           .register_title{
             margin-top: 40px;
+            letter-spacing: 10px;
           }
           .register_form{
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-top: 20px;
+            margin-bottom: 20px;
           }
           .input_area{
             display: flex;

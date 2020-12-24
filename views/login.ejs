@@ -2,13 +2,6 @@
   <head>
     <%- include('./partials/head') %>
     <script src="/public/js/login.js"></script>
-    <style>
-      .wrap{
-        display:flex;
-        align-items: center;
-        flex-direction: column;
-      }
-    </style>
   </head>
 
   <body>
@@ -18,10 +11,20 @@
       </div>
       <div class="content">
         <style>
+          .content{
+            display:flex;
+            align-items: center;
+            flex-direction: column;
+          }
+          .content{
+            background-color: #F8F8FF;
+            width:100%;
+          }
           .login_area{
+            background-color: white;
             margin-top: 70px;
             margin-bottom: 70px;
-            width:600px;
+            width:500px;
             height:400px;
             border: 1px solid #dfe3e6;
             display: flex;
@@ -30,6 +33,7 @@
           }
           .login_title{
             margin-top: 40px;
+            letter-spacing: 10px;
           }
           .login_form{
             display: flex;
@@ -74,7 +78,7 @@
         </style>
 
         <div class="login_area">
-          <h1 class="login_title"> 계정 로그인 <h1>
+          <h1 class="login_title"> 로그인 <h1>
           <form action="/login" class="login_form" method="post">
             <input class="input_id" type="text" name="id" id="id" value="<%= id %>" placeholder="아이디">
             <% if(errors.login){ %>
