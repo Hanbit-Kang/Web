@@ -1,0 +1,201 @@
+<html>
+  <head>
+    <%- include('../partials/head') %>
+    <script src="/public/js/user/index.js"></script>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="header">
+        <%- include('../partials/header') %>
+      </div>
+      <div class="content">
+        <style>
+          .content{
+            display:flex;
+            align-items: center;
+            flex-direction: column;
+            background-color: #F8F8FF;
+            width:100%;
+          }
+          .index_area{
+            background-color: white;
+            margin-top: 20px;
+            margin-bottom: 70px;
+            padding-bottom: 20px;
+            width:800px;
+            border: 1px solid #dfe3e6;
+            display: flex;
+            flex-direction: column;
+          }
+          .index_title{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            padding-top: 20px;
+            padding-left: 20px;
+            padding-bottom: 10px;
+          }
+          .index_title h1{
+            letter-spacing: 2px;
+          }
+          .img_setting{
+            margin-right: 20px;
+            margin-top: 7px;
+          }
+
+          .user_profile{
+            display:flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+          }
+          .up_text{
+            margin-left: 30px;
+          }
+          .up_nickname:hover{
+            color: #de0581;
+            cursor: pointer;
+          }
+          .up_id_and_email{
+            cursor: pointer;
+            margin-left: 5px;
+            margin-top: -3px;
+            color: gray;
+          }
+
+          .user_index{
+            display: flex;
+            flex-direction: column;
+            margin-top: 50px;
+          }
+          .ui_type{
+            margin-top: 10px;
+            border-top: 1px solid #dfe3e6;
+          }
+          .ui_type_title{
+            margin-top:30px;
+            margin-left: 30px;
+          }
+          .ui_posts{
+            margin-top: 20px;
+            margin-left: 30px;
+            list-style: none;
+            padding:0;
+          }
+          .ui_post{
+            cursor: pointer;
+            display: flex;
+            flex-direction: row;
+            padding-top:6px;
+            border-bottom: 1px solid #dfe3e6;
+          }
+          .ui_post:hover{
+            text-decoration: underline;
+          }
+          .ui_post_comments{
+            margin-left:4px;
+            color: red !important;
+          }
+
+          .ui_comments{
+            margin-top: 20px;
+            margin-left: 30px;
+            list-style: none;
+            padding:0;
+          }
+          .ui_comment{
+            cursor: pointer;
+            display: flex;
+            flex-direction: row;
+            padding-top:6px;
+          }
+          .ui_comment_post{
+            width:400px;
+          }
+          .ui_comment_post:hover{
+            text-decoration: underline;
+          }
+          .ui_comment_text{
+            width:400px;
+            font-weight: 0;
+          }
+          .ui_comment_text:hover{
+            text-decoration: underline;
+          }
+
+          .access_error{
+            color: black !important;
+            font-size: 16px !important;
+          }
+        </style>
+        <div class="index_area">
+          <div class="index_title">
+            <h3> 회원정보 </h3>
+            <% if(user && whoami.passport){%>
+              <% if(user.id==whoami.passport.user.id){ %>
+            <a href="/user/edit/<%=whoami.passport.user.id%>">
+              <img class="img_setting" src="/public/images/setting.png" width="20px" height="20px">
+            </a>
+              <% } %>
+            <% } %>
+          </div>
+          <a class="line"></a>
+          <div class="index_form">
+            <% if(user) {%>
+            <div class="user_profile">
+              <span class="up_img">
+                <img src="/public/images/user_gray.png" width="150px" height="150px">
+              </span>
+              <span class="up_text">
+                <h1 class="up_nickname"> <%=user.nickname%> </h1>
+                <h5 class="up_id_and_email"> <%=user.id%> / <%=user.email%> </h5>
+              </span>
+            </div>
+            <div class="user_index">
+              <div class="ui_type">
+                <h4 class="ui_type_title"> 게시글 12 </h4>
+                <ul class="ui_posts">
+                  <li class="ui_post">
+                    <h6 class="ui_post_title"> 아니근데이건아니지 </h6>
+                    <h6 class="ui_post_comments"> [2] </h6>
+                  </li>
+                  <li class="ui_post">
+                    <h6 class="ui_post_title"> 아오늘 공부 다 했다.............. </h6>
+                    <h6 class="ui_post_comments"> [1] </h6>
+                  </li>
+                  <li class="ui_post">
+                    <h6 class="ui_post_title"> 댓글 안 달리면 탈퇴함 </h6>
+                    <h6 class="ui_post_comments"> [0] </h6>
+                  </li>
+                </ul>
+              </div>
+              <div class="ui_type">
+                <h4 class="ui_type_title"> 댓글 152 </h4>
+                <ul class="ui_comments">
+                  <li class="ui_comment">
+                    <h6 class="ui_comment_post"> <알림> 이 글에 댓글 달지 마십쇼 </h6>
+                    <h6 class="ui_comment_text">  ㅇㅋ </h6>
+                  </li>
+                  <li class="ui_comment">
+                    <h6 class="ui_comment_post"> [음악 공유] Schumann Arabeske, Op. 18 </h6>
+                    <h6 class="ui_comment_text">  역시 슈만 </h6>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <%}else{%>
+            <a class="access_error a_basic"> 이런 일이 벌어질 리 없어 </a>
+            <%}%>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <%- include('../partials/footer') %>
+      </div>
+    </div>
+  </body>
+</html>

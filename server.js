@@ -49,9 +49,16 @@ var server = app.listen(port, function(){
   console.log("port:", port);
 });
 
+//ejs CAN access to SESSION
+app.use(function(req, res, next) {
+  if(req.session) res.locals.whoami = req.session;
+  else res.locals.whoami = undefined;
+  next();
+});
+
 //routes
 app.use('/', require('./router/main'));
 app.use('/', require('./router/login'));
 app.use('/', require('./router/register'));
-app.use('/', require('./router/edit'));
+app.use('/', require('./router/user'));
 app.use('/', require('./router/post'));

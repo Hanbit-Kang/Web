@@ -1,13 +1,13 @@
 <html>
   <head>
-    <%- include('./partials/head') %>
-    <script src="/public/js/edit.js"></script>
+    <%- include('../partials/head') %>
+    <script src="/public/js/user/edit.js"></script>
   </head>
 
   <body>
     <div class="wrap">
       <div class="header">
-        <%- include('./partials/header') %>
+        <%- include('../partials/header') %>
       </div>
       <div class="content">
         <style>
@@ -91,14 +91,14 @@
             </div>
             <input type="button" title="수정하기" alt="수정하기" value="수정하기" class="btn_edit bg-dark">
             <%}else{%>
-            <a class="access_error"> 존재하지 않는 아이디입니다. </a>
+            <a class="access_error"> 이런 일은 벌어질 수 없어. </a>
             <%}%>
           </div>
         </div>
       </div>
 
       <div class="footer">
-        <%- include('./partials/footer') %>
+        <%- include('../partials/footer') %>
       </div>
     </div>
   </body>

@@ -1,13 +1,12 @@
-//TODO: 닉네임 regex 설정 한글영어숫자8글자까지
 var idError, pwError, pw2Error, emailError;
 
 function IsVaild(){
   var id = $('#id').val();
   var idRegex = /^[a-z][a-z\d]{4,12}$/;
   var nickname = $('#nickname').val();
-  var nicknameRegex = /^[a-z][a-z\d]{4,12}$/;
+  var nicknameRegex = /^[a-zA-Z가-힣\d\s]{2,10}$/;
   var pw = $('#password').val();
-  var pwRegex = /^[a-zA-Z0-9!@#$%^&*()-_]{7,19}$/;
+  var pwRegex = /^[a-zA-Z0-9!@#$%^&*()-_]{8,20}$/;
   var email = $('#email').val();
   var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
@@ -16,28 +15,38 @@ function IsVaild(){
     $('#id').focus();
     idError.innerHTML = "아이디를 입력하세요.";
     $('.id_error').removeClass('none');
+    $('.id_overlap').addClass('none');
     flag = 0;
   }else{
     if(!idRegex.test(id)){
       $('#id').focus();
       idError.innerHTML = "아이디가 유효하지 않습니다. (5-13자, 소문자만 허용)";
       $('.id_error').removeClass('none');
+      $('.id_overlap').addClass('none');
       flag = 0;
-    }else{$('.id_error').addClass('none');}
+    }else{
+      $('.id_error').addClass('none');
+      $('.id_overlap').removeClass('none');
+    }
   }
 
   if(nickname==''){
     $('#nickname').focus();
     nicknameError.innerHTML = "닉네임을 입력하세요.";
     $('.nickname_error').removeClass('none');
+    $('.nickname_overlap').addClass('none');
     flag = 0;
   }else{
     if(!nicknameRegex.test(nickname)){
       $('#nickname').focus();
-      nicknameError.innerHTML = "닉네임이 유효하지 않습니다. (5-13자, 소문자만 허용)";
+      nicknameError.innerHTML = "닉네임이 유효하지 않습니다. (2-10자)";
       $('.nickname_error').removeClass('none');
+      $('.nickname_overlap').addClass('none');
       flag = 0;
-    }else{$('.nickname_error').addClass('none');}
+    }else{
+      $('.nickname_error').addClass('none');
+      $('.nickname_overlap').removeClass('none');
+    }
   }
 
   if(pw==''){

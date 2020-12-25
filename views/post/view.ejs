@@ -1,13 +1,13 @@
 <html>
   <head>
-    <%- include('./partials/head') %>
-    <script src="/public/js/post.js"></script>
+    <%- include('../partials/head') %>
+    <script src="/public/js/post/view.js"></script>
   </head>
 
   <body>
     <div class="wrap">
       <div class="header">
-        <%- include('./partials/header') %>
+        <%- include('../partials/header') %>
       </div>
       <div class="content">
         <style>
@@ -75,7 +75,7 @@
             color: black;
           }
 
-          .post_content{
+          .post_body{
             margin-left: 30px;
             margin-right: 30px;
             margin-top: 30px;
@@ -231,7 +231,7 @@
               </span>
             </div>
           </div>
-          <div class="post_content">
+          <div class="post_body">
             본문은 User가 알아서 하겠죠
           </div>
           <div class="post_footer">
@@ -329,7 +329,7 @@
       </div>
 
       <div class="footer">
-        <%- include('./partials/footer') %>
+        <%- include('../partials/footer') %>
       </div>
     </div>
   </body>

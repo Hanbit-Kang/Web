@@ -22,10 +22,10 @@
     height: 50px;
     border-bottom: solid 1px #dfe3e6;
   }
-  .menubar a{
+  .mb_middle a{
     transition-duration: 0.2s;
   }
-  .menubar a:hover{
+  .mb_middle a:hover{
     transform: scale(1.1);
   }
   .mb_left{
@@ -45,6 +45,7 @@
   .mb_middle{
     display: none;
   }
+
   .mb_right{
     display: flex;
     width: 130px;
@@ -57,6 +58,46 @@
     cursor: pointer;
     color: black;
     text-decoration: none;
+  }
+  .dropdown_btn{
+    display: flex;
+    font-size: 18px;
+    margin-right: 20px;
+  }
+  .dropdown_btn img{
+    cursor: pointer;
+    margin-top: 3px;
+    margin-right: 7px;
+  }
+  .dropdown_btn a{
+    color: black;
+    cursor: pointer;
+  }
+  .dropdown_btn a:hover{
+    text-decoration: underline !important;
+  }
+
+  .dropdown_usermenu{
+    left:0px;
+    top:40px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #dfe3e6;
+    border-radius: 5px 5px;
+    z-index: 2;
+  }
+  .dd_child{
+    text-align: center;
+    font-size: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top:3px;
+    padding-bottom:3px;
+    background-color: white;
+  }
+  .dd_child:hover{
+    background-color: #dfe3e6;
   }
 
   .a_basic{
@@ -74,26 +115,53 @@
     border-top: 1px solid #dfe3e6;
     width:100%;
   }
+  .msg{
+    opacity: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid #dfe3e6;
+    position: fixed;
+    left: 10px;
+    top: calc(100% - 60px);
+    z-index: 1;
+    transition-duration: 0.7s;
+    transition-delay: 2.5s;
+  }
 </style>
 <div class="menubar">
   <span class="mb_left">
     <a href="/"> <img src="/public/images/classicalLogo.png" width="150px"></img> </a>
   </span>
+
   <span class="mb_middle">
     <a> 공지사항 </a>
     <a> 공연정보 </a>
     <a> 음악공유 </a>
     <a> 자유게시판 </a>
   </span>
+  <% if(isAuthenticated){ %>
+  <span class="dropdown_btn">
+    <!--<img class="dropdown_btn_child" src="/public/images/user.png" width="20px" height="20px">-->
+    <a class="dropdown_btn_child"> <%=whoami.passport.user.nickname%></a>
+  </span>
+  <div class="dropdown_usermenu none">
+    <a href="/user/index/<%=whoami.passport.user.id%>" class="dd_child a_basic"> 내 정보 </a>
+    <a class="line"></a>
+    <a href="/user/edit/<%=whoami.passport.user.id%>" class="dd_child a_basic"> 정보수정 </a>
+    <a class="line"></a>
+    <a href="/logout" class="dd_child a_basic"> 로그아웃 </a>
+  </div>
+  <% } else { %>
   <span class="mb_right">
-    <% if(isAuthenticated){ %>
-      <a class="logout"> Logout </a>
-      <a class="dot"> | </a>
-      <a href="/mypage"> 내 정보 </a>
-    <% } else { %>
       <a href="/login"> Login </a>
       <a class="dot"> | </a>
       <a href="/register"> Register </a>
-    <% } %>
   </span>
+  <% } %>
 </div>
+<%if(whoami.error){%>
+<a class="msg bg-warning a_basic"> <%=whoami.error.msg%> </a>
+<%whoami.error=null%>
+<%}%>

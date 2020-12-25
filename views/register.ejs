@@ -72,14 +72,16 @@
             <div class="input_area">
               <input type="text" id="id" value="<%= id %>" placeholder="아이디">
               <% if (errors.id){ %>
-              <a class="error id_error"> <%= errors.id.message %> </a>
+              <a class="error id_overlap"> <%= errors.id.message %> </a>
+              <% errors.id=null %>
               <% } %>
               <a class="error id_error none"> default </a>
             </div>
             <div class="input_area">
               <input type="text" id="nickname" value="<%= nickname %>" placeholder="닉네임">
               <% if (errors.nickname){ %>
-              <a class="error nickname_error"> <%= errors.nickname.message %> </a>
+              <a class="error nickname_overlap"> <%= errors.nickname.message %> </a>
+              <% errors.nickname=null %>
               <% } %>
               <a class="error nickname_error none"> default </a>
             </div>

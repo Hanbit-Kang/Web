@@ -2,7 +2,7 @@ var nicknameError, emailError;
 
 function IsVaild(){
   var nickname = $('#nickname').val();
-  var nicknameRegex = /^[a-z][a-z\d]{4,12}$/;
+  var nicknameRegex = /^[a-zA-Z가-힣\d\s]{2,10}$/;
   var email = $('#email').val();
   var emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
@@ -15,7 +15,7 @@ function IsVaild(){
   }else{
     if(!nicknameRegex.test(nickname)){
       $('#nickname').focus();
-      nicknameError.innerHTML = "닉네임이 유효하지 않습니다. (5-13자, 소문자만 허용)";
+      nicknameError.innerHTML = "닉네임이 유효하지 않습니다. (2-10자)";
       $('.nickname_error').removeClass('none');
       flag = 0;
     }else{$('.nickname_error').addClass('none');}

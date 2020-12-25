@@ -3,6 +3,10 @@ var router = express.Router();
 var Account = require('../models/Account');
 
 router.get('/register', function(req, res){
+  if(req.session.passport){
+    req.session.error={'msg':"이미 로그인하였습니다."};
+    res.redirect('/');
+  }
   var id = req.flash('id')[0];
   var nickname = req.flash('nickname')[0];
   var email = req.flash('email')[0];
@@ -19,7 +23,7 @@ router.get('/welcome', function(req, res){
   res.render('welcome');
 });
 
-router.post('/register', function(req, res){ //TODO: 아이디, 닉네임 동시에 중복 시 에러 메시지가 같이 나오게
+router.post('/register', function(req, res){
   Account.findOne({id:req.body.id}, function(err,user){
     if(user){
       req.flash('errors', parseError(11000, 'id'));
@@ -32,7 +36,6 @@ router.post('/register', function(req, res){ //TODO: 아이디, 닉네임 동시
   });
   Account.create(req.body, function(err, account){
     if(err){
-      console.log(req.body.id);
       req.flash('id', req.body.id);
       req.flash('nickname', req.body.nickname);
       req.flash('email', req.body.email);

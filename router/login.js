@@ -5,9 +5,12 @@ var passport = require('passport');
 require('../config/passport');
 
 router.get('/login', function(req, res){
+  if(req.session.passport){
+    req.session.error={'msg':"이미 로그인하였습니다."};
+    res.redirect('/');
+  }
   var id = req.flash('id')[0];
   var errors = req.flash('errors')[0] || {};
-  console.log(id, errors);
   res.render('login',{
     id:id,
     errors:errors
@@ -29,8 +32,8 @@ router.post('/login',
   passport.authenticate('local-login', {
     successRedirect : '/',
     failureRedirect : '/login'
-  })
-);
+  }
+));
 
 router.get('/logout', function(req, res){
   req.logout();

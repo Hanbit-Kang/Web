@@ -1,13 +1,13 @@
 <html>
   <head>
-    <%- include('./partials/head') %>
-    <script src="/public/js/postnew.js"></script>
+    <%- include('../partials/head') %>
+    <script src="/public/js/post/new.js"></script>
   </head>
 
   <body>
     <div class="wrap">
       <div class="header">
-        <%- include('./partials/header') %>
+        <%- include('../partials/header') %>
       </div>
       <div class="content">
         <style>
@@ -37,16 +37,16 @@
           flex-direction: row;
           align-items: center;
         }
-        .np_type{
+        .dd_np_btn{
           margin-left: 8px;
           font-size: 16px;
           color: gray;
           cursor: pointer;
         }
-        .np_type:hover{
+        .dd_np_btn:hover{
           color: #de0581;
         }
-        .list_post_type{
+        .dd_np_post_type{
           left:0px;
           top:0px;
           position: absolute;
@@ -56,13 +56,13 @@
           border: 1px solid #dfe3e6;
           border-radius: 5px 5px;
         }
-        .lp_type{
+        .dd_np_child{
           padding-left: 15px;
           padding-top:5px;
           padding-bottom:5px;
           background-color: white;
         }
-        .lp_type:hover{
+        .dd_np_child:hover{
           background-color: #dfe3e6;
         }
 
@@ -74,7 +74,7 @@
         .np_title{
           margin-top: 30px;
         }
-        .np_content{
+        .np_body{
           margin-top: 15px;
         }
         .input_title{
@@ -86,14 +86,14 @@
           border: 1px solid #dfe3e6;
         }
         .input_title:focus{outline: none;}
-        .input_content{
+        .input_body{
           padding-left: 15px;
           padding-top: 15px;
           width: 100%;
           min-height: 600px;
           border: 1px solid #dfe3e6;
         }
-        .input_content:focus{outline: none;}
+        .input_body:focus{outline: none;}
 
         .np_buttons{
           display: flex;
@@ -132,23 +132,23 @@
             <span>
               <h2> 새 글 쓰기 </h2>
             </span>
-            <span class="np_type">
+            <span class="dd_np_btn">
               > 자유게시판
             </span>
-            <div class="list_post_type none">
-              <a href="#" class="lp_type a_basic"> 공연정보 </a>
+            <div class="dd_np_post_type none"> <!-- TODO: level에 따라 가능한 카테고리 indexing -->
+              <a href="#" class="dd_np_child a_basic" type="1"> 자유게시판 </a>
               <a class="line"></a>
-              <a href="#" class="lp_type a_basic"> 음악공유 </a>
+              <a href="#" class="dd_np_child a_basic" type="2"> 음악공유 </a>
               <a class="line"></a>
-              <a href="#" class="lp_type a_basic"> 자유게시판 </a>
+              <a href="#" class="dd_np_child a_basic" type="3"> 공연정보 </a>
             </div>
           </div>
           <div class="newpost_content">
             <div class="np_title">
               <input class="input_title" type="text" placeholder="제목을 입력하세요.">
             </div>
-            <div class="np_content">
-              <textarea class="input_content" placeholder="내용을 입력하세요."></textarea>
+            <div class="np_body">
+              <textarea class="input_body" placeholder="내용을 입력하세요."></textarea>
             </div>
           </div>
           <div class="newpost_footer">
@@ -161,7 +161,7 @@
       </div>
 
       <div class="footer">
-        <%- include('./partials/footer') %>
+        <%- include('../partials/footer') %>
       </div>
     </div>
   </body>
