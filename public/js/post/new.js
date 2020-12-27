@@ -25,7 +25,7 @@ $(document).ready(function(){
       JQddNpBtn.html('> ' + $(this).text());
       JQddNpPostType.addClass('none');
 
-      curCategory = $(this).attr('type'); //categorize
+      curCategory = $(this).attr('var'); //categorize
     });
   });
 

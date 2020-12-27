@@ -23,24 +23,40 @@
             margin-top: 70px;
             margin-bottom: 70px;
             width:600px;
-            height:250px;
             border: 1px solid #dfe3e6;
             display: flex;
             align-items: center;
             flex-direction: column;
-            justify-content: space-around;
+          }
+          .welcome_img{
+            margin-top:40px;
+            margin-bottom: 30px;
           }
           .welcome_title{
-            margin-top: 40px;
+            margin-top:50px;
+            display:flex;
+            flex-direction: row;
+          }
+          .welcome_title1{
+          }
+          .welcome_title2{
+            font-weight: lighter;
+          }
+          .welcome_text{
+            margin-top: 10px;
+            margin-left: 45px;
+            margin-right: 45px;
+            color: gray;
+            text-align: center;
           }
           .btn_gotologin{
             text-decoration: none !important;
-            margin-top: -20px;
+            margin-top: 20px;
+            margin-bottom: 60px;
             border: 1px solid #dfe3e6;
             border-radius: 0px;
             width: 300px;
             height: 52px;
-            margin-bottom: 20px;
             color: white !important;
             font-size: 20px;
             text-align: center;
@@ -49,8 +65,16 @@
         </style>
 
         <div class="welcome_area">
-          <h1 class="welcome_title"> 회원가입을 축하합니다! </h1>
-          <a href="/login" class="btn_gotologin bg-dark"> 로그인 하러 가기 </a>
+          <img class="welcome_img" src="/public/images/classicalLogo.png" width="300px">
+          <a class="line"></a>
+          <div class="welcome_title">
+            <h1 class="welcome_title1"> 회원가입 </h1>
+            <h1 class="welcome_title2"> 을 환영합니다! </h1>
+          </div>
+          <h6 class="welcome_text">
+            귀하께서 회원이 되신 것을 진심으로 환영합니다. 이제, Classical에 로그인하여 커뮤니티에 참여하실 수 있습니다.
+          </h6>
+          <a href="/login" class="btn_gotologin bg-dark"> 시작하기 </a>
         </div>
       </div>
 

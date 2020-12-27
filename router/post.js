@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Post = require('../models/Post');
 
-router.get('/post', function(req, res){ //TODO: /post -> 최신글보기 ... ?type=0 -> 자유게시판 최신글
+router.get('/post/index', function(req, res){ //TODO: /post -> 최신글보기 ... ?type=0 -> 자유게시판 최신글
   Post.find({})
     .populate('author')
     .sort('-createdAt')
@@ -10,6 +10,10 @@ router.get('/post', function(req, res){ //TODO: /post -> 최신글보기 ... ?ty
       if(err) return res.json(err);
       res.render('post/index', {posts:posts});
     });
+});
+
+router.get('/post', function(req, res){
+  res.redirect('/post/index');
 });
 
 router.get('/post/0', function(req, res){

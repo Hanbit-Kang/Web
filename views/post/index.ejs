@@ -1,0 +1,639 @@
+<html>
+  <head>
+    <%- include('../partials/head') %>
+    <script src="/public/js/post/index.js"></script>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <div class="header">
+        <%- include('../partials/header') %>
+      </div>
+      <div class="content">
+        <style>
+          .content{
+            background-color: #F8F8FF;
+            width:100%;
+            padding-top:30px;
+            padding-bottom: 60px;
+          }
+          @media(min-width:1000px){
+            .content{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+            }
+          }
+          .index_area{
+            border: 1px solid #dfe3e6;
+            width: 1000px;
+            background-color: white;
+          }
+          .index_header{
+            padding-top:30px;
+            padding-left:30px;
+            padding-right:30px;
+            padding-bottom:25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 2px solid black;
+          }
+          .newpost_btn{
+            display: flex;
+            flex-direction: row;
+            border: 1px solid #dfe3e6;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 5px;
+          }
+          .newpost_btn h5{
+            margin-left: 5px;
+            color: white;
+          }
+          .newpost_btn h5:hover{
+            text-decoration: underline;
+          }
+
+          .sort_standards{
+            display:flex;
+            flex-direction: row;
+            margin-top: 15px;
+            margin-left: 20px;
+            margin-bottom: 10px;
+          }
+          .sort_standards h6{
+            margin-right:10px;
+          }
+          .sort_standards a{
+            margin-right:10px;
+            margin-top:-5px;
+          }
+
+          .index_content{
+            display:flex;
+            flex-direction: column;
+          }
+          .index_content table{
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 10px;
+          }
+          .align-center{
+            text-align: center;
+          }
+          #PostTableTitle{
+            border-top: 1px solid #dfe3e6;
+            border-bottom: 1px solid #dfe3e6;
+            background-color: #f7f9fa;
+          }
+          #PostTableTitle th{
+            padding-top: 10px;
+            padding-bottom: 10px;
+          }
+          #PostTableTitle a{
+            font-size:14px;
+            font-weight: normal;
+          }
+          .post_title{
+            padding-left: 100px;
+          }
+
+          #PostTableContent{
+            border-bottom: 1px solid #dfe3e6;
+          }
+          #PostTableContent th{
+            padding-top: 10px;
+            padding-bottom: 10px;
+          }
+          #PostTableContent a{
+            font-weight: normal;
+          }
+          .post_table_title{
+            margin-left: 10px;
+            font-size: 12px;
+            color: black;
+          }
+          .post_table_title:hover{
+            color: black;
+            text-decoration: none;
+          }
+
+          .index_footer{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-top: 1px solid #dfe3e6;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-top: 90px;
+          }
+          #page_naviagtion{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+          }
+          #page_naviagtion a{
+            margin-left: 10px;
+            margin-right: 10px;
+            color: black;
+          }
+          .pn_prev_btn{
+            display: flex;
+            flex-direction: row;
+            cursor: pointer;
+          }
+          .pn_prev_btn h4{
+            margin-top:-5px;
+          }
+          .pn_next_btn{
+            display: flex;
+            flex-direction: row;
+            cursor: pointer;
+          }
+          .pn_next_btn h4{
+            margin-top:-5px;
+          }
+          .pn_number_active{
+            border: 1px solid #dfe3e6;
+            color: #de0581 !important;
+            padding-left: 7px;
+            padding-right: 7px;
+            height: 28px;
+            margin-left:3 !important;
+            margin-right:3 !important;
+          }
+
+          .search_area{
+            margin-top: 10px;
+            margin-bottom: 20px;
+            display:flex;
+            flex-direction: row;
+            align-items: center;
+          }
+          .search_range_box{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #dfe3e6;
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-right: 10px;
+            font-size: 14px;
+            height: 35px;
+            width: 125px;
+            cursor: pointer;
+          }
+          .search_ranges{
+            list-style: none;
+            position: absolute;
+            border: 1px solid #dfe3e6;
+            background-color: white;
+            width: 125px;
+            padding:0;
+          }
+          .search_range{
+            padding-top:5px;
+            padding-left:10px;
+            padding-bottom:5px;
+            cursor:pointer;
+          }
+          .search_range:hover{
+            background-color: #dfe3e6;
+          }
+          .input_search_text{
+            border: 1px solid #dfe3e6;
+            border-radius: 0px;
+            width: 300px;
+            height: 35px;
+            font-size: 14px;
+            margin-right:0;
+            padding-top:5px;
+            padding-left:10px;
+            padding-bottom:5px;
+          }
+          .input_search_text:focus{
+            outline-style:solid;
+          }
+          .search_btn{
+            cursor: pointer;
+          }
+        </style>
+        <div class="index_area">
+          <div class="index_header">
+            <h2> 전체글보기 </h2>
+            <a href="/post/new" class="a_basic newpost_btn bg-dark">
+              <img src="/public/images/newpost.png" width="25px" height="25px">
+              <h5> 글쓰기 </h5>
+            </a>
+          </div>
+          <div class="index_content">
+            <div class="sort_standards">
+              <h6 class="a_pointerAndunderline_black standard bold"> 최신순 </h6>
+              <a>·</a>
+              <h6 class="a_pointerAndunderline_black standard"> 추천순 </h6>
+              <a>·</a>
+              <h6 class="a_pointerAndunderline_black standard"> 댓글순 </h6>
+              <a>·</a>
+              <h6 class="a_pointerAndunderline_black standard"> 조회순 </h6>
+            </div>
+            <table>
+              <colgroup>
+                <col style="width:100px">
+                <col style="width:300px">
+                <col style="width:100px">
+                <col style="width:80px">
+                <col style="width:50px">
+                <col style="width:50px">
+              </colgroup>
+              <thead>
+                <tr id="PostTableTitle">
+                  <th scope="col">
+                  </th>
+                  <th scope="col" class="post_title">
+                    <a> 제목 </a>
+                  </th>
+                  <th scope="col">
+                    <a> 작성자 </a>
+                  </th>
+                  <th scope="col" class="align-center">
+                    <a> 작성일 </a>
+                  </th>
+                  <th scope="col" class="align-center">
+                    <a> 조회수 </a>
+                  </th>
+                  <th scope="col" class="align-center">
+                    <a> 좋아요 </a>
+                  </th>
+                </tr>
+                <tr id="PostTableContent">
+                  <th>
+                    <a class="post_table_title"> 자유게시판 </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> 안녕 방금 가입했음 </a>
+                    <a href="#" class="a_pointerAndunderline_red"> [5] </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> Administra </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 16:56 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 12 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 5 </a>
+                  </th>
+                </tr>
+                <tr id="PostTableContent">
+                  <th>
+                    <a class="post_table_title"> 음악공유 </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
+                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 20/12/26 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 52 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 7 </a>
+                  </th>
+                </tr>
+                <tr id="PostTableContent">
+                  <th>
+                    <a class="post_table_title"> 음악공유 </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
+                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 20/12/26 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 52 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 7 </a>
+                  </th>
+                </tr>
+                <tr id="PostTableContent">
+                  <th>
+                    <a class="post_table_title"> 음악공유 </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
+                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 20/12/26 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 52 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 7 </a>
+                  </th>
+                </tr>
+                <tr id="PostTableContent">
+                  <th>
+                    <a class="post_table_title"> 음악공유 </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
+                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 20/12/26 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 52 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 7 </a>
+                  </th>
+                </tr>
+                <tr id="PostTableContent">
+                  <th>
+                    <a class="post_table_title"> 자유게시판 </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> 안녕 방금 가입했음 </a>
+                    <a href="#" class="a_pointerAndunderline_red"> [5] </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> Administra </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 16:56 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 12 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 5 </a>
+                  </th>
+                </tr>
+                <tr id="PostTableContent">
+                  <th>
+                    <a class="post_table_title"> 음악공유 </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
+                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 20/12/26 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 52 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 7 </a>
+                  </th>
+                </tr>
+                <tr id="PostTableContent">
+                  <th>
+                    <a class="post_table_title"> 음악공유 </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
+                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 20/12/26 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 52 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 7 </a>
+                  </th>
+                </tr>
+                <tr id="PostTableContent">
+                  <th>
+                    <a class="post_table_title"> 음악공유 </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
+                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 20/12/26 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 52 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 7 </a>
+                  </th>
+                </tr>
+                <tr id="PostTableContent">
+                  <th>
+                    <a class="post_table_title"> 음악공유 </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
+                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 20/12/26 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 52 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 7 </a>
+                  </th>
+                </tr>
+                <tr id="PostTableContent">
+                  <th>
+                    <a class="post_table_title"> 자유게시판 </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> 안녕 방금 가입했음 </a>
+                    <a href="#" class="a_pointerAndunderline_red"> [5] </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> Administra </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 16:56 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 12 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 5 </a>
+                  </th>
+                </tr>
+                <tr id="PostTableContent">
+                  <th>
+                    <a class="post_table_title"> 음악공유 </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
+                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 20/12/26 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 52 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 7 </a>
+                  </th>
+                </tr>
+                <tr id="PostTableContent">
+                  <th>
+                    <a class="post_table_title"> 음악공유 </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
+                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 20/12/26 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 52 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 7 </a>
+                  </th>
+                </tr>
+                <tr id="PostTableContent">
+                  <th>
+                    <a class="post_table_title"> 음악공유 </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
+                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 20/12/26 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 52 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 7 </a>
+                  </th>
+                </tr>
+                <tr id="PostTableContent">
+                  <th>
+                    <a class="post_table_title"> 음악공유 </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
+                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
+                  </th>
+                  <th>
+                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 20/12/26 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 52 </a>
+                  </th>
+                  <th class="align-center">
+                    <a> 7 </a>
+                  </th>
+                </tr>
+
+              </thead>
+            </table>
+          </div>
+          <div class="index_footer">
+            <div id="page_naviagtion">
+              <span class="pn_prev_btn">
+                <h4> < </h4>
+                <a class="a_pointerAndunderline_black"> 이전 </a>
+              </span>
+              <a class="pn_number a_pointerAndunderline_black"> 1 </a>
+              <a class="pn_number a_pointerAndunderline_black"> 2 </a>
+              <a class="pn_number a_pointerAndunderline_black"> 3 </a>
+              <a class="pn_number a_pointerAndunderline_black"> 4 </a>
+              <a class="pn_number a_pointerAndunderline_black"> 5 </a>
+              <a class="pn_number a_pointerAndunderline_black"> 6 </a>
+              <a class="pn_number a_pointerAndunderline_black"> 7 </a>
+              <a class="pn_number a_pointerAndunderline_black"> 8 </a>
+              <a class="pn_number a_pointerAndunderline_black"> 9 </a>
+              <a class="pn_number a_pointerAndunderline_black"> 10 </a>
+              <span class="pn_next_btn">
+                <a class="a_pointerAndunderline_black"> 다음 </a>
+                <h4> > </h4>
+              </span>
+            </div>
+            <div class="search_area">
+              <div class="search_range_box">
+                <a class="search_range_box_text a_pointerAndunderline_black"> 제목+내용 </a>
+                <a class="dot a_basic"> ∨ </a>
+              </div>
+              <ul class="search_ranges none">
+                <li class="search_range" var="0">
+                  제목+내용
+                </li>
+                <li class="line"> </li>
+                <li class="search_range" var="1">
+                  제목
+                </li>
+                <li class="line"> </li>
+                <li class="search_range" var="2">
+                  작성자
+                </li>
+              </ul>
+              <input class="input_search_text" type="text" ale="검색" placeholder="검색어를 입력해주세요.">
+              <img class="search_btn" src="/public/images/search.png" width="35px" height="35px">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <%- include('../partials/footer') %>
+      </div>
+    </div>
+  </body>
+</html>
