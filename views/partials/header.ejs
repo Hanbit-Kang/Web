@@ -59,6 +59,14 @@
     color: black;
     text-decoration: none;
   }
+  .mb_right_login{
+    display:flex;
+    flex-direction: row;
+  }
+  .alertmenu{
+    margin-right: 20px;
+    cursor: pointer;
+  }
   .dropdown_btn{
     display: flex;
     font-size: 18px;
@@ -66,8 +74,6 @@
   }
   .dropdown_btn img{
     cursor: pointer;
-    margin-top: 3px;
-    margin-right: 7px;
   }
   .dropdown_btn a{
     color: black;
@@ -79,7 +85,8 @@
 
   .dropdown_usermenu{
     left:0px;
-    top:40px;
+    top:45px;
+    width:150px;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -88,16 +95,23 @@
     z-index: 2;
   }
   .dd_child{
-    text-align: center;
-    font-size: 14px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top:3px;
-    padding-bottom:3px;
+    font-size: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top:10px;
+    padding-bottom:10px;
     background-color: white;
   }
   .dd_child:hover{
     background-color: #dfe3e6;
+  }
+  .dropdown_usermenu span{
+    cursor:pointer;
+    display: flex;
+    justify-content: space-between;
+  }
+  .logout_img{
+    margin-top:3px;
   }
 
   .a_basic{
@@ -155,26 +169,42 @@
 <div class="menubar">
   <span class="mb_left">
     <a href="/"> <img src="/public/images/classicalLogo.png" width="150px"></img> </a>
-  </span>
+</span>
 
   <span class="mb_middle">
-    <a> 공지사항 </a>
-    <a> 공연정보 </a>
-    <a> 음악공유 </a>
-    <a> 자유게시판 </a>
+    <a class="a_basic" href="/post/index?category=0"> 공지사항 </a>
+    <a class="a_basic" href="/post/index?category=1"> 자유게시판 </a>
+    <a class="a_basic" href="/post/index?category=2"> 음악공유 </a>
+    <a class="a_basic" href="/post/index?category=3"> 공연정보 </a>
   </span>
   <% if(isAuthenticated){ %>
-  <span class="dropdown_btn">
-    <!--<img class="dropdown_btn_child" src="/public/images/user.png" width="20px" height="20px">-->
-    <a class="dropdown_btn_child"> <%=whoami.passport.user.nickname%></a>
+  <span class="mb_right_login">
+    <span class="alertmenu">
+      <span class="alert_btn">
+        <img class="alert_btn_child" src="/public/images/alert.png" width="25px" height="25px">
+      </span>
+      <div class="alert_usermenu none">
+
+      </div>
+    </span>
+
+    <span class="usermenu">
+      <span class="dropdown_btn">
+        <img class="dropdown_btn_child" src="/public/images/user.png" width="25px" height="25px">
+        <!--<a class="dropdown_btn_child"> <#%=whoami.passport.user.nickname%></a>-->
+      </span>
+      <div class="dropdown_usermenu none">
+        <a href="/user/index/<%=whoami.passport.user.id%>" class="dd_child a_basic"> 내 정보 </a>
+        <a class="line"></a>
+        <a href="/user/edit/<%=whoami.passport.user.id%>" class="dd_child a_basic"> 정보수정 </a>
+        <a class="line"></a>
+        <span onclick="location.href='/logout'" class="dd_child a_basic">
+          <a> 로그아웃 </a>
+          <img class="logout_img" src="/public/images/logout.png" width="20px" height="20px">
+        </span>
+      </div>
+    </span>
   </span>
-  <div class="dropdown_usermenu none">
-    <a href="/user/index/<%=whoami.passport.user.id%>" class="dd_child a_basic"> 내 정보 </a>
-    <a class="line"></a>
-    <a href="/user/edit/<%=whoami.passport.user.id%>" class="dd_child a_basic"> 정보수정 </a>
-    <a class="line"></a>
-    <a href="/logout" class="dd_child a_basic"> 로그아웃 </a>
-  </div>
   <% } else { %>
   <span class="mb_right">
       <a href="/login"> Login </a>
@@ -183,6 +213,7 @@
   </span>
   <% } %>
 </div>
+
 <%if(whoami.error){%>
 <a class="msg bg-warning a_basic"> <%=whoami.error.msg%> </a>
 <%whoami.error=null%>

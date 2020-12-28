@@ -6,14 +6,40 @@ router.get('/post', function(req, res){
   res.redirect('/post/index');
 });
 
-router.get('/post/index', function(req, res){ //TODO: /post -> 최신글보기 ... ?type=0 -> 자유게시판 최신글
-  Post.find({})
-    .populate('author')
-    .sort('-createdAt')
-    .exec(function(err, posts){
-      if(err) return res.json(err);
-      res.render('post/index', {posts:posts});
-    });
+router.get('/post/index', async function(req, res){
+  var page = Math.max(1, parseInt(req.query.page));
+  var limit = 15;
+  var category = Math.max(-1, parseInt(req.query.category));
+  page = !isNaN(page)?page:1;
+  category = !isNaN(category)?category:-1;
+
+  var skip = (page-1)*limit;
+  var count = category==-1?await Post.countDocuments({}):await Post.countDocuments({category:category});
+  var maxPage = Math.ceil(count/limit);
+  var posts;
+  if(category==-1){
+    posts = await Post.find({})
+      .populate('author')
+      .sort('-createdAt')
+      .skip(skip)
+      .limit(limit)
+      .exec();
+  }else{
+    posts = await Post.find({category:category})
+      .populate('author')
+      .sort('-createdAt')
+      .skip(skip)
+      .limit(limit)
+      .exec();
+  }
+
+  res.render('post/index',{
+    posts:posts,
+    currentPage:page,
+    maxPage:maxPage,
+    limit:limit,
+    category:category
+  });
 });
 
 //SHOW

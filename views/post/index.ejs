@@ -222,7 +222,7 @@
         </style>
         <div class="index_area">
           <div class="index_header">
-            <h2> 전체글보기 </h2>
+            <h2 class="index_category"><%=category%></h2>
             <a href="/post/new" class="a_basic newpost_btn bg-dark">
               <img src="/public/images/newpost.png" width="25px" height="25px">
               <h5> 글쓰기 </h5>
@@ -268,6 +268,7 @@
                   </th>
                 </tr>
               </thead>
+
               <tbody>
                 <% posts.forEach(function(post){ %>
                   <tr id="PostTableContent">
@@ -276,10 +277,10 @@
                     </th>
                     <th>
                       <a href="#" class="a_pointerAndunderline_black"> <%=post.title%> </a>
-                      <a href="#" class="a_pointerAndunderline_red"> [5] </a>
+                      <a href="#" class="a_pointerAndunderline_red"> [0] </a>
                     </th>
                     <th>
-                      <a href="#" class="a_pointerAndunderline_black"> <%=post.author.nickname%> </a>
+                      <a class="a_pointerAndunderline_black" href="/user/index/<%=post.author.id%>"> <%=post.author.nickname%> </a>
                     </th>
                     <th class="post_table_time align-center">
                       <!-- Today's Post -->
@@ -303,21 +304,20 @@
           </div>
           <div class="index_footer">
             <div id="page_naviagtion">
-              <span class="pn_prev_btn">
+              <%
+                var offset = 10;
+                var startpage = (Math.floor((currentPage-1)/offset))*offset+1;
+                var previousBtnEnabled = startpage>1;
+                var nextBtnEnabled = maxPage>startpage+offset-1 && currentPage<startpage+offset;
+              %>
+              <span class="pn_prev_btn <%=previousBtnEnabled?'':'none'%>" onclick="location.href='/post/index?page=<%=startpage-offset%>&category=<%=category%>'">
                 <h4> < </h4>
                 <a class="a_pointerAndunderline_black"> 이전 </a>
               </span>
-              <a class="pn_number a_pointerAndunderline_black"> 1 </a>
-              <a class="pn_number a_pointerAndunderline_black"> 2 </a>
-              <a class="pn_number a_pointerAndunderline_black"> 3 </a>
-              <a class="pn_number a_pointerAndunderline_black"> 4 </a>
-              <a class="pn_number a_pointerAndunderline_black"> 5 </a>
-              <a class="pn_number a_pointerAndunderline_black"> 6 </a>
-              <a class="pn_number a_pointerAndunderline_black"> 7 </a>
-              <a class="pn_number a_pointerAndunderline_black"> 8 </a>
-              <a class="pn_number a_pointerAndunderline_black"> 9 </a>
-              <a class="pn_number a_pointerAndunderline_black"> 10 </a>
-              <span class="pn_next_btn">
+              <% for(i=startpage;i<=Math.min(startpage+offset-1, maxPage);i++){%>
+              <a class="pn_number a_pointerAndunderline_black"><%=i%></a>
+              <%}%>
+              <span class="pn_next_btn <%=nextBtnEnabled?'':'none'%>" onclick="location.href='/post/index?page=<%=startpage+offset%>&category=<%=category%>'">
                 <a class="a_pointerAndunderline_black"> 다음 </a>
                 <h4> > </h4>
               </span>

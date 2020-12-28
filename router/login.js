@@ -36,6 +36,7 @@ router.post('/login',
 ));
 
 router.get('/logout', function(req, res){
+  req.session.passport=null;
   req.logout();
   res.redirect('/');
 });

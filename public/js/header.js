@@ -9,9 +9,7 @@ $(document).ready(function(){
     e.preventDefault();
     if (JQdropdownUsermenu.hasClass('none')){
       JQdropdownUsermenu.removeClass('none');
-      var sizeonly = parseInt(JQdropdownBtn.css('width'), 10);
-      JQdropdownUsermenu.css('width', sizeonly+10+'px');
-      JQdropdownUsermenu.css('left', JQdropdownBtn.offset().left-4);
+      JQdropdownUsermenu.css('left', JQdropdownBtn.offset().left-110);
     }else{
       JQdropdownUsermenu.addClass('none');
     }
@@ -36,5 +34,5 @@ $(document).ready(function(){
 });
 
 $(window).resize(function(){
-  JQdropdownUsermenu.css('left', JQdropdownBtn.offset().left-4);
+  JQdropdownUsermenu.css('left', JQdropdownBtn.offset().left-110);
 });
