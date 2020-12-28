@@ -1,6 +1,7 @@
 <html>
   <head>
     <%- include('../partials/head') %>
+    <script src="/public/js/consts.js"></script>
     <script src="/public/js/post/index.js"></script>
   </head>
 
@@ -253,336 +254,51 @@
                   <th scope="col" class="post_title">
                     <a> 제목 </a>
                   </th>
-                  <th scope="col">
+                  <th scope="col" class="post_author">
                     <a> 작성자 </a>
                   </th>
-                  <th scope="col" class="align-center">
+                  <th scope="col" class="post_createdAt align-center">
                     <a> 작성일 </a>
                   </th>
-                  <th scope="col" class="align-center">
+                  <th scope="col" class="post_view align-center">
                     <a> 조회수 </a>
                   </th>
-                  <th scope="col" class="align-center">
+                  <th scope="col" class="post_like align-center">
                     <a> 좋아요 </a>
                   </th>
                 </tr>
-                <tr id="PostTableContent">
-                  <th>
-                    <a class="post_table_title"> 자유게시판 </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> 안녕 방금 가입했음 </a>
-                    <a href="#" class="a_pointerAndunderline_red"> [5] </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> Administra </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 16:56 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 12 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 5 </a>
-                  </th>
-                </tr>
-                <tr id="PostTableContent">
-                  <th>
-                    <a class="post_table_title"> 음악공유 </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
-                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 20/12/26 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 52 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 7 </a>
-                  </th>
-                </tr>
-                <tr id="PostTableContent">
-                  <th>
-                    <a class="post_table_title"> 음악공유 </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
-                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 20/12/26 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 52 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 7 </a>
-                  </th>
-                </tr>
-                <tr id="PostTableContent">
-                  <th>
-                    <a class="post_table_title"> 음악공유 </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
-                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 20/12/26 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 52 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 7 </a>
-                  </th>
-                </tr>
-                <tr id="PostTableContent">
-                  <th>
-                    <a class="post_table_title"> 음악공유 </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
-                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 20/12/26 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 52 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 7 </a>
-                  </th>
-                </tr>
-                <tr id="PostTableContent">
-                  <th>
-                    <a class="post_table_title"> 자유게시판 </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> 안녕 방금 가입했음 </a>
-                    <a href="#" class="a_pointerAndunderline_red"> [5] </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> Administra </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 16:56 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 12 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 5 </a>
-                  </th>
-                </tr>
-                <tr id="PostTableContent">
-                  <th>
-                    <a class="post_table_title"> 음악공유 </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
-                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 20/12/26 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 52 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 7 </a>
-                  </th>
-                </tr>
-                <tr id="PostTableContent">
-                  <th>
-                    <a class="post_table_title"> 음악공유 </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
-                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 20/12/26 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 52 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 7 </a>
-                  </th>
-                </tr>
-                <tr id="PostTableContent">
-                  <th>
-                    <a class="post_table_title"> 음악공유 </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
-                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 20/12/26 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 52 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 7 </a>
-                  </th>
-                </tr>
-                <tr id="PostTableContent">
-                  <th>
-                    <a class="post_table_title"> 음악공유 </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
-                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 20/12/26 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 52 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 7 </a>
-                  </th>
-                </tr>
-                <tr id="PostTableContent">
-                  <th>
-                    <a class="post_table_title"> 자유게시판 </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> 안녕 방금 가입했음 </a>
-                    <a href="#" class="a_pointerAndunderline_red"> [5] </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> Administra </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 16:56 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 12 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 5 </a>
-                  </th>
-                </tr>
-                <tr id="PostTableContent">
-                  <th>
-                    <a class="post_table_title"> 음악공유 </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
-                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 20/12/26 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 52 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 7 </a>
-                  </th>
-                </tr>
-                <tr id="PostTableContent">
-                  <th>
-                    <a class="post_table_title"> 음악공유 </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
-                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 20/12/26 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 52 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 7 </a>
-                  </th>
-                </tr>
-                <tr id="PostTableContent">
-                  <th>
-                    <a class="post_table_title"> 음악공유 </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
-                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 20/12/26 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 52 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 7 </a>
-                  </th>
-                </tr>
-                <tr id="PostTableContent">
-                  <th>
-                    <a class="post_table_title"> 음악공유 </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> Schumann Arabeske, Op.18 </a>
-                    <a href="#" class="a_pointerAndunderline_red"> [2] </a>
-                  </th>
-                  <th>
-                    <a href="#" class="a_pointerAndunderline_black"> 슈만 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 20/12/26 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 52 </a>
-                  </th>
-                  <th class="align-center">
-                    <a> 7 </a>
-                  </th>
-                </tr>
-
               </thead>
+              <tbody>
+                <% posts.forEach(function(post){ %>
+                  <tr id="PostTableContent">
+                    <th>
+                      <a class="post_table_title"><%=post.category%></a>
+                    </th>
+                    <th>
+                      <a href="#" class="a_pointerAndunderline_black"> <%=post.title%> </a>
+                      <a href="#" class="a_pointerAndunderline_red"> [5] </a>
+                    </th>
+                    <th>
+                      <a href="#" class="a_pointerAndunderline_black"> <%=post.author.nickname%> </a>
+                    </th>
+                    <th class="post_table_time align-center">
+                      <!-- Today's Post -->
+                      <% const today = new Date(); %>
+                      <% if(post.createdAt.getFullYear()==today.getFullYear() && post.createdAt.getMonth()==today.getMonth() && post.createdAt.getDate()==today.getDate()) {%>
+                      <a> <%= post.createdAt.getHours()>=10? post.createdAt.getHours():'0'+post.createdAt.getHours()%>:<%= post.createdAt.getMinutes()>=10?post.createdAt.getMinutes():'0'+post.createdAt.getMinutes()%> </a>
+                      <%} else { %>
+                      <a> <%= post.createdAt.getYear()-100 %>.<%= post.createdAt.getMonth()+1>=10?post.createdAt.getMonth()+1:'0'+post.createdAt.getMonth()+1 %>.<%= post.createdAt.getDate()>=10?post.createdAt.getDate():'0'+post.createdAt.getDate() %> </a>
+                      <% } %>
+                    </th>
+                    <th class="align-center">
+                      <a> <%=post.view%> </a>
+                    </th>
+                    <th class="align-center">
+                      <a> <%=post.like%> </a>
+                    </th>
+                  </tr>
+                <% }) %>
+              </tbody>
             </table>
           </div>
           <div class="index_footer">

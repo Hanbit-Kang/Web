@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var Post = require('../models/Post');
 
+router.get('/post', function(req, res){
+  res.redirect('/post/index');
+});
+
 router.get('/post/index', function(req, res){ //TODO: /post -> 최신글보기 ... ?type=0 -> 자유게시판 최신글
   Post.find({})
     .populate('author')
@@ -12,14 +16,14 @@ router.get('/post/index', function(req, res){ //TODO: /post -> 최신글보기 .
     });
 });
 
-router.get('/post', function(req, res){
-  res.redirect('/post/index');
-});
-
+//SHOW
 router.get('/post/0', function(req, res){
-  res.render('post/view');
+  res.render('post/view',{
+    post: post
+  });
 });
 
+//ADD
 router.get('/post/new', function(req, res){
   if(!(req.session.passport)){
     req.session.error={'msg':"로그인 후 이용해주세요."};

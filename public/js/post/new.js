@@ -1,6 +1,5 @@
 var JQddNpPostType, JQddNpBtn, JQddNpChild;
 var curCategory = -1;
-
 $(document).ready(function(){
   JQddNpPostType = $('.dd_np_post_type');
   JQddNpBtn = $('.dd_np_btn');
@@ -20,6 +19,7 @@ $(document).ready(function(){
   });
 
   JQddNpChild.each(function(i){
+    $(this).html(POST_TYPES[i]);
     $(this).click(function(e){
       e.preventDefault();
       JQddNpBtn.html('> ' + $(this).text());

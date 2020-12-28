@@ -1,5 +1,8 @@
 var JQstantard, curStandard = 0;
 var curSearchRange, JQsearchRangeBox, JQsearchRange, JQsearchRanges;
+var PageSearchIndex;
+var JQpostTableTitle, JQpostTableTime;
+
 $(document).ready(function(){
   JQstantard = $('.standard');
 
@@ -7,15 +10,22 @@ $(document).ready(function(){
   JQsearchRange = $('.search_range');
   JQsearchRanges = $('.search_ranges');
 
+  PageSearchIndex = getParameterByName('PageSearchIndex');
+
+  JQpostTableTitle = $('.post_table_title');
+  JQpostTableTime = $('.post_table_time');
+
+  //SET SORT STANDARD
   JQstantard.each(function(i){
     $(this).click(function(e){
       e.preventDefault();
       $('.bold').removeClass('bold');
       $(this).addClass('bold');
-      curStandard = i; //0 최신순 1 추천순 2 댓글순 3 조회순
+      curStandard = i;
     });
   });
 
+  //SET SEARCH RANGE
   JQsearchRangeBox.click(function(e){
     e.preventDefault();
     if (JQsearchRanges.hasClass('none')){
@@ -32,7 +42,7 @@ $(document).ready(function(){
       e.preventDefault();
       $('.search_range_box_text').html($(this).text());
 
-      curSearchRange = $(this).attr('type'); //0:제목내용 1:제목 2:작성자
+      curSearchRange = $(this).attr('type');
     });
   });
 
@@ -42,7 +52,7 @@ $(document).ready(function(){
     }
   });
 
-  var PageSearchIndex = getParameterByName('PageSearchIndex');
+  //SET PAGE NUMBER
   if(PageSearchIndex==''){
     PageSearchIndex = 1;
   }
@@ -58,6 +68,12 @@ $(document).ready(function(){
     });
   });
 
+  //SET POST_TYPE... 1 -> 자유게시판
+  JQpostTableTitle.each(function(i){
+    if( isNaN($(this).html())==false ){
+      $(this).html(POST_TYPES[$(this).html()]);
+    }
+  });
 });
 
 $(window).resize(function(){

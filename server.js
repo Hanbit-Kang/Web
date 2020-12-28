@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.engine('html', require('ejs').renderFile);
 app.use(flash());
-app.use(session({secret:'sssecret', resave:true, saveUninitialized:true}));
+app.use(session({secret:process.env.SESSION_SECRET, resave:true, saveUninitialized:true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
