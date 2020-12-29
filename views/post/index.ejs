@@ -310,45 +310,51 @@
                 var previousBtnEnabled = startpage>1;
                 var nextBtnEnabled = maxPage>startpage+offset-1 && currentPage<startpage+offset;
               %>
-              <span class="pn_prev_btn <%=previousBtnEnabled?'':'none'%>" onclick="location.href='/post/index?page=<%=startpage-offset%>&category=<%=category%>'">
+              <span class="pn_prev_btn <%=previousBtnEnabled?'':'none'%>" onclick="location.href='/post/index<%=getPostQueryString(false, {page:startpage-1})%>'">
                 <h4> < </h4>
                 <a class="a_pointerAndunderline_black"> 이전 </a>
               </span>
               <% for(i=startpage;i<=Math.min(startpage+offset-1, maxPage);i++){%>
-              <a class="pn_number a_pointerAndunderline_black"><%=i%></a>
+              <a class="pn_number a_pointerAndunderline_black" href='/post/index<%=getPostQueryString(false, {page:i})%>'><%=i%></a>
               <%}%>
-              <span class="pn_next_btn <%=nextBtnEnabled?'':'none'%>" onclick="location.href='/post/index?page=<%=startpage+offset%>&category=<%=category%>'">
+              <span class="pn_next_btn <%=nextBtnEnabled?'':'none'%>" onclick="location.href='/post/index<%=getPostQueryString(false, {page:startpage+offset})%>'">
                 <a class="a_pointerAndunderline_black"> 다음 </a>
                 <h4> > </h4>
               </span>
             </div>
             <div class="search_area">
               <div class="search_range_box">
-                <a class="search_range_box_text a_pointerAndunderline_black"> 제목+내용 </a>
+                <a class="search_range_box_text a_pointerAndunderline_black" value="title,body"> 제목+내용 </a>
                 <a class="dot a_basic"> ∨ </a>
               </div>
+
               <ul class="search_ranges none">
-                <li class="search_range" var="0">
+                <li class="search_range" value="title,body">
                   제목+내용
                 </li>
                 <li class="line"> </li>
-                <li class="search_range" var="1">
+                <li class="search_range" value="title">
                   제목
                 </li>
                 <li class="line"> </li>
-                <li class="search_range" var="2">
-                  작성자
+                <li class="search_range" value="body">
+                  내용
                 </li>
               </ul>
-              <input class="input_search_text" type="text" ale="검색" placeholder="검색어를 입력해주세요.">
-              <img class="search_btn" src="/public/images/search.png" width="35px" height="35px">
+
+              <input class="input_search_text" type="text" alt="검색" placeholder="검색어를 입력해주세요.">
+              <input onclick="goSearch(document.getElementsByClassName('search_range_box_text')[0].getAttribute('value'), document.getElementsByClassName('input_search_text')[0].value)" type="image" class="search_btn" src="/public/images/search.png" width="35px" height="35px">
+
             </div>
+
+
           </div>
         </div>
       </div>
 
       <div class="footer">
         <%- include('../partials/footer') %>
+        <a id="post_info" currentPage="<%=currentPage%>" postQueryString="<%=getPostQueryString()%>"></a>
       </div>
     </div>
   </body>

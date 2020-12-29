@@ -1,7 +1,7 @@
 var JQstantard, curStandard = 0;
-var curSearchRange, JQsearchRangeBox, JQsearchRange, JQsearchRanges;
+var JQsearchRangeBox, JQsearchRange, JQsearchRanges;
 var page;
-var JQpostTableTitle, JQpostTableTime;
+var JQpostTableTitle;
 var query_category;
 
 $(document).ready(function(){
@@ -11,10 +11,9 @@ $(document).ready(function(){
   JQsearchRange = $('.search_range');
   JQsearchRanges = $('.search_ranges');
 
-  page = getParameterByName('page')||1;
+  page = $('#post_info').attr('currentPage');
 
   JQpostTableTitle = $('.post_table_title');
-  JQpostTableTime = $('.post_table_time');
 
   //SET SORT STANDARD
   JQstantard.each(function(i){
@@ -37,16 +36,13 @@ $(document).ready(function(){
       JQsearchRanges.addClass('none');
     }
   });
-
   JQsearchRange.each(function(i){
     $(this).click(function(e){
       e.preventDefault();
       $('.search_range_box_text').html($(this).text());
-
-      curSearchRange = $(this).attr('type');
+      $('.search_range_box_text').attr('value', $(this).attr('value'));
     });
   });
-
   $('html').click(function(e){
     if(!JQsearchRanges.hasClass('none') && !($(e.target).hasClass('search_range_box')||$(e.target).parents().hasClass('search_range_box'))){
       JQsearchRanges.addClass('none');
@@ -58,9 +54,6 @@ $(document).ready(function(){
     if ($(this).html()==page){
       $(this).addClass('pn_number_active');
     }
-    $(this).click(function(e){
-      window.location.href = '/post/index?page='+$(this).html()+'&category='+query_category;
-    });
   });
 
   //SET POST_CATEGORIES... 1 -> 자유게시판
@@ -90,4 +83,39 @@ function getParameterByName(name){
   var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
     results = regex.exec(location.search);
   return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+function goSearch(searchType, searchText){
+  //Search Btn click
+
+  var PostQueryString = $('#post_info').attr('postQueryString');
+  PostQueryString = deleteOneQuery(PostQueryString, 'searchType');
+  PostQueryString = deleteOneQuery(PostQueryString, 'searchText');
+  if(PostQueryString=='') PostQueryString+='?';
+  else PostQueryString+='&';
+  PostQueryString+='searchType='+$('.search_range_box_text').attr('value');
+  PostQueryString+='&searchText='+$('.input_search_text').val();
+  window.location.href = ('/post/index'+PostQueryString);
+}
+
+function deleteOneQuery(queryStr, strToDelete){
+  let idx = queryStr.indexOf(strToDelete);
+  if(idx==-1){
+    return queryStr;
+  }
+  queryStr = queryStr.slice(0, idx) + queryStr.slice(idx+strToDelete.length, queryStr.length);
+
+  let end=-1; //-1 -> 삭제할 파라미터가 마지막 값
+  for(i=idx;i<queryStr.length;i++){
+    if(queryStr[i]=='&'){
+      end = i+1;
+      break;
+    }
+  }
+  if(end==-1){
+    queryStr = queryStr.slice(0, idx-1);
+  }else{
+    queryStr = queryStr.slice(0, idx) + queryStr.slice(end, queryStr.length);
+  }
+  return queryStr;
 }

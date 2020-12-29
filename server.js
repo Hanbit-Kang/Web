@@ -8,6 +8,7 @@ var methodOverride = require('method-override');
 var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('passport');
+var util = require('./util');
 require('./config/passport');
 var app = express();
 var port = process.env.PORT || 3000;
@@ -20,7 +21,7 @@ mongoose.set('useUnifiedTopology', true);
 mongoose.connect(process.env.MONGO_DB);
 var db = mongoose.connection;
 db.once('open', function(){
-  console.log('DB connected');
+  console.log('MONGOOSE DB has SUCCESSFULLY connected to server');
 });
 db.on('error', function(err){
   console.log('DB ERROR : ', err);
@@ -46,7 +47,7 @@ app.use(function(req, res, next){
 
 //Listen
 var server = app.listen(port, function(){
-  console.log("port:", port);
+  console.log("Server has SUCCESSFULLY started [ Port:", port, "]");
 });
 
 //ejs CAN access to SESSION
@@ -60,5 +61,5 @@ app.use(function(req, res, next) {
 app.use('/', require('./router/main'));
 app.use('/', require('./router/login'));
 app.use('/', require('./router/register'));
-app.use('/', require('./router/user'));
-app.use('/', require('./router/post'));
+app.use('/', util.getPostQueryString, require('./router/user'));
+app.use('/', util.getPostQueryString, require('./router/post'));

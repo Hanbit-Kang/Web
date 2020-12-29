@@ -2,6 +2,7 @@
   <head>
     <%- include('../partials/head') %>
     <script src="/public/js/user/index.js"></script>
+    <script src="/public/js/consts.js"></script>
   </head>
 
   <body>
@@ -79,51 +80,96 @@
             margin-top:30px;
             margin-left: 30px;
           }
-          .ui_posts{
-            margin-top: 20px;
-            margin-left: 30px;
-            list-style: none;
-            padding:0;
+
+          .ui_type table{
+            margin-top: 30px;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 10px;
           }
-          .ui_post{
-            cursor: pointer;
-            display: flex;
-            flex-direction: row;
-            padding-top:6px;
+          .align-center{
+            text-align: center;
+          }
+          #PostTableTitle{
+            border-top: 1px solid #dfe3e6;
             border-bottom: 1px solid #dfe3e6;
+            background-color: #f7f9fa;
           }
-          .ui_post:hover{
-            text-decoration: underline;
+          #PostTableTitle th{
+            padding-top: 10px;
+            padding-bottom: 10px;
           }
-          .ui_post_comments{
-            margin-left:4px;
-            color: red !important;
+          #PostTableTitle a{
+            font-size:14px;
+            font-weight: normal;
+          }
+          .post_title{
+            padding-left: 150px;
           }
 
-          .ui_comments{
-            margin-top: 20px;
-            margin-left: 30px;
-            list-style: none;
-            padding:0;
+          #PostTableContent{
+            border-bottom: 1px solid #dfe3e6;
           }
-          .ui_comment{
-            cursor: pointer;
+          #PostTableContent th{
+            padding-top: 10px;
+            padding-bottom: 10px;
+          }
+          #PostTableContent a{
+            font-weight: normal;
+          }
+          .post_table_title{
+            margin-left: 10px;
+            font-size: 12px;
+            color: black;
+          }
+          .post_table_title:hover{
+            color: black;
+            text-decoration: none;
+          }
+
+          .ui_post_footer{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-top: 1px solid #dfe3e6;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-top: 90px;
+          }
+          #page_naviagtion{
             display: flex;
             flex-direction: row;
-            padding-top:6px;
+            justify-content: center;
           }
-          .ui_comment_post{
-            width:400px;
+          #page_naviagtion a{
+            margin-left: 10px;
+            margin-right: 10px;
+            color: black;
           }
-          .ui_comment_post:hover{
-            text-decoration: underline;
+          .pn_prev_btn{
+            display: flex;
+            flex-direction: row;
+            cursor: pointer;
           }
-          .ui_comment_text{
-            width:400px;
-            font-weight: 0;
+          .pn_prev_btn h4{
+            margin-top:-5px;
           }
-          .ui_comment_text:hover{
-            text-decoration: underline;
+          .pn_next_btn{
+            display: flex;
+            flex-direction: row;
+            cursor: pointer;
+          }
+          .pn_next_btn h4{
+            margin-top:-5px;
+          }
+          .pn_number_active{
+            border: 1px solid #dfe3e6;
+            color: #de0581 !important;
+            padding-left: 7px;
+            padding-right: 7px;
+            height: 28px;
+            margin-left:3 !important;
+            margin-right:3 !important;
           }
 
           .access_error{
@@ -156,34 +202,93 @@
             </div>
             <div class="user_index">
               <div class="ui_type">
-                <h4 class="ui_type_title"> 게시글 12 </h4>
-                <ul class="ui_posts">
-                  <li class="ui_post">
-                    <h6 class="ui_post_title"> 아니근데이건아니지 </h6>
-                    <h6 class="ui_post_comments"> [2] </h6>
-                  </li>
-                  <li class="ui_post">
-                    <h6 class="ui_post_title"> 아오늘 공부 다 했다.............. </h6>
-                    <h6 class="ui_post_comments"> [1] </h6>
-                  </li>
-                  <li class="ui_post">
-                    <h6 class="ui_post_title"> 댓글 안 달리면 탈퇴함 </h6>
-                    <h6 class="ui_post_comments"> [0] </h6>
-                  </li>
-                </ul>
+                <div class="ui_post_header">
+                  <h4 class="ui_type_title"> 게시글 <%=postcount%> </h4>
+                </div>
+                <div class="ui_post_content">
+                  <table>
+                    <colgroup>
+                      <col style="width:100px">
+                      <col style="width:400px">
+                      <col style="width:100px">
+                      <col style="width:80px">
+                      <col style="width:80px">
+                    </colgroup>
+                    <thead>
+                      <tr id="PostTableTitle">
+                        <th scope="col">
+                        </th>
+                        <th scope="col" class="post_title">
+                          <a> 제목 </a>
+                        </th>
+                        <th scope="col" class="post_createdAt align-center">
+                          <a> 작성일 </a>
+                        </th>
+                        <th scope="col" class="post_view align-center">
+                          <a> 조회수 </a>
+                        </th>
+                        <th scope="col" class="post_like align-center">
+                          <a> 좋아요 </a>
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <% posts.forEach(function(post){ %>
+                        <tr id="PostTableContent">
+                          <th>
+                            <a class="post_table_title"><%=post.category%></a>
+                          </th>
+                          <th>
+                            <a href="#" class="a_pointerAndunderline_black"> <%=post.title%> </a>
+                            <a href="#" class="a_pointerAndunderline_red"> [0] </a>
+                          </th>
+                          <th class="post_table_time align-center">
+                            <!-- Today's Post -->
+                            <% const today = new Date(); %>
+                            <% if(post.createdAt.getFullYear()==today.getFullYear() && post.createdAt.getMonth()==today.getMonth() && post.createdAt.getDate()==today.getDate()) {%>
+                            <a> <%= post.createdAt.getHours()>=10? post.createdAt.getHours():'0'+post.createdAt.getHours()%>:<%= post.createdAt.getMinutes()>=10?post.createdAt.getMinutes():'0'+post.createdAt.getMinutes()%> </a>
+                            <%} else { %>
+                            <a> <%= post.createdAt.getYear()-100 %>.<%= post.createdAt.getMonth()+1>=10?post.createdAt.getMonth()+1:'0'+post.createdAt.getMonth()+1 %>.<%= post.createdAt.getDate()>=10?post.createdAt.getDate():'0'+post.createdAt.getDate() %> </a>
+                            <% } %>
+                          </th>
+                          <th class="align-center">
+                            <a> <%=post.view%> </a>
+                          </th>
+                          <th class="align-center">
+                            <a> <%=post.like%> </a>
+                          </th>
+                        </tr>
+                      <% }) %>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="ui_post_footer">
+                  <div id="page_naviagtion">
+                    <%
+                      var offset = 10;
+                      var startpage = (Math.floor((postcurrentPage-1)/offset))*offset+1;
+                      var previousBtnEnabled = startpage>1;
+                      var nextBtnEnabled = postmaxPage>startpage+offset-1 && postcurrentPage<startpage+offset;
+                    %>
+                    <span class="pn_prev_btn <%=previousBtnEnabled?'':'none'%>" onclick="location.href='/user/index/<%=user.id+getPostQueryString(false, {postpage:startpage-1})%>'">
+                      <h4> < </h4>
+                      <a class="a_pointerAndunderline_black"> 이전 </a>
+                    </span>
+                    <% for(i=startpage;i<=Math.min(startpage+offset-1, postmaxPage);i++){%>
+                    <a class="pn_number a_pointerAndunderline_black" href='/user/index/<%=user.id+getPostQueryString(false, {postpage:i})%>'><%=i%></a>
+                    <%}%>
+                    <span class="pn_next_btn <%=nextBtnEnabled?'':'none'%>" onclick="location.href='/user/index/<%=user.id+getPostQueryString(false, {postpage:startpage+offset})%>'">
+                      <a class="a_pointerAndunderline_black"> 다음 </a>
+                      <h4> > </h4>
+                    </span>
+                  </div>
+                </div>
+
               </div>
               <div class="ui_type">
                 <h4 class="ui_type_title"> 댓글 152 </h4>
-                <ul class="ui_comments">
-                  <li class="ui_comment">
-                    <h6 class="ui_comment_post"> <알림> 이 글에 댓글 달지 마십쇼 </h6>
-                    <h6 class="ui_comment_text">  ㅇㅋ </h6>
-                  </li>
-                  <li class="ui_comment">
-                    <h6 class="ui_comment_post"> [음악 공유] Schumann Arabeske, Op. 18 </h6>
-                    <h6 class="ui_comment_text">  역시 슈만 </h6>
-                  </li>
-                </ul>
+
               </div>
             </div>
             <%}else{%>
@@ -195,6 +300,8 @@
 
       <div class="footer">
         <%- include('../partials/footer') %>
+        <a id="user_info" userId="<%=user.id%>"></a>
+        <a id="post_info" postcurrentPage="<%=postcurrentPage%>"><%=postcount%></a>
       </div>
     </div>
   </body>

@@ -13,32 +13,29 @@ router.get('/post/index', async function(req, res){
   page = !isNaN(page)?page:1;
   category = !isNaN(category)?category:-1;
 
+  var categoryQuery = category==-1?{}:{category:category};
+  var searchQuery = createSearchQuery(req.query);
+  var masterQuery = {...categoryQuery, ...searchQuery};
+  
   var skip = (page-1)*limit;
-  var count = category==-1?await Post.countDocuments({}):await Post.countDocuments({category:category});
+  var count = await Post.countDocuments(masterQuery);
   var maxPage = Math.ceil(count/limit);
   var posts;
-  if(category==-1){
-    posts = await Post.find({})
-      .populate('author')
-      .sort('-createdAt')
-      .skip(skip)
-      .limit(limit)
-      .exec();
-  }else{
-    posts = await Post.find({category:category})
-      .populate('author')
-      .sort('-createdAt')
-      .skip(skip)
-      .limit(limit)
-      .exec();
-  }
+  posts = await Post.find(masterQuery)
+    .populate('author')
+    .sort('-createdAt')
+    .skip(skip)
+    .limit(limit)
+    .exec();
 
   res.render('post/index',{
     posts:posts,
     currentPage:page,
     maxPage:maxPage,
     limit:limit,
-    category:category
+    category:category,
+    searchType:req.query.searchType,
+    searchText:req.query.searchText
   });
 });
 
@@ -63,10 +60,26 @@ router.post('/post/new', function(req, res){
   Post.create(req.body, function(err, post){
     if(err){
       req.flash('post', req.body);
-      return res.redirect('/post/new');
+      return res.redirect('/post/new'+res.locals.getPostQueryString());
     }
-    res.redirect('/post');
+    res.redirect('/post'+res.locals.getPostQueryString(false, {page:1}));
   });
 });
+
+function createSearchQuery(queries){
+  var searchQuery = {};
+  if(queries.searchType && queries.searchText && queries.searchText.length >= 3){
+    var searchTypes = queries.searchType.toLowerCase().split(',');
+    var postQueries = [];
+    if(searchTypes.indexOf('title')>=0){
+      postQueries.push({ title:{ $regex:new RegExp(queries.searchText, 'i') } });
+    }
+    if(searchTypes.indexOf('body')>=0){
+      postQueries.push({ body:{ $regex:new RegExp(queries.searchText, 'i') } });
+    }
+    if(postQueries.length>0) searchQuery={$or:postQueries};
+  }
+  return searchQuery;
+}
 
 module.exports = router;
