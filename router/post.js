@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Post = require('../models/Post');
+var Account = require('../models/Account');
 
 router.get('/post', function(req, res){
   res.redirect('/post/index');
@@ -14,9 +15,9 @@ router.get('/post/index', async function(req, res){
   category = !isNaN(category)?category:-1;
 
   var categoryQuery = category==-1?{}:{category:category};
-  var searchQuery = createSearchQuery(req.query);
+  var searchQuery = await createSearchQuery(req.query);
   var masterQuery = {...categoryQuery, ...searchQuery};
-  
+
   var skip = (page-1)*limit;
   var count = await Post.countDocuments(masterQuery);
   var maxPage = Math.ceil(count/limit);
@@ -40,10 +41,12 @@ router.get('/post/index', async function(req, res){
 });
 
 //SHOW
-router.get('/post/0', function(req, res){
-  res.render('post/view',{
-    post: post
-  });
+router.get('/post/view/:id', function(req, res){
+  Post.findOne({_id:req.params.id})
+    .populate('author')
+    .exec(function(err, post){
+      res.render('post/view', {post:post});
+    });
 });
 
 //ADD
@@ -66,10 +69,34 @@ router.post('/post/new', function(req, res){
   });
 });
 
-function createSearchQuery(queries){
+//DELETE
+router.get('/post/delete/:id', async function(req, res){
+  Post.findOne({_id:req.params.id}, function(err, post){
+    if(!(req.session.passport&&post.author==req.session.passport.user._id)){
+      req.session.error={'msg':"권한이 필요합니다."};
+      res.redirect('/post/index');
+    }else{
+      Post.deleteOne({_id:req.params.id}, function(err){
+        if(err) return res.json('엥?');
+        req.session.error={'msg':"게시물이 삭제되었습니다."};
+        res.redirect('/post/index');
+      });
+    }
+  });
+
+});
+
+async function createSearchQuery(queries){
+  for(var k in queries){
+    if(typeof(queries[k])=='object'){
+      console.log('Query Error');
+      return {};
+    }
+  }
   var searchQuery = {};
   if(queries.searchType && queries.searchText && queries.searchText.length >= 3){
     var searchTypes = queries.searchType.toLowerCase().split(',');
+
     var postQueries = [];
     if(searchTypes.indexOf('title')>=0){
       postQueries.push({ title:{ $regex:new RegExp(queries.searchText, 'i') } });
@@ -77,7 +104,12 @@ function createSearchQuery(queries){
     if(searchTypes.indexOf('body')>=0){
       postQueries.push({ body:{ $regex:new RegExp(queries.searchText, 'i') } });
     }
+    if(searchTypes.indexOf('author')>=0){
+      var user = await Account.findOne({ nickname: queries.searchText }).exec();
+      if(user) postQueries.push({author:user});
+    }
     if(postQueries.length>0) searchQuery={$or:postQueries};
+    else searchQuery = null;
   }
   return searchQuery;
 }

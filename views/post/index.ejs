@@ -119,6 +119,11 @@
             color: black;
             text-decoration: none;
           }
+          .msg_nodata{
+            color: gray;
+            text-align: center;
+            margin-top:15px;
+          }
 
           .index_footer{
             display: flex;
@@ -276,11 +281,11 @@
                       <a class="post_table_title"><%=post.category%></a>
                     </th>
                     <th>
-                      <a href="#" class="a_pointerAndunderline_black"> <%=post.title%> </a>
-                      <a href="#" class="a_pointerAndunderline_red"> [0] </a>
+                      <a href="/post/view/<%=post._id%>" data-search-highlight="title" class="a_pointerAndunderline_black"> <%=post.title%> </a>
+                      <a href="/post/view/<%=post._id%>" class="a_pointerAndunderline_red"> [0] </a>
                     </th>
                     <th>
-                      <a class="a_pointerAndunderline_black" href="/user/index/<%=post.author.id%>"> <%=post.author.nickname%> </a>
+                      <a data-search-highlight="author" class="a_pointerAndunderline_black" href="/user/index/<%=post.author.id%>"> <%=post.author.nickname%> </a>
                     </th>
                     <th class="post_table_time align-center">
                       <!-- Today's Post -->
@@ -301,6 +306,10 @@
                 <% }) %>
               </tbody>
             </table>
+
+            <% if(posts.length==0) { %>
+              <h6 class="msg_nodata"> 해당하는 데이터가 존재하지 않습니다. </h6>
+            <% } %>
           </div>
           <div class="index_footer">
             <div id="page_naviagtion">
@@ -340,10 +349,14 @@
                 <li class="search_range" value="body">
                   내용
                 </li>
+                <li class="line"> </li>
+                <li class="search_range" value="author">
+                  작성자
+                </li>
               </ul>
 
               <input class="input_search_text" type="text" alt="검색" placeholder="검색어를 입력해주세요.">
-              <input onclick="goSearch(document.getElementsByClassName('search_range_box_text')[0].getAttribute('value'), document.getElementsByClassName('input_search_text')[0].value)" type="image" class="search_btn" src="/public/images/search.png" width="35px" height="35px">
+              <input onclick="goSearch(document.getElementsByClassName('search_range_box_text')[0].value, document.getElementsByClassName('input_search_text')[0].value)" type="image" class="search_btn" src="/public/images/search.png" width="35px" height="35px">
 
             </div>
 
@@ -354,7 +367,7 @@
 
       <div class="footer">
         <%- include('../partials/footer') %>
-        <a id="post_info" currentPage="<%=currentPage%>" postQueryString="<%=getPostQueryString()%>"></a>
+        <a id="post_info" currentPage="<%=currentPage%>""></a>
       </div>
     </div>
   </body>

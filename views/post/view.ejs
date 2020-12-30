@@ -48,10 +48,33 @@
             flex-direction: row;
             justify-content: space-between;
           }
-          .post_setting{
+
+          .post_setting_btn{
             font-size: 30px;
             letter-spacing: 3px;
           }
+          .dropdown_postmenu{
+            left:0px;
+            top:0px;
+            width:80px;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #dfe3e6;
+            border-radius: 5px 5px;
+            z-index: 2;
+          }
+          .dd_ps_child{
+            text-align: center;
+            padding-top:7px;
+            padding-bottom:7px;
+            font-size: 16px;
+            background-color: white;
+          }
+          .dd_ps_child:hover{
+            background-color: #dfe3e6;
+          }
+
           .post_info{
             display:flex;
             justify-content: space-between;
@@ -195,9 +218,16 @@
               <a href="#" class="a_basic"> 자유게시판 </a>
             </div>
             <div class="post_titleAndsetting">
-              <span> <h3> Title</h3> </span>
+              <span> <h3><%=post.title%></h3> </span>
               <span>
-                <a href="#" class="post_setting a_basic dot"> ··· </a>
+                <% if(whoami.passport&&post.author._id==whoami.passport.user._id){ %>
+                <a href="#" class="post_setting_btn a_basic dot"> ··· </a>
+                <% } %>
+                <div class="dropdown_postmenu none">
+                  <a href="/post/<%=post._id%>/edit" class="dd_ps_child a_basic"> 수정 </a>
+                  <a href="#" onclick="clickDeleteBtn()" class="dd_ps_child a_basic"> 삭제 </a>
+                </div>
+              </span>
             </div>
             <div class="post_info">
               <span class="post_info_left">
@@ -208,36 +238,38 @@
                 </span>
                 <span class="post_userANDtime">
                   <div class="post_user">
-                    <a href="#" class="a_basic"> Nickname </a>
+                    <a href="/user/index/<%=post.author.id%>" class="a_basic"><%=post.author.nickname%></a>
                   </div>
                   <div class="post_time">
-                    <a> 2020.12.23 14:41 </a>
+                    <a>
+                      <%= post.createdAt.getYear()-100 %>.<%= post.createdAt.getMonth()+1>=10?post.createdAt.getMonth()+1:'0'+post.createdAt.getMonth()+1 %>.<%= post.createdAt.getDate()>=10?post.createdAt.getDate():'0'+post.createdAt.getDate() %>
+                      <%=post.createdAt.getHours()>=10? post.createdAt.getHours():'0'+post.createdAt.getHours()%>:<%= post.createdAt.getMinutes()>=10?post.createdAt.getMinutes():'0'+post.createdAt.getMinutes()%>%></a>
                   </div>
                 </span>
               </span>
               <span class="post_info_right">
                 <span class="post_figure_views">
                   <img src="/public/images/view.png">
-                  <a class="figure a_basic"> 153 </a>
+                  <a class="figure a_basic"><%=post.view%></a>
                 </span>
                 <span class="post_figure_comments">
                   <img src="/public/images/comment.png">
-                  <a class="figure a_basic"> 23 </a>
+                  <a class="figure a_basic"> 0 </a> <!--TODO -->
                 </span>
                 <span class="post_figure_likes">
                   <img src="/public/images/like.png">
-                  <a class="figure a_basic"> 5 </a>
+                  <a class="figure a_basic"><%=post.like%></a>
                 </span>
               </span>
             </div>
           </div>
           <div class="post_body">
-            본문은 User가 알아서 하겠죠
+            <%=post.body%>
           </div>
           <div class="post_footer">
             <div class="comment_area">
               <div class="post_figure">
-                <a class="comment_amount a_basic"> 댓글 23 </a>
+                <a class="comment_amount a_basic"> 댓글 0 </a> <!-- TODO -->
                 <a href="#" class="a_basic like like_off"> ♡ </a>
                 <a class="like_cmt a_basic"> 게시글을 좋아합니다 ! </a>
               </div>
@@ -329,6 +361,7 @@
       </div>
 
       <div class="footer">
+        <a id="post_info" postId='<%=post._id%>'></a>
         <%- include('../partials/footer') %>
       </div>
     </div>

@@ -21,7 +21,7 @@ mongoose.set('useUnifiedTopology', true);
 mongoose.connect(process.env.MONGO_DB);
 var db = mongoose.connection;
 db.once('open', function(){
-  console.log('MONGOOSE DB has SUCCESSFULLY connected to server');
+  console.log('MONGOOSE DB connected to server');
 });
 db.on('error', function(err){
   console.log('DB ERROR : ', err);
@@ -47,7 +47,7 @@ app.use(function(req, res, next){
 
 //Listen
 var server = app.listen(port, function(){
-  console.log("Server has SUCCESSFULLY started [ Port:", port, "]");
+  console.log("Server started [ Port:", port, "]");
 });
 
 //ejs CAN access to SESSION

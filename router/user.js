@@ -18,7 +18,6 @@ router.get('/user/index/:id', async function(req, res){
 
   var postskip = (postpage-1)*limit;
   var count = await Post.countDocuments({author:ObjUser});
-  console.log('처음'+count);
   var postmaxPage = Math.ceil(count/limit);
   var posts;
   posts = await Post.find({author:ObjUser})
@@ -27,7 +26,6 @@ router.get('/user/index/:id', async function(req, res){
     .skip(postskip)
     .limit(limit)
     .exec();
-  console.log('보내기 전'+count);
   res.render('user/index',{
     posts:posts,
     postcurrentPage:postpage,

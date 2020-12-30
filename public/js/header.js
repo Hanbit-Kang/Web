@@ -1,9 +1,8 @@
-var JQdropdownUsermenu, JQdropdownBtn, JQddChild;
+var JQdropdownUsermenu, JQdropdownBtn;
 
 $(document).ready(function(){
   JQdropdownUsermenu = $('.dropdown_usermenu');
   JQdropdownBtn = $('.dropdown_btn');
-  JQddChild = $('.dd_child');
 
   JQdropdownBtn.click(function(e){
     e.preventDefault();
