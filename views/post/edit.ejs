@@ -1,7 +1,7 @@
 <html>
   <head>
     <%- include('../partials/head') %>
-    <script src="/public/js/post/new.js"></script>
+    <script src="/public/js/post/edit.js"></script>
   </head>
 
   <body>
@@ -130,10 +130,10 @@
         <div class="newpost_area">
           <div class="newpost_header">
             <span>
-              <h2> 새 글 쓰기 </h2>
+              <h2> 글 수정 </h2>
             </span>
-            <span class="dd_np_btn">
-              > 자유게시판
+            <span class="dd_np_btn" init="<%=post.category%>">
+              > default
             </span>
             <div class="dd_np_post_type none"> <!-- TODO: level에 따라 가능한 카테고리 indexing -->
               <a href="#" class="dd_np_child a_basic" var="1"> default </a>
@@ -145,10 +145,10 @@
           </div>
           <div class="newpost_content">
             <div class="np_title">
-              <input class="input_title" type="text" placeholder="제목을 입력하세요.">
+              <input class="input_title" type="text" value="<%=post.title%>" placeholder="제목을 입력하세요.">
             </div>
             <div class="np_body">
-              <textarea class="input_body" placeholder="내용을 입력하세요."></textarea>
+              <textarea class="input_body" placeholder="내용을 입력하세요."><%=post.body%></textarea>
             </div>
           </div>
           <div class="newpost_footer">

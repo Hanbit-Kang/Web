@@ -3,7 +3,7 @@ var JQpostTableTitle;
 var query_category;
 
 $(document).ready(function(){
-  JQpostTableTitle = $('.post_table_title');
+  JQpostTableTitle = $('.post_table_category');
   page = $('#post_info').attr('postcurrentPage');
 
   //SET PAGE NUMBER
@@ -28,10 +28,3 @@ $(document).ready(function(){
     $('.index_category').html('전체글보기');
   }
 });
-
-function getParameterByName(name){
-  name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-    results = regex.exec(location.search);
-  return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}

@@ -55,20 +55,3 @@ function post_to_url(path, params, method) {
     document.body.appendChild(form);
     form.submit();
 }
-
-$(document).ready(function(){
-  nicknameError = document.getElementsByClassName('nickname_error')[0];
-  emailError = document.getElementsByClassName('email_error')[0];
-
-  $('.btn_edit').click(function(e){
-    e.preventDefault();
-    if (IsVaild()){
-      post_to_url('/user/edit/'+$('.userid').attr('var'),
-      {
-        nickname:$('#nickname').val(),
-        email:$('#email').val()
-      },
-    'post');
-    }
-  });
-});

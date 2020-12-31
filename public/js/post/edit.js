@@ -7,6 +7,9 @@ $(document).ready(function(){
   JQinputBody = $('.input_body');
   JQinputTitle = $('.input_title');
 
+  curCategory = JQddNpBtn.attr('init');
+  JQddNpBtn.html('> ' + POST_CATEGORIES[curCategory]);
+
   JQddNpBtn.click(function(e){
     e.preventDefault();
     if (JQddNpPostType.hasClass('none')){
@@ -44,7 +47,7 @@ $(document).ready(function(){
       alert('내용을 입력하세요.');
       JQinputBody.focus();
     }else{
-      post_to_url('/post/new',
+      post_to_url(window.location.href,
       {
         title:JQinputTitle.val(),
         body:JQinputBody.val(),
@@ -59,7 +62,7 @@ $(document).ready(function(){
     if(JQinputTitle.val()==''&&JQinputBody.val()==''){
       history.back();
     }else{
-      if(confirm("글쓰기를 취소하시겠습니까?")){
+      if(confirm("수정을 취소하시겠습니까?")){
         history.back();
       }
     }

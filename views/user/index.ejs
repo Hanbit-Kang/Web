@@ -2,7 +2,6 @@
   <head>
     <%- include('../partials/head') %>
     <script src="/public/js/user/index.js"></script>
-    <script src="/public/js/consts.js"></script>
   </head>
 
   <body>
@@ -87,9 +86,6 @@
             margin-right: 20px;
             margin-bottom: 10px;
           }
-          .align-center{
-            text-align: center;
-          }
           #PostTableTitle{
             border-top: 1px solid #dfe3e6;
             border-bottom: 1px solid #dfe3e6;
@@ -117,12 +113,12 @@
           #PostTableContent a{
             font-weight: normal;
           }
-          .post_table_title{
+          .post_table_category{
             margin-left: 10px;
             font-size: 12px;
             color: black;
           }
-          .post_table_title:hover{
+          .post_table_category:hover{
             color: black;
             text-decoration: none;
           }
@@ -237,7 +233,7 @@
                       <% posts.forEach(function(post){ %>
                         <tr id="PostTableContent">
                           <th>
-                            <a class="post_table_title"><%=post.category%></a>
+                            <a class="post_table_category"><%=post.category%></a>
                           </th>
                           <th>
                             <a href="/post/view/<%=post._id%>" class="a_pointerAndunderline_black"> <%=post.title%> </a>

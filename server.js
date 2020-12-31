@@ -63,3 +63,4 @@ app.use('/', require('./router/login'));
 app.use('/', require('./router/register'));
 app.use('/', util.getPostQueryString, require('./router/user'));
 app.use('/', util.getPostQueryString, require('./router/post'));
+app.use('/', util.getPostQueryString, require('./router/comments'));

@@ -70,30 +70,26 @@
             cursor: pointer;
           }
 
-          .posts{
+          .displaybox table{
+            margin-top: 5px;
+          }
+          #PostTableContent th{
+            padding-top: 3px;
+            padding-bottom: 3px;
+          }
+          #PostTableContent a{
+            font-weight: normal;
+          }
+          .post_table_title{
             margin-left: 10px;
-            margin-top: 10px;
           }
-          .post{
-            display: flex;
+          .post_table_nickname{
+            margin-right: 10px;
           }
-          .post_left{
-            display: flex;
-            cursor: pointer;
-            width: 75%;
-            margin-right:5px;
-          }
-          .post_left:hover{
-            text-decoration: underline;
-          }
-          .post_right{
-            display: flex;
-            cursor: pointer;
-            width: 25%;
-          }
-          .post_comment_num{
-            margin-left:5px;
-            color: red;
+          .msg_nodata{
+            color: gray;
+            text-align: center;
+            margin-top:15px;
           }
         </style>
         <div id="BannerCarousel" class="carousel slide" data-ride="carousel">
@@ -124,106 +120,74 @@
               <h2> 최신글 </h2>
               <a href="/post/index" class="a_basic"> > 전체글보기 </a>
             </div>
-            <div class="posts">
-              <div class="post">
-                <span class="post_left">
-                  <span class="post_title"> 안녕 </span>
-                  <span class="post_comment_num"> [3] </span>
-                </span>
-                <span class="post_right">
-                  <span class="post_writter"> 아주대물리학과 </span>
-                </span>
-              </div>
-              <div class="post">
-                <span class="post_left">
-                  <span class="post_title"> 야어제집에서달그락소리들리길래 </span>
-                  <span class="post_comment_num"> [6] </span>
-                </span>
-                <span class="post_right">
-                  <span class="post_writter"> 어그로ㄴㄴ </span>
-                </span>
-              </div>
-              <div class="post">
-                <span class="post_left">
-                  <span class="post_title"> ㅇㅇㅆㄺㅅㄲㅇㅇㅅㄲㅈㅈㅅㅇㄹㅈ </span>
-                  <span class="post_comment_num"> [0] </span>
-                </span>
-                <span class="post_right">
-                  <span class="post_writter"> 김인 </span>
-                </span>
-              </div>
-              <div class="post">
-                <span class="post_left">
-                  <span class="post_title"> 인...직 </span>
-                  <span class="post_comment_num"> [2] </span>
-                </span>
-                <span class="post_right">
-                  <span class="post_writter"> 라흐마니노프 </span>
-                </span>
-              </div>
-              <div class="post">
-                <span class="post_left">
-                  <span class="post_title"> 머쉬베놈 질 거 같다 </span>
-                  <span class="post_comment_num"> [2] </span>
-                </span>
-                <span class="post_right">
-                  <span class="post_writter"> 인지기귀엽22 </span>
-                </span>
-              </div>
-            </div>
+            <table>
+              <colgroup>
+                <col style="width:500px">
+                <col style="width:100px">
+              </colgroup>
+              <thead>
+                <tr id="PostTableTitle">
+                  <th scope="col" class="post_title"></th>
+                  <th scope="col" class="post_author"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% posts.forEach(function(post){ %>
+                  <tr id="PostTableContent">
+                    <th>
+                      <a href="/post/view/<%=post._id%>" class="a_pointerAndunderline_black post_table_title"> <%=post.title%> </a>
+                      <a href="/post/view/<%=post._id%>" class="a_pointerAndunderline_red"> [0] </a>
+                    </th>
+                    <th>
+                      <a class="a_pointerAndunderline_black post_table_nickname align-center" href="/user/index/<%=post.author.id%>"> <%=post.author.nickname%> </a>
+                    </th>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+            <% if(posts.length==0) { %>
+              <h6 class="msg_nodata"> 해당하는 데이터가 존재하지 않습니다. </h6>
+            <% } %>
           </div>
           <div class="displaybox">
             <div class="box_title">
               <h2> 베스트게시판 </h2>
               <a> > 전체글보기 </a>
             </div>
-            <div class="posts">
-              <div class="post">
-                <span class="post_left">
-                  <span class="post_title"> 조던1 발매 일정 정리 </span>
-                  <span class="post_comment_num"> [28] </span>
-                </span>
-                <span class="post_right">
-                  <span class="post_writter"> 버질 </span>
-                </span>
-              </div>
-              <div class="post">
-                <span class="post_left">
-                  <span class="post_title"> 야이거뭐냐?...jpg </span>
-                  <span class="post_comment_num"> [16] </span>
-                </span>
-                <span class="post_right">
-                  <span class="post_writter"> debwhjkg </span>
-                </span>
-              </div>
-              <div class="post">
-                <span class="post_left">
-                  <span class="post_title"> 안녕하세요. 클래시컬 운영진입니다. </span>
-                  <span class="post_comment_num"> [20] </span>
-                </span>
-                <span class="post_right">
-                  <span class="post_writter"> Classical </span>
-                </span>
-              </div>
-              <div class="post">
-                <span class="post_left">
-                  <span class="post_title"> 쇼팽 에튀드 역대 우승자...txt </span>
-                  <span class="post_comment_num"> [12] </span>
-                </span>
-                <span class="post_right">
-                  <span class="post_writter"> 쇼팽192 </span>
-                </span>
-              </div>
-              <div class="post">
-                <span class="post_left">
-                  <span class="post_title"> 테슬라, 5조 유상증자 </span>
-                  <span class="post_comment_num"> [12] </span>
-                </span>
-                <span class="post_right">
-                  <span class="post_writter"> 주식안합니다 </span>
-                </span>
-              </div>
-            </div>
+            <table>
+              <colgroup>
+                <col style="width:450px">
+                <col style="width:100px">
+                <col style="width:50px">
+              </colgroup>
+              <thead>
+                <tr id="PostTableTitle">
+                  <th scope="col" class="post_title"></th>
+                  <th scope="col" class="post_author"></th>
+                  <th scope="col" class="post_like"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% bestposts.forEach(function(post){ %>
+                  <tr id="PostTableContent">
+                    <th>
+                      <a href="/post/view/<%=post._id%>" class="a_pointerAndunderline_black post_table_title"> <%=post.title%> </a>
+                      <a href="/post/view/<%=post._id%>" class="a_pointerAndunderline_red"> [0] </a>
+                    </th>
+                    <th>
+                      <a class="a_pointerAndunderline_black post_table_nickname" href="/user/index/<%=post.author.id%>"> <%=post.author.nickname%> </a>
+                    </th>
+                    <th>
+                      ♥
+                      <a class="a_pointerAndunderline_black post_table_like"><%=post.like%></a>
+                    </th>
+                  </tr>
+                <% }) %>
+              </tbody>
+            </table>
+            <% if(bestposts.length==0) { %>
+              <h6 class="msg_nodata"> 해당하는 데이터가 존재하지 않습니다. </h6>
+            <% } %>
           </div>
         </div>
       </div>

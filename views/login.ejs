@@ -85,9 +85,9 @@
               <a class="error id_error"> <%=errors.login %> </a>
             <% } %>
             <a class="error id_error none"> default </a>
-            <input class="input_pw" type="password" name="password" id="password" placeholder="비밀번호">
+            <input onkeyup="enterKey()" class="input_pw" type="password" name="password" id="password" placeholder="비밀번호">
             <a class="error pw_error none"> default </a>
-            <input type="submit" title="로그인" alt="로그인" value="로그인" class="btn_login bg-dark">
+            <input type="submit" title="로그인" alt="로그인" value="로그인" class="btn_login bg-dark" onclick="login()">
           </form>
           <div class="login_footer">
             <a class="find_id"> 아이디 찾기 </a>

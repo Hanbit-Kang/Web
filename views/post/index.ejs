@@ -1,7 +1,6 @@
 <html>
   <head>
     <%- include('../partials/head') %>
-    <script src="/public/js/consts.js"></script>
     <script src="/public/js/post/index.js"></script>
   </head>
 
@@ -80,9 +79,6 @@
             margin-right: 20px;
             margin-bottom: 10px;
           }
-          .align-center{
-            text-align: center;
-          }
           #PostTableTitle{
             border-top: 1px solid #dfe3e6;
             border-bottom: 1px solid #dfe3e6;
@@ -110,12 +106,12 @@
           #PostTableContent a{
             font-weight: normal;
           }
-          .post_table_title{
+          .post_table_category{
             margin-left: 10px;
             font-size: 12px;
             color: black;
           }
-          .post_table_title:hover{
+          .post_table_category:hover{
             color: black;
             text-decoration: none;
           }
@@ -278,7 +274,7 @@
                 <% posts.forEach(function(post){ %>
                   <tr id="PostTableContent">
                     <th>
-                      <a class="post_table_title"><%=post.category%></a>
+                      <a class="post_table_category"><%=post.category%></a>
                     </th>
                     <th>
                       <a href="/post/view/<%=post._id%>" data-search-highlight="title" class="a_pointerAndunderline_black"> <%=post.title%> </a>
@@ -355,7 +351,7 @@
                 </li>
               </ul>
 
-              <input class="input_search_text" type="text" alt="검색" placeholder="검색어를 입력해주세요.">
+              <input onkeyup="enterKey()" class="input_search_text" type="text" alt="검색" placeholder="검색어를 입력해주세요.">
               <input onclick="goSearch(document.getElementsByClassName('search_range_box_text')[0].value, document.getElementsByClassName('input_search_text')[0].value)" type="image" class="search_btn" src="/public/images/search.png" width="35px" height="35px">
 
             </div>

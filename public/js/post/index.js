@@ -13,7 +13,7 @@ $(document).ready(function(){
 
   page = $('#post_info').attr('currentPage');
 
-  JQpostTableTitle = $('.post_table_title');
+  JQpostTableTitle = $('.post_table_category');
 
   //SET SORT STANDARD
   JQstantard.each(function(i){
@@ -150,5 +150,11 @@ function makeHighlighted(){
         $element.html($element.html().replace(regex,'<span class="highlighted">$1</span>'));
       }
     });
+  }
+}
+
+function enterKey(){
+  if(window.event.keyCode == 13){
+    goSearch(document.getElementsByClassName('search_range_box_text')[0].value, document.getElementsByClassName('input_search_text')[0].value);
   }
 }

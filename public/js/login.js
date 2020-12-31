@@ -43,16 +43,21 @@ function post_to_url(path, params, method) {
 $(document).ready(function(){
   idError = document.getElementsByClassName('id_error')[0];
   pwError = document.getElementsByClassName('pw_error')[0];
-
-  $('.btn_login').click(function(e){
-    e.preventDefault();
-    if (IsVaild()){
-      post_to_url('/login',
-      {
-        id:$('#id').val(),
-        password:$('#password').val()
-      },
-    'post');
-    }
-  });
 });
+
+function login(){
+  if (IsVaild()){
+    post_to_url('/login',
+    {
+      id:$('#id').val(),
+      password:$('#password').val()
+    },
+  'post');
+  }
+}
+
+function enterKey(){
+  if(window.event.keyCode == 13){
+    login();
+  }
+}

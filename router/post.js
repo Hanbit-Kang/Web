@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Post = require('../models/Post');
 var Account = require('../models/Account');
+var Comment = require('../models/Comment');
 
 router.get('/post', function(req, res){
   res.redirect('/post/index');
@@ -42,11 +43,20 @@ router.get('/post/index', async function(req, res){
 
 //SHOW
 router.get('/post/view/:id', function(req, res){
-  Post.findOne({_id:req.params.id})
-    .populate('author')
-    .exec(function(err, post){
-      res.render('post/view', {post:post});
-    });
+  var commentForm = req.flash('commentForm')[0] || {_id: null, form: {}};
+  var commentError = req.flash('commentError')[0] || {_id: null, parentComment: null, errors:{}};
+
+  Promise.all([
+    Post.findOne({_id:req.params.id}).populate('author'),
+    Comment.find({post:req.params.id}).sort('createdAt').populate('author')
+  ])
+  .then(([post, comments]) => {
+    res.render('post/view', {post:post, comments:comments, commentForm:commentForm, commentError:commentError});
+  })
+  .catch((err)=>{
+    console.log(err);
+    return res.json(err);
+  });
 });
 
 //ADD
@@ -83,7 +93,46 @@ router.get('/post/delete/:id', async function(req, res){
       });
     }
   });
+});
 
+//EDIT
+router.get('/post/edit/:id', function(req, res, next){
+  Post.findOne({_id:req.params.id}, function(err, post){
+    if(!(req.session.passport&&post.author==req.session.passport.user._id)){
+      req.session.error={'msg':"권한이 필요합니다."};
+      res.redirect('/post/index');
+    }else{
+      var post = req.flash('post')[0];
+      var errors = req.flash('errors')[0] || {};
+      if(!post){
+        Post.findOne({_id:req.params.id}, function(err, post){
+          if(err) return res.json(err);
+          res.render('post/edit', {post:post, errors:errors});
+        });
+      }else{
+        post._id = req.params.id;
+        res.render('post/edit', {post:post, errors:errors});
+      }
+    }
+  });
+});
+
+router.post('/post/edit/:id', function(req, res){
+  Post.findOne({_id:req.params.id}, function(err, post){
+    if(!(req.session.passport&&post.author==req.session.passport.user._id)){
+      req.session.error={'msg':"권한이 필요합니다."};
+      res.redirect('/post/index');
+    }else{
+      Post.findOneAndUpdate({_id:req.params.id}, req.body, function(err, post){
+        if(err){
+          req.flash('post', req.body);
+          req.flash('errors', 'updateError');
+          return res.redirect('/post/edit/'+req.params.id);
+        }
+        res.redirect('/post/view/'+req.params.id);
+      });
+    }
+  });
 });
 
 async function createSearchQuery(queries){
