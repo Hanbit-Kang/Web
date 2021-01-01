@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@master
@@ -31,5 +31,5 @@ jobs:
       with:
         app-name: 'classical'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_6d1768dcd5514cf79901e73b66e16689 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_737a45453b7c4347b0fc0be3af834f79 }}
         package: .
