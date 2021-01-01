@@ -185,9 +185,11 @@
           .dropdown_commentmenu{
             left:0px;
             top:0px;
+            width:60px;
+            cursor: pointer;
             position: absolute;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             border: 1px solid #dfe3e6;
             border-radius: 5px 5px;
             z-index: 2;
@@ -228,9 +230,11 @@
           .dropdown_replymenu{
             left:0px;
             top:0px;
+            width:60px;
+            cursor: pointer;
             position: absolute;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             border: 1px solid #dfe3e6;
             border-radius: 5px 5px;
             z-index: 2;
@@ -363,8 +367,8 @@
                   </div>
                   <div class="post_time">
                     <a>
-                      <%= post.createdAt.getYear()-100 %>.<%= post.createdAt.getMonth()+1>=10?post.createdAt.getMonth()+1:'0'+post.createdAt.getMonth()+1 %>.<%= post.createdAt.getDate()>=10?post.createdAt.getDate():'0'+post.createdAt.getDate() %>
-                      <%=post.createdAt.getHours()>=10? post.createdAt.getHours():'0'+post.createdAt.getHours()%>:<%= post.createdAt.getMinutes()>=10?post.createdAt.getMinutes():'0'+post.createdAt.getMinutes()%>%></a>
+                      <%= post.createdAt.getYear()-100 %>.<%= post.createdAt.getMonth()+1>=10?post.createdAt.getMonth()+1:'0'+String(post.createdAt.getMonth()+1) %>.<%= post.createdAt.getDate()>=10?post.createdAt.getDate():'0'+String(post.createdAt.getDate()) %>
+                      <%=post.createdAt.getHours()>=10? post.createdAt.getHours():'0'+String(post.createdAt.getHours())%>:<%= post.createdAt.getMinutes()>=10?post.createdAt.getMinutes():'0'+String(post.createdAt.getMinutes())%>%></a>
                   </div>
                 </span>
               </span>
@@ -419,8 +423,8 @@
                     </span>
                     <span class="cmt_right">
                       <span class="cmt_time">
-                        <a> <%= comment.createdAt.getYear()-100 %>.<%= comment.createdAt.getMonth()+1>=10?comment.createdAt.getMonth()+1:'0'+comment.createdAt.getMonth()+1 %>.<%= comment.createdAt.getDate()>=10?comment.createdAt.getDate():'0'+comment.createdAt.getDate() %> </a>
-                        <a> <%= comment.createdAt.getHours()>=10? comment.createdAt.getHours():'0'+comment.createdAt.getHours()%>:<%= comment.createdAt.getMinutes()>=10?comment.createdAt.getMinutes():'0'+comment.createdAt.getMinutes()%>%> </a>
+                        <a> <%= comment.createdAt.getYear()-100 %>.<%= comment.createdAt.getMonth()+1>=10?comment.createdAt.getMonth()+1:'0'+String(comment.createdAt.getMonth()+1) %>.<%= comment.createdAt.getDate()>=10?comment.createdAt.getDate():'0'+String(comment.createdAt.getDate()) %> </a>
+                        <a> <%= comment.createdAt.getHours()>=10? comment.createdAt.getHours():'0'+String(comment.createdAt.getHours())%>:<%= comment.createdAt.getMinutes()>=10?comment.createdAt.getMinutes():'0'+String(comment.createdAt.getMinutes())%>%> </a>
                       </span>
                       <% if(whoami.passport&&comment.author._id==whoami.passport.user._id){ %>
                       <a href="#" class="comment_setting_btn a_basic dot"> ··· </a>
@@ -452,8 +456,8 @@
                       </span>
                       <span class="cmt_right">
                         <span class="cmt_time">
-                          <a> <%= childComment.createdAt.getYear()-100 %>.<%= childComment.createdAt.getMonth()+1>=10?childComment.createdAt.getMonth()+1:'0'+childComment.createdAt.getMonth()+1 %>.<%= childComment.createdAt.getDate()>=10?childComment.createdAt.getDate():'0'+childComment.createdAt.getDate() %> </a>
-                          <a> <%= childComment.createdAt.getHours()>=10? childComment.createdAt.getHours():'0'+childComment.createdAt.getHours()%>:<%= childComment.createdAt.getMinutes()>=10?childComment.createdAt.getMinutes():'0'+childComment.createdAt.getMinutes()%>%> </a>
+                          <a> <%= childComment.createdAt.getYear()-100 %>.<%= childComment.createdAt.getMonth()+1>=10?childComment.createdAt.getMonth()+1:'0'+String(childComment.createdAt.getMonth()+1) %>.<%= childComment.createdAt.getDate()>=10?childComment.createdAt.getDate():'0'+String(childComment.createdAt.getDate()) %> </a>
+                          <a> <%= childComment.createdAt.getHours()>=10? childComment.createdAt.getHours():'0'+String(childComment.createdAt.getHours())%>:<%= childComment.createdAt.getMinutes()>=10?childComment.createdAt.getMinutes():'0'+String(childComment.createdAt.getMinutes())%>%> </a>
                         </span>
                         <% if(whoami.passport&&childComment.author._id==whoami.passport.user._id){ %>
                         <a href="#" class="reply_setting_btn a_basic dot"> ··· </a>

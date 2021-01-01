@@ -36,7 +36,7 @@ $(document).ready(function(){
         JQdropdownCommentmenu.insertAfter($(this).parents('.comment_main'));
         JQdropdownCommentmenu.removeClass('none');
         JQdropdownCommentmenu.css('top', curCommentSettingBtn.offset().top+25);
-        JQdropdownCommentmenu.css('left', curCommentSettingBtn.offset().left-90);
+        JQdropdownCommentmenu.css('left', curCommentSettingBtn.offset().left-53);
       }else{
         JQdropdownCommentmenu.addClass('none');
       }
@@ -59,7 +59,7 @@ $(document).ready(function(){
         JQdropdownReplymenu.insertAfter($(this).parents('.reply_main'));
         JQdropdownReplymenu.removeClass('none');
         JQdropdownReplymenu.css('top', curCommentSettingBtn.offset().top+25);
-        JQdropdownReplymenu.css('left', curCommentSettingBtn.offset().left-90);
+        JQdropdownReplymenu.css('left', curCommentSettingBtn.offset().left-53);
       }else{
         JQdropdownReplymenu.addClass('none');
       }
@@ -203,10 +203,10 @@ $(window).resize(function(){
   }
   if(!JQdropdownCommentmenu.hasClass('none')){
     JQdropdownCommentmenu.css('top', curCommentSettingBtn.offset().top+25);
-    JQdropdownCommentmenu.css('left', curCommentSettingBtn.offset().left-90);
+    JQdropdownCommentmenu.css('left', curCommentSettingBtn.offset().left-53);
   }
   if(!JQdropdownReplymenu.hasClass('none')){
     JQdropdownReplymenu.css('top', curCommentSettingBtn.offset().top+25);
-    JQdropdownReplymenu.css('left', curCommentSettingBtn.offset().left-90);
+    JQdropdownReplymenu.css('left', curCommentSettingBtn.offset().left-53);
   }
 });
