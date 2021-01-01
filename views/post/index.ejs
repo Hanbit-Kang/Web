@@ -278,7 +278,7 @@
                     </th>
                     <th>
                       <a href="/post/view/<%=post._id%>" data-search-highlight="title" class="a_pointerAndunderline_black"> <%=post.title%> </a>
-                      <a href="/post/view/<%=post._id%>" class="a_pointerAndunderline_red"> [0] </a>
+                      <a href="/post/view/<%=post._id%>" class="a_pointerAndunderline_red"> [<%=post.commentCount%>] </a>
                     </th>
                     <th>
                       <a data-search-highlight="author" class="a_pointerAndunderline_black" href="/user/index/<%=post.author.id%>"> <%=post.author.nickname%> </a>

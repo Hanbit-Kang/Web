@@ -6,12 +6,14 @@ util.getPostQueryString = function(req, res, next){
     var queryArray = [];
     var page = overwrites.page?overwrites.page:(req.query.page?req.query.page:'');
     var postpage = overwrites.postpage?overwrites.postpage:(req.query.postpage?req.query.postpage:'');
+    var commentpage = overwrites.commentpage?overwrites.commentpage:(req.query.commentpage?req.query.commentpage:'');
     var category = overwrites.category?overwrites.category:(req.query.category?req.query.category:'');
     var searchType = overwrites.searchType?overwrites.searchType:(req.query.searchType?req.query.searchType:'');
     var searchText = overwrites.searchText?overwrites.searchText:(req.query.searchText?req.query.searchText:'');
 
     if(page) queryArray.push('page='+page);
     if(postpage) queryArray.push('postpage='+postpage);
+    if(commentpage) queryArray.push('commentpage='+commentpage);
     if(category) queryArray.push('category='+category);
     if(searchType) queryArray.push('searchType='+searchType);
     if(searchText) queryArray.push('searchText='+searchText);

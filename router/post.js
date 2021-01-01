@@ -11,7 +11,7 @@ router.get('/post', function(req, res){
 
 router.get('/post/index', async function(req, res){
   var page = Math.max(1, parseInt(req.query.page));
-  var limit = 15;
+  var limit = 10;
   var category = Math.max(-1, parseInt(req.query.category));
   page = !isNaN(page)?page:1;
   category = !isNaN(category)?category:-1;
@@ -24,18 +24,42 @@ router.get('/post/index', async function(req, res){
   var count = await Post.countDocuments(masterQuery);
   var maxPage = Math.ceil(count/limit);
   var posts;
-  posts = await Post.find(masterQuery)
-    .populate('author')
-    .sort('-createdAt')
-    .skip(skip)
-    .limit(limit)
-    .exec();
+  posts = await Post.aggregate([
+    { $match: masterQuery },
+    { $lookup: {
+      from: 'accounts',
+      localField: 'author',
+      foreignField: '_id',
+      as: 'author'
+    }},
+    { $unwind: '$author'},
+    { $sort: { createdAt: -1}},
+    { $skip: skip },
+    { $limit: limit },
+    { $lookup: {
+      from: 'comments',
+      localField: '_id',
+      foreignField: 'post',
+      as: 'comments'
+    }},
+    { $project:{
+      title: 1,
+      author: {
+        id:1,
+        nickname:1
+      },
+      createdAt: 1,
+      commentCount: { $size: '$comments'},
+      category: 1,
+      view: 1,
+      like: 1
+    }},
+  ]).exec();
 
   res.render('post/index',{
     posts:posts,
     currentPage:page,
     maxPage:maxPage,
-    limit:limit,
     category:category,
     searchType:req.query.searchType,
     searchText:req.query.searchText

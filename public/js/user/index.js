@@ -1,30 +1,35 @@
-var page;
-var JQpostTableTitle;
+var postpage, commentpage;
+var JQpostTableCategory, JQcommentTableCategory;
 var query_category;
-
 $(document).ready(function(){
-  JQpostTableTitle = $('.post_table_category');
-  page = $('#post_info').attr('postcurrentPage');
+  JQpostTableCategory = $('.post_table_category');
+  JQcommentTableCategory = $('.comment_table_category');
+  postpage = $('#page_info').attr('postcurrentPage');
+  commentpage = $('#page_info').attr('commentcurrentPage');
 
-  //SET PAGE NUMBER
-  $('.pn_number').each(function(i){
-    if ($(this).html()==page){
+  //SET PAGE NUMBER - POST
+  $('.pn_number_post').each(function(i){
+    if ($(this).html()==postpage){
+      $(this).addClass('pn_number_active');
+    }
+  });
+  //SET PAGE NUMBER - POST
+  $('.pn_number_comment').each(function(i){
+    if ($(this).html()==commentpage){
       $(this).addClass('pn_number_active');
     }
   });
 
   //SET POST_CATEGORIES... 1 -> 자유게시판
-  JQpostTableTitle.each(function(i){
+  JQpostTableCategory.each(function(i){
     if( isNaN($(this).html())==false ){
       $(this).html(POST_CATEGORIES[$(this).html()]);
     }
   });
-  query_category = parseInt($('.index_category').html());
-  if(query_category>=POST_CATEGORIES.length){
-    window.location.href = '/user/index/'+$('#user_id').attr('userId');
-  }else if (query_category>=0){
-    $('.index_category').html(POST_CATEGORIES[$('.index_category').html()]);
-  }else if(query_category==-1){
-    $('.index_category').html('전체글보기');
-  }
+  //SET Comment_CATEGORIES... 1 -> 자유게시판
+  JQcommentTableCategory.each(function(i){
+    if( isNaN($(this).html())==false ){
+      $(this).html(POST_CATEGORIES[$(this).html()]);
+    }
+  });
 });

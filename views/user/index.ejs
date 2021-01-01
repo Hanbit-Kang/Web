@@ -123,6 +123,58 @@
             text-decoration: none;
           }
 
+          #CommentTableTitle{
+            border-top: 1px solid #dfe3e6;
+            border-bottom: 1px solid #dfe3e6;
+            background-color: #f7f9fa;
+          }
+          #CommentTableTitle th{
+            padding-top: 10px;
+            padding-bottom: 10px;
+          }
+          #CommentTableTitle a{
+            font-size:14px;
+            font-weight: normal;
+          }
+          .comment_title{
+            padding-left: 150px;
+          }
+          #CommentTableContent{
+            border-bottom: 1px solid #dfe3e6;
+          }
+          #CommentTableContent th{
+            padding-top: 10px;
+            padding-bottom: 10px;
+          }
+          #CommentTableContent a{
+            font-weight: normal;
+          }
+          .comment_table_post_title{
+            margin-left: 10px;
+          }
+          .comment_table_text{
+            margin-right: 10px;
+          }
+          .comment_table_info{
+            margin-right: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          .comment_table_info a{
+            font-size: 12px;
+            color: gray !important;
+          }
+          .comment_table_info a:hover{
+            color: gray;
+            text-decoration: none;
+          }
+          .msg_nodata{
+            color: gray;
+            text-align: center;
+            margin-top:15px;
+          }
+
           .ui_post_footer{
             display: flex;
             flex-direction: column;
@@ -237,15 +289,15 @@
                           </th>
                           <th>
                             <a href="/post/view/<%=post._id%>" class="a_pointerAndunderline_black"> <%=post.title%> </a>
-                            <a href="/post/view/<%=post._id%>" class="a_pointerAndunderline_red"> [0] </a>
+                            <a href="/post/view/<%=post._id%>" class="a_pointerAndunderline_red"> [<%=post.commentCount%>] </a>
                           </th>
                           <th class="post_table_time align-center">
                             <!-- Today's Post -->
                             <% const today = new Date(); %>
                             <% if(post.createdAt.getFullYear()==today.getFullYear() && post.createdAt.getMonth()==today.getMonth() && post.createdAt.getDate()==today.getDate()) {%>
-                            <a> <%= post.createdAt.getHours()>=10? post.createdAt.getHours():'0'+post.createdAt.getHours()%>:<%= post.createdAt.getMinutes()>=10?post.createdAt.getMinutes():'0'+post.createdAt.getMinutes()%> </a>
+                            <a> <%= post.createdAt.getHours()>=10? post.createdAt.getHours():'0'+String(post.createdAt.getHours())%>:<%= post.createdAt.getMinutes()>=10?post.createdAt.getMinutes():'0'+String(post.createdAt.getMinutes())%> </a>
                             <%} else { %>
-                            <a> <%= post.createdAt.getYear()-100 %>.<%= post.createdAt.getMonth()+1>=10?post.createdAt.getMonth()+1:'0'+post.createdAt.getMonth()+1 %>.<%= post.createdAt.getDate()>=10?post.createdAt.getDate():'0'+post.createdAt.getDate() %> </a>
+                            <a> <%= post.createdAt.getYear()-100 %>.<%= post.createdAt.getMonth()+1>=10?post.createdAt.getMonth()+1:'0'+String(post.createdAt.getMonth()+1) %>.<%= post.createdAt.getDate()>=10?post.createdAt.getDate():'0'+String(post.createdAt.getDate()) %> </a>
                             <% } %>
                           </th>
                           <th class="align-center">
@@ -258,6 +310,10 @@
                       <% }) %>
                     </tbody>
                   </table>
+
+                  <% if(posts.length==0) { %>
+                    <h6 class="msg_nodata"> 해당하는 데이터가 존재하지 않습니다. </h6>
+                  <% } %>
                 </div>
                 <div class="ui_post_footer">
                   <div id="page_naviagtion">
@@ -272,7 +328,7 @@
                       <a class="a_pointerAndunderline_black"> 이전 </a>
                     </span>
                     <% for(i=startpage;i<=Math.min(startpage+offset-1, postmaxPage);i++){%>
-                    <a class="pn_number a_pointerAndunderline_black" href='/user/index/<%=user.id+getPostQueryString(false, {postpage:i})%>'><%=i%></a>
+                    <a class="pn_number_post a_pointerAndunderline_black" href='/user/index/<%=user.id+getPostQueryString(false, {postpage:i})%>'><%=i%></a>
                     <%}%>
                     <span class="pn_next_btn <%=nextBtnEnabled?'':'none'%>" onclick="location.href='/user/index/<%=user.id+getPostQueryString(false, {postpage:startpage+offset})%>'">
                       <a class="a_pointerAndunderline_black"> 다음 </a>
@@ -283,8 +339,78 @@
 
               </div>
               <div class="ui_type">
-                <h4 class="ui_type_title"> 댓글 152 </h4>
+                <div class="ui_post_header">
+                  <h4 class="ui_type_title"> 댓글 <%=commentcount%> </h4>
+                </div>
+                <div class="ui_comment_content">
+                  <table>
+                    <colgroup>
+                      <col style="width:300px;">
+                      <col style="width:400px;">
+                      <col style="width:100px;">
+                    </colgroup>
+                    <thead>
+                      <tr id="CommentTableTitle">
+                        <th scope="col" class="align-center">
+                          <a> 게시글 제목 </a>
+                        </th>
+                        <th scope="col" class="align-center">
+                          <a> 댓글 내용 </a>
+                        </th>
+                        <th scope="col" class="">
+                          <a></a>
+                        </th>
+                      </tr>
+                    </thead>
 
+                    <tbody>
+                      <% comments.forEach(function(comment){ %>
+                        <tr id="CommentTableContent">
+                          <th>
+                            <a href="/post/view/<%=comment.post._id%>" class="comment_table_post_title a_pointerAndunderline_black"> <%=comment.post.title%> </a>
+                          </th>
+                          <th class="comment_table_text">
+                            <!-- Today's Post -->
+                            <a> <%= comment.text %></a>
+                          </th>
+                          <th class="comment_table_info">
+                            <a class="comment_table_category"><%=comment.post.category%></a>
+                            <% const today = new Date(); %>
+                            <a>
+                              <%= comment.createdAt.getYear()-100 %>.<%= comment.createdAt.getMonth()+1>=10?comment.createdAt.getMonth()+1:'0'+String(comment.createdAt.getMonth()+1) %>.<%= comment.createdAt.getDate()>=10?comment.createdAt.getDate():'0'+String(comment.createdAt.getDate()) %>
+                              <%= comment.createdAt.getHours()>=10? comment.createdAt.getHours():'0'+String(comment.createdAt.getHours())%>:<%= comment.createdAt.getMinutes()>=10?comment.createdAt.getMinutes():'0'+String(comment.createdAt.getMinutes())%>
+                            </a>
+                            </th>
+                        </tr>
+                      <% }) %>
+                    </tbody>
+                  </table>
+
+                  <% if(comments.length==0) { %>
+                    <h6 class="msg_nodata"> 해당하는 데이터가 존재하지 않습니다. </h6>
+                  <% } %>
+                </div>
+                <div class="ui_post_footer">
+                  <div id="page_naviagtion">
+                    <%
+                      var offset = 10;
+                      var startpage = (Math.floor((commentcurrentPage-1)/offset))*offset+1;
+                      var previousBtnEnabled = startpage>1;
+                      var nextBtnEnabled = commentmaxPage>startpage+offset-1 && commentcurrentPage<startpage+offset;
+                    %>
+                    <span class="pn_prev_btn <%=previousBtnEnabled?'':'none'%>" onclick="location.href='/user/index/<%=user.id+getPostQueryString(false, {commentpage:startpage-1})%>'">
+                      <h4> < </h4>
+                      <a class="a_pointerAndunderline_black"> 이전 </a>
+                    </span>
+                    <% for(i=startpage;i<=Math.min(startpage+offset-1, commentmaxPage);i++){%>
+                    <a class="pn_number_comment a_pointerAndunderline_black" href='/user/index/<%=user.id+getPostQueryString(false, {commentpage:i})%>#CommentTableTitle'><%=i%></a>
+                    <%}%>
+                    <span class="pn_next_btn <%=nextBtnEnabled?'':'none'%>" onclick="location.href='/user/index/<%=user.id+getPostQueryString(false, {commentpage:startpage+offset})%>'">
+                      <a class="a_pointerAndunderline_black"> 다음 </a>
+                      <h4> > </h4>
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
             <%}else{%>
@@ -297,7 +423,7 @@
       <div class="footer">
         <%- include('../partials/footer') %>
         <a id="user_info" userId="<%=user.id%>"></a>
-        <a id="post_info" postcurrentPage="<%=postcurrentPage%>"><%=postcount%></a>
+        <a id="page_info" postcurrentPage="<%=postcurrentPage%>" commentcurrentPage="<%=commentcurrentPage%>"></a>
       </div>
     </div>
   </body>
