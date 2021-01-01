@@ -18,7 +18,7 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect(process.env.MONGO_DB);
+mongoose.connect(process.env.MONGO_DB||'mongodb+srv://admin:admin@cluster0.fdyfs.mongodb.net/Classical');
 var db = mongoose.connection;
 db.once('open', function(){
   console.log('MONGOOSE DB connected to server');
