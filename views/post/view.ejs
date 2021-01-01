@@ -209,15 +209,32 @@
             text-decoration: underline;
           }
           .cmt_reply{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-bottom: 1px solid #dfe3e6;
+          }
+          .reply_main{
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-            margin-top: 10px;
-            margin-left: 20px;
-            margin-right: 20px;
           }
-
+          .reply_setting_btn{
+            margin-top:-7px;
+            font-size: 20px;
+          }
+          .dropdown_replymenu{
+            left:0px;
+            top:0px;
+            position: absolute;
+            display: flex;
+            flex-direction: row;
+            border: 1px solid #dfe3e6;
+            border-radius: 5px 5px;
+            z-index: 2;
+          }
           .cmt_input_area{
             min-height: 130px;
             border: 1px solid #dfe3e6;
@@ -380,7 +397,7 @@
               <ul class="comments">
                 <% if(comments.length){ %>
                 <% comments.forEach(function(comment){ %>
-                <%if(comment.isDeleted){%>
+                <%if(comment.isDeleted||comment.parentComment){%>
                 <li class="comment none" commentId="<%=comment._id%>" commentText="<%=comment.text%>">
                 <%}else{%>
                 <li class="comment" commentId="<%=comment._id%>" commentText="<%=comment.text%>">
@@ -410,6 +427,43 @@
                       <% } %>
                     </span>
                   </div>
+
+                  <% if(comment.childComments){ %>
+                  <% comment.childComments.forEach(function(childComment){ %>
+                  <%if(childComment.isDeleted){%>
+                  <li class="cmt_reply none" commentId="<%=childComment._id%>" commentText="<%=childComment.text%>">
+                  <%}else{%>
+                  <li class="cmt_reply" commentId="<%=childComment._id%>" commentText="<%=childComment.text%>">
+                  <% } %>
+                    <div class="reply_main">
+                      <span class="cmt_left">
+                        <span class="cmt_nickname">
+                          <a> <%=childComment.author.nickname%> </a>
+                        </span>
+                        <% if(isAuthenticated){ %>
+                        <span onclick="clickComment(this);" class="cmt_content">
+                          <a> <%=childComment.text%> </a>
+                        </span>
+                        <% } else { %>
+                        <span class="cmt_content">
+                          <a> <%=childComment.text%> </a>
+                        </span>
+                        <% } %>
+                      </span>
+                      <span class="cmt_right">
+                        <span class="cmt_time">
+                          <a> <%= childComment.createdAt.getYear()-100 %>.<%= childComment.createdAt.getMonth()+1>=10?childComment.createdAt.getMonth()+1:'0'+childComment.createdAt.getMonth()+1 %>.<%= childComment.createdAt.getDate()>=10?childComment.createdAt.getDate():'0'+childComment.createdAt.getDate() %> </a>
+                          <a> <%= childComment.createdAt.getHours()>=10? childComment.createdAt.getHours():'0'+childComment.createdAt.getHours()%>:<%= childComment.createdAt.getMinutes()>=10?childComment.createdAt.getMinutes():'0'+childComment.createdAt.getMinutes()%>%> </a>
+                        </span>
+                        <% if(whoami.passport&&childComment.author._id==whoami.passport.user._id){ %>
+                        <a href="#" class="reply_setting_btn a_basic dot"> ··· </a>
+                        <% } %>
+                      </span>
+                    </div>
+                  </li>
+                  <% }) %>
+                  <% } %>
+
                 </li>
                 <% }) %>
                 <% } %>
@@ -418,6 +472,10 @@
               <div class="none dropdown_commentmenu">
                 <a onclick="doEdit(this);" class="dd_cs_child a_basic"> 수정 </a>
                 <a onclick="doDelete(this);" class="dd_cs_child a_basic"> 삭제 </a>
+              </div>
+              <div class="none dropdown_replymenu">
+                <a onclick="doEditReply(this);" class="dd_cs_child a_basic"> 수정 </a>
+                <a onclick="doDeleteReply(this);" class="dd_cs_child a_basic"> 삭제 </a>
               </div>
 
               <div class="cmt_reply_area none">

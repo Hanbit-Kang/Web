@@ -3,6 +3,7 @@ var router = express.Router();
 var Post = require('../models/Post');
 var Account = require('../models/Account');
 var Comment = require('../models/Comment');
+var util = require('../util');
 
 router.get('/post', function(req, res){
   res.redirect('/post/index');
@@ -43,15 +44,13 @@ router.get('/post/index', async function(req, res){
 
 //SHOW
 router.get('/post/view/:id', function(req, res){
-  var commentForm = req.flash('commentForm')[0] || {_id: null, form: {}};
-  var commentError = req.flash('commentError')[0] || {_id: null, parentComment: null, errors:{}};
-
   Promise.all([
     Post.findOne({_id:req.params.id}).populate('author'),
     Comment.find({post:req.params.id}).sort('createdAt').populate('author')
   ])
   .then(([post, comments]) => {
-    res.render('post/view', {post:post, comments:comments, commentForm:commentForm, commentError:commentError});
+    var commentTrees = util.convertToTrees(comments, '_id','parentComment','childComments');
+    res.render('post/view', {post:post, comments:comments});
   })
   .catch((err)=>{
     console.log(err);

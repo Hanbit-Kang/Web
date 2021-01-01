@@ -24,10 +24,7 @@ router.post('/comment/edit/:id', checkPostId, function(req, res){
   var post = res.locals.post;
 
   Comment.findOneAndUpdate({_id:req.params.id}, req.body, function(err, comment){
-    if(err){
-      req.flash('commentForm', {_id:req.params.id, form:req.body});
-      req.flash('commentError', {_id:req.params.id, errors:'updateErr'});
-    }
+    if(err) return res.json('?');
     return res.redirect('/post/view/'+post._id+res.locals.getPostQueryString());
   });
 });
