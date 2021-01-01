@@ -45,7 +45,7 @@ router.get('/user/index/:id', async function(req, res){
       { $project:{
         title: 1,
         createdAt: 1,
-        commentCount: { $size: '$comments'},
+        comment:1,
         category: 1,
         view: 1,
         like: 1

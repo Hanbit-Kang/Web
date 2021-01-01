@@ -3,6 +3,7 @@ var router = express.Router();
 var Post = require('../models/Post');
 var Account = require('../models/Account');
 var Comment = require('../models/Comment');
+var Like = require('../models/Like');
 var util = require('../util');
 
 router.get('/post', function(req, res){
@@ -20,6 +21,8 @@ router.get('/post/index', async function(req, res){
   var searchQuery = await createSearchQuery(req.query);
   var masterQuery = {...categoryQuery, ...searchQuery};
 
+  var sort =  req.query.sort?req.query.sort:'createdAt';
+  
   var skip = (page-1)*limit;
   var count = await Post.countDocuments(masterQuery);
   var maxPage = Math.ceil(count/limit);
@@ -33,7 +36,7 @@ router.get('/post/index', async function(req, res){
       as: 'author'
     }},
     { $unwind: '$author'},
-    { $sort: { createdAt: -1}},
+    { $sort: { [sort]: -1}},
     { $skip: skip },
     { $limit: limit },
     { $lookup: {
@@ -48,11 +51,11 @@ router.get('/post/index', async function(req, res){
         id:1,
         nickname:1
       },
+      view:1,
+      like:1,
       createdAt: 1,
-      commentCount: { $size: '$comments'},
+      comment: 1,
       category: 1,
-      view: 1,
-      like: 1
     }},
   ]).exec();
 
@@ -67,14 +70,19 @@ router.get('/post/index', async function(req, res){
 });
 
 //SHOW
-router.get('/post/view/:id', function(req, res){
+router.get('/post/view/:id', async function(req, res){
   Promise.all([
     Post.findOne({_id:req.params.id}).populate('author'),
-    Comment.find({post:req.params.id}).sort('createdAt').populate('author')
+    Comment.find({post:req.params.id}).sort('createdAt').populate('author'),
+    req.session.passport?Like.findOne({post:req.params.id, who:req.session.passport.user}):null
   ])
-  .then(([post, comments]) => {
+  .then(([post, comments, like]) => {
+    var IsLike = false;
+    if(like) IsLike = true;
+    post.view++;
+    post.save();
     var commentTrees = util.convertToTrees(comments, '_id','parentComment','childComments');
-    res.render('post/view', {post:post, comments:comments});
+    res.render('post/view', {post:post, comments:comments, IsLike:IsLike});
   })
   .catch((err)=>{
     console.log(err);
@@ -154,6 +162,36 @@ router.post('/post/edit/:id', function(req, res){
         }
         res.redirect('/post/view/'+req.params.id);
       });
+    }
+  });
+});
+
+//like
+router.get('/post/like/:id', function(req, res){
+  Post.findOne({_id:req.params.id}, async function(err, post){
+    if(!post){
+      req.session.error={'msg':"해당 게시글이 존재하지 않습니다."};
+      res.redirect('/post/index');
+    }else if(!req.session.passport){
+      req.session.error={'msg':"로그인 후 이용하실 수 있습니다."};
+      res.redirect('/login');
+    }else{
+      var ObjLike = await Like.findOne({post:req.params.id, who:req.session.passport.user._id}).exec();
+      if(ObjLike){
+        Like.deleteOne({post:req.params.id, who:req.session.passport.user}, function(err){
+          if(err) return res.json(err);
+          post.like--;
+          post.save();
+          res.redirect('/post/view/'+req.params.id);
+        });
+      }else{
+        Like.create({post:req.params.id, who:req.session.passport.user}, function(err, like){
+          if(err) return res.json(err);
+          post.like++;
+          post.save();
+          res.redirect('/post/view/'+req.params.id);
+        });
+      }
     }
   });
 });

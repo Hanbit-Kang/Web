@@ -15,6 +15,8 @@ router.post('/comment/new', checkPostId, function(req, res){
 
   Comment.create(req.body, function(err, comment){
     if(err) return res.json('d');
+    post.comment++;
+    post.save();
     return res.redirect('/post/view/'+post._id+res.locals.getPostQueryString());
   });
 });

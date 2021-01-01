@@ -76,7 +76,6 @@ $(document).ready(function(){
 
   //like 기능
   JQlike.click(function(e){
-    e.preventDefault();
     if(JQlike.hasClass('like_off')){
       JQlike.removeClass('like_off');
       JQlike.addClass('like_on');
@@ -89,6 +88,7 @@ $(document).ready(function(){
       JQlike.html("♡");
     }
   });
+  makeHighlighted();
 });
 
 function clickComment(me){

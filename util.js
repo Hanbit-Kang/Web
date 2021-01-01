@@ -10,6 +10,7 @@ util.getPostQueryString = function(req, res, next){
     var category = overwrites.category?overwrites.category:(req.query.category?req.query.category:'');
     var searchType = overwrites.searchType?overwrites.searchType:(req.query.searchType?req.query.searchType:'');
     var searchText = overwrites.searchText?overwrites.searchText:(req.query.searchText?req.query.searchText:'');
+    var sort = overwrites.sort?overwrites.sort:(req.query.sort?req.query.sort:'');
 
     if(page) queryArray.push('page='+page);
     if(postpage) queryArray.push('postpage='+postpage);
@@ -17,6 +18,7 @@ util.getPostQueryString = function(req, res, next){
     if(category) queryArray.push('category='+category);
     if(searchType) queryArray.push('searchType='+searchType);
     if(searchText) queryArray.push('searchText='+searchText);
+    if(sort) queryArray.push('sort='+sort);
 
     if(queryArray.length>0) queryString = (isAppended?'&':'?') + queryArray.join('&');
 

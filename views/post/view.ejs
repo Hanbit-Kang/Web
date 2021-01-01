@@ -340,10 +340,10 @@
         <div class="post_area">
           <div class="post_header">
             <div class="post_type">
-              <a href="#" class="a_basic post_type_text"><%=post.category%></a>
+              <a href="/post/index?category=<%=post.category%>" class="a_basic post_type_text"><%=post.category%></a>
             </div>
             <div class="post_titleAndsetting">
-              <span> <h3><%=post.title%></h3> </span>
+              <span data-search-highlight="title"> <h3><%=post.title%></h3> </span>
               <span>
                 <% if(whoami.passport&&post.author._id==whoami.passport.user._id){ %>
                 <a href="#" class="post_setting_btn a_basic dot"> ··· </a>
@@ -363,7 +363,7 @@
                 </span>
                 <span class="post_userANDtime">
                   <div class="post_user">
-                    <a href="/user/index/<%=post.author.id%>" class="a_basic"><%=post.author.nickname%></a>
+                    <a href="/user/index/<%=post.author.id%>" data-search-highlight="author" class="a_basic"><%=post.author.nickname%></a>
                   </div>
                   <div class="post_time">
                     <a>
@@ -379,7 +379,7 @@
                 </span>
                 <span class="post_figure_comments">
                   <img src="/public/images/comment.png">
-                  <a class="figure a_basic"> 0 </a> <!--TODO -->
+                  <a class="figure a_basic"><%=post.comment%></a>
                 </span>
                 <span class="post_figure_likes">
                   <img src="/public/images/like.png">
@@ -388,15 +388,26 @@
               </span>
             </div>
           </div>
-          <div class="post_body">
+          <div class="post_body" data-search-highlight="body">
             <%=post.body%>
           </div>
           <div class="post_footer">
             <div class="comment_area">
               <div class="post_figure">
-                <a class="comment_amount a_basic"> 댓글 0 </a> <!-- TODO -->
-                <a href="#" class="a_basic like like_off"> ♡ </a>
+                <a class="comment_amount a_basic"> 댓글 <%=comments.length?comments.length:0%> </a>
+                <% if(whoami.passport){ %>
+                  <% if(IsLike) { %>
+                <a href="/post/like/<%=post._id%>" class="a_basic like like_on"> ♥ </a>
+                  <% } else {%>
+                    <a href="/post/like/<%=post._id%>" class="a_basic like like_off"> ♡ </a>
+                  <% } %>
+                <% } %>
+
+                <% if(IsLike) { %>
+                <a class="like_cmt a_basic" style="opacity:50%;"> 게시글을 좋아합니다 ! </a>
+                <% } else {%>
                 <a class="like_cmt a_basic"> 게시글을 좋아합니다 ! </a>
+                <% } %>
               </div>
               <ul class="comments">
                 <% if(comments.length){ %>
