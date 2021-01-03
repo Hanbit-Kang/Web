@@ -6,7 +6,8 @@ var accountSchema = mongoose.Schema({
   id:{type:String, required:true, unique:true, trim:true},
   password:{type:String, required:true},
   email:{type:String, trim:true},
-  nickname:{type:String, trim:true, unique:true}
+  nickname:{type:String, trim:true, unique:true},
+  level:{type:Number, required:true, default:0}
 });
 
 accountSchema.pre('save', function(next){

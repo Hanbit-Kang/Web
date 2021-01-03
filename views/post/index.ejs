@@ -115,6 +115,10 @@
             color: black;
             text-decoration: none;
           }
+          .delete_btn{
+            text-align:right;
+            margin-right:20px;
+          }
           .msg_nodata{
             color: gray;
             text-align: center;
@@ -247,6 +251,9 @@
                 <col style="width:80px">
                 <col style="width:50px">
                 <col style="width:50px">
+                <% if(whoami.passport&&whoami.passport.user.level>=1){ %>
+                <col style="width:20px">
+                <% } %>
               </colgroup>
               <thead>
                 <tr id="PostTableTitle">
@@ -267,12 +274,17 @@
                   <th scope="col" class="post_like align-center">
                     <a> 좋아요 </a>
                   </th>
+                  <% if(whoami.passport&&whoami.passport.user.level>=1){ %>
+                  <th scope="col" class="align-center">
+                    <input type="checkbox" class="checkbox_delete_all"></label>
+                  </th>
+                  <% } %>
                 </tr>
               </thead>
 
               <tbody>
                 <% posts.forEach(function(post){ %>
-                  <tr id="PostTableContent">
+                  <tr id="PostTableContent" postId="<%=post._id%>">
                     <th>
                       <a class="post_table_category"><%=post.category%></a>
                     </th>
@@ -287,9 +299,9 @@
                       <!-- Today's Post -->
                       <% const today = new Date(); %>
                       <% if(post.createdAt.getFullYear()==today.getFullYear() && post.createdAt.getMonth()==today.getMonth() && post.createdAt.getDate()==today.getDate()) {%>
-                      <a> <%= post.createdAt.getHours()>=10? post.createdAt.getHours():'0'+post.createdAt.getHours()%>:<%= post.createdAt.getMinutes()>=10?post.createdAt.getMinutes():'0'+post.createdAt.getMinutes()%> </a>
+                      <a> <%= post.createdAt.getHours()>=10? post.createdAt.getHours():'0'+String(post.createdAt.getHours())%>:<%= post.createdAt.getMinutes()>=10?post.createdAt.getMinutes():'0'+String(post.createdAt.getMinutes())%> </a>
                       <%} else { %>
-                      <a> <%= post.createdAt.getYear()-100 %>.<%= post.createdAt.getMonth()+1>=10?post.createdAt.getMonth()+1:'0'+post.createdAt.getMonth()+1 %>.<%= post.createdAt.getDate()>=10?post.createdAt.getDate():'0'+post.createdAt.getDate() %> </a>
+                      <a> <%= post.createdAt.getYear()-100 %>.<%= post.createdAt.getMonth()+1>=10?post.createdAt.getMonth()+1:'0'+String(post.createdAt.getMonth()+1) %>.<%= post.createdAt.getDate()>=10?post.createdAt.getDate():'0'+String(post.createdAt.getDate()) %> </a>
                       <% } %>
                     </th>
                     <th class="align-center">
@@ -298,11 +310,19 @@
                     <th class="align-center">
                       <a> <%=post.like%> </a>
                     </th>
+                    <% if(whoami.passport&&whoami.passport.user.level>=1){ %>
+                    <th scope="col" class="post_table_delete align-center">
+                      <input type="checkbox" class="checkbox_delete"></label>
+                    </th>
+                    <% } %>
                   </tr>
                 <% }) %>
               </tbody>
             </table>
 
+            <% if(whoami.passport&&whoami.passport.user.level>=1){ %>
+              <a href="#" class="delete_btn a_pointerAndunderline_black"> 삭제하기 </a>
+            <% } %>
             <% if(posts.length==0) { %>
               <h6 class="msg_nodata"> 해당하는 데이터가 존재하지 않습니다. </h6>
             <% } %>

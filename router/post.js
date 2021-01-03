@@ -22,7 +22,7 @@ router.get('/post/index', async function(req, res){
   var masterQuery = {...categoryQuery, ...searchQuery};
 
   var sort =  req.query.sort?req.query.sort:'createdAt';
-  
+
   var skip = (page-1)*limit;
   var count = await Post.countDocuments(masterQuery);
   var maxPage = Math.ceil(count/limit);
@@ -100,6 +100,13 @@ router.get('/post/new', function(req, res){
 });
 
 router.post('/post/new', function(req, res){
+  if(!(req.session.passport)){
+    req.session.error={'msg':"로그인 후 이용해주세요."};
+    res.redirect('/login');
+  }else if(req.body.category==0&&req.session.passport.user.level<1){
+    req.session.error={'msg':"권한이 없습니다."};
+    res.redirect('/post/index');
+  }
   req.body.author = req.session.passport.user._id;
   Post.create(req.body, function(err, post){
     if(err){
@@ -131,6 +138,9 @@ router.get('/post/edit/:id', function(req, res, next){
   Post.findOne({_id:req.params.id}, function(err, post){
     if(!(req.session.passport&&post.author==req.session.passport.user._id)){
       req.session.error={'msg':"권한이 필요합니다."};
+      res.redirect('/post/index');
+    }else if(req.body.category==0&&req.session.passport.user.level<1){
+      req.session.error={'msg':"권한이 없습니다."};
       res.redirect('/post/index');
     }else{
       var post = req.flash('post')[0];
@@ -194,6 +204,28 @@ router.get('/post/like/:id', function(req, res){
       }
     }
   });
+});
+
+router.post('/post/index/delete', function(req, res){
+  if(!(req.session.passport&&req.session.passport.user.level>=1)){
+    req.session.error={'msg':"권한이 없습니다."};
+    res.redirect('/post/index');
+  }else{
+    var postsIdStr = req.body.postsId;
+    var postsId = [];
+    var curStr='';
+    for(var i in postsIdStr){
+      if(postsIdStr[i]==','){
+        postsId.push(curStr);
+        curStr = '';
+      }
+      else curStr+=postsIdStr[i];
+    } postsId.push(curStr);
+    Post.deleteMany({_id:{$in:postsId}}, function(err){
+      if(err) return res.json(err);
+      res.redirect('/post/index');
+    });
+  }
 });
 
 async function createSearchQuery(queries){

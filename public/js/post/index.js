@@ -74,6 +74,33 @@ $(document).ready(function(){
   }else if(query_category==-1){
     $('.index_category').html('전체글보기');
   }
+
+  //admin only
+  $('.checkbox_delete_all').click(function(){
+    if($('.checkbox_delete_all').prop("checked")){
+      $('.checkbox_delete').each(function(i){
+        $(this).prop("checked", true);
+      });
+    }else{
+      $('.checkbox_delete').each(function(i){
+        $(this).prop("checked", false);
+      });
+    }
+  });
+  $('.delete_btn').click(function(){
+    var postsId = [];
+    $('.post_table_delete').each(function(i){
+      if($(this).children().prop("checked")){
+        postsId.push($(this).parent().attr('postId'));
+      }
+    });
+    post_to_url('/post/index/delete',
+    {
+      postsId:postsId
+    },
+  'post');
+  });
+
   makeHighlighted();
 });
 

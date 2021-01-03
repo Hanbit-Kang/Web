@@ -37,21 +37,19 @@ function IsVaild(){
 
   return flag;
 }
+$(document).ready(function(){
+  nicknameError = document.getElementsByClassName('nickname_error')[0];
+  emailError = document.getElementsByClassName('email_error')[0];
 
-function post_to_url(path, params, method) {
-    method = method || "post";
-
-    var form = document.createElement("form");
-    form.setAttribute("method", method);
-    form.setAttribute("action", path);
-
-    for(var key in params) {
-        var hiddenField = document.createElement("input");
-        hiddenField.setAttribute("type", "hidden");
-        hiddenField.setAttribute("name", key);
-        hiddenField.setAttribute("value", params[key]);
-        form.appendChild(hiddenField);
+  $('.btn_edit').click(function(e){
+    e.preventDefault();
+    if (IsVaild()){
+      post_to_url('/user/edit/'+$('.userid').attr('var'),
+      {
+        nickname:$('#nickname').val(),
+        email:$('#email').val()
+      },
+    'post');
     }
-    document.body.appendChild(form);
-    form.submit();
-}
+  });
+});
