@@ -82,7 +82,7 @@ router.get('/post/view/:id', async function(req, res){
     post.view++;
     post.save();
     var commentTrees = util.convertToTrees(comments, '_id','parentComment','childComments');
-    res.render('post/view', {post:post, comments:comments, IsLike:IsLike});
+    res.render('post/view', {post:post, commentTrees:commentTrees, IsLike:IsLike});
   })
   .catch((err)=>{
     console.log(err);
@@ -248,10 +248,10 @@ async function createSearchQuery(queries){
     }
     if(searchTypes.indexOf('author')>=0){
       var user = await Account.findOne({ nickname: queries.searchText }).exec();
-      if(user) postQueries.push({author:user});
+      if(user) postQueries.push({author:user._id});
     }
-    if(postQueries.length>0) searchQuery={$or:postQueries};
-    else searchQuery = null;
+    if(postQueries.length==0) postQueries.push({author:'000000000000000000000000'});
+    searchQuery={$or:postQueries};
   }
   return searchQuery;
 }

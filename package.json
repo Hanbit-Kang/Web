@@ -2,8 +2,26 @@
   "name": "classical",
   "version": "1.0.0",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "ejs": "~2.4.1",
-    "express": "~4.13.1"
+    "express": "^4.13.4",
+    "mongoose": "^5.11.10",
+    "nodemailer": "^6.4.17",
+    "nodemailer-smtp-transport": "^2.7.4",
+    "passport": "^0.4.1"
   },
-  "main": "index.js"
+  "main": "index.js",
+  "description": "CRUD PROJECT!",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/hanbit-kang/Classical"
+  },
+  "keywords": [
+    "crud"
+  ],
+  "author": "hanbit-kang",
+  "license": "BSD-3-Clause"
 }

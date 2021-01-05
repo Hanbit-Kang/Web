@@ -111,6 +111,10 @@ $(window).resize(function(){
 
 function goSearch(searchType, searchText){
   //Search Btn click
+  if(searchText.length<3){
+    alert('3글자 이상 입력해주세요.');
+    return;
+  }
   var PostQueryString = window.location.search;
   PostQueryString = deleteOneQuery(PostQueryString, 'searchType');
   PostQueryString = deleteOneQuery(PostQueryString, 'searchText');

@@ -29,8 +29,8 @@ util.getPostQueryString = function(req, res, next){
 
 util.convertToTrees = function(array, idFieldName, parentIdFieldName, childrenFieldName){
   var cloned = array.slice();
-
-  for(var i=cloned.length-1; i>-1; i--){
+  //for(var i=cloned.length-1; i>-1; i--){
+  for(var i=0; i<cloned.length; i++){
     var parentId = cloned[i][parentIdFieldName];
 
     if(parentId){
@@ -46,7 +46,7 @@ util.convertToTrees = function(array, idFieldName, parentIdFieldName, childrenFi
           parent[childrenFieldName] = [cloned[i]];
         }
       }
-      cloned.splice(i,1);
+      //cloned.splice(i,1);
     }
   }
   return cloned;
