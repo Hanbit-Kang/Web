@@ -46,7 +46,7 @@ app.use(function(req, res, next){
 });
 
 //Listen
-var server = app.listen(port, function(){
+var server = app.listen(port,'0.0.0.0' ,function(){
   console.log("Server started [ Port:", port, "]");
 });
 

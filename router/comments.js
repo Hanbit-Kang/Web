@@ -42,6 +42,10 @@ router.get('/comment/delete/:id', checkPostId, function(req, res){
     comment.save(function(err, comment){
       if(err) return res.json(err);
 
+      Post.findOne({_id:post._id}, function(err, post){
+        post.comment--;
+        post.save();
+      });
       return res.redirect('/post/view/'+post._id+res.locals.getPostQueryString());
     });
   });

@@ -28,7 +28,7 @@ router.get('/', async function(req, res){
         nickname:1
       },
       title: 1,
-      commentCount: { $size: '$comments'}
+      comment: 1
     }},
   ]).exec();
 
@@ -55,7 +55,7 @@ router.get('/', async function(req, res){
         nickname:1
       },
       title: 1,
-      commentCount: { $size: '$comments'},
+      comment: 1,
       like: 1
     }},
   ]).exec();
