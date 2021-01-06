@@ -12,12 +12,8 @@ var accountSchema = mongoose.Schema({
 
 accountSchema.pre('save', function(next){
   var account = this;
-  if(!account.isModified('password')){
-    return next();
-  }else{
-    account.password = bcrypt.hashSync(account.password);
-    return next();
-  }
+  account.password = bcrypt.hashSync(account.password);
+  return next();
 });
 
 accountSchema.methods.authenticate = function(password){

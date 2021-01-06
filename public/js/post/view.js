@@ -88,6 +88,7 @@ $(document).ready(function(){
       JQlike.html("♡");
     }
   });
+
   makeHighlighted();
 });
 

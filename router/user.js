@@ -3,6 +3,7 @@ var router = express.Router();
 var Account = require('../models/Account');
 var Post = require('../models/Post');
 var Comment = require('../models/Comment');
+var bcrypt = require('bcryptjs');
 
 router.get('/user/index/:id', async function(req, res){
   var IsErr = false;
@@ -97,19 +98,21 @@ router.get('/user/index/:id', async function(req, res){
     });
   }
 });
+//EDIT
 router.get('/user/edit/:id', function(req, res){
   if(!(req.session.passport && req.session.passport.user.id==req.params.id)){
     req.session.error={'msg':"잘못된 접근입니다."};
     res.redirect('/');
-  }
-  var errors = req.flash('errors')[0] || {};
-  Account.findOne({id:req.params.id}, function(err, user){
-    if(err) return res.json(err);
-    res.render('user/edit', {
-      user: user,
-      errors:errors
+  }else{
+    var errors = req.flash('errors')[0] || {};
+    Account.findOne({id:req.params.id}, function(err, user){
+      if(err) return res.json(err);
+      res.render('user/edit', {
+        user: user,
+        errors:errors
+      });
     });
-  });
+  }
 });
 
 router.post('/user/edit/:id', function(req, res, next){
@@ -133,5 +136,43 @@ router.post('/user/edit/:id', function(req, res, next){
     }
   });
 });
+//change PW
+router.get('/user/pw/:id', function(req, res){
+  if(!(req.session.passport && req.session.passport.user.id==req.params.id)){
+    req.session.error={'msg':"잘못된 접근입니다."};
+    res.redirect('/');
+  }else{
+    var errors = req.flash('errors')[0] || {};
+    Account.findOne({id:req.params.id}, function(err, user){
+      if(err) return res.json(err);
+      res.render('user/pw', {
+        user: user,
+        errors:errors
+      });
+    });
+  }
+});
 
+router.post('/user/pw/:id', function(req, res, next){
+  if(!(req.session.passport && req.session.passport.user.id==req.params.id)){
+    req.session.error={'msg':"잘못된 접근입니다."};
+    res.redirect('/');
+  }else{
+    Account.findOne({id:req.params.id}, function(err, user){
+      if(err) return res.json(err);
+      else if(!user){
+        req.session.error={'msg':"잘못된 접근입니다."};
+        res.redirect('/');
+      }
+
+      if(!bcrypt.compareSync(req.body.curPassword, user.password)){
+        req.flash('errors', {password:'비밀번호가 틀렸습니다.'});
+        return res.redirect('/user/pw/'+user.id);
+      }
+      user.password = req.body.newPassword;
+      user.save();
+      res.redirect('/user/index/'+req.params.id);
+    });
+  }
+});
 module.exports = router;

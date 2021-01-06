@@ -8,17 +8,18 @@ router.post('/comment/new', checkPostId, function(req, res){
   if(!(req.session.passport)){
     req.session.error={'msg':"권한이 없습니다."};
     res.redirect('/login');
-  }
-  var post = res.locals.post;
-  req.body.author = req.user._id;
-  req.body.post = post._id;
+  }else{
+    var post = res.locals.post;
+    req.body.author = req.user._id;
+    req.body.post = post._id;
 
-  Comment.create(req.body, function(err, comment){
-    if(err) return res.json('d');
-    post.comment++;
-    post.save();
-    return res.redirect('/post/view/'+post._id+res.locals.getPostQueryString());
-  });
+    Comment.create(req.body, function(err, comment){
+      if(err) return res.json('d');
+      post.comment++;
+      post.save();
+      return res.redirect('/post/view/'+post._id+res.locals.getPostQueryString());
+    });
+  }
 });
 
 //Update

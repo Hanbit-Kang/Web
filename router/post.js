@@ -95,8 +95,9 @@ router.get('/post/new', function(req, res){
   if(!(req.session.passport)){
     req.session.error={'msg':"로그인 후 이용해주세요."};
     res.redirect('/login');
+  }else{
+    res.render('post/new');
   }
-  res.render('post/new');
 });
 
 router.post('/post/new', function(req, res){
@@ -106,15 +107,16 @@ router.post('/post/new', function(req, res){
   }else if(req.body.category==0&&req.session.passport.user.level<1){
     req.session.error={'msg':"권한이 없습니다."};
     res.redirect('/post/index');
+  }else{
+    req.body.author = req.session.passport.user._id;
+    Post.create(req.body, function(err, post){
+      if(err){
+        req.flash('post', req.body);
+        return res.redirect('/post/new'+res.locals.getPostQueryString());
+      }
+      res.redirect('/post'+res.locals.getPostQueryString(false, {page:1}));
+    });
   }
-  req.body.author = req.session.passport.user._id;
-  Post.create(req.body, function(err, post){
-    if(err){
-      req.flash('post', req.body);
-      return res.redirect('/post/new'+res.locals.getPostQueryString());
-    }
-    res.redirect('/post'+res.locals.getPostQueryString(false, {page:1}));
-  });
 });
 
 //DELETE
@@ -206,6 +208,7 @@ router.get('/post/like/:id', function(req, res){
   });
 });
 
+//delete for ADMIN
 router.post('/post/index/delete', function(req, res){
   if(!(req.session.passport&&req.session.passport.user.level>=1)){
     req.session.error={'msg':"권한이 없습니다."};
