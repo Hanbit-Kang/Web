@@ -42,6 +42,7 @@ router.post('/register', function(req, res){
       req.flash('email', req.body.email);
       return res.redirect('/register');
     }
+    console.log('REGISTER: '+req.body.id);
     res.redirect('/welcome');
   });
 });

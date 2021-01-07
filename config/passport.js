@@ -23,6 +23,7 @@ passport.use('local-login',
       .exec(function(err, account){
         if(err) return done(err);
         if(account && account.authenticate(password)){
+          console.log('LOG IN: ' + account.id);
           return done(null, account);
         }
         else{

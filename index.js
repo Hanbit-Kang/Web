@@ -13,6 +13,8 @@ require('./config/passport');
 var app = express();
 var port = process.env.PORT || 3000;
 
+var Alert = require('./models/Alert');
+
 // DB settings
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -51,8 +53,19 @@ var server = app.listen(port,'0.0.0.0' ,function(){
 });
 
 //ejs CAN access to SESSION
-app.use(function(req, res, next) {
-  if(req.session) res.locals.whoami = req.session;
+app.use(async function(req, res, next) {
+  if(req.session){
+    res.locals.whoami = req.session;
+
+    if(req.session.passport){
+      if(req.session.alertOn==true) res.locals.whoami.alertOn=true;
+      var alerts = await Alert.find({to:req.session.passport.user})
+        .sort({'createdAt':-1})
+        .populate('post')
+        .populate('from');
+      res.locals.whoami.alerts = alerts;
+    }
+  }
   else res.locals.whoami = undefined;
   next();
 });
@@ -64,3 +77,4 @@ app.use('/', require('./router/register'));
 app.use('/', util.getPostQueryString, require('./router/user'));
 app.use('/', util.getPostQueryString, require('./router/post'));
 app.use('/', util.getPostQueryString, require('./router/comments'));
+app.use('/', require('./router/alert'));

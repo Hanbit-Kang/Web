@@ -1,8 +1,11 @@
 var JQdropdownUsermenu, JQdropdownBtn;
+var JQalertUsermenu, JQalertBtn;
 
 $(document).ready(function(){
   JQdropdownUsermenu = $('.dropdown_usermenu');
   JQdropdownBtn = $('.dropdown_btn');
+  JQalertUsermenu = $('.alert_usermenu');
+  JQalertBtn = $('.alert_btn');
 
   JQdropdownBtn.click(function(e){
     e.preventDefault();
@@ -13,10 +16,23 @@ $(document).ready(function(){
       JQdropdownUsermenu.addClass('none');
     }
   });
+  JQalertUsermenu.css('left', JQalertBtn.offset().left-315);
+  JQalertBtn.click(function(e){
+    e.preventDefault();
+    if (JQalertUsermenu.hasClass('none')){
+      JQalertUsermenu.removeClass('none');
+      JQalertUsermenu.css('left', JQalertBtn.offset().left-315);
+    }else{
+      JQalertUsermenu.addClass('none');
+    } 
+  });
 
   $('html').click(function(e){
     if(!JQdropdownUsermenu.hasClass('none') && !($(e.target).hasClass('dropdown_btn_child'))){
       JQdropdownUsermenu.addClass('none');
+    }
+    if(!JQalertUsermenu.hasClass('none') && !($(e.target).hasClass('alert_btn_child')||$(e.target).hasClass('au_x'))){
+      JQalertUsermenu.addClass('none');
     }
   });
 
@@ -34,4 +50,5 @@ $(document).ready(function(){
 
 $(window).resize(function(){
   JQdropdownUsermenu.css('left', JQdropdownBtn.offset().left-110);
+  JQalertUsermenu.css('left', JQalertBtn.offset().left-315);
 });

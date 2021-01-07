@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Comment = require('../models/Comment');
 var Post = require('../models/Post');
+var Alert = require('../models/Alert');
 
 //Create
 router.post('/comment/new', checkPostId, function(req, res){
@@ -14,7 +15,12 @@ router.post('/comment/new', checkPostId, function(req, res){
     req.body.post = post._id;
 
     Comment.create(req.body, function(err, comment){
-      if(err) return res.json('d');
+      if(err) return res.json(err);
+      
+      if(req.body.author!=post.author){
+        Alert.create({post:post, from:req.user, to:post.author, text:req.body.text});
+      }
+
       post.comment++;
       post.save();
       return res.redirect('/post/view/'+post._id+res.locals.getPostQueryString());

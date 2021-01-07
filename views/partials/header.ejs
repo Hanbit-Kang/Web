@@ -67,6 +67,14 @@
     margin-right: 20px;
     cursor: pointer;
   }
+  .alert_count{
+    margin-top:-4px;
+    margin-right:-23px;
+    font-size: 12px;
+    z-index: 1;
+    color: white;
+    pointer-events: none;
+  }
   .dropdown_btn{
     display: flex;
     font-size: 18px;
@@ -83,6 +91,82 @@
     text-decoration: underline !important;
   }
 
+  .alert_usermenu{
+    left:400px;
+    top:45px;
+    width:400px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #dfe3e6;
+    border-radius: 5px 5px;
+    z-index: 2;
+  }
+  .alert_usermenu span{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+  }
+  .alerts{
+    overflow-y: scroll;
+    max-height:300px;
+  }
+  .alert_delete_all{
+    padding:10px;
+    background: white;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .alert_delete_all a{
+    font-size: 12px;
+  }
+  .alerts::-webkit-scrollbar {
+    width: 7px;
+  }
+  .alerts::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 5px 5px;
+  }
+  .alerts::-webkit-scrollbar-track {
+    background-color: white;
+  }
+  .au_dd_child{
+    font-size: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top:10px;
+    padding-bottom:10px;
+    background-color: white;
+  }
+  .au_dd_child:hover{
+    background-color: #dfe3e6;
+  }
+  .alert_time{
+    width:75px;
+    color:gray;
+    text-align:center;
+  }
+  .alert_text{
+    width:300px;
+    margin-left:10px;
+    margin-right:10px;
+  }
+  .au_x{
+    text-align: center;
+    width:25px;
+    margin-left:7px;
+    transition-duration: 0.2s;
+  }
+  .au_x:hover{
+    transform: scale(1.5);
+  }
+  .no_alert{
+    background:white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    font-style: oblique;
+  }
   .dropdown_usermenu{
     left:0px;
     top:45px;
@@ -188,14 +272,49 @@
     <a class="a_basic" href="/post/index?category=3"> 공연정보 </a>
   </span>
   <% if(isAuthenticated){ %>
-  <span class="mb_right_login">
+  <span class="mb_right_login" alertCount="<%=whoami.alerts.length%>">
+    <% if(whoami.alerts&&whoami.alerts.length>0){ %>
+    <a class="alert_count"><%= whoami.alerts.length %></a>
+    <% } %>
     <span class="alertmenu">
       <span class="alert_btn">
+        <% if(whoami.alerts&&whoami.alerts.length>0){ %>
+        <img class="alert_btn_child" src="/public/images/alertActive.png" width="25px" height="25px">
+        <% } else { %>
         <img class="alert_btn_child" src="/public/images/alert.png" width="25px" height="25px">
+        <% } %>
       </span>
+      <%if(whoami.alerts&&whoami.alerts.length>0){%>
+        <%if(whoami.alertOn){%>
+      <div class="alert_usermenu">
+        <%whoami.alertOn=null;%>
+        <%}else{%>
       <div class="alert_usermenu none">
-
+        <%}%>
+        <div class="alerts">
+          <%whoami.alerts.forEach(function(alert, i){%>
+            <span class="au_dd_child">
+              <% const today = new Date(); %>
+              <% if(alert.createdAt.getFullYear()==today.getFullYear() && alert.createdAt.getMonth()==today.getMonth() && alert.createdAt.getDate()==today.getDate()) {%>
+              <a class="alert_time a_basic"> <%= alert.createdAt.getHours()>=10? alert.createdAt.getHours():'0'+String(alert.createdAt.getHours())%>:<%= alert.createdAt.getMinutes()>=10?alert.createdAt.getMinutes():'0'+String(alert.createdAt.getMinutes())%> </a>
+              <%} else { %>
+              <a class="alert_time a_basic"> <%= alert.createdAt.getYear()-100 %>.<%= alert.createdAt.getMonth()+1>=10?alert.createdAt.getMonth()+1:'0'+String(alert.createdAt.getMonth()+1) %>.<%= alert.createdAt.getDate()>=10?alert.createdAt.getDate():'0'+String(alert.createdAt.getDate()) %> </a>
+              <% } %>
+              <a class="alert_text a_pointerAndunderline_black" href="/alert/view/<%=alert.post._id%>" class="a_basic"><%=alert.post.title%> - <%=alert.from.nickname%> | <%=alert.text%></a>
+              <a href="/alert/delete/<%=alert._id%>" class="a_basic au_x">X</a>
+            </span>
+            <a class="line"></a>
+          <%});%>
+        </div>
+        <div class="alert_delete_all">
+          <a href="/alert/deleteall/<%=whoami.passport.user._id%>" class="a_pointerAndunderline_black">전체 삭제</a>
+        </div>
       </div>
+      <%}else{%>
+        <div class="alert_usermenu none">
+          <a class="no_alert a_basic"> 새로운 알림이 없습니다. </a>
+        </div>
+      <%}%>
     </span>
 
     <span class="usermenu">
