@@ -58,12 +58,12 @@ router.get('/user/index/:id', async function(req, res){
     commentpage = !isNaN(commentpage)?commentpage:1;
 
     var commentskip = (commentpage-1)*postlimit;
-    var commentcount = await Comment.countDocuments({author:ObjUser});
+    var commentcount = await Comment.countDocuments({author:ObjUser, isDeleted:false});
     var commentmaxPage = Math.ceil(commentcount/postlimit);
     var comments;
 
     comments = await Comment.aggregate([ //댓글 내용
-      { $match: { author: ObjUser._id } },
+      { $match: { author: ObjUser._id, isDeleted:false } },
       { $lookup: {
         from: 'posts',
         localField: 'post',

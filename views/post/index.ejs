@@ -39,6 +39,33 @@
             align-items: flex-end;
             border-bottom: 2px solid black;
           }
+          .index_title{
+            display: flex;
+            cursor: pointer;
+          }
+          .index_category::after{
+            content: '＞';
+            margin-left:7px;
+          }
+          .dd_category_type{
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            width: 150px;
+            border: 1px solid #dfe3e6;
+            border-radius: 5px 5px;
+          }
+          .dd_category_child{
+            font-size: 20px;
+            padding-left: 15px;
+            padding-top:10px;
+            padding-bottom:10px;
+            background-color: white;
+          }
+          .dd_category_child:hover{
+            background-color: #dfe3e6;
+          }
+
           .newpost_btn{
             display: flex;
             flex-direction: row;
@@ -227,7 +254,21 @@
         </style>
         <div class="index_area">
           <div class="index_header">
-            <h2 class="index_category"><%=category%></h2>
+            <span class="index_title">
+              <h2 class="index_category"><%=category%></h2>
+              <a class="index_title_end"></a>
+            </span>
+            <div class="dd_category_type none">
+              <a href="#" class="dd_category_child a_basic" var="-1"> 전체글보기 </a>
+              <a class="line"></a>
+              <a href="#" class="dd_category_child a_basic" var="0"> default </a>
+              <a class="line"></a>
+              <a href="#" class="dd_category_child a_basic" var="1"> default </a>
+              <a class="line"></a>
+              <a href="#" class="dd_category_child a_basic" var="2"> default </a>
+              <a class="line"></a>
+              <a href="#" class="dd_category_child a_basic" var="3"> default </a>
+            </div>
             <a href="/post/new" class="a_basic newpost_btn bg-dark">
               <img src="/public/images/newpost.png" width="25px" height="25px">
               <h5> 글쓰기 </h5>

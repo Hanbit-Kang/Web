@@ -3,6 +3,7 @@ var JQsearchRangeBox, JQsearchRange, JQsearchRanges;
 var page;
 var JQpostTableTitle;
 var query_category;
+var JQddCategoryType, JQindexCategory, JQddCategoryChild;
 
 $(document).ready(function(){
   JQstantard = $('.standard');
@@ -14,6 +15,11 @@ $(document).ready(function(){
   page = $('#post_info').attr('currentPage');
 
   JQpostTableTitle = $('.post_table_category');
+
+
+  JQddCategoryType = $('.dd_category_type');
+  JQindexCategory = $('.index_category');
+  JQddCategoryChild = $('.dd_category_child');
 
   var sort = getParameterByName('sort')?getParameterByName('sort'):'createdAt';
   //SET SORT STANDARD
@@ -66,13 +72,13 @@ $(document).ready(function(){
       $(this).html(POST_CATEGORIES[$(this).html()]);
     }
   });
-  query_category = parseInt($('.index_category').html());
+  query_category = parseInt(JQindexCategory.html());
   if(query_category>=POST_CATEGORIES.length){
     window.location.href = ('/post/index');
   }else if (query_category>=0){
-    $('.index_category').html(POST_CATEGORIES[$('.index_category').html()]);
+    JQindexCategory.html(POST_CATEGORIES[JQindexCategory.html()]);
   }else if(query_category==-1){
-    $('.index_category').html('전체글보기');
+    JQindexCategory.html('전체글보기');
   }
 
   //admin only
@@ -101,12 +107,42 @@ $(document).ready(function(){
   'post');
   });
 
+  //category select
+  JQindexCategory.click(function(e){
+    e.preventDefault();
+    if (JQddCategoryType.hasClass('none')){
+      JQddCategoryType.removeClass('none');
+      JQddCategoryType.css('left', $('.index_title_end').offset().left+5);
+      JQddCategoryType.css('top', $('.index_title_end').offset().top);
+    }else{
+      JQddCategoryType.addClass('none');
+    }
+  });
+
+  JQddCategoryChild.each(function(i){
+    $(this).html(POST_CATEGORIES[$(this).attr('var')]);
+    $(this).click(function(e){
+      e.preventDefault();
+      JQindexCategory.html($(this).text());
+      JQddCategoryType.addClass('none');
+      window.location.href='/post/index?category='+$(this).attr('var');
+    });
+  });
+
+  $('html').click(function(e){
+    if(!JQddCategoryType.hasClass('none') && !($(e.target).hasClass('dd_category_type')||$(e.target).hasClass('index_category'))){
+      JQddCategoryType.addClass('none');
+    }
+  });
+
   makeHighlighted();
 });
 
 $(window).resize(function(){
   JQsearchRanges.css('top', JQsearchRangeBox.offset().top+35);
   JQsearchRanges.css('left', JQsearchRangeBox.offset().left);
+  JQddCategoryType.css('left', $('.index_title_end').offset().left+5);
+  JQddCategoryType.css('top', $('.index_title_end').offset().top);
 });
 
 function goSearch(searchType, searchText){

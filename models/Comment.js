@@ -5,7 +5,7 @@ var commentSchema = mongoose.Schema({
   author:{type:mongoose.Schema.Types.ObjectId, ref:'account', required:true},
   parentComment:{type:mongoose.Schema.Types.ObjectId, ref:'comment'},
   text:{type:String, required:true},
-  isDeleted:{type:Boolean},
+  isDeleted:{type:Boolean, required:true, default:false},
   createdAt:{type:Date, default:Date.now}
 },{
   toObject:{virtuals:true}

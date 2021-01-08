@@ -11,7 +11,7 @@ var passport = require('passport');
 var util = require('./util');
 require('./config/passport');
 var app = express();
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 80;
 
 var Alert = require('./models/Alert');
 
@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.engine('html', require('ejs').renderFile);
 app.use(flash());
-app.use(session({secret:process.env.SESSION_SECRET, resave:true, saveUninitialized:true}));
+app.use(session({name:'sessionID', secret:process.env.SESSION_SECRET, resave:true, saveUninitialized:true}));
 app.use(passport.initialize());
 app.use(passport.session());
 

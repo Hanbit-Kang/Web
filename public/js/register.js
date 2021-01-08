@@ -88,23 +88,51 @@ function IsVaild(){
 }
 
 $(document).ready(function(){
+  var JQregisterBtnArea = $('.register_btn_area');
+  var JQregisterBtn = $('.register_btn');
   idError = document.getElementsByClassName('id_error')[0];
   nicknameError = document.getElementsByClassName('nickname_error')[0];
   pwError = document.getElementsByClassName('pw_error')[0];
   pw2Error = document.getElementsByClassName('pw2_error')[0];
   emailError = document.getElementsByClassName('email_error')[0];
 
-  $('.btn_register').click(function(e){
-    e.preventDefault();
-    if (IsVaild()){
-      post_to_url('/register',
-      {
-        id:$('#id').val(),
-        nickname:$('#nickname').val(),
-        password:$('#password').val(),
-        email:$('#email').val()
-      },
-    'post');
+  //TOU - CHECKBOX
+  $('.terms_of_use').click(function(e){
+    if(JQregisterBtnArea.attr('var')==0){
+      JQregisterBtnArea.css('opacity', '100%');
+      JQregisterBtn.attr('style', 'cursor:pointer !important');
+      JQregisterBtnArea.attr('var', 1);
+    }else{
+      JQregisterBtnArea.css('opacity', '50%');
+      JQregisterBtn.attr('style', 'cursor:not-allowed !important');
+      JQregisterBtnArea.attr('var', 0);
+    }
+  });
+
+  //TOU - View
+  $('.tou1_btn').click(function(e){
+    $('.tou1').removeClass('none');
+  });
+  $('.tou2_btn').click(function(e){
+    $('.tou2').removeClass('none');
+  });
+  $('.tou_close_btn').click(function(e){
+    $(this).parents('.tou').addClass('none');
+  });
+
+  JQregisterBtn.click(function(e){
+    if(JQregisterBtnArea.attr('var')==1){
+      e.preventDefault();
+      if (IsVaild()){
+        post_to_url('/register',
+        {
+          id:$('#id').val(),
+          nickname:$('#nickname').val(),
+          password:$('#password').val(),
+          email:$('#email').val()
+        },
+      'post');
+      }
     }
   });
 });
