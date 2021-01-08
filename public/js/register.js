@@ -74,14 +74,19 @@ function IsVaild(){
     $('#email').focus();
     emailError.innerHTML = "이메일을 입력하세요.";
     $('.email_error').removeClass('none');
+    $('.email_overlap').addClass('none');
     flag = 0;
   }else{
     if(!emailRegex.test(email)){
       $('#email').focus();
       emailError.innerHTML = "이메일이 유효하지 않습니다.";
       $('.email_error').removeClass('none');
+      $('.email_overlap').addClass('none');
       flag = 0;
-    }else{$('.email_error').addClass('none');}
+    }else{
+      $('.email_error').addClass('none');
+      $('.email_overlap').removeClass('none');
+    }
   }
 
   return flag;
@@ -121,7 +126,7 @@ $(document).ready(function(){
   });
 
   JQregisterBtn.click(function(e){
-    if(JQregisterBtnArea.attr('var')==1){
+    if($('.tou_checkbox').prop("checked")){
       e.preventDefault();
       if (IsVaild()){
         post_to_url('/register',

@@ -2,6 +2,7 @@
   "name": "classical",
   "version": "1.0.0",
   "dependencies": {
+    "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
     "ejs": "~2.4.1",
     "express": "^4.13.4",

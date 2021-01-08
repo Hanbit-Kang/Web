@@ -156,11 +156,15 @@
             <div class="input_area">
               <h5 class="input_info"> 이메일 </h5>
               <input type="text" id="email" value="<%= email %>" placeholder="이메일">
+              <% if (errors.email){ %>
+              <a class="error email_overlap"> <%= errors.email.message %> </a>
+              <% errors.email=null %>
+              <% } %>
               <a class="error email_error none"> default </a>
             </div>
             <div class="terms_of_use">
               <div class="agree_area">
-                <input type="checkbox">
+                <input class="tou_checkbox" type="checkbox">
                 <a href="#" class="tou1_btn">이용약관</a>
                 <a> 및 </a>
                 <a href="#" class="tou2_btn">개인정보 처리방침</a>

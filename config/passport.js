@@ -23,12 +23,21 @@ passport.use('local-login',
       .exec(function(err, account){
         if(err) return done(err);
         if(account && account.authenticate(password)){
-          console.log('LOG IN: ' + account.id);
-          return done(null, account);
+          if(!account.isVerified){
+            var errors={};
+            errors.verify = {id: account.id};
+            req.flash('errors', errors);
+            return done(null, false);
+          }else{//SUCCESS
+            console.log('LOG IN: ' + account.id);
+            return done(null, account);
+          }
         }
         else{
+          var errors={};
+          errors.login = {message: '아이디 또는 비밀번호가 일치하지 않습니다.'};
           req.flash('id', id);
-          req.flash('errors', {login: '아이디 또는 비밀번호가 일치하지 않습니다.'});
+          req.flash('errors', errors);
           return done(null, false);
         }
       });

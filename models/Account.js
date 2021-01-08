@@ -5,9 +5,11 @@ var bcrypt = require('bcryptjs');
 var accountSchema = mongoose.Schema({
   id:{type:String, required:true, unique:true, trim:true},
   password:{type:String, required:true},
-  email:{type:String, trim:true},
+  email:{type:String, trim:true, unique:true},
   nickname:{type:String, trim:true, unique:true},
-  level:{type:Number, required:true, default:0}
+  level:{type:Number, required:true, default:0},
+  isVerified:{type:Boolean, required:true, default:false},
+  verifyKey:{type:String}
 });
 
 accountSchema.pre('save', function(next){

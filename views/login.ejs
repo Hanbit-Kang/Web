@@ -66,13 +66,6 @@
           .login_footer{
             display: flex;
             justify-content: space-around;
-            margin-top:-30px;
-          }
-          .find_id{
-            cursor:not-allowed !important;
-          }
-          .find_pw{
-            cursor:not-allowed !important;
           }
           .login_footer a{
             color: gray;
@@ -82,16 +75,29 @@
           .redline{
             border-color: red !important;
           }
+          .verify_error{
+            font-size: 14px;
+            text-decoration: none !important;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: flex;
+            width: 300px;
+          }
         </style>
 
         <div class="login_area">
           <h1 class="login_title"> 로그인 <h1>
-          <form action="/login" class="login_form" method="post">
+          <div class="login_form">
             <div class="input_area">
               <h5 class="input_info"> 아이디 </h5>
               <input class="input_id" type="text" name="id" id="id" value="<%= id %>" placeholder="아이디">
               <% if(errors.login){ %>
-                <a class="error id_error"> <%=errors.login %> </a>
+                <a class="error id_error"> <%=errors.login.message %> </a>
+              <% errors.login=null %>
+              <% } %>
+              <% if(errors.verify){ %>
+                <a class="verify_error" href="/register/verify?id=<%=errors.verify.id%>"> > 인증하기 </a>
+              <% errors.verify=null %>
               <% } %>
               <a class="error id_error none"> default </a>
             </div>
@@ -101,11 +107,11 @@
               <a class="error pw_error none"> default </a>
             </div>
             <input type="submit" title="로그인" alt="로그인" value="로그인" class="btn_login bg-dark" onclick="login()">
-          </form>
+          </div>
           <div class="login_footer">
-            <a class="find_id"> 아이디 찾기 </a>
+            <a href="/login/findid" class="find_id"> 아이디 찾기 </a>
             <a class="dot"> · </a>
-            <a class="find_pw"> 비밀번호 찾기 </a>
+            <a href="/login/findpw" class="find_pw"> 비밀번호 찾기 </a>
             <a class="dot"> · </a>
             <a href="/register" class="register"> 회원가입 </a>
           </div>

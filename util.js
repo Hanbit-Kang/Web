@@ -46,10 +46,29 @@ util.convertToTrees = function(array, idFieldName, parentIdFieldName, childrenFi
           parent[childrenFieldName] = [cloned[i]];
         }
       }
-      //cloned.splice(i,1);
     }
   }
   return cloned;
+};
+
+const nodemailer = require('nodemailer');
+util.sendMail = async function(to, subject, html){
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth:{
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASS
+    }
+  });
+
+  let info = await transporter.sendMail({
+    from: '"Classical" <'+process.env.MAIL_USER+'',
+    to: to,
+    subject: subject,
+    html: html
+  });
 };
 
 module.exports = util;
