@@ -367,7 +367,7 @@
                 </span>
                 <span class="post_userANDtime">
                   <div class="post_user">
-                    <a href="/user/index/<%=post.author.isLeaved?'(탈퇴 회원)':post.author.id%>" data-search-highlight="author" class="a_basic"><%=post.author.isLeaved?'(탈퇴 회원)':post.author.nickname%></a>
+                    <a href="/user/index/<%=post.author.isLeaved?'L':post.author.id%>" data-search-highlight="author" class="a_basic"><%=post.author.isLeaved?post.author.nickname.slice(13):post.author.nickname%></a>
                   </div>
                   <div class="post_time">
                     <a>
@@ -438,7 +438,7 @@
                   <div class="comment_main" commentId="<%=comment._id%>">
                     <span class="cmt_left">
                       <span class="cmt_nickname">
-                        <a class="a_basic" href="/user/index/<%=comment.author.isLeaved?'(탈퇴 회원)':comment.author.id%>"> <%=comment.author.isLeaved?'(탈퇴 회원)':comment.author.nickname%> </a>
+                        <a class="a_basic" href="/user/index/<%=comment.author.isLeaved?'L':comment.author.id%>"> <%=comment.author.isLeaved?comment.author.nickname.slice(13):comment.author.nickname%> </a>
                       </span>
                       <% if(isAuthenticated){ %>
                       <span onclick="clickComment(this);" class="cmt_content">
@@ -471,7 +471,7 @@
                     <div class="reply_main" commentId="<%=childComment._id%>">
                       <span class="cmt_left">
                         <span class="cmt_nickname">
-                          <a class="a_basic" href="/user/index/<%=childComment.author.isLeaved?'(탈퇴 회원)':childComment.author.id%>"> <%=childComment.author.isLeaved?'(탈퇴 회원)':childComment.author.nickname%> </a>
+                          <a class="a_basic" href="/user/index/<%=childComment.author.isLeaved?'L':childComment.author.id%>"> <%=childComment.author.isLeaved?childComment.author.nickname.slice(13):childComment.author.nickname%> </a>
                         </span>
                         <% if(isAuthenticated){ %>
                         <span class="cmt_content">

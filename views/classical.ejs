@@ -139,7 +139,7 @@
                       <a href="/post/view/<%=post._id%>" class="a_pointerAndunderline_red"> [<%=post.comment%>] </a>
                     </th>
                     <th>
-                      <a class="a_pointerAndunderline_black post_table_nickname align-center" href="/user/index/<%=post.author.isLeaved?'(탈퇴 회원)':post.author.id%>"> <%=post.author.isLeaved?'(탈퇴 회원)':post.author.nickname%> </a>
+                      <a class="a_pointerAndunderline_black post_table_nickname align-center" href="/user/index/<%=post.author.isLeaved?'L':post.author.id%>"> <%=post.author.isLeaved?post.author.nickname.slice(13):post.author.nickname%> </a>
                     </th>
                   </tr>
                 <% }) %>

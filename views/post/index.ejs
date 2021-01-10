@@ -334,7 +334,7 @@
                       <a onclick="location.href='/post/view/<%=post._id%><%=getPostQueryString()%>'" class="a_pointerAndunderline_red"> [<%=post.comment%>] </a>
                     </th>
                     <th>
-                      <a data-search-highlight="author" class="a_pointerAndunderline_black" href="/user/index/<%=post.author.isLeaved?'(탈퇴 회원)':post.author.id%>"><%=post.author.isLeaved?'(탈퇴 회원)':post.author.nickname%></a>
+                      <a data-search-highlight="author" class="a_pointerAndunderline_black" href="/user/index/<%=post.author.isLeaved?'L':post.author.id%>"><%=post.author.isLeaved?post.author.nickname.slice(13):post.author.nickname%></a>
                     </th>
                     <th class="post_table_time align-center">
                       <!-- Today's Post -->

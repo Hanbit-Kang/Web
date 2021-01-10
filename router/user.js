@@ -7,6 +7,10 @@ var Auth = require('../models/Auth');
 var bcrypt = require('bcryptjs');
 
 router.get('/user/index/:id', function(req, res){
+  if(req.params.id=='L'){
+    req.session.error={'msg':"탈퇴한 회원입니다."};
+    return res.redirect('back');
+  }
   Account.findOne({id:req.params.id, isLeaved:false}, async function(err, user){
     if(err) return res.json(err);
     else if(!user){
