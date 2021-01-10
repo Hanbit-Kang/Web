@@ -1,7 +1,7 @@
 <html>
   <head>
     <%- include('../partials/head') %>
-    <script src="/public/js/user/edit.js"></script>
+    <script src="/public/js/user/leave.js"></script>
   </head>
 
   <body>
@@ -18,7 +18,7 @@
             background-color: #F8F8FF;
             width:100%;
           }
-          .edit_area{
+          .leave_area{
             background-color: white;
             margin-top: 70px;
             margin-bottom: 70px;
@@ -29,21 +29,28 @@
             align-items: center;
             flex-direction: column;
           }
-          .edit_title{
+          .leave_title{
             margin-top: 40px;
             letter-spacing: 10px;
           }
-          .edit_form{
+          .leave_form{
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-top: 20px;
           }
+          .input_info{
+            margin-left:45px;
+            margin-right:45px;
+            font-size:14px;
+            text-align:center;
+          }
           .input_area{
+            margin-top:30px;
             display: flex;
             flex-direction: column;
           }
-          .edit_area input{
+          .leave_area input{
             border: 1px solid #dfe3e6;
             border-radius: 0px;
             width: 300px;
@@ -61,47 +68,28 @@
             display: flex;
             width: 300px;
           }
-          .edit_footer{
-            display: flex;
-            justify-content: space-around;
-            width: 200px;
-            margin-top:0px;
-            margin-bottom:15px;
-            font-size: 13px;
-          }
-          .edit_footer a{
-            color: gray !important;
-          }
           .access_error{
             color: black !important;
             font-size: 16px !important;
             margin-bottom: 20px !important;
           }
-          .btn_edit{
+          .btn_leave{
             color: white;
             font-size: 20px !important;
+            cursor: not-allowed !important;
+            opacity:50%;
           }
         </style>
-        <div class="edit_area">
-          <h1 class="edit_title"> 회원정보수정 <h1>
-          <div class="edit_form">
+        <div class="leave_area">
+          <h1 class="leave_title"> 회원탈퇴 <h1>
+          <div class="leave_form">
             <% if(user) {%>
             <div class="userid" var="<%=user.id%>"></div>
+            <a class="input_info a_basic"> 회원 탈퇴 시 이전에 활동한 내역들(게시글, 댓글, 좋아요, 알림)이 동시에 제거됩니다. 아래 입력 칸에 '동의합니다'를 입력할 시, 이에 동의한 것으로 간주됩니다. </a>
             <div class="input_area">
-              <h5 class="input_info"> 닉네임 </h5>
-              <input type="text" id="nickname" value="<%= user.nickname %>" placeholder="닉네임">
-
-              <% if (errors.nickname){ %>
-              <a class="error nickname_overlap"> <%=errors.nickname%> </a>
-              <% } %>
-              <a class="error nickname_error none"> default </a>
+              <input onkeyup="checkAgree();" type="text" id="agree" placeholder="동의합니다">
             </div>
-            <input type="button" title="수정하기" alt="수정하기" value="수정하기" class="btn_edit bg-dark">
-            <div class="edit_footer">
-              <a href="/user/pw/<%=user.id%>"> 비밀번호 변경 </a>
-              <a class="dot"> / </a>
-              <a href="/user/leave/<%=user.id%>"> 회원 탈퇴 </a>
-            </div>
+            <input type="button" title="탈퇴하기" alt="탈퇴하기" value="탈퇴하기" class="btn_leave bg-dark">
             <%}else{%>
             <a class="access_error"> 이런 일은 벌어질 수 없어. </a>
             <%}%>

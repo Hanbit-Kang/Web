@@ -22,18 +22,18 @@ router.get('/register', function(req, res){
   }
 });
 
-router.post('/register', function(req, res){
-  Account.findOne({id:req.body.id}, function(err,user){
+router.post('/register', async function(req, res){
+  await Account.findOne({id:req.body.id}, function(err,user){
     if(user){
       req.flash('errors', parseError(11000, 'id'));
     }
   });
-  Account.findOne({nickname:req.body.nickname}, function(err,user){
+  await Account.findOne({nickname:req.body.nickname}, function(err,user){
     if(user){
       req.flash('errors', parseError(11000, 'nickname'));
     }
   });
-  Account.findOne({email:req.body.email}, function(err,user){
+  await Account.findOne({email:req.body.email}, function(err,user){
     if(user){
       req.flash('errors', parseError(11000, 'email'));
     }
@@ -48,8 +48,8 @@ router.post('/register', function(req, res){
     }
     console.log('REGISTER: '+req.body.id);
     util.sendMail(req.body.email, '[Classical] 이메일 인증을 진행하세요.',
-    "<link href=\"https:\//fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap\" rel=\"stylesheet\"><div style=\"width:100%;height:100%;background-color:#f7f9fa;display:flex;flex-direction:column;justify-content:center;align-items:center;\"><div style=\"margin:30px;padding-top:15px;padding-bottom:15px;padding-left:30px;padding-right:30px; width:500px;height:250px;background-color:white;border:1px solid #dfe3e6;display:flex;flex-direction:column;justify-content:space-around;align-items:center;\"><h2 style=\"font-family: 'Nanum Gothic', sans-serif;\">이메일 인증</h2><a style=\"text-align:center;color:gray;font-size:14px;\"> Classical 계정 가입을 위한 이메일 인증코드입니다. 아래의 인증코드를 진행 중인 가입화면에 입력하시면 인증이 완료됩니다. </a><h4> 인증코드 </h4><h3 style=\"margin-top:-10px;padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;background-color:#dfe3e6\"> "+req.body.verifyKey+" </h3></div></div>"
-  );
+    '<html><div style="width:700px;background-color:#f7f9fa;display:block;"><div style="margin:50px; padding:30px; width:500px;background-color:white;border:1px solid #dfe3e6;display:inline-block;text-align:center;"><h2 style="display:inline-block;">이메일 인증</h2><a style="display:inline-block;text-align:center;color:gray;font-size:14px;"> Classical 계정 가입을 위한 이메일 인증코드입니다. 아래의 인증코드를 진행 중인 가입화면에 입력하시면 인증이 완료됩니다. </a><h4 style="display:inline-block;">인증코드</h4><h3 style="display:block;padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;background-color:#dfe3e6">'+req.body.verifyKey+'</h3></div></div></html>'
+    );
     res.redirect('/register/verify?id='+req.body.id);
   });
 });
@@ -64,7 +64,7 @@ router.get('/register/verify', function(req, res){
 });
 
 router.post('/register/verify', function(req, res){
-  Account.findOne({id:req.body.id, isVerified:false}, async function(err,user){
+  Account.findOne({id:req.body.id, isVerified:false, isLeaved:false}, async function(err,user){
     if(err) return res.json(err);
     if(!user){
       req.session.error={'msg':"잘못된 접근입니다."};

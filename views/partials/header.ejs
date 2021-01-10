@@ -300,7 +300,7 @@
               <%} else { %>
               <a class="alert_time a_basic"> <%= alert.createdAt.getYear()-100 %>.<%= alert.createdAt.getMonth()+1>=10?alert.createdAt.getMonth()+1:'0'+String(alert.createdAt.getMonth()+1) %>.<%= alert.createdAt.getDate()>=10?alert.createdAt.getDate():'0'+String(alert.createdAt.getDate()) %> </a>
               <% } %>
-              <a class="alert_text a_pointerAndunderline_black" href="/alert/view/<%=alert.post._id%>" class="a_basic"><%=alert.post.title%> - <%=alert.from.nickname%> | <%=alert.text%></a>
+              <a class="alert_text a_pointerAndunderline_black" href="/alert/view/<%=alert.post._id%>" class="a_basic"><%=alert.post.title%> - <%=alert.from.isLeaved?'(탈퇴 회원)':alert.from.nickname%> | <%=alert.text%></a>
               <a href="/alert/delete/<%=alert._id%>" class="a_basic au_x">X</a>
             </span>
             <a class="line"></a>
@@ -320,8 +320,7 @@
     <span class="usermenu">
       <span class="dropdown_btn">
         <img class="dropdown_btn_child" src="/public/images/user.png" width="25px" height="25px">
-        <!--<a class="dropdown_btn_child"> <#%=whoami.passport.user.nickname%></a>-->
-      </span>
+        </span>
       <div class="dropdown_usermenu none">
         <a href="/user/index/<%=whoami.passport.user.id%>" class="dd_child a_basic"> 내 정보 </a>
         <a class="line"></a>
@@ -346,4 +345,8 @@
 <%if(whoami.error){%>
 <a class="msg bg-warning a_basic"> <%=whoami.error.msg%> </a>
 <%whoami.error=null%>
+<%}%>
+<%if(whoami.success){%>
+<a class="msg bg-primary a_basic" style="color:white !important;"> <%=whoami.success.msg%> </a>
+<%whoami.success=null%>
 <%}%>

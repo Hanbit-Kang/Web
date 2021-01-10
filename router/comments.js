@@ -16,7 +16,7 @@ router.post('/comment/new', checkPostId, function(req, res){
 
     Comment.create(req.body, function(err, comment){
       if(err) return res.json(err);
-      
+
       if(req.body.author!=post.author){
         Alert.create({post:post, from:req.user, to:post.author, text:req.body.text});
       }
@@ -31,7 +31,6 @@ router.post('/comment/new', checkPostId, function(req, res){
 //Update
 router.post('/comment/edit/:id', checkPostId, function(req, res){
   var post = res.locals.post;
-
   Comment.findOneAndUpdate({_id:req.params.id}, req.body, function(err, comment){
     if(err) return res.json('?');
     return res.redirect('/post/view/'+post._id+res.locals.getPostQueryString());
