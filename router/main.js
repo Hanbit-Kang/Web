@@ -25,7 +25,8 @@ router.get('/', async function(req, res){
     { $project:{
       author: {
         id:1,
-        nickname:1
+        nickname:1,
+        isLeaved:1
       },
       title: 1,
       comment: 1

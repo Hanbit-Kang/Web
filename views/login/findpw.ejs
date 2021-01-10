@@ -1,7 +1,7 @@
 <html>
   <head>
     <%- include('../partials/head') %>
-    <script src="/public/js/register/verify.js"></script>
+    <script src="/public/js/login/findpw.js"></script>
   </head>
 
   <body>
@@ -20,7 +20,7 @@
             background-color: #F8F8FF;
             width:100%;
           }
-          .verify_area{
+          .find_area{
             background-color: white;
             margin-top: 70px;
             margin-bottom: 70px;
@@ -30,31 +30,18 @@
             align-items: center;
             flex-direction: column;
           }
-          .verify_title{
+          .find_title{
             margin-top: 40px;
             letter-spacing: 10px;
           }
-          .verify_info{
-            padding-left: 45px;
-            padding-right: 45px;
-            margin-top: 15px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: center;
-          }
-          .verify_info a{
-            text-align: center;
-            font-size: 14px;
-            color: gray !important;
-          }
-          .verify_form{
+          .find_form{
             display: flex;
             flex-direction: column;
             align-items: center;
             margin-top: 20px;
             margin-bottom:30px;
           }
-          .verify_area input{
+          .find_area input{
             border: 1px solid #dfe3e6;
             border-radius: 0px;
             width: 300px;
@@ -72,7 +59,7 @@
             display: flex;
             width: 300px;
           }
-          .btn_verify{
+          .btn_find{
             color: white;
             font-size: 20px !important;
           }
@@ -81,21 +68,26 @@
           }
         </style>
 
-        <div class="verify_area">
-          <h1 class="verify_title"> 이메일인증 <h1>
-          <div class="verify_info">
-            <a class="a_basic">해당 이메일로 인증코드가 발송되었습니다. 커뮤니티 활동을 위해서 이메일 인증이 필요합니다.</a>
-          </div>
-          <div class="verify_form">
+        <div class="find_area">
+          <h1 class="find_title"> 비밀번호찾기 <h1>
+          <div class="find_form">
             <div class="input_area">
-              <h5 class="input_info"> 인증코드 </h5>
-              <input class="input_verify" type="text" name="verify" id="verify" placeholder="인증코드">
-              <% if(errors.verify){ %>
-                <a class="error verify_invalid"> <%=errors.verify.message %> </a>
+              <h5 class="input_info"> 아이디 </h5>
+              <input class="input_id" value="<%=id%>" type="text" name="id" id="id" placeholder="아이디">
+              <a class="error id_error none"> default </a>
+              <% if(errors.id){ %>
+                <a class="error id_notfound"><%=errors.id.message %></a>
               <% } %>
-              <a class="error verify_error none"> default </a>
             </div>
-            <input type="submit" title="인증하기" alt="인증하기" value="인증하기" class="btn_verify bg-dark" onclick="verify()">
+            <div class="input_area">
+              <h5 class="input_info"> 이메일 </h5>
+              <input class="input_email" value="<%=email%>" type="text" name="email" id="email" placeholder="이메일">
+              <a class="error email_error none"> default </a>
+              <% if(errors.email){ %>
+                <a class="error email_notfound"><%=errors.email.message %></a>
+              <% } %>
+            </div>
+            <input type="submit" title="입력하기" alt="입력하기" value="입력하기" class="btn_find bg-dark" onclick="findPw()">
           </div>
         </div>
       </div>

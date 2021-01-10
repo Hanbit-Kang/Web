@@ -76,17 +76,20 @@
             <% if(user) {%>
             <div class="userid" var="<%=user.id%>"></div>
             <div class="input_area">
+              <h5 class="input_info"> 현재 비밀번호 </h5>
               <input type="password" id="curPw" placeholder="현재 비밀번호">
               <a class="error curPw_error none"> default </a>
               <% if (errors.password){ %>
-              <a class="error curPw_error"> <%=errors.password%> </a>
+              <a class="error curPw_invalid"> <%=errors.password%> </a>
               <% } %>
             </div>
             <div class="input_area">
+              <h5 class="input_info"> 새 비밀번호 </h5>
               <input type="password" id="newPw" placeholder="새 비밀번호">
               <a class="error newPw_error none"> default </a>
             </div>
             <div class="input_area">
+              <h5 class="input_info"> 비밀번호 재입력 </h5>
               <input type="password" id="newPw2" placeholder="비밀번호 재입력">
               <a class="error newPw2_error none"> default </a>
             </div>

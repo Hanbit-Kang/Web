@@ -1,7 +1,7 @@
 <html>
   <head>
     <%- include('../partials/head') %>
-    <script src="/public/js/user/edit.js"></script>
+    <script src="/public/js/user/findpw.js"></script>
   </head>
 
   <body>
@@ -50,7 +50,6 @@
             height: 50px;
             font-size: 18px;
             margin-bottom: 20px;
-            padding-left:10px;
           }
           .error{
             text-decoration: none !important;
@@ -60,17 +59,6 @@
             margin-bottom: 10px;
             display: flex;
             width: 300px;
-          }
-          .edit_footer{
-            display: flex;
-            justify-content: space-around;
-            width: 200px;
-            margin-top:0px;
-            margin-bottom:15px;
-            font-size: 13px;
-          }
-          .edit_footer a{
-            color: gray !important;
           }
           .access_error{
             color: black !important;
@@ -83,25 +71,29 @@
           }
         </style>
         <div class="edit_area">
-          <h1 class="edit_title"> 회원정보수정 <h1>
+          <h1 class="edit_title"> 비밀번호변경 <h1>
           <div class="edit_form">
             <% if(user) {%>
             <div class="userid" var="<%=user.id%>"></div>
             <div class="input_area">
-              <h5 class="input_info"> 닉네임 </h5>
-              <input type="text" id="nickname" value="<%= user.nickname %>" placeholder="닉네임">
-
-              <% if (errors.nickname){ %>
-              <a class="error nickname_overlap"> <%=errors.nickname%> </a>
+              <h5 class="input_info"> 코드 </h5>
+              <input type="code" id="code" placeholder="전송된 코드 입력">
+              <a class="error code_error none"> default </a>
+              <% if (errors.code){ %>
+              <a class="error code_invalid"> <%=errors.code%> </a>
               <% } %>
-              <a class="error nickname_error none"> default </a>
             </div>
-            <input type="button" title="수정하기" alt="수정하기" value="수정하기" class="btn_edit bg-dark">
-            <div class="edit_footer">
-              <a href="/user/pw/<%=user.id%>"> 비밀번호 변경 </a>
-              <a class="dot"> / </a>
-              <a href="/user/leave/<%=user.id%>"> 회원 탈퇴 </a>
+            <div class="input_area">
+              <h5 class="input_info"> 새 비밀번호 </h5>
+              <input type="password" id="newPw" placeholder="새 비밀번호">
+              <a class="error newPw_error none"> default </a>
             </div>
+            <div class="input_area">
+              <h5 class="input_info"> 비밀번호 재입력 </h5>
+              <input type="password" id="newPw2" placeholder="비밀번호 재입력">
+              <a class="error newPw2_error none"> default </a>
+            </div>
+            <input type="button" title="변경하기" alt="변경하기" value="변경하기" class="btn_edit bg-dark">
             <%}else{%>
             <a class="access_error"> 이런 일은 벌어질 수 없어. </a>
             <%}%>

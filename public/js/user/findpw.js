@@ -1,21 +1,21 @@
-var curPwError, newPwError, newPw2Error;
+var codeError, newPwError, newPw2Error;
 
 function IsVaild(){
-  var curPw = $('#curPw').val();
+  var code = $('#code').val();
   var newPw = $('#newPw').val();
   var newPw2 = $('#newPw2').val();
   var pwRegex = /^[a-zA-Z0-9!@#$%^&*()-_]{8,20}$/;
 
   var flag = 1;
-  if(curPw==''){
-    $('#curPw').focus();
-    curPwError.innerHTML = "현재 비밀번호를 입력하세요.";
-    $('.curPw_error').removeClass('none');
-    $('.curPw_invalid').addClass('none');
+  if(code==''){
+    $('#code').focus();
+    codeError.innerHTML = "코드를 입력하세요.";
+    $('.code_error').removeClass('none');
+    $('.code_invalid').addClass('none');
     flag = 0;
   }else{
-    $('.curPw_error').addClass('none');
-    $('.curPw_invalid').removeClass('none');
+    $('.code_error').addClass('none');
+    $('.code_invalid').removeClass('none');
   }
 
   if(newPw==''){
@@ -23,7 +23,7 @@ function IsVaild(){
     newPwError.innerHTML = "새 비밀번호를 입력하세요.";
     $('.newPw_error').removeClass('none');
     flag = 0;
-  }else if(newPw==curPw){
+  }else if(newPw==code){
     $('#newPw').focus();
     newPwError.innerHTML = "기존 비밀번호와 일치합니다.";
     $('.newPw_error').removeClass('none');
@@ -54,16 +54,16 @@ function IsVaild(){
   return flag;
 }
 $(document).ready(function(){
-  curPwError = document.getElementsByClassName('curPw_error')[0];
+  codeError = document.getElementsByClassName('code_error')[0];
   newPwError = document.getElementsByClassName('newPw_error')[0];
   newPw2Error = document.getElementsByClassName('newPw2_error')[0];
 
   $('.btn_edit').click(function(e){
     e.preventDefault();
     if (IsVaild()){
-      post_to_url('/user/pw/'+$('.userid').attr('var'),
+      post_to_url('/user/findpw/'+$('.userid').attr('var'),
       {
-        curPassword:$('#curPw').val(),
+        code:$('#code').val(),
         newPassword:$('#newPw').val()
       },
     'post');

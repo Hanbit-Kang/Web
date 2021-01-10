@@ -9,12 +9,16 @@ var accountSchema = mongoose.Schema({
   nickname:{type:String, trim:true, unique:true},
   level:{type:Number, required:true, default:0},
   isVerified:{type:Boolean, required:true, default:false},
-  verifyKey:{type:String}
+  verifyKey:{type:String},
+  isLeaved:{type:Boolean, required:true, default:false},
+  leavedAt:{type:Date}
 });
 
 accountSchema.pre('save', function(next){
   var account = this;
-  account.password = bcrypt.hashSync(account.password);
+  if(account.password.length<60){
+    account.password = bcrypt.hashSync(account.password);
+  }
   return next();
 });
 

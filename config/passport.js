@@ -29,11 +29,11 @@ passport.use('local-login',
             req.flash('errors', errors);
             return done(null, false);
           }else{//SUCCESS
+            req.session.success={'msg':"로그인에 성공했습니다."};
             console.log('LOG IN: ' + account.id);
             return done(null, account);
           }
-        }
-        else{
+        }else{
           var errors={};
           errors.login = {message: '아이디 또는 비밀번호가 일치하지 않습니다.'};
           req.flash('id', id);

@@ -49,7 +49,8 @@ router.get('/post/index', async function(req, res){
       title: 1,
       author: {
         id:1,
-        nickname:1
+        nickname:1,
+        isLeaved: 1
       },
       view:1,
       like:1,
@@ -114,6 +115,7 @@ router.post('/post/new', function(req, res){
         req.flash('post', req.body);
         return res.redirect('/post/new'+res.locals.getPostQueryString());
       }
+      req.session.success={'msg':"게시글이 작성되었습니다."};
       res.redirect('/post'+res.locals.getPostQueryString(false, {page:1}));
     });
   }
@@ -128,7 +130,7 @@ router.get('/post/delete/:id', async function(req, res){
     }else{
       Post.deleteOne({_id:req.params.id}, function(err){
         if(err) return res.json('엥?');
-        req.session.error={'msg':"게시물이 삭제되었습니다."};
+        req.session.success={'msg':"게시물이 삭제되었습니다."};
         res.redirect('/post/index');
       });
     }
@@ -172,6 +174,7 @@ router.post('/post/edit/:id', function(req, res){
           req.flash('errors', 'updateError');
           return res.redirect('/post/edit/'+req.params.id);
         }
+        req.session.success={'msg':"게시글을 수정하였습니다."};
         res.redirect('/post/view/'+req.params.id);
       });
     }
@@ -226,6 +229,7 @@ router.post('/post/index/delete', function(req, res){
     } postsId.push(curStr);
     Post.deleteMany({_id:{$in:postsId}}, function(err){
       if(err) return res.json(err);
+      req.session.success={'msg':"게시글을 삭제하였습니다."};
       res.redirect('/post/index');
     });
   }
