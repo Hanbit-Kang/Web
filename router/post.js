@@ -109,6 +109,7 @@ router.post('/post/new', function(req, res){
     req.session.error={'msg':"권한이 없습니다."};
     res.redirect('/post/index');
   }else{
+    console.log(req.body.body);
     req.body.author = req.session.passport.user._id;
     Post.create(req.body, function(err, post){
       if(err){

@@ -1,4 +1,3 @@
-//TODO: 페이지 들어왔을 때, 이 게시글 좋아요 했었으면 하트 채워지게
 var JQdropdownPostmenu, JQpostSettingBtn;
 var JQdropdownCommentmenu, JQcommentSettingBtn;
 var curCommentSettingBtn;

@@ -94,17 +94,19 @@ $(document).ready(function(){
     }
   });
   $('.delete_btn').click(function(){
-    var postsId = [];
-    $('.post_table_delete').each(function(i){
-      if($(this).children().prop("checked")){
-        postsId.push($(this).parent().attr('postId'));
-      }
-    });
-    post_to_url('/post/index/delete',
-    {
-      postsId:postsId
-    },
-  'post');
+    if(confirm('정말 삭제하시겠습니까?')){
+      var postsId = [];
+      $('.post_table_delete').each(function(i){
+        if($(this).children().prop("checked")){
+          postsId.push($(this).parent().attr('postId'));
+        }
+      });
+      post_to_url('/post/index/delete',
+      {
+        postsId:postsId
+      },
+    'post');
+    }
   });
 
   //category select

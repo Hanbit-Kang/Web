@@ -1,4 +1,5 @@
 var JQddNpPostType, JQddNpBtn, JQddNpChild;
+var JQdropdownSize, JQsizeBtn;
 var curCategory = 1;
 $(document).ready(function(){
   JQddNpPostType = $('.dd_np_post_type');
@@ -6,6 +7,9 @@ $(document).ready(function(){
   JQddNpChild = $('.dd_np_child');
   JQinputBody = $('.input_body');
   JQinputTitle = $('.input_title');
+
+  JQdropdownSize = $('.dropdown_size');
+  JQsizeBtn = $('.size_button');
 
   curCategory = JQddNpBtn.attr('init');
   JQddNpBtn.html('> ' + POST_CATEGORIES[curCategory]);
@@ -36,6 +40,9 @@ $(document).ready(function(){
     if(!JQddNpPostType.hasClass('none') && !($(e.target).hasClass('dd_np_post_type')||$(e.target).hasClass('dd_np_btn'))){
       JQddNpPostType.addClass('none');
     }
+    if(!JQdropdownSize.hasClass('none') && !($(e.target).hasClass('size_button'))){
+      JQdropdownSize.addClass('none');
+    }
   });
 
   $('.post_btn').click(function(e){
@@ -43,14 +50,14 @@ $(document).ready(function(){
     if(JQinputTitle.val()==''){
       alert('제목을 입력하세요.');
       JQinputTitle.focus();
-    }else if(JQinputBody.val()==''){
+    }else if(JQinputBody.text()==''){
       alert('내용을 입력하세요.');
       JQinputBody.focus();
     }else{
       post_to_url(window.location.href,
       {
         title:JQinputTitle.val(),
-        body:JQinputBody.val(),
+        body:JQinputBody.html(),
         category:curCategory
       },
     'post');
@@ -59,7 +66,7 @@ $(document).ready(function(){
 
   $('.cancel_btn').click(function(e){
     e.preventDefault();
-    if(JQinputTitle.val()==''&&JQinputBody.val()==''){
+    if(JQinputTitle.val()==''&&JQinputBody.text()==''){
       history.back();
     }else{
       if(confirm("수정을 취소하시겠습니까?")){
@@ -67,9 +74,40 @@ $(document).ready(function(){
       }
     }
   });
+
+  JQsizeBtn.click(function(e){
+    e.preventDefault();
+    if (JQdropdownSize.hasClass('none')){
+      JQdropdownSize.removeClass('none');
+      JQdropdownSize.css('left', JQsizeBtn.offset().left-1);
+    }else{
+      JQdropdownSize.addClass('none');
+    }
+  });
+
+  $('.ds_child').each(function(i){
+    $(this).click(function(e){
+      e.preventDefault();
+      $('.pink').removeClass('pink');
+      $(this).addClass('pink');
+      JQsizeBtn.val($(this).text()+' ∨');
+
+      execFontSize($(this).text());
+      JQinputBody.focus();
+    });
+  });
 });
 
 $(window).resize(function(){
   JQddNpPostType.css('left', JQddNpBtn.offset().left+10);
   JQddNpPostType.css('top', JQddNpBtn.offset().top+30);
+  JQdropdownSize.css('left', JQsizeBtn.offset().left-1);
 });
+
+var execFontSize = function(size){
+  var preString = $('<pre/>', {
+       'text': document.getSelection()
+   }).css({'font-size':size+'px', 'font-family':'inherit'}).prop('outerHTML');
+
+   document.execCommand('insertHTML', false, preString);
+};

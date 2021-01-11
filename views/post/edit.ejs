@@ -77,6 +77,69 @@
         .np_body{
           margin-top: 15px;
         }
+        .editor_buttons{
+          display: flex;
+          justify-content:flex-start;
+          border-top: 1px solid #dfe3e6;
+          border-right: 1px solid #dfe3e6;
+          border-left: 1px solid #dfe3e6;
+        }
+        .editor_buttons input{
+          padding: 4px;
+          background-color: white;
+          height:33px;
+          border-right: 1px solid #dfe3e6;
+          border-top: 0px solid;
+          border-bottom: 0px solid;
+          border-left: 0px solid;
+        }
+        .editor_buttons input:focus{outline: none;}
+        .size_button{
+          width: 50px;
+        }
+        .dropdown_size{
+          left:31px;
+          top:323px;
+          width:75px;
+          position: absolute;
+          display: flex;
+          flex-direction: column;
+          border: 1px solid #dfe3e6;
+          border-radius: 5px 5px;
+          z-index: 2;
+        }
+        .ds_child{
+          font-size: 16px;
+          padding-left: 15px;
+          padding-top:5px;
+          padding-bottom:5px;
+          background-color: white;
+        }
+        .ds_child:hover{
+          background-color: #dfe3e6;
+        }
+        .dropdown_size span{
+          cursor:pointer;
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .square_button{
+          width:33px;
+        }
+
+        .BOLD{
+          font-weight: bold;
+        }
+        .ITALIC{
+          font-style: italic;
+        }
+        .UNDERLINE{
+          text-decoration: underline;
+        }
+        .STRIKETHROUGH{
+          text-decoration:line-through;
+        }
         .input_title{
           padding-left: 15px;
           padding-top: 3px;
@@ -152,7 +215,31 @@
               <input class="input_title" type="text" value="<%=post.title%>" placeholder="제목을 입력하세요.">
             </div>
             <div class="np_body">
-              <textarea class="input_body" placeholder="내용을 입력하세요."><%=post.body%></textarea>
+              <div class="editor_buttons">
+                <input type="button" class="SIZE size_button" title="글씨 크기" value="14 ∨"/>
+                <div class="dropdown_size none">
+                  <a href="#" class="ds_child a_basic">10</a>
+                  <a href="#" class="ds_child a_basic">12</a>
+                  <a href="#" class="ds_child a_basic pink">14</a>
+                  <a href="#" class="ds_child a_basic">16</a>
+                  <a href="#" class="ds_child a_basic">18</a>
+                  <a href="#" class="ds_child a_basic">20</a>
+                  <a href="#" class="ds_child a_basic">24</a>
+                  <a href="#" class="ds_child a_basic">28</a>
+                  <a href="#" class="ds_child a_basic">32</a>
+                </div>
+
+                <input type="button" class="BOLD square_button" value="B" title="굵게" onclick="document.execCommand('bold');$('.input_body').focus();"/>
+                <input type="button" class="ITALIC square_button" value="T" title="기울이기" onclick="document.execCommand('Italic');$('.input_body').focus();"/>
+                <input type="button" class="UNDERLINE square_button" value="U" title="밑줄" onclick="document.execCommand('Underline');$('.input_body').focus();"/>
+                <input type="button" class="STRIKETHROUGH square_button" value="T" title="취소선" onclick="document.execCommand('StrikeThrough');$('.input_body').focus();"/>
+                <input type="image" class="JUSTIFYLEFT square_button" src="/public/images/alignleft.png" title="왼쪽 정렬" onclick="document.execCommand('justifyleft');$('.input_body').focus();"/>
+                <input type="image" class="JUSTIFYCENTER square_button" src="/public/images/aligncenter.png" title="가운데 정렬" onclick="document.execCommand('justifycenter');$('.input_body').focus();"/>
+                <input type="image" class="JUSTIFYRIGHT square_button" src="/public/images/alignright.png" title="오른쪽 정렬" onclick="document.execCommand('justifyright');$('.input_body').focus();"/>
+              </div>
+              <div>
+                <div class="input_body" contenteditable="true" onkeyup="document.getSelection()"><%-post.body%></div>
+              </div>
             </div>
           </div>
           <div class="newpost_footer">
