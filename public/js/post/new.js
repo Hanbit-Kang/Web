@@ -88,9 +88,6 @@ $(document).ready(function(){
       $('.pink').removeClass('pink');
       $(this).addClass('pink');
       JQsizeBtn.val($(this).text()+' ∨');
-
-      execFontSize($(this).text());
-      JQinputBody.focus();
     });
   });
 });
@@ -100,11 +97,3 @@ $(window).resize(function(){
   JQddNpPostType.css('top', JQddNpBtn.offset().top+30);
   JQdropdownSize.css('left', JQsizeBtn.offset().left-1);
 });
-
-var execFontSize = function(size){
-  var preString = $('<pre/>', {
-       'text': document.getSelection()
-   }).css({'font-size':size+'px', 'font-family':'inherit'}).prop('outerHTML');
-
-   document.execCommand('insertHTML', false, preString);
-};

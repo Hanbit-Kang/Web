@@ -192,6 +192,27 @@
           align-items: center;
           color: white !important;
         }
+        font[size='1']{
+            font-size: 8px;
+        }
+        font[size='2']{
+            font-size: 12px;
+        }
+        font[size='3']{
+            font-size: 16px;
+        }
+        font[size='4']{
+            font-size: 20px;
+        }
+        font[size='5']{
+            font-size: 24px;
+        }
+        font[size='6']{
+            font-size: 28px;
+        }
+        font[size='7']{
+            font-size: 32px;
+        }
         </style>
         <div class="newpost_area">
           <div class="newpost_header">
@@ -219,17 +240,15 @@
             </div>
             <div class="np_body">
               <div class="editor_buttons">
-                <input type="button" class="SIZE size_button" title="글씨 크기" value="14 ∨"/>
+                <input type="button" class="SIZE size_button" title="글씨 크기" value="16 ∨"/>
                 <div class="dropdown_size none">
-                  <a href="#" class="ds_child a_basic">10</a>
-                  <a href="#" class="ds_child a_basic">12</a>
-                  <a href="#" class="ds_child a_basic pink">14</a>
-                  <a href="#" class="ds_child a_basic">16</a>
-                  <a href="#" class="ds_child a_basic">18</a>
-                  <a href="#" class="ds_child a_basic">20</a>
-                  <a href="#" class="ds_child a_basic">24</a>
-                  <a href="#" class="ds_child a_basic">28</a>
-                  <a href="#" class="ds_child a_basic">32</a>
+                  <a href="#" class="ds_child a_basic" onclick='document.execCommand("fontSize", false, "1");$(".input_body").focus();'>8</a>
+                  <a href="#" class="ds_child a_basic"  onclick='document.execCommand("fontSize", false, "2");$(".input_body").focus();'>12</a>
+                  <a href="#" class="ds_child a_basic pink"  onclick='document.execCommand("fontSize", false, "3");$(".input_body").focus();'>16</a>
+                  <a href="#" class="ds_child a_basic"  onclick='document.execCommand("fontSize", false, "4");$(".input_body").focus();'>20</a>
+                  <a href="#" class="ds_child a_basic"  onclick='document.execCommand("fontSize", false, "5");$(".input_body").focus();'>24</a>
+                  <a href="#" class="ds_child a_basic"  onclick='document.execCommand("fontSize", false, "6");$(".input_body").focus();'>28</a>
+                  <a href="#" class="ds_child a_basic"  onclick='document.execCommand("fontSize", false, "7");$(".input_body").focus();'>32</a>
                 </div>
 
                 <input type="button" class="BOLD square_button" value="B" title="굵게" onclick="document.execCommand('bold');$('.input_body').focus();"/>
@@ -241,7 +260,7 @@
                 <input type="image" class="JUSTIFYRIGHT square_button" src="/public/images/alignright.png" title="오른쪽 정렬" onclick="document.execCommand('justifyright');$('.input_body').focus();"/>
               </div>
               <div>
-                <div class="input_body" contenteditable="true" onkeyup="document.getSelection()"></div>
+                <div class="input_body" contenteditable="true"></div>
               </div>
             </div>
           </div>
