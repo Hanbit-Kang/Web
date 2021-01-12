@@ -5,6 +5,7 @@ var Account = require('../models/Account');
 var Comment = require('../models/Comment');
 var Like = require('../models/Like');
 var util = require('../util');
+var Log = require('../models/Log');
 
 router.get('/post', function(req, res){
   res.redirect('/post/index');
@@ -19,7 +20,8 @@ router.get('/post/index', async function(req, res){
 
   var categoryQuery = category==-1?{}:{category:category};
   var searchQuery = await createSearchQuery(req.query);
-  var masterQuery = {...categoryQuery, ...searchQuery};
+  var deletedQuery = {isDeleted:false};
+  var masterQuery = {...categoryQuery, ...searchQuery, ...deletedQuery};
 
   var sort =  req.query.sort?req.query.sort:'createdAt';
 
@@ -78,6 +80,10 @@ router.get('/post/view/:id', async function(req, res){
     req.session.passport?Like.findOne({post:req.params.id, who:req.session.passport.user}):null
   ])
   .then(([post, comments, like]) => {
+    if(post.isDeleted==true){
+      req.session.error={'msg':"존재하지 않는 게시글입니다."};
+      res.redirect('back');
+    }
     var IsLike = false;
     if(like) IsLike = true;
     post.view++;
@@ -86,8 +92,8 @@ router.get('/post/view/:id', async function(req, res){
     res.render('post/view', {post:post, commentTrees:commentTrees, IsLike:IsLike});
   })
   .catch((err)=>{
-    console.log(err);
-    return res.json(err);
+    req.session.error={'msg':"존재하지 않는 게시글입니다."};
+    res.redirect('back');
   });
 });
 
@@ -109,7 +115,6 @@ router.post('/post/new', function(req, res){
     req.session.error={'msg':"권한이 없습니다."};
     res.redirect('/post/index');
   }else{
-    console.log(req.body.body);
     req.body.author = req.session.passport.user._id;
     Post.create(req.body, function(err, post){
       if(err){
@@ -117,6 +122,7 @@ router.post('/post/new', function(req, res){
         return res.redirect('/post/new'+res.locals.getPostQueryString());
       }
       req.session.success={'msg':"게시글이 작성되었습니다."};
+      Log.create({activity:'post new'});
       res.redirect('/post'+res.locals.getPostQueryString(false, {page:1}));
     });
   }
@@ -125,15 +131,20 @@ router.post('/post/new', function(req, res){
 //DELETE
 router.get('/post/delete/:id', async function(req, res){
   Post.findOne({_id:req.params.id}, function(err, post){
+    if(err) return res.json(err);
+    if(!post){
+      req.session.error={'msg':"잘못된 접근입니다."};
+      res.redirect('/');
+    }
     if(!(req.session.passport&&post.author==req.session.passport.user._id)){
       req.session.error={'msg':"권한이 필요합니다."};
       res.redirect('/post/index');
     }else{
-      Post.deleteOne({_id:req.params.id}, function(err){
-        if(err) return res.json('엥?');
-        req.session.success={'msg':"게시물이 삭제되었습니다."};
-        res.redirect('/post/index');
-      });
+      post.isDeleted = true;
+      post.save();
+      req.session.success={'msg':"게시물이 삭제되었습니다."};
+      Log.create({activity:'post delete'});
+      res.redirect('/post/index');
     }
   });
 });
@@ -168,6 +179,9 @@ router.post('/post/edit/:id', function(req, res){
     if(!(req.session.passport&&post.author==req.session.passport.user._id)){
       req.session.error={'msg':"권한이 필요합니다."};
       res.redirect('/post/index');
+    }else if(req.body.category==0&&req.session.passport.user.level<1){
+      req.session.error={'msg':"권한이 없습니다."};
+      res.redirect('/post/index');
     }else{
       Post.findOneAndUpdate({_id:req.params.id}, req.body, function(err, post){
         if(err){
@@ -176,6 +190,7 @@ router.post('/post/edit/:id', function(req, res){
           return res.redirect('/post/edit/'+req.params.id);
         }
         req.session.success={'msg':"게시글을 수정하였습니다."};
+        Log.create({activity:'post edit'});
         res.redirect('/post/view/'+req.params.id);
       });
     }
@@ -228,9 +243,14 @@ router.post('/post/index/delete', function(req, res){
       }
       else curStr+=postsIdStr[i];
     } postsId.push(curStr);
-    Post.deleteMany({_id:{$in:postsId}}, function(err){
+    Post.find({_id:{$in:postsId}}, function(err, posts){
       if(err) return res.json(err);
+      for(var i=0;i<posts.length;i++){
+        posts[i].isDeleted = true;
+        posts[i].save();
+      }
       req.session.success={'msg':"게시글을 삭제하였습니다."};
+      Log.create({activity:'ADMIN, post delete'});
       res.redirect('/post/index');
     });
   }

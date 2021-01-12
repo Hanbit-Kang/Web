@@ -254,6 +254,7 @@
             width:100%;
             height: 60px;
             margin-bottom: 10px;
+            resize: none;
           }
           .input_cmt:focus{
             outline: none;
@@ -282,6 +283,7 @@
             width:100%;
             height: 60px;
             margin-bottom: 10px;
+            resize: none;
           }
           .input_reply:focus{
             outline: none;
@@ -307,6 +309,7 @@
             width:100%;
             height: 60px;
             margin-bottom: 10px;
+            resize: none;
           }
           .input_edit:focus{
             outline: none;
@@ -512,14 +515,14 @@
               </div>
 
               <div class="cmt_reply_area none">
-                <textarea class="input_reply" placeholder="답글을 입력하세요."></textarea>
+                <textarea class="input_reply my_scroll" placeholder="답글을 입력하세요."></textarea>
                 <div onclick="inputReply()" class="cmt_reply_btn cursor_pointer alert-secondary">
                   <a href="#" class="a_basic"> 등록 </a>
                 </div>
               </div>
 
               <div class="cmt_edit_area none">
-                <textarea class="input_edit" placeholder="댓글을 입력하세요."></textarea>
+                <textarea class="input_edit my_scroll" placeholder="댓글을 입력하세요."></textarea>
                 <div onclick="inputEdit(this)" class="cmt_edit_btn cursor_pointer alert-secondary">
                   <a class="a_basic cursor_pointer"> 수정 </a>
                 </div>
@@ -530,7 +533,7 @@
 
               <% if(isAuthenticated){ %>
               <div class="cmt_input_area">
-                <textarea class="input_cmt" placeholder="댓글을 입력하세요."></textarea>
+                <textarea class="input_cmt my_scroll" placeholder="댓글을 입력하세요."></textarea>
                 <div onclick="inputComment()" class="cmt_input_btn cursor_pointer alert-secondary">
                   <a class="a_basic cursor_pointer"> 등록 </a>
                 </div>

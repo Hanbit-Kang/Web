@@ -9,7 +9,10 @@ $(document).ready(function(){
   JQinputTitle = $('.input_title');
 
   JQdropdownSize = $('.dropdown_size');
-  JQsizeBtn = $('.size_button');
+  JQsizeBtn = $('.size_btn');
+
+  JQdropdownColor = $('.dropdown_color');
+  JQcolorBtn = $('.color_btn');
 
   JQddNpBtn.click(function(e){
     e.preventDefault();
@@ -31,15 +34,6 @@ $(document).ready(function(){
 
       curCategory = $(this).attr('var'); //categorize
     });
-  });
-
-  $('html').click(function(e){
-    if(!JQddNpPostType.hasClass('none') && !($(e.target).hasClass('dd_np_post_type')||$(e.target).hasClass('dd_np_btn'))){
-      JQddNpPostType.addClass('none');
-    }
-    if(!JQdropdownSize.hasClass('none') && !($(e.target).hasClass('size_button'))){
-      JQdropdownSize.addClass('none');
-    }
   });
 
   $('.post_btn').click(function(e){
@@ -72,6 +66,7 @@ $(document).ready(function(){
     }
   });
 
+//SIZE
   JQsizeBtn.click(function(e){
     e.preventDefault();
     if (JQdropdownSize.hasClass('none')){
@@ -90,10 +85,43 @@ $(document).ready(function(){
       JQsizeBtn.val($(this).text()+' ∨');
     });
   });
+
+//COLOR
+  JQcolorBtn.click(function(e){
+    e.preventDefault();
+    if (JQdropdownColor.hasClass('none')){
+      JQdropdownColor.removeClass('none');
+      JQdropdownColor.css('left', JQcolorBtn.offset().left-1);
+    }else{
+      JQdropdownColor.addClass('none');
+    }
+  });
+
+  $('.dc_child').each(function(i){
+    $(this).click(function(e){
+      e.preventDefault();
+      $('.border_bold').removeClass('border_bold');
+      $(this).addClass('border_bold');
+    });
+  });
+
+//다른 곳 클릭 시 창 닫기
+  $('html').click(function(e){
+    if(!JQddNpPostType.hasClass('none') && !($(e.target).hasClass('dd_np_post_type')||$(e.target).hasClass('dd_np_btn'))){
+      JQddNpPostType.addClass('none');
+    }
+    if(!JQdropdownSize.hasClass('none') && !($(e.target).hasClass('size_btn'))){
+      JQdropdownSize.addClass('none');
+    }
+    if(!JQdropdownColor.hasClass('none') && !($(e.target).hasClass('color_btn'))){
+      JQdropdownColor.addClass('none');
+    }
+  });
 });
 
 $(window).resize(function(){
   JQddNpPostType.css('left', JQddNpBtn.offset().left+10);
   JQddNpPostType.css('top', JQddNpBtn.offset().top+30);
   JQdropdownSize.css('left', JQsizeBtn.offset().left-1);
+  JQdropdownColor.css('left', JQcolorBtn.offset().left-1);
 });

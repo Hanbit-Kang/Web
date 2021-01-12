@@ -1,6 +1,7 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var Account = require('../models/Account');
+var Log = require('../models/Log');
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -31,6 +32,7 @@ passport.use('local-login',
           }else{//SUCCESS
             req.session.success={'msg':"로그인에 성공했습니다."};
             console.log('LOG IN: ' + account.id);
+            Log.create({activity:'login'});
             return done(null, account);
           }
         }else{

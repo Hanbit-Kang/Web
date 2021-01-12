@@ -1,4 +1,3 @@
-//TODO: 원래 있었던 페이지로 돌아가기
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
@@ -7,6 +6,7 @@ require('../config/passport');
 var util = require('../util');
 const crypto = require('crypto');
 var Auth = require('../models/Auth');
+var Log = require('../models/Log');
 
 router.get('/login', function(req, res){
   if(req.session.passport){
@@ -43,6 +43,7 @@ router.post('/login',
 router.get('/logout', function(req, res){
   req.session.passport=null;
   req.logout();
+  Log.create({activity:'logout'});
   res.redirect('back');
 });
 
@@ -66,6 +67,7 @@ router.post('/login/findid', function(req, res){
       req.flash('errors', errors);
       return res.redirect('/login/findid');
     }
+    Log.create({activity:'findid'});
     util.sendMail(req.body.email, '[Classical] 아이디 찾기를 요청하셨습니다.','<html><div style="width:700px;background-color:#f7f9fa;display:block;"><div style="margin:50px; padding:30px; width:500px;background-color:white;border:1px solid #dfe3e6;display:inline-block;text-align:center;"><h2 style="display:inline-block;">아이디 찾기</h2><a style="display:inline-block;text-align:center;color:gray;font-size:14px;"> 회원님께서 Classical에 아이디 찾기를 요청하여, 귀하의 아이디가 전송되었습니다. 아이디는 다음과 같습니다. </a><h4 style="display:inline-block;">아이디</h4><h3 style="display:block;padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;background-color:#dfe3e6">'+user.id+'</h3></div></div></html>'
   );
     req.session.success={'msg':"해당 이메일로 아이디를 발송했습니다."};
@@ -120,6 +122,7 @@ router.post('/login/findpw', function(req, res){
     util.sendMail(req.body.email, '[Classical] 비밀번호 찾기를 요청하셨습니다.','<html><div style="width:700px;background-color:#f7f9fa;display:block;"><div style="margin:50px; padding:30px; width:500px;background-color:white;border:1px solid #dfe3e6;display:inline-block;text-align:center;"><h2 style="display:inline-block;">비밀번호 찾기</h2><a style="display:inline-block;text-align:center;color:gray;font-size:14px;"> 회원님께서 Classical에 비밀번호 찾기를 요청하여, 귀하의 비밀번호를 변경할 수 있는 코드가 전송되었습니다. 단, 코드는 5분간 유효합니다. </a><h4 style="display:inline-block;">코드</h4><h3 style="display:block;padding-top:10px;padding-bottom:10px;padding-left:30px;padding-right:30px;background-color:#dfe3e6">'+code+'</h3></div></div></html>'
   );
     req.session.success={'msg':"해당 이메일로 링크를 발송했습니다."};
+    Log.create({activity:'findpw'});
     res.redirect('/user/findpw/'+req.body.id);
   });
 });

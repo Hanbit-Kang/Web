@@ -85,7 +85,7 @@
           <div class="leave_form">
             <% if(user) {%>
             <div class="userid" var="<%=user.id%>"></div>
-            <a class="input_info a_basic"> 회원 탈퇴 시 이전에 활동한 내역들(게시글, 댓글, 좋아요, 알림)이 동시에 제거됩니다. 아래 입력 칸에 '동의합니다'를 입력할 시, 이에 동의한 것으로 간주됩니다. </a>
+            <a class="input_info a_basic"> 회원 탈퇴 시 이전에 활동한 내역들(게시글, 댓글, 좋아요, 알림)은 제거되지 않습니다. 또한, 약관에 명시된 바와 같이 탈퇴 후 60일 개인정보는 보관됩니다. 아래 입력 칸에 '동의합니다'를 입력할 시, 이에 동의한 것으로 간주됩니다. </a>
             <div class="input_area">
               <input onkeyup="checkAgree();" type="text" id="agree" placeholder="동의합니다">
             </div>

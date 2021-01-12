@@ -151,7 +151,7 @@
           </div>
           <div class="displaybox">
             <div class="box_title">
-              <h2> 베스트게시판 </h2>
+              <h2> Weekly Best </h2>
               <a href="/post/index?sort=like" class="a_basic"> > 전체글보기 </a>
             </div>
             <table>
@@ -179,14 +179,14 @@
                     </th>
                     <th>
                       ♥
-                      <a class="a_pointerAndunderline_black post_table_like"><%=post.like%></a>
+                      <a class="a_basic post_table_like"><%=post.like%></a>
                     </th>
                   </tr>
                 <% }) %>
               </tbody>
             </table>
             <% if(bestposts.length==0) { %>
-              <h6 class="msg_nodata"> 해당하는 데이터가 존재하지 않습니다. </h6>
+              <h6 class="msg_nodata"> 좋아요를 받아 인기글의 주인공이 되어보세요! </h6>
             <% } %>
           </div>
         </div>

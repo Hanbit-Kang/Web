@@ -4,7 +4,6 @@ var Alert = require('../models/Alert');
 
 router.get('/alert/view/:postid', function(req, res){
     Alert.deleteOne({post:req.params.postid}, function(err){
-      if(err) return res.json(err);
       res.redirect('/post/view/'+req.params.postid);
     });
 });

@@ -5,6 +5,7 @@ var Post = require('../models/Post');
 var Comment = require('../models/Comment');
 var Auth = require('../models/Auth');
 var bcrypt = require('bcryptjs');
+var Log = require('../models/Log');
 
 router.get('/user/index/:id', function(req, res){
   if(req.params.id=='L'){
@@ -22,12 +23,12 @@ router.get('/user/index/:id', function(req, res){
       postpage = !isNaN(postpage)?postpage:1;
 
       var postskip = (postpage-1)*postlimit;
-      var postcount = await Post.countDocuments({author:user});
+      var postcount = await Post.countDocuments({author:user, isDeleted: false});
       var postmaxPage = Math.ceil(postcount/postlimit);
       var posts;
 
       posts = await Post.aggregate([
-        { $match: { author: user._id } },
+        { $match: { author: user._id, isDeleted: false } },
         { $lookup: {
           from: 'accounts',
           localField: 'author',
@@ -64,7 +65,7 @@ router.get('/user/index/:id', function(req, res){
       var comments;
 
       comments = await Comment.aggregate([ //댓글 내용
-        { $match: { author: user._id, isDeleted:false } },
+        { $match: { author: user._id } },
         { $lookup: {
           from: 'posts',
           localField: 'post',
@@ -79,7 +80,8 @@ router.get('/user/index/:id', function(req, res){
           post: {
             _id:1,
             category:1,
-            title:1
+            title:1,
+            isDeleted:1
           },
           text: 1,
           createdAt: 1
@@ -119,7 +121,7 @@ router.get('/user/edit/:id', function(req, res){
 });
 
 router.post('/user/edit/:id', function(req, res, next){
-  Account.findOne({nickname:req.body.nickname, isLeaved:false}, function(err, user){
+  Account.findOne({id:req.session.passport.user.id, nickname:req.body.nickname, isLeaved:false}, function(err, user){
     if(err) return res.json(err);
     if(!user || user.nickname==req.session.passport.user.nickname){
       Account.findOne({id:req.params.id})
@@ -129,7 +131,9 @@ router.post('/user/edit/:id', function(req, res, next){
 
           user.save(function(err, user){
             if(err) return res.json(err);
+            req.session.passport.user.nickname = req.body.nickname;
             req.session.success={'msg':"회원정보가 수정되었습니다."};
+            Log.create({activity:'user edit'});
             res.redirect('/user/index/'+req.params.id);
           });
         });
@@ -176,6 +180,7 @@ router.post('/user/pw/:id', function(req, res, next){
       user.password = req.body.newPassword;
       user.save();
       req.session.success={'msg':"비밀번호가 변경되었습니다."};
+      Log.create({activity:'user pw'});
       res.redirect('/user/index/'+req.params.id);
     });
   }
@@ -221,6 +226,7 @@ router.post('/user/findpw/:id', function(req, res, next){
       user.password = req.body.newPassword;
       user.save();
       req.session.success={'msg':"비밀번호가 변경되었습니다."};
+      Log.create({activity:'user findpw'});
       res.redirect('/login');
     });
   });
@@ -243,7 +249,7 @@ router.get('/user/leave/:id', function(req, res){
 router.post('/user/leave/:id', function(req, res, next){
   Account.findOne({id:req.params.id, isLeaved:false}, function(err, user){
     if(err) return res.json(err);
-    if(!user){
+    if(!user||user.id!=req.session.passport.user.id){
       req.session.error={'msg':"잘못된 접근입니다."};
       res.redirect('/');
     }
@@ -257,6 +263,7 @@ router.post('/user/leave/:id', function(req, res, next){
     req.session.passport=null;
     req.logout();
     req.session.success={'msg':"탈퇴하였습니다."};
+    Log.create({activity:'user leave'});
     res.redirect('/');
   });
 });

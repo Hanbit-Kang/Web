@@ -367,7 +367,7 @@
                       <% comments.forEach(function(comment){ %>
                         <tr id="CommentTableContent">
                           <th>
-                            <a href="/post/view/<%=comment.post._id%>" class="comment_table_post_title a_pointerAndunderline_black"> <%=comment.post.title%> </a>
+                            <a href="/post/view/<%=comment.post.isDeleted?'D':comment.post._id%>" class="comment_table_post_title a_pointerAndunderline_black"> <%=comment.post.isDeleted?'삭제된 게시글입니다.':comment.post.title%> </a>
                           </th>
                           <th class="comment_table_text">
                             <!-- Today's Post -->

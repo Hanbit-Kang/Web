@@ -9,7 +9,8 @@ var postSchema = mongoose.Schema({
   createdAt:{type:Date, default:Date.now},
   comment:{type: Number, default:0},
   view:{type: Number, default:0},
-  like:{type: Number, default:0}
+  like:{type: Number, default:0},
+  isDeleted:{type: Boolean, default:false}
 });
 
 var Post = mongoose.model('post', postSchema);

@@ -12,6 +12,7 @@ var util = require('./util');
 require('./config/passport');
 var app = express();
 var port = process.env.PORT || 80;
+const getIP = require('external-ip')();
 
 var Alert = require('./models/Alert');
 
@@ -48,15 +49,21 @@ app.use(function(req, res, next){
 });
 
 //Listen
-var server = app.listen(port,'0.0.0.0' ,function(){
+var server = app.listen(port,'0.0.0.0', function(){
   console.log("Server started [ Port:", port, "]");
+  getIP((err, ip) => {
+    if(err){
+      console.log('Failed to Load IP');
+    }else{
+      console.log("Server IP:", ip);
+    }
+  });
 });
 
 //ejs CAN access to SESSION
 app.use(async function(req, res, next) {
   if(req.session){
     res.locals.whoami = req.session;
-
     if(req.session.passport){
       if(req.session.alertOn==true) res.locals.whoami.alertOn=true;
       var alerts = await Alert.find({to:req.session.passport.user})

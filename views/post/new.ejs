@@ -95,7 +95,7 @@
           border-left: 0px solid;
         }
         .editor_buttons input:focus{outline: none;}
-        .size_button{
+        .size_btn{
           width: 50px;
         }
         .dropdown_size{
@@ -107,7 +107,6 @@
           flex-direction: column;
           border: 1px solid #dfe3e6;
           border-radius: 5px 5px;
-          z-index: 2;
         }
         .ds_child{
           font-size: 16px;
@@ -142,6 +141,31 @@
           text-decoration:line-through;
         }
 
+        .dropdown_color{
+          left:100px;
+          top:323px;
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          border: 1px solid #dfe3e6;
+        }
+        .colors{
+          display: flex;
+          flex-direction: row;
+        }
+        .color_line{
+          display: flex;
+          flex-direction: column;
+        }
+        .dc_child{
+          width:20px;
+          height:20px;
+          background-color: black;
+        }
+        .dc_child:hover{
+          background-color: #dfe3e6;
+        }
+
         .input_title{
           padding-left: 15px;
           padding-top: 3px;
@@ -155,11 +179,17 @@
           padding-left: 15px;
           padding-top: 15px;
           width: 100%;
-          min-height: 600px;
+          overflow-y: scroll;
+          min-height: 300px;
+          height: 500px;
+          resize: vertical;
           border: 1px solid #dfe3e6;
           font-size:14px;
         }
         .input_body:focus{outline: none;}
+        .input_body span{
+          white-space: pre-wrap;
+        }
 
         .np_buttons{
           display: flex;
@@ -240,7 +270,7 @@
             </div>
             <div class="np_body">
               <div class="editor_buttons">
-                <input type="button" class="SIZE size_button" title="글씨 크기" value="16 ∨"/>
+                <input type="button" class="SIZE size_btn" title="글씨 크기" value="16 ∨"/>
                 <div class="dropdown_size none">
                   <a href="#" class="ds_child a_basic" onclick='document.execCommand("fontSize", false, "1");$(".input_body").focus();'>8</a>
                   <a href="#" class="ds_child a_basic"  onclick='document.execCommand("fontSize", false, "2");$(".input_body").focus();'>12</a>
@@ -258,9 +288,102 @@
                 <input type="image" class="JUSTIFYLEFT square_button" src="/public/images/alignleft.png" title="왼쪽 정렬" onclick="document.execCommand('justifyleft');$('.input_body').focus();"/>
                 <input type="image" class="JUSTIFYCENTER square_button" src="/public/images/aligncenter.png" title="가운데 정렬" onclick="document.execCommand('justifycenter');$('.input_body').focus();"/>
                 <input type="image" class="JUSTIFYRIGHT square_button" src="/public/images/alignright.png" title="오른쪽 정렬" onclick="document.execCommand('justifyright');$('.input_body').focus();"/>
+                <input type="image" class="square_button color_btn" src="/public/images/rgb.png" title="글씨 색"/>
+                <div class="dropdown_color none">
+                  <div class="colors">
+                    <div class="color_line">
+                      <a href="#" class="dc_child a_basic" style="background-color:#ffffff;" onclick='document.execCommand("foreColor", false, "#ffffff");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#e2e2e2;" onclick='document.execCommand("foreColor", false, "#e2e2e2");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#9c9c9c;" onclick='document.execCommand("foreColor", false, "#9c9c9c");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#777777;" onclick='document.execCommand("foreColor", false, "#777777");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#333333;" onclick='document.execCommand("foreColor", false, "#333333");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#000000;" onclick='document.execCommand("foreColor", false, "#000000");$(".input_body").focus();'></a>
+                    </div>
+                    <div class="color_line">
+                      <a href="#" class="dc_child a_basic" style="background-color:#ffcdc0;" onclick='document.execCommand("foreColor", false, "#ffcdc0");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#ffad98;" onclick='document.execCommand("foreColor", false, "#ffad98");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#ff5f45;" onclick='document.execCommand("foreColor", false, "#ff5f45");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#ff0010;" onclick='document.execCommand("foreColor", false, "#ff0010");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#ba0000;" onclick='document.execCommand("foreColor", false, "#ba0000");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#700001;" onclick='document.execCommand("foreColor", false, "#700001");$(".input_body").focus();'></a>
+                    </div>
+                    <div class="color_line">
+                      <a href="#" class="dc_child a_basic" style="background-color:#ffe3c8;" onclick='document.execCommand("foreColor", false, "#ffe3c8");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#ffd1a4;" onclick='document.execCommand("foreColor", false, "#ffd1a4");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#ffa94f;" onclick='document.execCommand("foreColor", false, "#ffa94f");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#ff9300;" onclick='document.execCommand("foreColor", false, "#ff9300");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#b85c00;" onclick='document.execCommand("foreColor", false, "#b85c00");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#823f00;" onclick='document.execCommand("foreColor", false, "#823f00");$(".input_body").focus();'></a>
+                    </div>
+                    <div class="color_line">
+                      <a href="#" class="dc_child a_basic" style="background-color:#fff8b2;" onclick='document.execCommand("foreColor", false, "#fff8b2");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#fff593;" onclick='document.execCommand("foreColor", false, "#fff593");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#ffef34;" onclick='document.execCommand("foreColor", false, "#ffef34");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#ffd300;" onclick='document.execCommand("foreColor", false, "#ffd300");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#ac9a00;" onclick='document.execCommand("foreColor", false, "#ac9a00");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#6a5f00;" onclick='document.execCommand("foreColor", false, "#6a5f00");$(".input_body").focus();'></a>
+                    </div>
+                    <div class="color_line">
+                      <a href="#" class="dc_child a_basic" style="background-color:#e3fdc8;" onclick='document.execCommand("foreColor", false, "#e3fdc8");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#badf98;" onclick='document.execCommand("foreColor", false, "#badf98");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#98d36c;" onclick='document.execCommand("foreColor", false, "#98d36c");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#54b800;" onclick='document.execCommand("foreColor", false, "#54b800");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#36851e;" onclick='document.execCommand("foreColor", false, "#36851e");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#245b12;" onclick='document.execCommand("foreColor", false, "#245b12");$(".input_body").focus();'></a>
+                    </div>
+                    <div class="color_line">
+                      <a href="#" class="dc_child a_basic" style="background-color:#c2f4db;" onclick='document.execCommand("foreColor", false, "#c2f4db");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#3fcc9c;" onclick='document.execCommand("foreColor", false, "#3fcc9c");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#00b976;" onclick='document.execCommand("foreColor", false, "#00b976");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#00a84b;" onclick='document.execCommand("foreColor", false, "#00a84b");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#007433;" onclick='document.execCommand("foreColor", false, "#007433");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#245b12;" onclick='document.execCommand("foreColor", false, "#245b12");$(".input_body").focus();'></a>
+                    </div>
+                    <div class="color_line">
+                      <a href="#" class="dc_child a_basic" style="background-color:#bdfbfa;" onclick='document.execCommand("foreColor", false, "#bdfbfa");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#15d0ca;" onclick='document.execCommand("foreColor", false, "#15d0ca");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#00bfb5;" onclick='document.execCommand("foreColor", false, "#00bfb5");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#009d91;" onclick='document.execCommand("foreColor", false, "#009d91");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#00756a;" onclick='document.execCommand("foreColor", false, "#00756a");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#00554c;" onclick='document.execCommand("foreColor", false, "#00554c");$(".input_body").focus();'></a>
+                    </div>
+                    <div class="color_line">
+                      <a href="#" class="dc_child a_basic" style="background-color:#b0f1ff;" onclick='document.execCommand("foreColor", false, "#b0f1ff");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#28e1ff;" onclick='document.execCommand("foreColor", false, "#28e1ff");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#00cdff;" onclick='document.execCommand("foreColor", false, "#00cdff");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#00b3f2;" onclick='document.execCommand("foreColor", false, "#00b3f2");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#007aa6;" onclick='document.execCommand("foreColor", false, "#007aa6");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#004e6a;" onclick='document.execCommand("foreColor", false, "#004e6a");$(".input_body").focus();'></a>
+                    </div>
+                    <div class="color_line">
+                      <a href="#" class="dc_child a_basic" style="background-color:#9bdfff;" onclick='document.execCommand("foreColor", false, "#9bdfff");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#5bc7ff;" onclick='document.execCommand("foreColor", false, "#5bc7ff");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#0095e9;" onclick='document.execCommand("foreColor", false, "#0095e9");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#0078cb;" onclick='document.execCommand("foreColor", false, "#0078cb");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#004e82;" onclick='document.execCommand("foreColor", false, "#004e82");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#003960;" onclick='document.execCommand("foreColor", false, "#003960");$(".input_body").focus();'></a>
+                    </div>
+                    <div class="color_line">
+                      <a href="#" class="dc_child a_basic" style="background-color:#fdd5f5;" onclick='document.execCommand("foreColor", false, "#fdd5f5");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#cd8bc0;" onclick='document.execCommand("foreColor", false, "#cd8bc0");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#bc61ab;" onclick='document.execCommand("foreColor", false, "#bc61ab");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#aa1f91;" onclick='document.execCommand("foreColor", false, "#aa1f91");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#740060;" onclick='document.execCommand("foreColor", false, "#740060");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#4f0041;" onclick='document.execCommand("foreColor", false, "#4f0041");$(".input_body").focus();'></a>
+                    </div>
+                    <div class="color_line">
+                      <a href="#" class="dc_child a_basic" style="background-color:#ffb7de;" onclick='document.execCommand("foreColor", false, "#ffb7de");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#ff97c1;" onclick='document.execCommand("foreColor", false, "#ff97c1");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#ff65a8;" onclick='document.execCommand("foreColor", false, "#ff65a8");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#ff008c;" onclick='document.execCommand("foreColor", false, "#ff008c");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#bb005c;" onclick='document.execCommand("foreColor", false, "#bb005c");$(".input_body").focus();'></a>
+                      <a href="#" class="dc_child a_basic" style="background-color:#830041;" onclick='document.execCommand("foreColor", false, "#830041");$(".input_body").focus();'></a>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div>
-                <div class="input_body" contenteditable="true"></div>
+                <div class="input_body my_scroll" contenteditable="true"></div>
               </div>
             </div>
           </div>

@@ -68,12 +68,17 @@
     cursor: pointer;
   }
   .alert_count{
-    margin-top:-4px;
-    margin-right:-23px;
-    font-size: 12px;
+    margin-top:-3px;
+    margin-right:-27px;
+    text-align:center;
+    font-size: 10px;
     z-index: 1;
     color: white;
     pointer-events: none;
+    background-color: #de0581;
+    border-radius: 7px 7px;
+    height: 14px;
+    width:15px;
   }
   .dropdown_btn{
     display: flex;
@@ -119,16 +124,6 @@
   }
   .alert_delete_all a{
     font-size: 12px;
-  }
-  .alerts::-webkit-scrollbar {
-    width: 7px;
-  }
-  .alerts::-webkit-scrollbar-thumb {
-    background-color: gray;
-    border-radius: 5px 5px;
-  }
-  .alerts::-webkit-scrollbar-track {
-    background-color: white;
   }
   .au_dd_child{
     font-size: 14px;
@@ -261,6 +256,19 @@
   .pink{
     color: #de0581 !important;
   }
+  .border_bold{
+    border:2px solid;
+  }
+  .my_scroll::-webkit-scrollbar {
+    width: 7px;
+  }
+  .my_scroll::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 5px 5px;
+  }
+  .my_scroll::-webkit-scrollbar-track {
+    background-color: white;
+  }
 </style>
 <div class="menubar">
   <span class="mb_left">
@@ -277,15 +285,11 @@
   <% if(isAuthenticated){ %>
   <span class="mb_right_login" alertCount="<%=whoami.alerts.length%>">
     <% if(whoami.alerts&&whoami.alerts.length>0){ %>
-    <a class="alert_count"><%= whoami.alerts.length %></a>
+    <a class="alert_count"><%=Math.min(whoami.alerts.length,99)%></a>
     <% } %>
     <span class="alertmenu">
       <span class="alert_btn">
-        <% if(whoami.alerts&&whoami.alerts.length>0){ %>
-        <img class="alert_btn_child" src="/public/images/alertActive.png" width="25px" height="25px">
-        <% } else { %>
         <img class="alert_btn_child" src="/public/images/alert.png" width="25px" height="25px">
-        <% } %>
       </span>
       <%if(whoami.alerts&&whoami.alerts.length>0){%>
         <%if(whoami.alertOn){%>
@@ -294,7 +298,7 @@
         <%}else{%>
       <div class="alert_usermenu none">
         <%}%>
-        <div class="alerts">
+        <div class="alerts my_scroll">
           <%whoami.alerts.forEach(function(alert, i){%>
             <span class="au_dd_child">
               <% const today = new Date(); %>
@@ -303,7 +307,7 @@
               <%} else { %>
               <a class="alert_time a_basic"> <%= alert.createdAt.getYear()-100 %>.<%= alert.createdAt.getMonth()+1>=10?alert.createdAt.getMonth()+1:'0'+String(alert.createdAt.getMonth()+1) %>.<%= alert.createdAt.getDate()>=10?alert.createdAt.getDate():'0'+String(alert.createdAt.getDate()) %> </a>
               <% } %>
-              <a class="alert_text a_pointerAndunderline_black" href="/alert/view/<%=alert.post._id%>" class="a_basic"><%=alert.post.title%> - <%=alert.from.isLeaved?'(탈퇴 회원)':alert.from.nickname%> | <%=alert.text%></a>
+              <a class="alert_text a_pointerAndunderline_black" href="/alert/view/<%=alert.post?alert.post._id:'D'%>" class="a_basic"><%=alert.post?alert.post.tltle:'삭제된 글입니다.'%> - <%=alert.from.isLeaved?'(탈퇴 회원)':alert.from.nickname%> | <%=alert.text%></a>
               <a href="/alert/delete/<%=alert._id%>" class="a_basic au_x">X</a>
             </span>
             <a class="line"></a>
