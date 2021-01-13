@@ -307,7 +307,11 @@
               <%} else { %>
               <a class="alert_time a_basic"> <%= alert.createdAt.getYear()-100 %>.<%= alert.createdAt.getMonth()+1>=10?alert.createdAt.getMonth()+1:'0'+String(alert.createdAt.getMonth()+1) %>.<%= alert.createdAt.getDate()>=10?alert.createdAt.getDate():'0'+String(alert.createdAt.getDate()) %> </a>
               <% } %>
+              <% if(alert.post){ %>
               <a class="alert_text a_pointerAndunderline_black" href="/alert/view/<%=alert.post?alert.post._id:'D'%>" class="a_basic"><%=alert.post?alert.post.tltle:'삭제된 글입니다.'%> - <%=alert.from.isLeaved?'(탈퇴 회원)':alert.from.nickname%> | <%=alert.text%></a>
+              <% }else{ %>
+              <a class="alert_text a_pointerAndunderline_black" href="#" class="a_basic"><%=alert.text%></a>
+              <% } %>
               <a href="/alert/delete/<%=alert._id%>" class="a_basic au_x">X</a>
             </span>
             <a class="line"></a>

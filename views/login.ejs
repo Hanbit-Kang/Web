@@ -92,7 +92,7 @@
               <h5 class="input_info"> 아이디 </h5>
               <input class="input_id" type="text" name="id" id="id" value="<%= id %>" placeholder="아이디">
               <% if(errors.login){ %>
-                <a class="error id_error"> <%=errors.login.message %> </a>
+                <a class="error id_invalid"> <%=errors.login.message %> </a>
               <% errors.login=null %>
               <% } %>
               <% if(errors.verify){ %>

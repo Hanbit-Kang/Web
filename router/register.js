@@ -8,7 +8,7 @@ var Log = require('../models/Log');
 router.get('/register', function(req, res){
   if(req.session.passport){
     req.session.error={'msg':"이미 로그인하였습니다."};
-    res.redirect('/');
+    return res.redirect('/');
   }else{
     var id = req.flash('id')[0];
     var nickname = req.flash('nickname')[0];

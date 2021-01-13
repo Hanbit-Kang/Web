@@ -51,6 +51,15 @@ util.convertToTrees = function(array, idFieldName, parentIdFieldName, childrenFi
   return cloned;
 };
 
+util.convertDateToString = function(date){
+  var RET = String(date.getYear()-100)+'.';
+  RET += date.getMonth()+1>=10?String(date.getMonth+1)+'.':'0'+String(date.getMonth()+1)+'.';
+  RET += date.getDate()>=10?String(date.getDate())+' ':'0'+String(date.getDate())+' ';
+  RET += date.getHours()>=10?String(date.getHours())+':':'0'+String(date.getHours())+':';
+  RET += date.getMinutes()>=10?String(date.getMinutes()):'0'+String(date.getMinutes());
+  return RET;
+};
+
 const nodemailer = require('nodemailer');
 util.sendMail = async function(to, subject, html){
   let transporter = nodemailer.createTransport({

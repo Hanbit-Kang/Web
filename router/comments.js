@@ -1,16 +1,23 @@
 var express = require('express');
 var router = express.Router();
+var Account = require('../models/Account');
 var Comment = require('../models/Comment');
 var Post = require('../models/Post');
 var Alert = require('../models/Alert');
 var Log = require('../models/Log');
+var util = require('../util');
 
 //Create
-router.post('/comment/new', checkPostId, function(req, res){
+router.post('/comment/new', checkPostId, async function(req, res){
   if(!(req.session.passport)){
     req.session.error={'msg':"권한이 없습니다."};
-    res.redirect('/login');
+    return res.redirect('/login');
   }else{
+    var user = await Account.findOne({id:req.session.passport.user.id, isSuspended:true});
+    if(user){
+      req.session.error={'msg':"활동 정지 상태입니다. 기간: [~"+util.convertDateToString(user.resumeAt)+"]"};
+      return res.redirect('back');
+    }
     var post = res.locals.post;
     req.body.author = req.user._id;
     req.body.post = post._id;
@@ -32,12 +39,17 @@ router.post('/comment/new', checkPostId, function(req, res){
 
 //Update
 router.post('/comment/edit/:id', checkPostId, function(req, res){
-  Comment.findOne({_id:req.params.id, author:req.session.passport.user._id}, function(err, comment){
+  Comment.findOne({_id:req.params.id, author:req.session.passport.user._id}, async function(err, comment){
     if(err) return res.json(err);
     if(!comment){
       req.session.error={'msg':"권한이 없습니다."};
-      res.redirect('/login');
+      return res.redirect('/login');
     }else{
+      var user = await Account.findOne({id:req.session.passport.user.id, isSuspended:true});
+      if(user){
+        req.session.error={'msg':"활동 정지 상태입니다. 기간: [~"+util.convertDateToString(user.resumeAt)+"]"};
+        return res.redirect('back');
+      }
       var post = res.locals.post;
       comment.text = req.body.text;
       comment.save();
@@ -55,7 +67,7 @@ router.get('/comment/delete/:id', checkPostId, function(req, res){
     if(err) return res.json(err);
     if(!comment){
       req.session.error={'msg':"권한이 없습니다."};
-      res.redirect('/login');
+      return res.redirect('/login');
     }else{
       comment.isDeleted = true;
       comment.save(function(err, comment){

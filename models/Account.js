@@ -10,6 +10,8 @@ var accountSchema = mongoose.Schema({
   level:{type:Number, required:true, default:0},
   isVerified:{type:Boolean, required:true, default:false},
   verifyKey:{type:String},
+  isSuspended:{type:Boolean, required:true, default:false},
+  resumeAt:{type:Date},
   isLeaved:{type:Boolean, required:true, default:false},
   leavedAt:{type:Date}
 });

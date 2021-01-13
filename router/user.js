@@ -4,6 +4,7 @@ var Account = require('../models/Account');
 var Post = require('../models/Post');
 var Comment = require('../models/Comment');
 var Auth = require('../models/Auth');
+var Alert = require('../models/Alert');
 var bcrypt = require('bcryptjs');
 var Log = require('../models/Log');
 
@@ -107,7 +108,7 @@ router.get('/user/index/:id', function(req, res){
 router.get('/user/edit/:id', function(req, res){
   if(!(req.session.passport && req.session.passport.user.id==req.params.id)){
     req.session.error={'msg':"잘못된 접근입니다."};
-    res.redirect('/');
+    return res.redirect('/');
   }else{
     var errors = req.flash('errors')[0] || {};
     Account.findOne({id:req.params.id, isLeaved:false}, function(err, user){
@@ -148,7 +149,7 @@ router.post('/user/edit/:id', function(req, res, next){
 router.get('/user/pw/:id', function(req, res){
   if(!(req.session.passport && req.session.passport.user.id==req.params.id)){
     req.session.error={'msg':"잘못된 접근입니다."};
-    res.redirect('/');
+    return res.redirect('/');
   }else{
     var errors = req.flash('errors')[0] || {};
     Account.findOne({id:req.params.id, isLeaved:false}, function(err, user){
@@ -164,13 +165,13 @@ router.get('/user/pw/:id', function(req, res){
 router.post('/user/pw/:id', function(req, res, next){
   if(!(req.session.passport && req.session.passport.user.id==req.params.id)){
     req.session.error={'msg':"잘못된 접근입니다."};
-    res.redirect('/');
+    return res.redirect('/');
   }else{
     Account.findOne({id:req.params.id, isLeaved:false}, function(err, user){
       if(err) return res.json(err);
       else if(!user){
         req.session.error={'msg':"잘못된 접근입니다."};
-        res.redirect('/');
+        return res.redirect('/');
       }
 
       if(!bcrypt.compareSync(req.body.curPassword, user.password)){
@@ -193,7 +194,7 @@ router.get('/user/findpw/:id', function(req, res){
     if(err) return res.json(err);
     if(!user){
       req.session.error={'msg':"잘못된 접근입니다."};
-      res.redirect('/');
+      return res.redirect('/');
     }
     res.render('user/findpw', {
       user: user,
@@ -207,7 +208,7 @@ router.post('/user/findpw/:id', function(req, res, next){
     if(err) return res.json(err);
     else if(!user){
       req.session.error={'msg':"잘못된 접근입니다."};
-      res.redirect('/');
+      return res.redirect('/');
     }
     Auth.findOne({code:req.body.code}, function(err, auth){
       if(err) return res.json(err);
@@ -236,7 +237,7 @@ router.post('/user/findpw/:id', function(req, res, next){
 router.get('/user/leave/:id', function(req, res){
   if(!(req.session.passport && req.session.passport.user.id==req.params.id)){
     req.session.error={'msg':"잘못된 접근입니다."};
-    res.redirect('/');
+    return res.redirect('/');
   }else{
     var errors = req.flash('errors')[0] || {};
     Account.findOne({id:req.params.id, isLeaved:false}, function(err, user){
@@ -251,7 +252,7 @@ router.post('/user/leave/:id', function(req, res, next){
     if(err) return res.json(err);
     if(!user||user.id!=req.session.passport.user.id){
       req.session.error={'msg':"잘못된 접근입니다."};
-      res.redirect('/');
+      return res.redirect('/');
     }
     let DATENOW = Date.now();
     user.leavedAt = DATENOW;
@@ -265,6 +266,25 @@ router.post('/user/leave/:id', function(req, res, next){
     req.session.success={'msg':"탈퇴하였습니다."};
     Log.create({activity:'user leave'});
     res.redirect('/');
+  });
+});
+
+router.get('/user/suspend/:id', function(req, res){
+  Account.findOne({id:req.params.id, isLeaved:false}, function(err, user){
+    if(err) return res.json(err);
+    if(!(req.session.passport&&req.session.passport.user.level>=1)){
+      req.session.error={'msg':"권한이 없습니다."};
+      return res.redirect('/');
+    }
+    let resumeAt = new Date();
+    resumeAt.setDate(resumeAt.getDate()+Number(req.query.date));
+    user.resumeAt = resumeAt;
+    user.isSuspended = true;
+    user.save();
+    req.session.success={'msg':"활동 정지하였습니다."};
+    Alert.create({text:req.query.date+'일 동안 활동 정지 상태입니다. 사유는 다음과 같습니다. ['+req.query.reason+']', to:user._id});
+    Log.create({activity:'ADMIN, user suspend:'+req.session.passport.user.id+'->'+user.id+' date:'+req.query.date});
+    res.redirect('back');
   });
 });
 

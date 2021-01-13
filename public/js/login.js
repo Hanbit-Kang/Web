@@ -9,8 +9,12 @@ function IsVaild(){
     $('#id').focus();
     idError.innerHTML = "아이디를 입력하세요.";
     $('.id_error').removeClass('none');
+    $('.id_invalid').addClass('none');
     flag = 0;
-  }else{$('.id_error').addClass('none');}
+  }else{
+    $('.id_error').addClass('none');
+    $('.id_invalid').removeClass('none');
+  }
 
   if(pw==''){
     $('#pw').focus();

@@ -82,7 +82,7 @@ router.get('/post/view/:id', async function(req, res){
   .then(([post, comments, like]) => {
     if(post.isDeleted==true){
       req.session.error={'msg':"존재하지 않는 게시글입니다."};
-      res.redirect('back');
+      return res.redirect('back');
     }
     var IsLike = false;
     if(like) IsLike = true;
@@ -93,28 +93,38 @@ router.get('/post/view/:id', async function(req, res){
   })
   .catch((err)=>{
     req.session.error={'msg':"존재하지 않는 게시글입니다."};
-    res.redirect('back');
+    return res.redirect('back');
   });
 });
 
 //ADD
-router.get('/post/new', function(req, res){
+router.get('/post/new', async function(req, res){
   if(!(req.session.passport)){
     req.session.error={'msg':"로그인 후 이용해주세요."};
-    res.redirect('/login');
+    return res.redirect('/login');
   }else{
+    var user = await Account.findOne({id:req.session.passport.user.id, isSuspended:true});
+    if(user){
+      req.session.error={'msg':"활동 정지 상태입니다. 기간: [~"+util.convertDateToString(user.resumeAt)+"]"};
+      return res.redirect('back');
+    }
     res.render('post/new');
   }
 });
 
-router.post('/post/new', function(req, res){
+router.post('/post/new', async function(req, res){
   if(!(req.session.passport)){
     req.session.error={'msg':"로그인 후 이용해주세요."};
-    res.redirect('/login');
+    return res.redirect('/login');
   }else if(req.body.category==0&&req.session.passport.user.level<1){
     req.session.error={'msg':"권한이 없습니다."};
-    res.redirect('/post/index');
+    return res.redirect('/post/index');
   }else{
+    var user = await Account.findOne({id:req.session.passport.user.id, isSuspended:true});
+    if(user){
+      req.session.error={'msg':"활동 정지 상태입니다. 기간: [~"+util.convertDateToString(user.resumeAt)+"]"};
+      return res.redirect('/');
+    }
     req.body.author = req.session.passport.user._id;
     Post.create(req.body, function(err, post){
       if(err){
@@ -134,11 +144,11 @@ router.get('/post/delete/:id', async function(req, res){
     if(err) return res.json(err);
     if(!post){
       req.session.error={'msg':"잘못된 접근입니다."};
-      res.redirect('/');
+      return res.redirect('/');
     }
     if(!(req.session.passport&&post.author==req.session.passport.user._id)){
       req.session.error={'msg':"권한이 필요합니다."};
-      res.redirect('/post/index');
+      return res.redirect('/post/index');
     }else{
       post.isDeleted = true;
       post.save();
@@ -151,14 +161,19 @@ router.get('/post/delete/:id', async function(req, res){
 
 //EDIT
 router.get('/post/edit/:id', function(req, res, next){
-  Post.findOne({_id:req.params.id}, function(err, post){
+  Post.findOne({_id:req.params.id}, async function(err, post){
     if(!(req.session.passport&&post.author==req.session.passport.user._id)){
       req.session.error={'msg':"권한이 필요합니다."};
-      res.redirect('/post/index');
+      return res.redirect('/post/index');
     }else if(req.body.category==0&&req.session.passport.user.level<1){
       req.session.error={'msg':"권한이 없습니다."};
-      res.redirect('/post/index');
+      return res.redirect('/post/index');
     }else{
+      var user = await Account.findOne({id:req.session.passport.user.id, isSuspended:true});
+      if(user){
+        req.session.error={'msg':"활동 정지 상태입니다. 기간: [~"+util.convertDateToString(user.resumeAt)+"]"};
+        return res.redirect('back');
+      }
       var post = req.flash('post')[0];
       var errors = req.flash('errors')[0] || {};
       if(!post){
@@ -175,14 +190,19 @@ router.get('/post/edit/:id', function(req, res, next){
 });
 
 router.post('/post/edit/:id', function(req, res){
-  Post.findOne({_id:req.params.id}, function(err, post){
+  Post.findOne({_id:req.params.id}, async function(err, post){
     if(!(req.session.passport&&post.author==req.session.passport.user._id)){
       req.session.error={'msg':"권한이 필요합니다."};
-      res.redirect('/post/index');
+      return res.redirect('/post/index');
     }else if(req.body.category==0&&req.session.passport.user.level<1){
       req.session.error={'msg':"권한이 없습니다."};
-      res.redirect('/post/index');
+      return res.redirect('/post/index');
     }else{
+      var user = await Account.findOne({id:req.session.passport.user.id, isSuspended:true});
+      if(user){
+        req.session.error={'msg':"활동 정지 상태입니다. 기간: [~"+util.convertDateToString(user.resumeAt)+"]"};
+        return res.redirect('/');
+      }
       Post.findOneAndUpdate({_id:req.params.id}, req.body, function(err, post){
         if(err){
           req.flash('post', req.body);
@@ -202,10 +222,10 @@ router.get('/post/like/:id', function(req, res){
   Post.findOne({_id:req.params.id}, async function(err, post){
     if(!post){
       req.session.error={'msg':"해당 게시글이 존재하지 않습니다."};
-      res.redirect('/post/index');
+      return res.redirect('/post/index');
     }else if(!req.session.passport){
       req.session.error={'msg':"로그인 후 이용하실 수 있습니다."};
-      res.redirect('/login');
+      return res.redirect('/login');
     }else{
       var ObjLike = await Like.findOne({post:req.params.id, who:req.session.passport.user._id}).exec();
       if(ObjLike){
@@ -231,7 +251,7 @@ router.get('/post/like/:id', function(req, res){
 router.post('/post/index/delete', function(req, res){
   if(!(req.session.passport&&req.session.passport.user.level>=1)){
     req.session.error={'msg':"권한이 없습니다."};
-    res.redirect('/post/index');
+    return res.redirect('/post/index');
   }else{
     var postsIdStr = req.body.postsId;
     var postsId = [];

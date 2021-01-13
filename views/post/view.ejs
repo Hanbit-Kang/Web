@@ -375,7 +375,7 @@
                   <div class="post_time">
                     <a>
                       <%= post.createdAt.getYear()-100 %>.<%= post.createdAt.getMonth()+1>=10?post.createdAt.getMonth()+1:'0'+String(post.createdAt.getMonth()+1) %>.<%= post.createdAt.getDate()>=10?post.createdAt.getDate():'0'+String(post.createdAt.getDate()) %>
-                      <%=post.createdAt.getHours()>=10? post.createdAt.getHours():'0'+String(post.createdAt.getHours())%>:<%= post.createdAt.getMinutes()>=10?post.createdAt.getMinutes():'0'+String(post.createdAt.getMinutes())%>%></a>
+                      <%= post.createdAt.getHours()>=10? post.createdAt.getHours():'0'+String(post.createdAt.getHours())%>:<%= post.createdAt.getMinutes()>=10?post.createdAt.getMinutes():'0'+String(post.createdAt.getMinutes())%>%></a>
                   </div>
                 </span>
               </span>
