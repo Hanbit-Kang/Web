@@ -12,84 +12,178 @@
 
       <div class="content">
         <style>
-          .content{
-            width: 100%;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-          }
-          #BannerCarousel{
-            display: flex;
-            width: 100%;
-            margin-bottom:50px;
-            z-index: 0;
-          }
-          .displayArea{
-            width: 600px;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-          }
-          .displaybox{
-            width: 600px;
-            margin-bottom: 100px;
-            display: flex;
-            flex-direction: column;
-          }
-          @media(min-width:1200px){
-            .displayArea{
-              width: 1200px;
+          @media (min-device-width: 768px){
+            .content{
+              width: 100%;
               display: flex;
-              justify-content: space-between;
-              flex-direction:row;
+              align-items: center;
+              flex-direction: column;
+            }
+            #BannerCarousel{
+              display: flex;
+              width: 100%;
+              margin-bottom:50px;
+              z-index: 0;
+            }
+            .displayArea{
+              width: 600px;
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
             }
             .displaybox{
-              width: 550px;
+              width: 600px;
+              margin-bottom: 100px;
               display: flex;
               flex-direction: column;
             }
-          }
-          .box_title{
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            border-bottom: 1px solid;
-          }
-          .box_title h2{
-            display: flex;
-            margin-left: 20px;
-            margin-bottom: 20px;
-          }
-          .box_title a{
-            display: flex;
-            float: right;
-            font-size: 12px;
-            margin-bottom: 10px;
-            margin-right: 10px;
-            color: gray !important;
-            cursor: pointer;
+            @media(min-width:1200px){
+              .displayArea{
+                width: 1200px;
+                display: flex;
+                justify-content: space-between;
+                flex-direction:row;
+              }
+              .displaybox{
+                width: 550px;
+                display: flex;
+                flex-direction: column;
+              }
+            }
+            .box_title{
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-end;
+              border-bottom: 1px solid;
+            }
+            .box_title_text{
+              font-size: 30px;
+              display: flex;
+              margin-left: 20px;
+              margin-bottom: 20px;
+            }
+            .box_title_link{
+              display: flex;
+              float: right;
+              font-size: 12px;
+              margin-bottom: 10px;
+              margin-right: 10px;
+              color: gray !important;
+              cursor: pointer;
+            }
+
+            .displaybox table{
+              margin-top: 5px;
+            }
+            #PostTableContent th{
+              padding-top: 3px;
+              padding-bottom: 3px;
+            }
+            #PostTableContent a{
+              font-weight: normal;
+            }
+            .post_table_title{
+              margin-left: 10px;
+            }
+            .post_table_last{
+              margin-right: 10px;
+            }
+            .post_table_like{
+              color: gray !important;
+              font-size: 14px;
+            }
+            .msg_nodata{
+              color: gray;
+              text-align: center;
+              margin-top:15px;
+            }
           }
 
-          .displaybox table{
-            margin-top: 5px;
-          }
-          #PostTableContent th{
-            padding-top: 3px;
-            padding-bottom: 3px;
-          }
-          #PostTableContent a{
-            font-weight: normal;
-          }
-          .post_table_title{
-            margin-left: 10px;
-          }
-          .post_table_nickname{
-            margin-right: 10px;
-          }
-          .msg_nodata{
-            color: gray;
-            text-align: center;
-            margin-top:15px;
+
+          @media (max-device-width: 768px) {
+            .content{
+              width: 100%;
+              background-color: #F8F8FF;
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            #BannerCarousel{
+              display: flex;
+              width: 100%;
+              margin-top:50px;
+              z-index: 0;
+            }
+            .displayArea{
+              width: 100%;
+              padding-top:50px;
+              border-bottom: 1px solid #dfe3e6;
+              background-color: white;
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              margin-bottom: 200px;
+            }
+            .displaybox{
+              width: 100%;
+              margin-bottom: 100px;
+              display: flex;
+              flex-direction: column;
+            }
+            .box_title{
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-end;
+              border-bottom: 2px solid;
+            }
+            .box_title_text{
+              display: flex;
+              font-size: 72px;
+              margin-left: 40px;
+              margin-bottom: 20px;
+            }
+            .box_title_link{
+              display: flex;
+              float: right;
+              font-size: 32px;
+              margin-bottom: 10px;
+              margin-right: 30px;
+              color: gray !important;
+              cursor: pointer;
+            }
+
+            .displaybox table{
+              margin-top: 20px;
+            }
+            .WB_colgroup:first-child{
+              width: 50%;
+            }
+            .WB_colgroup:nth-child(2){
+              width: 10%;
+            }
+            #PostTableContent th{
+              padding-top: 10px;
+              padding-bottom: 10px;
+            }
+            #PostTableContent a{
+              font-weight: normal;
+              font-size: 36px;
+            }
+            .post_table_title{
+              margin-left: 30px;
+            }
+            .post_table_last{
+              margin-right: 30px;
+            }
+            .post_table_like{
+              color: gray !important;
+              font-size: 20px;
+            }
+            .msg_nodata{
+              color: gray;
+              text-align: center;
+              margin-top:15px;
+            }
           }
         </style>
         <div id="BannerCarousel" class="carousel slide" data-ride="carousel">
@@ -117,13 +211,13 @@
         <div class="displayArea">
           <div class="displaybox">
             <div class="box_title">
-              <h2> 최신글 </h2>
-              <a href="/post/index" class="a_basic"> > 전체글보기 </a>
+              <a class="box_title_text a_basic"> 최신글 </a>
+              <a class="box_title_link" href="/post/index" class="a_basic"> > 전체글보기 </a>
             </div>
             <table>
               <colgroup>
-                <col style="width:500px">
-                <col style="width:100px">
+                <col style="width:50%">
+                <col style="width:10%">
               </colgroup>
               <thead>
                 <tr id="PostTableTitle">
@@ -139,7 +233,7 @@
                       <a href="/post/view/<%=post._id%>" class="a_pointerAndunderline_red"> [<%=post.comment%>] </a>
                     </th>
                     <th>
-                      <a class="a_pointerAndunderline_black post_table_nickname align-center" href="/user/index/<%=post.author.isLeaved?'L':post.author.id%>"> <%=post.author.isLeaved?post.author.nickname.slice(13):post.author.nickname%> </a>
+                      <a class="a_pointerAndunderline_black post_table_nickname align-center post_table_last" href="/user/index/<%=post.author.isLeaved?'L':post.author.id%>"> <%=post.author.isLeaved?post.author.nickname.slice(13):post.author.nickname%> </a>
                     </th>
                   </tr>
                 <% }) %>
@@ -151,20 +245,18 @@
           </div>
           <div class="displaybox">
             <div class="box_title">
-              <h2> Weekly Best </h2>
-              <a href="/post/index?sort=like" class="a_basic"> > 전체글보기 </a>
+              <a class="box_title_text a_basic"> Weekly Best </a>
+              <a class="box_title_link" href="/post/index?sort=like" class="a_basic"> > 전체글보기 </a>
             </div>
             <table>
-              <colgroup>
-                <col style="width:450px">
-                <col style="width:100px">
-                <col style="width:50px">
+              <colgroup class="WB_colgroup">
+                <col style="width:50%">
+                <col style="width:10%">
               </colgroup>
               <thead>
                 <tr id="PostTableTitle">
                   <th scope="col" class="post_title"></th>
                   <th scope="col" class="post_author"></th>
-                  <th scope="col" class="post_like"></th>
                 </tr>
               </thead>
               <tbody>
@@ -173,13 +265,10 @@
                     <th>
                       <a href="/post/view/<%=post._id%>" class="a_pointerAndunderline_black post_table_title"> <%=post.title%> </a>
                       <a href="/post/view/<%=post._id%>" class="a_pointerAndunderline_red"> [<%=post.comment%>] </a>
+                      <a class="a_basic post_table_like post_table_last"> - ♡<%=post.like%></a>
                     </th>
                     <th>
-                      <a class="a_pointerAndunderline_black post_table_nickname" href="/user/index/<%=post.author.id%>"> <%=post.author.nickname%> </a>
-                    </th>
-                    <th>
-                      ♥
-                      <a class="a_basic post_table_like"><%=post.like%></a>
+                      <a class="a_pointerAndunderline_black post_table_nickname post_table_last" href="/user/index/<%=post.author.id%>"> <%=post.author.nickname%> </a>
                     </th>
                   </tr>
                 <% }) %>

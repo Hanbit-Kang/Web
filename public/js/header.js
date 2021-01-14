@@ -52,7 +52,7 @@ $(document).ready(function(){
 
 $(window).resize(function(){
   if($('.mb_right_login').length){
-    JQdropdownUsermenu.css('left', JQdropdownBtn.offset().left-110);
+  JQdropdownUsermenu.css('left', JQdropdownBtn.offset().left-110);
     JQalertUsermenu.css('left', JQalertBtn.offset().left-315);
   }
 });

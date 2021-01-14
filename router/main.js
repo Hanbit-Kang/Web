@@ -36,7 +36,7 @@ router.get('/', async function(req, res){
   let lastWeek = new Date();
   lastWeek.setDate(lastWeek.getDate()-7);
   var bestposts = await Post.aggregate([
-    { $match: { createdAt:{$gte:lastWeek}, like:{$gte:1} } },
+    { $match: { isDeleted:false, createdAt:{$gte:lastWeek}, like:{$gte:1} } },
     { $lookup: {
       from: 'accounts',
       localField: 'author',

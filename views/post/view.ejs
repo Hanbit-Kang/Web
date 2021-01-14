@@ -11,337 +11,694 @@
       </div>
       <div class="content">
         <style>
-          .content{
-            background-color: #F8F8FF;
-            width:100%;
-            padding-top:30px;
-            padding-bottom: 60px;
-          }
-          @media(min-width:750px){
+          @media (min-device-width: 768px){
+            .content{
+              background-color: #F8F8FF;
+              width:100%;
+              padding-top:30px;
+              padding-bottom: 60px;
+            }
+            @media(min-width:750px){
+              .post_area{
+                margin-left: 5%;
+                width: 90% !important;
+              }
+            }
             .post_area{
-              margin-left: 5%;
-              width: 90% !important;
+              border: 1px solid #dfe3e6;
+              width: 750px;
+              background-color: white;
+            }
+            .post_header{
+              margin-left: 30px;
+              margin-top: 30px;
+              margin-right: 30px;
+            }
+            .post_type{
+              border-bottom: 1px solid #dfe3e6;
+              padding-bottom: 10px;
+            }
+            .post_type a{
+              letter-spacing: 2px;
+              font-size: 24px;
+            }
+            .post_titleAndsetting{
+              margin-top:20px;
+              margin-bottom:10px;
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+            }
+            .post_title{
+              font-size: 28px;
+            }
+
+            .post_setting_btn{
+              font-size: 30px;
+              letter-spacing: 3px;
+            }
+            .dropdown_postmenu{
+              left:0px;
+              top:0px;
+              width:80px;
+              position: absolute;
+              display: flex;
+              flex-direction: column;
+              border: 1px solid #dfe3e6;
+              border-radius: 5px 5px;
+              z-index: 2;
+            }
+            .dd_ps_child{
+              text-align: center;
+              padding-top:7px;
+              padding-bottom:7px;
+              font-size: 16px;
+              background-color: white;
+            }
+            .dd_ps_child:hover{
+              background-color: #dfe3e6;
+            }
+
+            .post_info{
+              display:flex;
+              justify-content: space-between;
+              flex-direction: row;
+              align-items: center;
+            }
+            .post_info_left{
+              display:flex;
+            }
+            .post_userANDtime{
+              margin-left: 10px;
+            }
+            .post_info_right{
+              display:flex;
+              justify-content: space-around;
+              width: 160px;
+              flex-direction: row;
+            }
+            .figure{
+              text-decoration: none;
+              color: black;
+            }
+
+            .post_body{
+              margin-left: 30px;
+              margin-right: 30px;
+              margin-top: 30px;
+            }
+            .post_body pre{
+              white-space: pre-wrap;
+              overflow:hidden;
+            }
+
+            .post_footer{
+              margin-top: 30px;
+              margin-left: 30px;
+              margin-right: 30px;
+              display: flex;
+              flex-direction: column;
+            }
+            .comment_area{
+              padding-bottom:30px;
+            }
+            .post_figure{
+              margin-top: 10px;
+              display: flex;
+              align-items: center;
+            }
+            .comment_amount{
+              font-size: 24px;
+            }
+            .like{
+              color: #de0581 !important;
+              font-size: 40px;
+              margin-left: 10px;
+            }
+            .like_cmt{
+              margin-top: 10px;
+              font-size: 14px;
+              margin-left: 7px;
+              color: gray;
+              opacity: 0%;
+              transition-duration: 0.2s;
+            }
+            .comments{
+              border-top: 1px solid #dfe3e6;
+              list-style: none;
+              padding-left:0px;
+              margin-top: 10px;
+            }
+            .comment{
+              padding-top: 10px;
+              padding-bottom: 10px;
+              border-bottom: 1px solid #dfe3e6;
+            }
+            .comment_main{
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              align-items: center;
+            }
+            .cmt_left{
+              display: flex;
+              flex-direction: row;
+              margin-right: 10px;
+              width: 100%;
+            }
+            .cmt_nickname{
+              width:150px;
+              cursor: pointer;
+            }
+            .cmt_content{
+              cursor:pointer;
+              width: 100%;
+            }
+            .cmt_right{
+              display: flex;
+              width: 130px;
+            }
+            .cmt_time{
+              font-size: 14px;
+              opacity: 50%;
+              margin-right: 10px;
+            }
+            .cmt_time a{
+              font-size: 12px;
+            }
+            .comment_setting_btn{
+              margin-top:-7px;
+              font-size: 20px;
+            }
+            .dropdown_commentmenu{
+              left:0px;
+              top:0px;
+              width:60px;
+              cursor: pointer;
+              position: absolute;
+              display: flex;
+              flex-direction: column;
+              border: 1px solid #dfe3e6;
+              border-radius: 5px 5px;
+              z-index: 2;
+            }
+            .dd_cs_child{
+              text-align: center;
+              padding-left:10px;
+              padding-right:10px;
+              padding-top:5px;
+              padding-bottom:5px;
+              font-size: 14px;
+              background-color: white;
+            }
+            .dd_cs_child:hover{
+              background-color: #dfe3e6;
+            }
+
+            .cmt_reply_btn:hover{
+              text-decoration: underline;
+            }
+            .cmt_reply{
+              padding-top: 10px;
+              padding-bottom: 10px;
+              padding-left: 20px;
+              padding-right: 20px;
+              border-bottom: 1px solid #dfe3e6;
+            }
+            .reply_main{
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              align-items: center;
+            }
+            .reply_setting_btn{
+              margin-top:-7px;
+              font-size: 20px;
+            }
+            .dropdown_replymenu{
+              left:0px;
+              top:0px;
+              width:60px;
+              cursor: pointer;
+              position: absolute;
+              display: flex;
+              flex-direction: column;
+              border: 1px solid #dfe3e6;
+              border-radius: 5px 5px;
+              z-index: 2;
+            }
+            .cmt_input_area{
+              min-height: 130px;
+              border: 1px solid #dfe3e6;
+              border-radius: 3px 3px;
+              padding: 15px;
+            }
+            .input_cmt{
+              border: 0px;
+              width:100%;
+              height: 60px;
+              margin-bottom: 10px;
+              resize: none;
+            }
+            .input_cmt:focus{
+              outline: none;
+            }
+            .cmt_input_btn{
+              float: right;
+              width: 60px;
+              height: 30px;
+              border-radius: 2px 2px;
+              display:flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            .cmt_reply_area{
+              min-height: 130px;
+              border: 1px solid #dfe3e6;
+              border-radius: 3px 3px;
+              padding: 15px;
+              margin-top: 10px;
+              margin-left: 20px;
+              margin-bottom: 10px;
+            }
+            .input_reply{
+              border: 0px;
+              width:100%;
+              height: 60px;
+              margin-bottom: 10px;
+              resize: none;
+            }
+            .input_reply:focus{
+              outline: none;
+            }
+            .cmt_reply_btn{
+              float: right;
+              width: 60px;
+              height: 30px;
+              border-radius: 2px 2px;
+              display:flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            .cmt_edit_area{
+              min-height: 130px;
+              border: 1px solid #dfe3e6;
+              border-radius: 3px 3px;
+              padding: 15px;
+            }
+            .input_edit{
+              border: 0px;
+              width:100%;
+              height: 60px;
+              margin-bottom: 10px;
+              resize: none;
+            }
+            .input_edit:focus{
+              outline: none;
+            }
+            .cmt_edit_btn{
+              float: right;
+              width: 60px;
+              height: 30px;
+              border-radius: 2px 2px;
+              display:flex;
+              justify-content: center;
+              align-items: center;
+            }
+            .cmt_edit_cancel_btn{
+              float: right;
+              margin-right: 10px;
+              width: 60px;
+              height: 30px;
+              border: 1px solid  #dfe3e6;
+              border-radius: 2px 2px;
+              display:flex;
+              justify-content: center;
+              align-items: center;
+              background-color: white;
+            }
+
+            .login_info_area{
+              display:flex;
+              justify-content: center;
+            }
+            .login_info{
+              color: gray;
             }
           }
-          .post_area{
-            border: 1px solid #dfe3e6;
-            width: 750px;
-            background-color: white;
-          }
-          .post_header{
-            margin-left: 30px;
-            margin-top: 30px;
-            margin-right: 30px;
-          }
-          .post_type{
-            border-bottom: 1px solid #dfe3e6;
-            padding-bottom: 10px;
-          }
-          .post_type a{
-            letter-spacing: 2px;
-            font-size: 24px;
-          }
-          .post_titleAndsetting{
-            margin-top:20px;
-            margin-bottom:10px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-          }
 
-          .post_setting_btn{
-            font-size: 30px;
-            letter-spacing: 3px;
-          }
-          .dropdown_postmenu{
-            left:0px;
-            top:0px;
-            width:80px;
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #dfe3e6;
-            border-radius: 5px 5px;
-            z-index: 2;
-          }
-          .dd_ps_child{
-            text-align: center;
-            padding-top:7px;
-            padding-bottom:7px;
-            font-size: 16px;
-            background-color: white;
-          }
-          .dd_ps_child:hover{
-            background-color: #dfe3e6;
-          }
 
-          .post_info{
-            display:flex;
-            justify-content: space-between;
-            flex-direction: row;
-            align-items: center;
-          }
-          .post_info_left{
-            display:flex;
-          }
-          .post_userANDtime{
-            margin-left: 10px;
-          }
-          .post_info_right{
-            display:flex;
-            justify-content: space-around;
-            width: 160px;
-            flex-direction: row;
-          }
-          .figure{
-            text-decoration: none;
-            color: black;
-          }
 
-          .post_body{
-            margin-left: 30px;
-            margin-right: 30px;
-            margin-top: 30px;
-          }
+          @media (max-device-width: 768px){
+            .content{
+              background-color: #F8F8FF;
+              width:100%;
+              padding-top:30px;
+              padding-bottom: 60px;
+            }
+            .post_area{
+              border: 1px solid #dfe3e6;
+              width: 750px;
+              background-color: white;
+              margin-top: 70px;
+              width: 100%;
+            }
+            .post_header{
+              margin-left: 45px;
+              margin-top: 45px;
+              margin-right: 45px;
+            }
+            .post_type{
+              border-bottom: 3px solid #dfe3e6;
+              padding-bottom: 20px;
+            }
+            .post_type a{
+              letter-spacing: 2px;
+              font-size: 60px;
+            }
+            .post_titleAndsetting{
+              margin-top:20px;
+              margin-bottom:15px;
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+            }
+            .post_title{
+              font-size: 56px;
+            }
 
-          .post_footer{
-            margin-top: 30px;
-            margin-left: 30px;
-            margin-right: 30px;
-            display: flex;
-            flex-direction: column;
-          }
-          .comment_area{
-            padding-bottom:30px;
-          }
-          .post_figure{
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-          }
-          .comment_amount{
-            font-size: 24px;
-          }
-          .like{
-            color: #de0581 !important;
-            font-size: 40px;
-            margin-left: 10px;
-          }
-          .like_cmt{
-            margin-top: 10px;
-            font-size: 14px;
-            margin-left: 7px;
-            color: gray;
-            opacity: 0%;
-            transition-duration: 0.2s;
-          }
-          .delete_btn{
-            float:right;
-            margin-top:-20px;
-          }
-          .comments{
-            border-top: 1px solid #dfe3e6;
-            list-style: none;
-            padding-left:0px;
-            margin-top: 10px;
-          }
-          .comment{
-            padding-top: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #dfe3e6;
-          }
-          .comment_main{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-          }
-          .cmt_left{
-            display: flex;
-            flex-direction: row;
-            margin-right: 10px;
-            width: 100%;
-          }
-          .cmt_nickname{
-            width:150px;
-            cursor: pointer;
-          }
-          .cmt_content{
-            cursor:pointer;
-            width: 100%;
-          }
-          .cmt_right{
-            display: flex;
-            width: 130px;
-          }
-          .cmt_time{
-            font-size: 14px;
-            opacity: 50%;
-            margin-right: 10px;
-          }
-          .cmt_time a{
-            font-size: 12px;
-          }
-          .comment_setting_btn{
-            margin-top:-7px;
-            font-size: 20px;
-          }
-          .dropdown_commentmenu{
-            left:0px;
-            top:0px;
-            width:60px;
-            cursor: pointer;
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #dfe3e6;
-            border-radius: 5px 5px;
-            z-index: 2;
-          }
-          .dd_cs_child{
-            text-align: center;
-            padding-left:10px;
-            padding-right:10px;
-            padding-top:5px;
-            padding-bottom:5px;
-            font-size: 14px;
-            background-color: white;
-          }
-          .dd_cs_child:hover{
-            background-color: #dfe3e6;
-          }
+            .post_setting_btn{
+              font-size: 60px;
+              letter-spacing: 3px;
+            }
+            .dropdown_postmenu{
+              margin-left: -60px;
+              margin-top: 20px;
+              width:160px;
+              position: absolute;
+              display: flex;
+              flex-direction: column;
+              border: 1px solid #dfe3e6;
+              border-radius: 5px 5px;
+              z-index: 2;
+            }
+            .dd_ps_child{
+              text-align: center;
+              padding-top:15px;
+              padding-bottom:15px;
+              font-size: 40px;
+              background-color: white;
+            }
+            .dd_ps_child:hover{
+              background-color: #dfe3e6;
+            }
 
-          .cmt_reply_btn:hover{
-            text-decoration: underline;
-          }
-          .cmt_reply{
-            padding-top: 10px;
-            padding-bottom: 10px;
-            padding-left: 20px;
-            padding-right: 20px;
-            border-bottom: 1px solid #dfe3e6;
-          }
-          .reply_main{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-          }
-          .reply_setting_btn{
-            margin-top:-7px;
-            font-size: 20px;
-          }
-          .dropdown_replymenu{
-            left:0px;
-            top:0px;
-            width:60px;
-            cursor: pointer;
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #dfe3e6;
-            border-radius: 5px 5px;
-            z-index: 2;
-          }
-          .cmt_input_area{
-            min-height: 130px;
-            border: 1px solid #dfe3e6;
-            border-radius: 3px 3px;
-            padding: 15px;
-          }
-          .input_cmt{
-            border: 0px;
-            width:100%;
-            height: 60px;
-            margin-bottom: 10px;
-            resize: none;
-          }
-          .input_cmt:focus{
-            outline: none;
-          }
-          .cmt_input_btn{
-            float: right;
-            width: 60px;
-            height: 30px;
-            border-radius: 2px 2px;
-            display:flex;
-            justify-content: center;
-            align-items: center;
-          }
+            .post_info{
+              display:flex;
+              justify-content: space-between;
+              flex-direction: row;
+              align-items: center;
+            }
+            .post_info a{
+              font-size: 32px;
+            }
+            .post_info_left{
+              display:flex;
+            }
+            .post_profile_img{
+              width:90px;
+              height:90px;
+            }
+            .post_userANDtime{
+              margin-left: 20px;
+            }
+            .post_user a{
+              font-size: 36px !important;
+            }
+            .post_info_right{
+              display:flex;
+              justify-content: space-around;
+              width: 320px;
+              flex-direction: row;
+            }
+            .post_figure_img{
+              width:40px;
+              height:40px;
+              margin-top:-10px;
+              margin-right: 5px;
+            }
+            .figure{
+              text-decoration: none;
+              color: black;
+            }
 
-          .cmt_reply_area{
-            min-height: 130px;
-            border: 1px solid #dfe3e6;
-            border-radius: 3px 3px;
-            padding: 15px;
-            margin-top: 10px;
-            margin-left: 20px;
-            margin-bottom: 10px;
-          }
-          .input_reply{
-            border: 0px;
-            width:100%;
-            height: 60px;
-            margin-bottom: 10px;
-            resize: none;
-          }
-          .input_reply:focus{
-            outline: none;
-          }
-          .cmt_reply_btn{
-            float: right;
-            width: 60px;
-            height: 30px;
-            border-radius: 2px 2px;
-            display:flex;
-            justify-content: center;
-            align-items: center;
-          }
+            .post_body{
+              margin-left: 45px;
+              margin-right: 45px;
+              margin-top: 45px;
+              font-size: 40px;
+            }
+            .post_body pre{
+              white-space: pre-wrap;
+              overflow:hidden;
+            }
 
-          .cmt_edit_area{
-            min-height: 130px;
-            border: 1px solid #dfe3e6;
-            border-radius: 3px 3px;
-            padding: 15px;
-          }
-          .input_edit{
-            border: 0px;
-            width:100%;
-            height: 60px;
-            margin-bottom: 10px;
-            resize: none;
-          }
-          .input_edit:focus{
-            outline: none;
-          }
-          .cmt_edit_btn{
-            float: right;
-            width: 60px;
-            height: 30px;
-            border-radius: 2px 2px;
-            display:flex;
-            justify-content: center;
-            align-items: center;
-          }
-          .cmt_edit_cancel_btn{
-            float: right;
-            margin-right: 10px;
-            width: 60px;
-            height: 30px;
-            border: 1px solid  #dfe3e6;
-            border-radius: 2px 2px;
-            display:flex;
-            justify-content: center;
-            align-items: center;
-            background-color: white;
-          }
+            .post_footer{
+              font-size: 32px;
+              margin-top: 30px;
+              margin-left: 30px;
+              margin-right: 30px;
+              display: flex;
+              flex-direction: column;
+            }
+            .comment_area{
+              padding-bottom:30px;
+            }
+            .post_figure{
+              margin-top: 10px;
+              display: flex;
+              align-items: center;
+            }
+            .comment_amount{
+              font-size: 60px;
+            }
+            .like{
+              color: #de0581 !important;
+              font-size: 60px;
+              margin-left: 20px;
+            }
+            .like_cmt{
+              margin-top: 20px;
+              font-size: 28px;
+              margin-left: 14px;
+              color: gray;
+              opacity: 0%;
+              transition-duration: 0.2s;
+            }
+            .comments{
+              border-top: 3px solid #dfe3e6;
+              list-style: none;
+              padding-left:0px;
+              margin-top: 20px;
+            }
+            .comment{
+              padding-top: 20px;
+              padding-bottom: 20px;
+              border-bottom: 1px solid #dfe3e6;
+            }
+            .comment_main{
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              align-items: center;
+            }
+            .cmt_left{
+              display: flex;
+              flex-direction: row;
+              margin-right: 20px;
+              width: 100%;
+            }
+            .cmt_nickname{
+              width:300px;
+              cursor: pointer;
+            }
+            .cmt_content{
+              cursor:pointer;
+              width: 100%;
+            }
+            .cmt_right{
+              display: flex;
+              width: 300px;
+            }
+            .cmt_time{
+              font-size: 28px;
+              opacity: 50%;
+              margin-right: 20px;
+            }
+            .cmt_time a{
+              font-size: 24px;
+            }
+            .comment_setting_btn{
+              margin-top:-22px;
+              font-size:40px;
+            }
+            .dropdown_commentmenu{
+              margin-left:-60px;
+              margin-top:20px;
+              width:160px;
+              cursor: pointer;
+              position: absolute;
+              display: flex;
+              flex-direction: column;
+              border: 1px solid #dfe3e6;
+              border-radius: 5px 5px;
+              z-index: 2;
+            }
+            .dd_cs_child{
+              text-align: center;
+              padding-top:15px;
+              padding-bottom:15px;
+              font-size: 40px;
+              background-color: white;
+            }
+            .dd_cs_child:hover{
+              background-color: #dfe3e6;
+            }
 
-          .login_info_area{
-            display:flex;
-            justify-content: center;
-          }
-          .login_info{
-            color: gray;
+            .cmt_reply_btn:hover{
+              text-decoration: underline;
+            }
+            .cmt_reply{
+              padding-top: 20px;
+              padding-bottom: 20px;
+              padding-left: 40px;
+              padding-right: 40px;
+              border-bottom: 1px solid #dfe3e6;
+            }
+            .reply_main{
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              align-items: center;
+            }
+            .reply_setting_btn{
+              margin-top:-14px;
+              font-size: 40px;
+            }
+            .dropdown_replymenu{
+              margin-left:-60px;
+              margin-top:20px;
+              width:160px;
+              cursor: pointer;
+              position: absolute;
+              display: flex;
+              flex-direction: column;
+              border: 1px solid #dfe3e6;
+              border-radius: 10px 10px;
+              z-index: 2;
+            }
+            .cmt_input_area{
+              min-height: 260px;
+              border: 1px solid #dfe3e6;
+              border-radius: 6px 6px;
+              padding: 30px;
+            }
+            .input_cmt{
+              border: 0px;
+              width:100%;
+              height: 120px;
+              margin-bottom: 20px;
+              resize: none;
+            }
+            .input_cmt:focus{
+              outline: none;
+            }
+            .cmt_input_btn{
+              float: right;
+              width: 120px;
+              height: 60px;
+              border-radius: 4px 4px;
+              display:flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            .cmt_reply_area{
+              min-height: 260px;
+              border: 1px solid #dfe3e6;
+              border-radius: 6px 6px;
+              padding: 30px;
+              margin-top: 20px;
+              margin-left: 40px;
+              margin-bottom: 20px;
+            }
+            .input_reply{
+              border: 0px;
+              width:100%;
+              height: 120px;
+              margin-bottom: 20px;
+              resize: none;
+            }
+            .input_reply:focus{
+              outline: none;
+            }
+            .cmt_reply_btn{
+              float: right;
+              width: 120px;
+              height: 60px;
+              border-radius: 4px 4px;
+              display:flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            .cmt_edit_area{
+              min-height: 260px;
+              border: 1px solid #dfe3e6;
+              border-radius: 6px 6px;
+              padding: 30px;
+            }
+            .input_edit{
+              border: 0px;
+              width:100%;
+              height: 120px;
+              margin-bottom: 20px;
+              resize: none;
+            }
+            .input_edit:focus{
+              outline: none;
+            }
+            .cmt_edit_btn{
+              float: right;
+              width: 120px;
+              height: 60px;
+              border-radius: 4px 4px;
+              display:flex;
+              justify-content: center;
+              align-items: center;
+            }
+            .cmt_edit_cancel_btn{
+              float: right;
+              margin-right: 20px;
+              width: 120px;
+              height: 60px;
+              border: 1px solid  #dfe3e6;
+              border-radius: 4px 4px;
+              display:flex;
+              justify-content: center;
+              align-items: center;
+              background-color: white;
+            }
+
+            .login_info_area{
+              display:flex;
+              justify-content: center;
+            }
+            .login_info{
+              color: gray;
+            }
           }
         </style>
         <div class="post_area">
@@ -350,7 +707,7 @@
               <a href="/post/index?category=<%=post.category%>" class="a_basic post_type_text"><%=post.category%></a>
             </div>
             <div class="post_titleAndsetting">
-              <span data-search-highlight="title"> <h3><%=post.title%></h3> </span>
+              <span data-search-highlight="title"> <a class="a_basic post_title"><%=post.title%></a> </span>
               <span>
                 <% if(whoami.passport&&post.author._id==whoami.passport.user._id){ %>
                 <a href="#" class="post_setting_btn a_basic dot"> ··· </a>
@@ -364,8 +721,8 @@
             <div class="post_info">
               <span class="post_info_left">
                 <span class="post_profile">
-                  <a class="post_profile_img a_basic" href="#">
-                    <img src="/public/images/profile.png">
+                  <a class="a_basic" href="#">
+                    <img class="post_profile_img" src="/public/images/profile.png">
                   </a>
                 </span>
                 <span class="post_userANDtime">
@@ -375,21 +732,22 @@
                   <div class="post_time">
                     <a>
                       <%= post.createdAt.getYear()-100 %>.<%= post.createdAt.getMonth()+1>=10?post.createdAt.getMonth()+1:'0'+String(post.createdAt.getMonth()+1) %>.<%= post.createdAt.getDate()>=10?post.createdAt.getDate():'0'+String(post.createdAt.getDate()) %>
-                      <%= post.createdAt.getHours()>=10? post.createdAt.getHours():'0'+String(post.createdAt.getHours())%>:<%= post.createdAt.getMinutes()>=10?post.createdAt.getMinutes():'0'+String(post.createdAt.getMinutes())%>%></a>
+                      <%= post.createdAt.getHours()>=10? post.createdAt.getHours():'0'+String(post.createdAt.getHours())%>:<%= post.createdAt.getMinutes()>=10?post.createdAt.getMinutes():'0'+String(post.createdAt.getMinutes())%>%>
+                    </a>
                   </div>
                 </span>
               </span>
               <span class="post_info_right">
                 <span class="post_figure_views">
-                  <img src="/public/images/view.png">
+                  <img class="post_figure_img" src="/public/images/view.png">
                   <a class="figure a_basic"><%=post.view%></a>
                 </span>
                 <span class="post_figure_comments">
-                  <img src="/public/images/comment.png">
+                  <img class="post_figure_img" src="/public/images/comment.png">
                   <a class="figure a_basic"><%=post.comment%></a>
                 </span>
                 <span class="post_figure_likes">
-                  <img src="/public/images/like.png">
+                  <img class="post_figure_img" src="/public/images/like.png">
                   <a class="figure a_basic"><%=post.like%></a>
                 </span>
               </span>

@@ -11,112 +11,231 @@
       </div>
       <div class="content">
         <style>
-          .content{
-            display:flex;
-            align-items: center;
-            flex-direction: column;
-            background-color: #F8F8FF;
-            width:100%;
-          }
-          .register_area{
-            background-color: white;
-            margin-top: 70px;
-            margin-bottom: 70px;
-            width:500px;
-            border: 1px solid #dfe3e6;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-          }
-          .register_title{
-            margin-top: 40px;
-            letter-spacing: 10px;
-          }
-          .register_form{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-          }
-          .input_area{
-            display: flex;
-            flex-direction: column;
-          }
-          .input_area input{
-            border: 1px solid #dfe3e6;
-            border-radius: 0px;
-            width: 300px;
-            height: 50px;
-            font-size: 18px;
-            margin-bottom: 20px;
-            padding-left:10px;
+          @media (min-device-width: 768px){
+            .content{
+              display:flex;
+              align-items: center;
+              flex-direction: column;
+              background-color: #F8F8FF;
+              width:100%;
+            }
+            .register_area{
+              background-color: white;
+              margin-top: 70px;
+              margin-bottom: 70px;
+              width:500px;
+              border: 1px solid #dfe3e6;
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .register_title{
+              margin-top: 40px;
+              letter-spacing: 10px;
+              font-size:40px;
+            }
+            .register_form{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-top: 20px;
+              margin-bottom: 20px;
+            }
+            .input_area{
+              display: flex;
+              flex-direction: column;
+            }
+            .input_info{
+              font-size: 20px;
+              margin-top: -10px;
+              margin-bottom: 10px;
+            }
+            .input_area input{
+              border: 1px solid #dfe3e6;
+              border-radius: 0px;
+              width: 300px;
+              height: 50px;
+              font-size: 18px;
+              margin-bottom: 20px;
+              padding-left:10px;
+            }
+
+            .terms_of_use{
+              font-size: 14px;
+              margin-top:10px;
+              margin-bottom:15px;
+            }
+            .tou{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width:100%;
+              height:100%;
+              top:0;
+              left:0;
+              background-color: rgba(0,0,0,0.1);
+              z-index: 2;
+              position: fixed;
+            }
+            .tou_area{
+              display: flex;
+              flex-direction: column;
+              align-items: flex-end;
+              width:90%;
+              max-height:90%;
+              background: white;
+              border: 1px solid #dfe3e6;
+              position: absolute;
+            }
+            .tou_close_btn{
+              margin-right: 4px;
+              font-size: 18px;
+              cursor: pointer;
+            }
+            .tou_content{
+              padding-left: 6px;
+              margin-right: 6px;
+              overflow-y: scroll;
+              width:calc(100% - 11px);
+            }
+
+            .register_btn_area{
+              opacity: 50%;
+            }
+            .register_btn{
+              cursor: not-allowed !important;
+              color: white;
+              font-size: 20px !important;
+            }
+
+            .error{
+              text-decoration: none !important;
+              font-size: 12px;
+              color: red !important;
+              margin-top: -10px;
+              margin-bottom: 10px;
+              display: flex;
+              width: 300px;
+            }
           }
 
-          .terms_of_use{
-            font-size: 14px;
-            margin-top:10px;
-            margin-bottom:15px;
-          }
-          .tou{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width:100%;
-            height:100%;
-            top:0;
-            left:0;
-            background-color: rgba(0,0,0,0.1);
-            z-index: 2;
-            position: fixed;
-          }
-          .tou_area{
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            width:90%;
-            max-height:90%;
-            background: white;
-            border: 1px solid #dfe3e6;
-            position: absolute;
-          }
-          .tou_close_btn{
-            margin-right: 4px;
-            font-size: 18px;
-            cursor: pointer;
-          }
-          .tou_content{
-            padding-left: 6px;
-            margin-right: 6px;
-            overflow-y: scroll;
-            width:calc(100% - 11px);
-          }
+          @media (max-device-width: 768px){
+            .content{
+              display:flex;
+              align-items: center;
+              flex-direction: column;
+              background-color: #F8F8FF;
+              width:100%;
+            }
+            .register_area{
+              background-color: white;
+              margin-top: 100px;
+              margin-bottom: 100px;
+              width:100%;
+              border: 1px solid #dfe3e6;
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .register_title{
+              margin-top: 80px;
+              letter-spacing: 10px;
+              font-size: 90px;
+            }
+            .register_form{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-top: 60px;
+              margin-bottom: 100px;
+            }
+            .input_area{
+              display: flex;
+              flex-direction: column;
+            }
+            .input_info{
+              font-size: 40px;
+              margin-bottom: 20px;
+            }
+            .input_area input{
+              border: 1px solid #dfe3e6;
+              border-radius: 0px;
+              width: 600px;
+              height: 100px;
+              font-size: 40px;
+              margin-bottom: 20px;
+              padding-left:10px;
+            }
 
-          .register_btn_area{
-            opacity: 50%;
-          }
-          .register_btn{
-            cursor: not-allowed !important;
-            color: white;
-            font-size: 20px !important;
-          }
+            .terms_of_use{
+              font-size: 28px;
+              margin-top:10px;
+              margin-bottom:15px;
+            }
+            .tou_checkbox{
+              width:32px;
+              height:32px;
+            }
+            .tou{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width:100%;
+              height:100%;
+              top:0;
+              left:0;
+              background-color: rgba(0,0,0,0.1);
+              z-index: 2;
+              position: fixed;
+            }
+            .tou_area{
+              display: flex;
+              flex-direction: column;
+              align-items: flex-end;
+              width:90%;
+              max-height:90%;
+              background: white;
+              border: 1px solid #dfe3e6;
+              position: absolute;
+            }
+            .tou_close_btn{
+              margin-right: 12px;
+              font-size: 48px;
+              cursor: pointer;
+            }
+            .tou_content{
+              padding-left: 6px;
+              margin-right: 6px;
+              overflow-y: scroll;
+              width:calc(100% - 11px);
+            }
 
-          .error{
-            text-decoration: none !important;
-            font-size: 12px;
-            color: red !important;
-            margin-top: -10px;
-            margin-bottom: 10px;
-            display: flex;
-            width: 300px;
+            .register_btn_area{
+              opacity: 50%;
+            }
+            .register_btn{
+              cursor: not-allowed !important;
+              color: white;
+              font-size: 40px !important;
+            }
+
+            .error{
+              text-decoration: none !important;
+              font-size: 28px;
+              color: red !important;
+              margin-top: -20px;
+              margin-bottom: 20px;
+              display: flex;
+              width: 600px;
+            }
           }
         </style>
 
         <div class="register_area">
-          <h1 class="register_title"> 회원가입 <h1>
+          <a class="register_title a_basic"> 회원가입 <a>
           <div class="register_form">
             <div class="input_area">
-              <h5 class="input_info"> 아이디 </h5>
+              <a class="input_info a_basic"> 아이디 </a>
               <input type="text" id="id" value="<%= id %>" placeholder="아이디">
               <% if (errors.id){ %>
               <a class="error id_overlap"> <%= errors.id.message %> </a>
@@ -125,7 +244,7 @@
               <a class="error id_error none"> default </a>
             </div>
             <div class="input_area">
-              <h5 class="input_info"> 닉네임 </h5>
+              <a class="input_info a_basic"> 닉네임 </a>
               <input type="text" id="nickname" value="<%= nickname %>" placeholder="닉네임">
               <% if (errors.nickname){ %>
               <a class="error nickname_overlap"> <%= errors.nickname.message %> </a>
@@ -134,17 +253,17 @@
               <a class="error nickname_error none"> default </a>
             </div>
             <div class="input_area">
-              <h5 class="input_info"> 비밀번호 </h5>
+              <a class="input_info a_basic"> 비밀번호 </a>
               <input type="password" id="password" placeholder="비밀번호">
               <a class="error pw_error none"> default </a>
             </div>
             <div class="input_area">
-              <h5 class="input_info"> 비밀번호 재입력 </h5>
+              <a class="input_info a_basic"> 비밀번호 재입력 </a>
               <input type="password" id="password2" placeholder="비밀번호 확인">
               <a class="error pw2_error none"> default </a>
             </div>
             <div class="input_area">
-              <h5 class="input_info"> 이메일 </h5>
+              <a class="input_info a_basic"> 이메일 </a>
               <input type="text" id="email" value="<%= email %>" placeholder="이메일">
               <% if (errors.email){ %>
               <a class="error email_overlap"> <%= errors.email.message %> </a>

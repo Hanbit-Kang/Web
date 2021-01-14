@@ -11,251 +11,506 @@
       </div>
       <div class="content">
         <style>
-          .content{
-            background-color: #F8F8FF;
-            width:100%;
-            padding-top:30px;
-            padding-bottom: 60px;
-          }
-          @media(min-width:1000px){
+          @media (min-device-width: 768px){
             .content{
+              background-color: #F8F8FF;
+              width:100%;
+              padding-top:30px;
+              padding-bottom: 60px;
+            }
+            @media(min-width:1000px){
+              .content{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+              }
+            }
+            .index_area{
+              border: 1px solid #dfe3e6;
+              width: 1000px;
+              background-color: white;
+            }
+            .index_header{
+              padding-top:60px;
+              padding-left:30px;
+              padding-right:30px;
+              padding-bottom:25px;
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-end;
+              border-bottom: 2px solid black;
+            }
+            .index_title{
+              display: flex;
+              cursor: pointer;
+            }
+            .index_category{
+              font-size:32px;
+            }
+            .index_category::after{
+              content: '＞';
+              margin-left:7px;
+            }
+            .dd_category_type{
+              position: absolute;
+              display: flex;
+              flex-direction: column;
+              width: 150px;
+              border: 1px solid #dfe3e6;
+              border-radius: 5px 5px;
+            }
+            .dd_category_child{
+              font-size: 20px;
+              padding-left: 15px;
+              padding-top:10px;
+              padding-bottom:10px;
+              background-color: white;
+            }
+            .dd_category_child:hover{
+              background-color: #dfe3e6;
+            }
+
+            .newpost_btn{
+              display: flex;
+              cursor: pointer;
+              flex-direction: row;
+              border: 1px solid #dfe3e6;
+              padding-left: 10px;
+              padding-right: 10px;
+              padding-top: 5px;
+              padding-bottom: 5px;
+            }
+            .newpost_btn img{
+              width:25px;
+              height:25px;
+            }
+            .newpost_btn a{
+              font-size: 20px;
+              margin-left: 5px;
+              color: white !important;
+            }
+            .newpost_btn a:hover{
+              text-decoration: underline;
+            }
+
+            .sort_standards{
+              display:flex;
+              flex-direction: row;
+              margin-top: 15px;
+              margin-left: 20px;
+              margin-bottom: 10px;
+            }
+            .sort_standards a{
+              margin-right:10px;
+              margin-top:-5px;
+            }
+
+            .index_content{
+              display:flex;
+              flex-direction: column;
+            }
+            .PC_table{
+              margin-left: 20px;
+              margin-right: 20px;
+              margin-bottom: 10px;
+            }
+            .mobile_table{
+              display:none;
+            }
+            #PostTableTitle{
+              border-top: 1px solid #dfe3e6;
+              border-bottom: 1px solid #dfe3e6;
+              background-color: #f7f9fa;
+            }
+            #PostTableTitle th{
+              padding-top: 10px;
+              padding-bottom: 10px;
+            }
+            #PostTableTitle a{
+              font-size:14px;
+              font-weight: normal;
+            }
+            .post_title{
+              padding-left: 100px;
+            }
+
+            #PostTableContent{
+              border-bottom: 1px solid #dfe3e6;
+            }
+            #PostTableContent th{
+              padding-top: 10px;
+              padding-bottom: 10px;
+            }
+            #PostTableContent a{
+              font-weight: normal;
+            }
+            .post_table_category{
+              margin-left: 10px;
+              font-size: 12px;
+              color: black;
+            }
+            .post_table_category:hover{
+              color: black;
+              text-decoration: none;
+            }
+            .delete_btn{
+              width: 66px;
+              margin-left:900px;
+            }
+            .msg_nodata{
+              color: gray;
+              text-align: center;
+              margin-top:15px;
+            }
+
+            .index_footer{
               display: flex;
               flex-direction: column;
               align-items: center;
+              border-top: 1px solid #dfe3e6;
+              padding-top: 20px;
+              padding-bottom: 20px;
+              margin-top: 90px;
+            }
+            #page_naviagtion{
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+            }
+            #page_naviagtion a{
+              margin-left: 10px;
+              margin-right: 10px;
+              color: black;
+            }
+            .pn_prev_btn{
+              display: flex;
+              flex-direction: row;
+              cursor: pointer;
+            }
+            .pn_prev_btn h4{
+              margin-top:-5px;
+            }
+            .pn_next_btn{
+              display: flex;
+              flex-direction: row;
+              cursor: pointer;
+            }
+            .pn_next_btn h4{
+              margin-top:-5px;
+            }
+            .pn_number_active{
+              border: 1px solid #dfe3e6;
+              color: #de0581 !important;
+              padding-left: 7px;
+              padding-right: 7px;
+              height: 28px;
+              margin-left:3 !important;
+              margin-right:3 !important;
+            }
+
+            .search_area{
+              margin-top: 10px;
+              margin-bottom: 20px;
+              display:flex;
+              flex-direction: row;
+              align-items: center;
+            }
+            .search_range_box{
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              border: 1px solid #dfe3e6;
+              padding-left: 10px;
+              padding-right: 10px;
+              margin-right: 10px;
+              font-size: 14px;
+              height: 35px;
+              width: 125px;
+              cursor: pointer;
+            }
+            .search_ranges{
+              list-style: none;
+              position: absolute;
+              border: 1px solid #dfe3e6;
+              background-color: white;
+              width: 125px;
+              padding:0;
+            }
+            .search_range{
+              padding-top:5px;
+              padding-left:10px;
+              padding-bottom:5px;
+              cursor:pointer;
+            }
+            .search_range:hover{
+              background-color: #dfe3e6;
+            }
+            .input_search_text{
+              border: 1px solid #dfe3e6;
+              border-radius: 0px;
+              width: 300px;
+              height: 35px;
+              font-size: 14px;
+              margin-right:0;
+              padding-top:5px;
+              padding-left:10px;
+              padding-bottom:5px;
+            }
+            .input_search_text:focus{
+              outline-style:solid;
+            }
+            .search_btn{
+              cursor: pointer;
+              width:35px;
+              height:35px;
             }
           }
-          .index_area{
-            border: 1px solid #dfe3e6;
-            width: 1000px;
-            background-color: white;
-          }
-          .index_header{
-            padding-top:30px;
-            padding-left:30px;
-            padding-right:30px;
-            padding-bottom:25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            border-bottom: 2px solid black;
-          }
-          .index_title{
-            display: flex;
-            cursor: pointer;
-          }
-          .index_category::after{
-            content: '＞';
-            margin-left:7px;
-          }
-          .dd_category_type{
-            position: absolute;
-            display: flex;
-            flex-direction: column;
-            width: 150px;
-            border: 1px solid #dfe3e6;
-            border-radius: 5px 5px;
-          }
-          .dd_category_child{
-            font-size: 20px;
-            padding-left: 15px;
-            padding-top:10px;
-            padding-bottom:10px;
-            background-color: white;
-          }
-          .dd_category_child:hover{
-            background-color: #dfe3e6;
-          }
 
-          .newpost_btn{
-            display: flex;
-            flex-direction: row;
-            border: 1px solid #dfe3e6;
-            padding-left: 10px;
-            padding-right: 10px;
-            padding-top: 5px;
-          }
-          .newpost_btn h5{
-            margin-left: 5px;
-            color: white;
-          }
-          .newpost_btn h5:hover{
-            text-decoration: underline;
-          }
+          @media (max-device-width: 768px){
+            .content{
+              background-color: #F8F8FF;
+              width:100%;
+              padding-top:30px;
+              padding-bottom: 60px;
+            }
+            .index_area{
+              border: 1px solid #dfe3e6;
+              margin-top:70px;
+              width: 100%;
+              background-color: white;
+            }
+            .index_header{
+              padding-top:45px;
+              padding-left:45px;
+              padding-right:45px;
+              padding-bottom:45px;
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-end;
+              border-bottom: 3px solid;
+            }
+            .index_title{
+              display: flex;
+              cursor: pointer;
+            }
+            .index_category{
+              font-size:60px;
+            }
+            .index_category::after{
+              content: '＞';
+              font-size:48px;
+              margin-left:14px;
+            }
+            .dd_category_type{
+              position: absolute;
+              display: flex;
+              flex-direction: column;
+              width: 300px;
+              margin-top:30px;
+              border: 1px solid #dfe3e6;
+              border-radius: 5px 5px;
+            }
+            .dd_category_child{
+              font-size: 40px;
+              padding-left: 30px;
+              padding-top:20px;
+              padding-bottom:20px;
+              background-color: white;
+            }
+            .dd_category_child:hover{
+              background-color: #dfe3e6;
+            }
 
-          .sort_standards{
-            display:flex;
-            flex-direction: row;
-            margin-top: 15px;
-            margin-left: 20px;
-            margin-bottom: 10px;
-          }
-          .sort_standards h6{
-            margin-right:10px;
-          }
-          .sort_standards a{
-            margin-right:10px;
-            margin-top:-5px;
-          }
+            .newpost_btn{
+              display: flex;
+              cursor: pointer;
+              flex-direction: row;
+              border: 1px solid #dfe3e6;
+              padding-left: 20px;
+              padding-right: 15px;
+              padding-top: 10px;
+              padding-bottom: 20px;
+            }
+            .newpost_btn img{
+              width:50px;
+              height:50px;
+            }
+            .newpost_btn a{
+              display:none;
+            }
 
-          .index_content{
-            display:flex;
-            flex-direction: column;
-          }
-          .index_content table{
-            margin-left: 20px;
-            margin-right: 20px;
-            margin-bottom: 10px;
-          }
-          #PostTableTitle{
-            border-top: 1px solid #dfe3e6;
-            border-bottom: 1px solid #dfe3e6;
-            background-color: #f7f9fa;
-          }
-          #PostTableTitle th{
-            padding-top: 10px;
-            padding-bottom: 10px;
-          }
-          #PostTableTitle a{
-            font-size:14px;
-            font-weight: normal;
-          }
-          .post_title{
-            padding-left: 100px;
-          }
+            .sort_standards{
+              display:flex;
+              flex-direction: row;
+              margin-top: 30px;
+              margin-left: 40px;
+              margin-bottom: 20px;
+            }
+            .sort_standards a{
+              margin-right:20px;
+              margin-top:-10px;
+              font-size: 32px;
+            }
 
-          #PostTableContent{
-            border-bottom: 1px solid #dfe3e6;
-          }
-          #PostTableContent th{
-            padding-top: 10px;
-            padding-bottom: 10px;
-          }
-          #PostTableContent a{
-            font-weight: normal;
-          }
-          .post_table_category{
-            margin-left: 10px;
-            font-size: 12px;
-            color: black;
-          }
-          .post_table_category:hover{
-            color: black;
-            text-decoration: none;
-          }
-          .delete_btn{
-            width: 66px;
-            margin-left:900px;
-          }
-          .msg_nodata{
-            color: gray;
-            text-align: center;
-            margin-top:15px;
-          }
+            .index_content{
+              display:flex;
+              flex-direction: column;
+            }
+            .PC_table{
+              display:none;
+            }
+            .mobile_table{
+              display: flex;
+              flex-direction: column;
+            }
+            .mobile_post{
+              margin-top:10px;
+              margin-bottom:10px;
+              margin-left: 30px;
+              margin-right: 30px;
+              padding-top:20px;
+              border-top: 1px solid #dfe3e6;
+            }
+            .mp_top{
+              font-size: 40px;
+            }
+            .mp_bottom{
+              font-size: 30px;
+            }
+            .mp_nickname{
+              font-size: 34px !important;
+            }
+            .mp_bottom a{
+              margin-right: 10px;
+            }
+            .checkbox_delete{
+              width: 36px;
+              height: 36px;
+            }
 
-          .index_footer{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border-top: 1px solid #dfe3e6;
-            padding-top: 20px;
-            padding-bottom: 20px;
-            margin-top: 90px;
-          }
-          #page_naviagtion{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-          }
-          #page_naviagtion a{
-            margin-left: 10px;
-            margin-right: 10px;
-            color: black;
-          }
-          .pn_prev_btn{
-            display: flex;
-            flex-direction: row;
-            cursor: pointer;
-          }
-          .pn_prev_btn h4{
-            margin-top:-5px;
-          }
-          .pn_next_btn{
-            display: flex;
-            flex-direction: row;
-            cursor: pointer;
-          }
-          .pn_next_btn h4{
-            margin-top:-5px;
-          }
-          .pn_number_active{
-            border: 1px solid #dfe3e6;
-            color: #de0581 !important;
-            padding-left: 7px;
-            padding-right: 7px;
-            height: 28px;
-            margin-left:3 !important;
-            margin-right:3 !important;
-          }
+            .delete_btn{
+              width: 100px;
+              margin-left:850px;
+              font-size: 24px;
+            }
+            .msg_nodata{
+              color: gray;
+              text-align: center;
+              margin-top:15px;
+            }
 
-          .search_area{
-            margin-top: 10px;
-            margin-bottom: 20px;
-            display:flex;
-            flex-direction: row;
-            align-items: center;
-          }
-          .search_range_box{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #dfe3e6;
-            padding-left: 10px;
-            padding-right: 10px;
-            margin-right: 10px;
-            font-size: 14px;
-            height: 35px;
-            width: 125px;
-            cursor: pointer;
-          }
-          .search_ranges{
-            list-style: none;
-            position: absolute;
-            border: 1px solid #dfe3e6;
-            background-color: white;
-            width: 125px;
-            padding:0;
-          }
-          .search_range{
-            padding-top:5px;
-            padding-left:10px;
-            padding-bottom:5px;
-            cursor:pointer;
-          }
-          .search_range:hover{
-            background-color: #dfe3e6;
-          }
-          .input_search_text{
-            border: 1px solid #dfe3e6;
-            border-radius: 0px;
-            width: 300px;
-            height: 35px;
-            font-size: 14px;
-            margin-right:0;
-            padding-top:5px;
-            padding-left:10px;
-            padding-bottom:5px;
-          }
-          .input_search_text:focus{
-            outline-style:solid;
-          }
-          .search_btn{
-            cursor: pointer;
+            .index_footer{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              border-top: 1px solid #dfe3e6;
+              padding-top: 40px;
+              padding-bottom: 40px;
+              margin-top: 180px;
+            }
+            #page_naviagtion{
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+            }
+            #page_naviagtion a{
+              margin-left: 20px;
+              margin-right: 20px;
+              font-size: 36px;
+              color: black;
+            }
+            .pn_prev_btn{
+              display: flex;
+              flex-direction: row;
+              cursor: pointer;
+            }
+            .pn_prev_btn a{
+              margin-top:-5px;
+            }
+            .pn_next_btn{
+              display: flex;
+              flex-direction: row;
+              cursor: pointer;
+            }
+            .pn_next_btn a{
+              margin-top:-5px;
+            }
+            .pn_number_active{
+              border: 1px solid #dfe3e6;
+              color: #de0581 !important;
+              padding-left: 14px;
+              padding-right: 14px;
+              height: 56px;
+              margin-left:6 !important;
+              margin-right:6 !important;
+            }
+
+            .search_area{
+              margin-top: 20px;
+              margin-bottom: 40px;
+              display:flex;
+              flex-direction: row;
+              align-items: center;
+            }
+            .search_range_box{
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              border: 1px solid #dfe3e6;
+              padding-left: 20px;
+              padding-right: 20px;
+              margin-right: 20px;
+              font-size: 28px;
+              height: 70px;
+              width: 250px;
+              cursor: pointer;
+            }
+            .search_ranges{
+              list-style: none;
+              position: absolute;
+              border: 1px solid #dfe3e6;
+              background-color: white;
+              width: 250px;
+              margin-top:34px;
+              padding:0;
+            }
+            .search_range{
+              padding-top:10px;
+              padding-left:20px;
+              padding-bottom:10px;
+              cursor:pointer;
+            }
+            .search_range a{
+              font-size: 28px;
+            }
+            .search_range:hover{
+              background-color: #dfe3e6;
+            }
+            .input_search_text{
+              border: 1px solid #dfe3e6;
+              border-radius: 0px;
+              width: 600px;
+              height: 70px;
+              font-size: 28px;
+              margin-right:0;
+              padding-top:10px;
+              padding-left:20px;
+              padding-bottom:10px;
+            }
+            .input_search_text:focus{
+              outline-style:solid;
+            }
+            .search_btn{
+              cursor: pointer;
+              width:70px;
+              height:70px;
+            }
           }
         </style>
         <div class="index_area">
           <div class="index_header">
             <span class="index_title">
-              <h2 class="index_category"><%=category%></h2>
+              <a class="index_category a_basic"><%=category%></a>
               <a class="index_title_end"></a>
             </span>
             <div class="dd_category_type none">
@@ -269,22 +524,22 @@
               <a class="line"></a>
               <a href="#" class="dd_category_child a_basic" var="3"> default </a>
             </div>
-            <a href="/post/new" class="a_basic newpost_btn bg-dark">
-              <img src="/public/images/newpost.png" width="25px" height="25px">
-              <h5> 글쓰기 </h5>
-            </a>
+            <div onclick="window.location.href='/post/new'" class="a_basic newpost_btn bg-dark">
+              <img src="/public/images/newpost.png">
+              <a class="a_basic"> 글쓰기 </a>
+            </div>
           </div>
           <div class="index_content">
             <div class="sort_standards">
-              <h6 class="a_pointerAndunderline_black standard" var="createdAt" onclick="location.href='/post/index<%=getPostQueryString(false, {sort:'createdAt'})%>'"> 최신순 </h6>
+              <a class="a_pointerAndunderline_black standard" var="createdAt" onclick="location.href='/post/index<%=getPostQueryString(false, {sort:'createdAt'})%>'"> 최신순 </a>
               <a>·</a>
-              <h6 class="a_pointerAndunderline_black standard" var="like" onclick="location.href='/post/index<%=getPostQueryString(false, {sort:'like'})%>'"> 추천순 </h6>
+              <a class="a_pointerAndunderline_black standard" var="like" onclick="location.href='/post/index<%=getPostQueryString(false, {sort:'like'})%>'"> 추천순 </a>
               <a>·</a>
-              <h6 class="a_pointerAndunderline_black standard" var="comment" onclick="location.href='/post/index<%=getPostQueryString(false, {sort:'comment'})%>'"> 댓글순 </h6>
+              <a class="a_pointerAndunderline_black standard" var="comment" onclick="location.href='/post/index<%=getPostQueryString(false, {sort:'comment'})%>'"> 댓글순 </a>
               <a>·</a>
-              <h6 class="a_pointerAndunderline_black standard" var="view" onclick="location.href='/post/index<%=getPostQueryString(false, {sort:'view'})%>'"> 조회순 </h6>
+              <a class="a_pointerAndunderline_black standard" var="view" onclick="location.href='/post/index<%=getPostQueryString(false, {sort:'view'})%>'"> 조회순 </a>
             </div>
-            <table>
+            <table class="PC_table">
               <colgroup>
                 <col style="width:100px">
                 <col style="width:300px">
@@ -360,12 +615,36 @@
                 <% }) %>
               </tbody>
             </table>
+            <div class="mobile_table">
+              <% posts.forEach(function(post){ %>
+                <div class="mobile_post">
+                  <div class="mp_top">
+                    <% if(whoami.passport&&whoami.passport.user.level>=1){ %>
+                    <input type="checkbox" class="checkbox_delete"></label>
+                    <% } %>
+                    <a onclick="location.href='/post/view/<%=post._id%><%=getPostQueryString()%>'" data-search-highlight="title" class="a_pointerAndunderline_black"><%=post.title%></a>
+                    <a onclick="location.href='/post/view/<%=post._id%><%=getPostQueryString()%>'" class="a_pointerAndunderline_red">[<%=post.comment%>]</a>
+                  </div>
+                  <div class="mp_bottom">
+                    <a data-search-highlight="author" class="mp_nickname a_pointerAndunderline_black" href="/user/index/<%=post.author.isLeaved?'L':post.author.id%>"><%=post.author.isLeaved?post.author.nickname.slice(13):post.author.nickname%></a>
+                    <% const today = new Date(); %>
+                    <% if(post.createdAt.getFullYear()==today.getFullYear() && post.createdAt.getMonth()==today.getMonth() && post.createdAt.getDate()==today.getDate()) {%>
+                    <a> <%= post.createdAt.getHours()>=10? post.createdAt.getHours():'0'+String(post.createdAt.getHours())%>:<%= post.createdAt.getMinutes()>=10?post.createdAt.getMinutes():'0'+String(post.createdAt.getMinutes())%> </a>
+                    <%} else { %>
+                    <a> <%= post.createdAt.getYear()-100 %>.<%= post.createdAt.getMonth()+1>=10?post.createdAt.getMonth()+1:'0'+String(post.createdAt.getMonth()+1) %>.<%= post.createdAt.getDate()>=10?post.createdAt.getDate():'0'+String(post.createdAt.getDate()) %> </a>
+                    <% } %>
+                    <a> 조회 <%=post.view%> </a>
+                    <a> 좋아요 <%=post.like%> </a>
+                  </div>
+                </div>
+              <% }) %>
+            </div>
 
             <% if(whoami.passport&&whoami.passport.user.level>=1){ %>
               <a href="#" class="delete_btn a_pointerAndunderline_black"> 삭제하기 </a>
             <% } %>
             <% if(posts.length==0) { %>
-              <h6 class="msg_nodata"> 해당하는 데이터가 존재하지 않습니다. </h6>
+              <a class="msg_nodata"> 해당하는 데이터가 존재하지 않습니다. </a>
             <% } %>
           </div>
           <div class="index_footer">
@@ -396,24 +675,24 @@
 
               <ul class="search_ranges none">
                 <li class="search_range" value="title,body">
-                  제목+내용
+                  <a class="a_basic"> 제목+내용 </a>
                 </li>
                 <li class="line"> </li>
                 <li class="search_range" value="title">
-                  제목
+                  <a class="a_basic"> 제목 </a>
                 </li>
                 <li class="line"> </li>
                 <li class="search_range" value="body">
-                  내용
+                  <a class="a_basic"> 내용 </a>
                 </li>
                 <li class="line"> </li>
                 <li class="search_range" value="author">
-                  작성자
+                  <a class="a_basic"> 작성자 </a>
                 </li>
               </ul>
 
               <input onkeyup="enterKey()" class="input_search_text" type="text" alt="검색" placeholder="검색어를 입력해주세요.">
-              <input onclick="goSearch(document.getElementsByClassName('search_range_box_text')[0].value, document.getElementsByClassName('input_search_text')[0].value)" type="image" class="search_btn" src="/public/images/search.png" width="35px" height="35px">
+              <input onclick="goSearch(document.getElementsByClassName('search_range_box_text')[0].value, document.getElementsByClassName('input_search_text')[0].value)" type="image" class="search_btn" src="/public/images/search.png">
 
             </div>
 

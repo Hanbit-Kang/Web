@@ -11,85 +11,183 @@
       </div>
       <div class="content">
         <style>
-          .content{
-            display:flex;
-            align-items: center;
-            flex-direction: column;
+          @media (min-device-width: 768px){
+            .content{
+              display:flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .content{
+              background-color: #F8F8FF;
+              width:100%;
+            }
+            .login_area{
+              background-color: white;
+              margin-top: 70px;
+              margin-bottom: 70px;
+              padding-bottom:50px;
+              width:500px;
+              border: 1px solid #dfe3e6;
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .login_title{
+              font-size: 40px;
+              margin-top: 40px;
+              letter-spacing: 10px;
+            }
+            .login_form{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-top: 20px;
+            }
+            .input_area{
+              display: flex;
+              flex-direction: column;
+            }
+            .input_info{
+              font-size: 20px;
+              margin-top: -10px;
+              margin-bottom: 10px;
+            }
+            .login_area input{
+              border: 1px solid #dfe3e6;
+              border-radius: 0px;
+              width: 300px;
+              height: 50px;
+              font-size: 18px;
+              margin-bottom: 20px;
+              padding-left: 10px;
+            }
+            .error{
+              text-decoration: none !important;
+              font-size: 12px;
+              color: red !important;
+              margin-top: -10px;
+              margin-bottom: 10px;
+              display: flex;
+              width: 300px;
+            }
+            .btn_login{
+              color: white;
+              font-size: 20px !important;
+            }
+            .login_footer{
+              display: flex;
+              justify-content: space-around;
+              width: 300px;
+            }
+            .login_footer a{
+              color: gray;
+              font-size: 16px;
+              cursor: pointer;
+            }
+            .redline{
+              border-color: red !important;
+            }
+            .verify_error{
+              font-size: 14px;
+              text-decoration: none !important;
+              margin-top: -10px;
+              margin-bottom: 10px;
+              display: flex;
+              width: 300px;
+            }
           }
-          .content{
-            background-color: #F8F8FF;
-            width:100%;
-          }
-          .login_area{
-            background-color: white;
-            margin-top: 70px;
-            margin-bottom: 70px;
-            padding-bottom:50px;
-            width:500px;
-            border: 1px solid #dfe3e6;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-          }
-          .login_title{
-            margin-top: 40px;
-            letter-spacing: 10px;
-          }
-          .login_form{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-          }
-          .login_area input{
-            border: 1px solid #dfe3e6;
-            border-radius: 0px;
-            width: 300px;
-            height: 50px;
-            font-size: 18px;
-            margin-bottom: 20px;
-            padding-left: 10px;
-          }
-          .error{
-            text-decoration: none !important;
-            font-size: 12px;
-            color: red !important;
-            margin-top: -10px;
-            margin-bottom: 10px;
-            display: flex;
-            width: 300px;
-          }
-          .btn_login{
-            color: white;
-            font-size: 20px !important;
-          }
-          .login_footer{
-            display: flex;
-            justify-content: space-around;
-          }
-          .login_footer a{
-            color: gray;
-            font-size: 16px;
-            cursor: pointer;
-          }
-          .redline{
-            border-color: red !important;
-          }
-          .verify_error{
-            font-size: 14px;
-            text-decoration: none !important;
-            margin-top: -10px;
-            margin-bottom: 10px;
-            display: flex;
-            width: 300px;
+
+          @media (max-device-width: 768px){
+            .content{
+              display:flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .content{
+              background-color: #F8F8FF;
+              width:100%;
+            }
+            .login_area{
+              background-color: white;
+              margin-top: 100px;
+              margin-bottom: 100px;
+              padding-bottom:100px;
+              width:800px;
+              border: 1px solid #dfe3e6;
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .login_title{
+              margin-top: 80px;
+              letter-spacing: 10px;
+              font-size: 72px;
+            }
+            .login_form{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-top: 40px;
+            }
+            .input_area{
+              display: flex;
+              flex-direction: column;
+            }
+            .input_info{
+              font-size: 40px;
+              margin-bottom: 20px;
+            }
+            .login_area input{
+              border: 1px solid #dfe3e6;
+              border-radius: 0px;
+              width: 600px;
+              height: 100px;
+              font-size: 40px;
+              margin-bottom: 40px;
+              padding-left: 20px;
+            }
+            .error{
+              text-decoration: none !important;
+              font-size: 28px;
+              color: red !important;
+              margin-top: -20px;
+              margin-bottom: 20px;
+              display: flex;
+              width: 600px;
+            }
+            .btn_login{
+              color: white;
+              font-size: 40px !important;
+            }
+            .login_footer{
+              display: flex;
+              justify-content: space-around;
+              width: 600px;
+            }
+            .login_footer a{
+              color: gray;
+              font-size: 32px;
+              cursor: pointer;
+            }
+            .redline{
+              border-color: red !important;
+            }
+            .verify_error{
+              font-size: 28px;
+              text-decoration: none !important;
+              margin-top: -20px;
+              margin-bottom: 20px;
+              display: flex;
+              width: 600px;
+            }
           }
         </style>
 
         <div class="login_area">
-          <h1 class="login_title"> 로그인 <h1>
+          <a class="login_title a_basic"> 로그인 <a>
           <div class="login_form">
             <div class="input_area">
-              <h5 class="input_info"> 아이디 </h5>
+              <a class="input_info a_basic"> 아이디 </a>
               <input class="input_id" type="text" name="id" id="id" value="<%= id %>" placeholder="아이디">
               <% if(errors.login){ %>
                 <a class="error id_invalid"> <%=errors.login.message %> </a>
@@ -102,7 +200,7 @@
               <a class="error id_error none"> default </a>
             </div>
             <div class="input_area">
-              <h5 class="input_info"> 비밀번호 </h5>
+              <a class="input_info a_basic"> 비밀번호 </a>
               <input onkeyup="enterKey()" class="input_pw" type="password" name="password" id="password" placeholder="비밀번호">
               <a class="error pw_error none"> default </a>
             </div>

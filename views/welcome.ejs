@@ -11,69 +11,129 @@
       </div>
       <div class="content">
         <style>
-          .content{
-            display:flex;
-            align-items: center;
-            flex-direction: column;
-            background-color: #F8F8FF;
-            width:100%;
+          @media (min-device-width: 768px){
+            .content{
+              display:flex;
+              align-items: center;
+              flex-direction: column;
+              background-color: #F8F8FF;
+              width:100%;
+            }
+            .welcome_area{
+              background-color: white;
+              margin-top: 70px;
+              margin-bottom: 70px;
+              width:600px;
+              border: 1px solid #dfe3e6;
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .welcome_img{
+              margin-top:40px;
+              margin-bottom: 30px;
+            }
+            .welcome_title{
+              margin-top:50px;
+              display:flex;
+              flex-direction: row;
+            }
+            .welcome_title1{
+              font-size:40px;
+            }
+            .welcome_title2{
+              font-size:40px;
+              font-weight: lighter;
+            }
+            .welcome_text{
+              margin-top: 10px;
+              margin-left: 45px;
+              margin-right: 45px;
+              color: gray;
+              text-align: center;
+            }
+            .btn_gotologin{
+              text-decoration: none !important;
+              margin-top: 20px;
+              margin-bottom: 60px;
+              border: 1px solid #dfe3e6;
+              border-radius: 0px;
+              width: 300px;
+              height: 52px;
+              color: white !important;
+              font-size: 20px;
+              text-align: center;
+              padding-top:10px;
+            }
           }
-          .welcome_area{
-            background-color: white;
-            margin-top: 70px;
-            margin-bottom: 70px;
-            width:600px;
-            border: 1px solid #dfe3e6;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
+          @media (max-device-width: 768px){
+            .content{
+              display:flex;
+              align-items: center;
+              flex-direction: column;
+              background-color: #F8F8FF;
+              width:100%;
+            }
+            .welcome_area{
+              background-color: white;
+              margin-top: 200px;
+              margin-bottom: 200px;
+              width:100%;
+              border: 1px solid #dfe3e6;
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .welcome_img{
+              margin-top:40px;
+              margin-bottom: 30px;
+            }
+            .welcome_title{
+              margin-top:100px;
+              display:flex;
+              flex-direction: row;
+            }
+            .welcome_title1{
+              font-size:72px;
+            }
+            .welcome_title2{
+              font-size:72px;
+              font-weight: lighter;
+            }
+            .welcome_text{
+              font-size:32px;
+              margin-top: 40px;
+              margin-left: 45px;
+              margin-right: 45px;
+              color: gray;
+              text-align: center;
+            }
+            .btn_gotologin{
+              text-decoration: none !important;
+              margin-top: 40px;
+              margin-bottom: 120px;
+              border: 1px solid #dfe3e6;
+              border-radius: 0px;
+              width: 600px;
+              height: 104px;
+              color: white !important;
+              font-size: 40px;
+              text-align: center;
+              padding-top:20px;
+            }
           }
-          .welcome_img{
-            margin-top:40px;
-            margin-bottom: 30px;
-          }
-          .welcome_title{
-            margin-top:50px;
-            display:flex;
-            flex-direction: row;
-          }
-          .welcome_title1{
-          }
-          .welcome_title2{
-            font-weight: lighter;
-          }
-          .welcome_text{
-            margin-top: 10px;
-            margin-left: 45px;
-            margin-right: 45px;
-            color: gray;
-            text-align: center;
-          }
-          .btn_gotologin{
-            text-decoration: none !important;
-            margin-top: 20px;
-            margin-bottom: 60px;
-            border: 1px solid #dfe3e6;
-            border-radius: 0px;
-            width: 300px;
-            height: 52px;
-            color: white !important;
-            font-size: 20px;
-            text-align: center;
-            padding-top:10px;
           }
         </style>
 
         <div class="welcome_area">
-          <img class="welcome_img" src="/public/images/classicalLogo.png" width="300px">
           <a class="line"></a>
           <div class="welcome_title">
-            <h1 class="welcome_title1"> 회원가입 </h1>
-            <h1 class="welcome_title2"> 을 환영합니다! </h1>
+            <a class="welcome_title1 a_basic"> 회원가입 </a>
+            <a class="welcome_title2 a_basic"> 을 환영합니다! </a>
           </div>
-          <h6 class="welcome_text">
+          <a class="welcome_text a_basic">
             귀하께서 회원이 되신 것을 진심으로 환영합니다. 이제, Classical에 로그인하여 커뮤니티에 참여하실 수 있습니다.
-          </h6>
+          </a>
           <a href="/login" class="btn_gotologin bg-dark"> 시작하기 </a>
         </div>
       </div>

@@ -3,6 +3,9 @@ var JQdropdownCommentmenu, JQcommentSettingBtn;
 var curCommentSettingBtn;
 var removedCommentMain;
 $(document).ready(function(){
+  var pc_device = "win16|win32|win64|mac|macintel";
+  var this_device = navigator.platform;
+
   JQdropdownPostmenu = $('.dropdown_postmenu');
   JQpostSettingBtn = $('.post_setting_btn');
   JQdropdownCommentmenu = $('.dropdown_commentmenu');
@@ -11,6 +14,27 @@ $(document).ready(function(){
   JQreplySettingBtn = $('.reply_setting_btn');
 
   var JQlike = $('.like');
+
+  if ( this_device ) { //MOBILE -> FONT SIZE X 2
+    if ( pc_device.indexOf(navigator.platform.toLowerCase()) < 0 ) {
+      var elementsToSizeUp = document.getElementsByTagName('pre');
+      for(var i=0;i<elementsToSizeUp.length;i++){
+        if(elementsToSizeUp[i].style.fontSize){
+          var curSize = elementsToSizeUp[i].style.fontSize;
+          elementsToSizeUp[i].style.fontSize=(curSize.slice(0, curSize.length-2)*2.5)+'px';
+        }
+      }
+
+      elementsToSizeUp = document.getElementsByTagName('span');
+      for(i=0;i<elementsToSizeUp.length;i++){
+        if(elementsToSizeUp[i].style.fontSize){
+          var curSize = elementsToSizeUp[i].style.fontSize;
+          elementsToSizeUp[i].style.fontSize=(curSize.slice(0, curSize.length-2)*2.5)+'px';
+        }
+      }
+    }
+  }
+
 
   $('.post_type_text').html(POST_CATEGORIES[$('.post_type_text').html()]);
 

@@ -11,243 +11,383 @@
       </div>
       <div class="content">
         <style>
-        .content{
-          background-color: #F8F8FF;
-          width:100%;
-          padding-top: 30px;
-          padding-bottom: 60px;
-        }
-        @media(min-width:800px){
+        @media (min-device-width: 768px){
           .content{
+            background-color: #F8F8FF;
+            width:100%;
+            padding-top: 30px;
+            padding-bottom: 60px;
+          }
+          @media(min-width:800px){
+            .content{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+            }
+          }
+          .newpost_area{
+            background-color: white;
+            width:800px;
+            border: 1px solid #dfe3e6;
+          }
+          .newpost_header{
+            padding-top: 40px;
+            padding-left: 30px;
+            padding-bottom: 30px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+          }
+          .newpost_title{
+            font-size:32px;
+          }
+          .dd_np_btn{
+            margin-left: 8px;
+            font-size: 16px;
+            color: gray;
+            cursor: pointer;
+          }
+          .dd_np_btn:hover{
+            color: #de0581;
+          }
+          .dd_np_post_type{
+            left:0px;
+            top:0px;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            width: 150px;
+            border: 1px solid #dfe3e6;
+            border-radius: 5px 5px;
+          }
+          .dd_np_child{
+            padding-left: 15px;
+            padding-top:5px;
+            padding-bottom:5px;
+            background-color: white;
+          }
+          .dd_np_child:hover{
+            background-color: #dfe3e6;
+          }
+
+          .newpost_content{
+            border-top: 1px solid #dfe3e6;
+            padding-left:30px;
+            padding-right:30px;
+          }
+          .np_title{
+            margin-top: 30px;
+          }
+
+          .np_body{
+            margin-top: 15px;
+          }
+          .editor_buttons{
+            display: flex;
+            justify-content:flex-start;
+            border-top: 1px solid #dfe3e6;
+            border-right: 1px solid #dfe3e6;
+            border-left: 1px solid #dfe3e6;
+          }
+          .editor_buttons input{
+            padding: 4px;
+            background-color: white;
+            height:33px;
+            border-right: 1px solid #dfe3e6;
+            border-top: 0px solid;
+            border-bottom: 0px solid;
+            border-left: 0px solid;
+          }
+          .editor_buttons input:focus{outline: none;}
+          .size_btn{
+            width: 50px;
+          }
+          .dropdown_size{
+            left:31px;
+            top:323px;
+            width:75px;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #dfe3e6;
+            border-radius: 5px 5px;
+          }
+          .ds_child{
+            font-size: 16px;
+            padding-left: 15px;
+            padding-top:5px;
+            padding-bottom:5px;
+            background-color: white;
+          }
+          .ds_child:hover{
+            background-color: #dfe3e6;
+          }
+          .dropdown_size span{
+            cursor:pointer;
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .square_button{
+            width:33px;
+          }
+
+          .BOLD{
+            font-weight: bold;
+          }
+          .ITALIC{
+            font-style: italic;
+          }
+          .UNDERLINE{
+            text-decoration: underline;
+          }
+          .STRIKETHROUGH{
+            text-decoration:line-through;
+          }
+
+          .dropdown_color{
+            left:100px;
+            top:323px;
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            border: 1px solid #dfe3e6;
+          }
+          .colors{
+            display: flex;
+            flex-direction: row;
+          }
+          .color_line{
+            display: flex;
+            flex-direction: column;
+          }
+          .dc_child{
+            width:20px;
+            height:20px;
+            background-color: black;
+          }
+          .dc_child:hover{
+            background-color: #dfe3e6;
+          }
+
+          .input_title{
+            padding-left: 15px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            width: 100%;
+            height: 46px;
+            border: 1px solid #dfe3e6;
+          }
+          .input_title:focus{outline: none;}
+          .input_body{
+            padding-left: 15px;
+            padding-top: 15px;
+            width: 100%;
+            overflow-y: scroll;
+            min-height: 300px;
+            height: 500px;
+            resize: vertical;
+            border: 1px solid #dfe3e6;
+            font-size:14px;
+          }
+          .input_body:focus{outline: none;}
+          .post_body pre{
+            white-space: pre-wrap;
+            overflow:hidden;
+          }
+
+          .np_buttons{
+            display: flex;
+            justify-content:flex-end;
+            padding-left: 30px;
+            padding-right: 30px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+          }
+          .np_buttons a:hover{
+            text-decoration: underline !important;
+          }
+          .cancel_btn{
+            width: 90px;
+            height: 40px;
+            border: 1px solid #dfe3e6;
+            border-radius: 2px 2px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .post_btn{
+            margin-left: 15px;
+            width: 90px;
+            height: 40px;
+            border: 1px solid #dfe3e6;
+            border-radius: 2px 2px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            color: white !important;
+          }
+          font[size='1']{
+              font-size: 8px;
+          }
+          font[size='2']{
+              font-size: 12px;
+          }
+          font[size='3']{
+              font-size: 16px;
+          }
+          font[size='4']{
+              font-size: 20px;
+          }
+          font[size='5']{
+              font-size: 24px;
+          }
+          font[size='6']{
+              font-size: 28px;
+          }
+          font[size='7']{
+              font-size: 32px;
+          }
+        }
+
+        @media (max-device-width: 768px){
+          .content{
+            background-color: #F8F8FF;
+            width:100%;
+            padding-top: 30px;
+            padding-bottom: 60px;
             display: flex;
             flex-direction: column;
             align-items: center;
           }
-        }
-        .newpost_area{
-          background-color: white;
-          width:800px;
-          border: 1px solid #dfe3e6;
-        }
-        .newpost_header{
-          padding-top: 40px;
-          padding-left: 30px;
-          padding-bottom: 30px;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-        }
-        .dd_np_btn{
-          margin-left: 8px;
-          font-size: 16px;
-          color: gray;
-          cursor: pointer;
-        }
-        .dd_np_btn:hover{
-          color: #de0581;
-        }
-        .dd_np_post_type{
-          left:0px;
-          top:0px;
-          position: absolute;
-          display: flex;
-          flex-direction: column;
-          width: 150px;
-          border: 1px solid #dfe3e6;
-          border-radius: 5px 5px;
-        }
-        .dd_np_child{
-          padding-left: 15px;
-          padding-top:5px;
-          padding-bottom:5px;
-          background-color: white;
-        }
-        .dd_np_child:hover{
-          background-color: #dfe3e6;
-        }
-
-        .newpost_content{
-          border-top: 1px solid #dfe3e6;
-          padding-left:30px;
-          padding-right:30px;
-        }
-        .np_title{
-          margin-top: 30px;
-        }
-
-        .np_body{
-          margin-top: 15px;
-        }
-        .editor_buttons{
-          display: flex;
-          justify-content:flex-start;
-          border-top: 1px solid #dfe3e6;
-          border-right: 1px solid #dfe3e6;
-          border-left: 1px solid #dfe3e6;
-        }
-        .editor_buttons input{
-          padding: 4px;
-          background-color: white;
-          height:33px;
-          border-right: 1px solid #dfe3e6;
-          border-top: 0px solid;
-          border-bottom: 0px solid;
-          border-left: 0px solid;
-        }
-        .editor_buttons input:focus{outline: none;}
-        .size_btn{
-          width: 50px;
-        }
-        .dropdown_size{
-          left:31px;
-          top:323px;
-          width:75px;
-          position: absolute;
-          display: flex;
-          flex-direction: column;
-          border: 1px solid #dfe3e6;
-          border-radius: 5px 5px;
-        }
-        .ds_child{
-          font-size: 16px;
-          padding-left: 15px;
-          padding-top:5px;
-          padding-bottom:5px;
-          background-color: white;
-        }
-        .ds_child:hover{
-          background-color: #dfe3e6;
-        }
-        .dropdown_size span{
-          cursor:pointer;
-          display: flex;
-          justify-content: space-between;
-        }
-
-        .square_button{
-          width:33px;
-        }
-
-        .BOLD{
-          font-weight: bold;
-        }
-        .ITALIC{
-          font-style: italic;
-        }
-        .UNDERLINE{
-          text-decoration: underline;
-        }
-        .STRIKETHROUGH{
-          text-decoration:line-through;
-        }
-
-        .dropdown_color{
-          left:100px;
-          top:323px;
-          display: flex;
-          flex-direction: column;
-          position: absolute;
-          border: 1px solid #dfe3e6;
-        }
-        .colors{
-          display: flex;
-          flex-direction: row;
-        }
-        .color_line{
-          display: flex;
-          flex-direction: column;
-        }
-        .dc_child{
-          width:20px;
-          height:20px;
-          background-color: black;
-        }
-        .dc_child:hover{
-          background-color: #dfe3e6;
-        }
-
-        .input_title{
-          padding-left: 15px;
-          padding-top: 3px;
-          padding-bottom: 3px;
-          width: 100%;
-          height: 46px;
-          border: 1px solid #dfe3e6;
-        }
-        .input_title:focus{outline: none;}
-        .input_body{
-          padding-left: 15px;
-          padding-top: 15px;
-          width: 100%;
-          overflow-y: scroll;
-          min-height: 300px;
-          height: 500px;
-          resize: vertical;
-          border: 1px solid #dfe3e6;
-          font-size:14px;
-        }
-        .input_body:focus{outline: none;}
-        .input_body span{
-          white-space: pre-wrap;
-        }
-
-        .np_buttons{
-          display: flex;
-          justify-content:flex-end;
-          padding-left: 30px;
-          padding-right: 30px;
-          margin-top: 15px;
-          margin-bottom: 15px;
-        }
-        .np_buttons a:hover{
-          text-decoration: underline !important;
-        }
-        .cancel_btn{
-          width: 90px;
-          height: 40px;
-          border: 1px solid #dfe3e6;
-          border-radius: 2px 2px;
-          display:flex;
-          justify-content: center;
-          align-items: center;
-        }
-        .post_btn{
-          margin-left: 15px;
-          width: 90px;
-          height: 40px;
-          border: 1px solid #dfe3e6;
-          border-radius: 2px 2px;
-          display:flex;
-          justify-content: center;
-          align-items: center;
-          color: white !important;
-        }
-        font[size='1']{
-            font-size: 8px;
-        }
-        font[size='2']{
-            font-size: 12px;
-        }
-        font[size='3']{
-            font-size: 16px;
-        }
-        font[size='4']{
-            font-size: 20px;
-        }
-        font[size='5']{
-            font-size: 24px;
-        }
-        font[size='6']{
-            font-size: 28px;
-        }
-        font[size='7']{
+          .newpost_area{
+            background-color: white;
+            width:100%;
+            margin-top: 60px;
+            border: 1px solid #dfe3e6;
+          }
+          .newpost_header{
+            padding-top: 45px;
+            padding-left: 45px;
+            padding-bottom: 45px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+          }
+          .newpost_title{
+            font-size:60px;
+          }
+          .dd_np_btn{
+            margin-left: 16px;
             font-size: 32px;
+            color: gray;
+            cursor: pointer;
+          }
+          .dd_np_btn:hover{
+            color: #de0581;
+          }
+          .dd_np_post_type{
+            margin-top:20px;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            border: 1px solid #dfe3e6;
+            border-radius: 10px 10px;
+          }
+          .dd_np_child{
+            padding-left: 30px;
+            padding-top:15px;
+            padding-bottom:15px;
+            background-color: white;
+            font-size: 40px;
+          }
+          .dd_np_child:hover{
+            background-color: #dfe3e6;
+          }
+
+          .newpost_content{
+            border-top: 3px solid #dfe3e6;
+            padding-left:30px;
+            padding-right:30px;
+          }
+          .np_title{
+            margin-top: 60px;
+          }
+
+          .np_body{
+            margin-top: 30px;
+          }
+          .editor_buttons{
+            display: none;
+          }
+
+          .input_title{
+            padding-left: 30px;
+            padding-top: 6px;
+            padding-bottom: 6px;
+            width: 100%;
+            height: 92px;
+            border: 1px solid #dfe3e6;
+            font-size: 32px;
+          }
+          .input_title:focus{outline: none;}
+          .input_body{
+            padding-left: 30px;
+            padding-top: 30px;
+            width: 100%;
+            overflow-y: scroll;
+            min-height: 600px;
+            height: 1000px;
+            resize: vertical;
+            border: 1px solid #dfe3e6;
+            font-size:32px;
+          }
+          .input_body:focus{outline: none;}
+          .post_body pre{
+            white-space: pre-wrap;
+            overflow:hidden;
+          }
+
+          .np_buttons{
+            display: flex;
+            justify-content:flex-end;
+            padding-left: 60px;
+            padding-right: 60px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+          }
+          .np_buttons a:hover{
+            text-decoration: underline !important;
+          }
+          .cancel_btn{
+            width: 180px;
+            height: 80px;
+            border: 1px solid #dfe3e6;
+            border-radius: 4px 4px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+          }
+          .post_btn{
+            margin-left: 30px;
+            width: 180px;
+            height: 80px;
+            border: 1px solid #dfe3e6;
+            border-radius: 4px 4px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            color: white !important;
+            font-size: 32px;
+          }
         }
         </style>
         <div class="newpost_area">
           <div class="newpost_header">
             <span>
-              <h2> 새 글 쓰기 </h2>
+              <a class="a_basic newpost_title"> 새 글 쓰기 </a>
             </span>
             <span class="dd_np_btn">
               > 자유게시판
