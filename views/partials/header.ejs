@@ -10,6 +10,7 @@
     .content{
       margin-top: 50px;
     }
+    .menubar_mobile{display:none;}
     .menubar{
       box-shadow: 0px 1px 10px 2px #dfe3e6;
       z-index: 1;
@@ -228,65 +229,76 @@
       flex-direction: column;
     }
     .content{
-      margin-top: 50px;
+      margin-top: 100px;
     }
-    .menubar{
+    .menubar{display:none;}
+    .menubar_mobile{
       box-shadow: 0px 1px 10px 2px #dfe3e6;
       z-index: 1;
       position: fixed;
       background-color: white;
       top:0;
-      display: flex;
-      justify-content:space-between;
-      align-items: center;
       width:100%;
-      height: 100px;
       border-bottom: solid 1px #dfe3e6;
     }
-    .mb_middle a{
-      transition-duration: 0.2s;
-    }
-    .mb_middle a:hover{
-      transform: scale(1.1);
-    }
+
     .mb_left{
       margin-left: 20px;
     }
     .mb_left img{
-      width:300px;
-    }
-    .mb_middle{
-      display: none;
+      width:450px;
     }
 
     .mb_right{
       display: flex;
-      width: 300px;
       margin-right: 20px;
       justify-content: space-between;
     }
-    .mb_right a{
-      font-size: 36px;
-      display: flex;
-      font-family: "Montserrat", sans-sans-serif;
-      cursor: pointer;
-      color: black;
-      text-decoration: none;
+    .mb_right span{
+      width:75px !important;
+      height:75px !important;
     }
-    .mb_right_login{
-      display:flex;
-      flex-direction: row;
+    #navbar-nav1{
+      padding-top:20px;
     }
-    .alertmenu{
-      margin-right: 30px;
-      cursor: pointer;
+    #navbar-nav2{
+      font-size: 32px;
+      padding-top:30px;
+      padding-bottom:30px;
     }
-    .alert_btn img{
+    #navbar-nav3{
+      padding-top:10px;
+      padding-bottom:30px;
+      font-size: 44px;
+    }
+    #navbar-nav3 img{
       width: 75px;
       height:75px;
     }
+    .input_search_text_header{
+      border: 1px solid #dfe3e6;
+      border-radius: 0px;
+      width: 800px;
+      height: 100px;
+      font-size: 40px;
+      margin-right:0;
+      padding-top:10px;
+      padding-left:20px;
+      padding-bottom:10px;
+    }
+    .input_search_text_header:focus{
+      outline-style:solid;
+    }
+    .search_btn_header{
+      cursor: pointer;
+      width:100px;
+      height:100px;
+    }
+    .alertmenu{
+      cursor: pointer;
+    }
     .alert_count{
-      margin-top:-3px;
+      margin-top:-5px;
       margin-right:-75px;
       text-align:center;
       font-size: 20px;
@@ -300,7 +312,6 @@
     }
     .dropdown_btn{
       display: flex;
-      margin-right: 30px;
     }
     .dropdown_btn img{
       width: 75px;
@@ -314,11 +325,11 @@
     .dropdown_btn a:hover{
       text-decoration: underline !important;
     }
-
     .alert_usermenu{
       left:300px;
       top:100px;
-      margin-left:-300px;
+      margin-left:450px;
+      margin-top:380px;
       width:800px;
       position: fixed;
       display: flex;
@@ -343,7 +354,7 @@
       justify-content: flex-end;
     }
     .alert_delete_all a{
-      font-size: 30px;
+      font-size: 32px;
     }
     .au_dd_child{
       font-size: 36px;
@@ -363,8 +374,7 @@
     }
     .alert_text{
       width:500px;
-      margin-left:10px;
-      margin-right:10px;
+      margin-left:100px;
     }
     .au_x{
       text-align: center;
@@ -382,39 +392,6 @@
       font-size: 32px;
       text-align: center;
       font-style: oblique;
-    }
-    .dropdown_usermenu{
-      left:0px;
-      margin-left: -60px;
-      top:100px;
-      width:250px;
-      position: fixed;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #dfe3e6;
-      border-radius: 5px 5px;
-      z-index: 2;
-    }
-    .dd_child{
-      font-size: 36px;
-      padding-left: 20px;
-      padding-right: 20px;
-      padding-top:20px;
-      padding-bottom:20px;
-      background-color: white;
-    }
-    .dd_child:hover{
-      background-color: #dfe3e6;
-    }
-    .dropdown_usermenu span{
-      cursor:pointer;
-      display: flex;
-      justify-content: space-between;
-    }
-    .logout_img{
-      margin-top:6px;
-      width:50px;
-      height:50px;
     }
 
     .msg{
@@ -501,7 +478,7 @@
 <div class="menubar">
   <span class="mb_left">
     <a href="/"> <img src="/public/images/classicalLogo.png"></img> </a>
-</span>
+  </span>
 
   <span class="mb_middle">
     <a class="a_basic" href="/post/index"> 전체글보기 </a>
@@ -522,7 +499,6 @@
       <%if(whoami.alerts&&whoami.alerts.length>0){%>
         <%if(whoami.alertOn){%>
       <div class="alert_usermenu">
-        <%whoami.alertOn=null;%>
         <%}else{%>
       <div class="alert_usermenu none">
         <%}%>
@@ -559,13 +535,13 @@
     <span class="usermenu">
       <span class="dropdown_btn">
         <img class="dropdown_btn_child" src="/public/images/user.png">
-        </span>
+      </span>
       <div class="dropdown_usermenu none">
         <a href="/user/index/<%=whoami.passport.user.id%>" class="dd_child a_basic"> 내 정보 </a>
         <a class="line"></a>
         <a href="/user/edit/<%=whoami.passport.user.id%>" class="dd_child a_basic"> 정보수정 </a>
         <a class="line"></a>
-        <span onclick="location.href='/logout'" class="dd_child a_basic">
+        <span class="logout dd_child a_basic">
           <a> 로그아웃 </a>
           <img class="logout_img" src="/public/images/logout.png">
         </span>
@@ -581,6 +557,107 @@
   <% } %>
 </div>
 
+
+<nav class="navbar navbar-expand-lg navbar-light menubar_mobile">
+  <a href="/" class="navbar-brand mb_left"> <img src="/public/images/classicalLogo.png"></img> </a>
+  <button class="navbar-toggler mb_right" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <%if(whoami.alertOn){%>
+  <div class="collapse show navbar-collapse" id="navbarToggler">
+  <%}else{%>
+  <div class="collapse navbar-collapse" id="navbarToggler">
+  <%}%>
+    <div class="d-flex justify-content-center" id="navbar-nav1">
+      <input onkeyup="enterKey_header()" class="input_search_text_header" type="text" alt="검색" placeholder="검색어를 입력해주세요.">
+      <input onclick="goSearch_header('title,body', document.getElementsByClassName('input_search_text_header')[0].value)" type="image" class="search_btn_header" src="/public/images/search.png">
+    </div>
+    <ul class="navbar-nav d-flex flex-row justify-content-around" id="navbar-nav2">
+      <li class="nav-item">
+        <a class="nav-link a_basic" href="/post/index"> 전체글보기 </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link a_basic" href="/post/index?category=0"> 공지사항 </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link a_basic" href="/post/index?category=1"> 자유게시판 </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link a_basic" href="/post/index?category=2"> 음악공유 </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link a_basic" href="/post/index?category=3"> 공연정보 </a>
+      </li>
+    </ul>
+
+    <% if(isAuthenticated){ %>
+      <ul class="navbar-nav d-flex flex-row justify-content-around" id="navbar-nav3">
+        <li class="nav-item">
+          <img class="logout_img logout" src="/public/images/logout_black.png">
+        </li>
+        <li class="nav-item">
+          <a href="/user/index/<%=whoami.passport.user.id%>">
+            <img class="user_img" src="/public/images/user.png">
+          </a>
+        </li>
+        <li class="nav-item d-flex flex-row">
+          <% if(whoami.alerts&&whoami.alerts.length>0){ %>
+          <a class="alert_count"><%=Math.min(whoami.alerts.length,99)%></a>
+          <% } %>
+          <span class="alertmenu">
+            <span class="alert_btn">
+              <img class="alert_btn_child" src="/public/images/alert.png">
+            </span>
+            <%if(whoami.alerts&&whoami.alerts.length>0){%>
+              <%if(whoami.alertOn){%>
+            <div class="alert_usermenu">
+              <%}else{%>
+            <div class="alert_usermenu none">
+              <%}%>
+              <div class="alerts my_scroll">
+                <%whoami.alerts.forEach(function(alert, i){%>
+                  <span class="au_dd_child">
+                    <% const today = new Date(); %>
+                    <% if(alert.createdAt.getFullYear()==today.getFullYear() && alert.createdAt.getMonth()==today.getMonth() && alert.createdAt.getDate()==today.getDate()) {%>
+                    <a class="alert_time a_basic"> <%= alert.createdAt.getHours()>=10? alert.createdAt.getHours():'0'+String(alert.createdAt.getHours())%>:<%= alert.createdAt.getMinutes()>=10?alert.createdAt.getMinutes():'0'+String(alert.createdAt.getMinutes())%> </a>
+                    <%} else { %>
+                    <a class="alert_time a_basic"> <%= alert.createdAt.getYear()-100 %>.<%= alert.createdAt.getMonth()+1>=10?alert.createdAt.getMonth()+1:'0'+String(alert.createdAt.getMonth()+1) %>.<%= alert.createdAt.getDate()>=10?alert.createdAt.getDate():'0'+String(alert.createdAt.getDate()) %> </a>
+                    <% } %>
+                    <% if(alert.post){ %>
+                    <a class="alert_text a_pointerAndunderline_black" href="/alert/view/<%=alert.post?alert.post._id:'D'%>" class="a_basic"><%=alert.post?alert.post.title:'삭제된 글입니다.'%> - <%=alert.from.isLeaved?'(탈퇴 회원)':alert.from.nickname%> | <%=alert.text%></a>
+                    <% }else{ %>
+                    <a class="alert_text a_pointerAndunderline_black" href="#" class="a_basic"><%=alert.text%></a>
+                    <% } %>
+                    <a href="/alert/delete/<%=alert._id%>" class="a_basic au_x">X</a>
+                  </span>
+                  <a class="line"></a>
+                <%});%>
+              </div>
+              <div class="alert_delete_all">
+                <a href="/alert/deleteall/<%=whoami.passport.user._id%>" class="a_pointerAndunderline_black">전체 삭제</a>
+              </div>
+            </div>
+            <%}else{%>
+              <div class="alert_usermenu none">
+                <a class="no_alert a_basic"> 새로운 알림이 없습니다. </a>
+              </div>
+            <%}%>
+          </span>
+        </li>
+      </ul>
+    <%}else{%>
+    <ul class="navbar-nav d-flex flex-row justify-content-around" id="navbar-nav3">
+      <li class="nav-item">
+        <a class="nav-link a_basic" href="/register">회원가입</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link a_basic" href="/login">로그인</a>
+      </li>
+    </ul>
+    <%}%>
+  </div>
+</nav>
+
 <%if(whoami.error){%>
 <a class="msg bg-warning a_basic"> <%=whoami.error.msg%> </a>
 <%whoami.error=null%>
@@ -589,3 +666,5 @@
 <a class="msg bg-primary a_basic" style="color:white !important;"> <%=whoami.success.msg%> </a>
 <%whoami.success=null%>
 <%}%>
+
+<%if(whoami.alertOn) whoami.alertOn=null;%>

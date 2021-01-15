@@ -65,7 +65,9 @@ app.use(async function(req, res, next) {
   if(req.session){
     res.locals.whoami = req.session;
     if(req.session.passport){
-      if(req.session.alertOn==true) res.locals.whoami.alertOn=true;
+      if(req.session.alertOn){
+        res.locals.whoami.alertOn=true;
+      }
       var alerts = await Alert.find({to:req.session.passport.user})
         .sort({'createdAt':-1})
         .populate('post')

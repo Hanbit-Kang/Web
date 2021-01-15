@@ -56,3 +56,18 @@ $(window).resize(function(){
     JQalertUsermenu.css('left', JQalertBtn.offset().left-315);
   }
 });
+
+function goSearch_header(searchType, searchText){
+  //Search Btn click
+  if(searchText.length<3){
+    alert('3글자 이상 입력해주세요.');
+    return;
+  }
+  window.location.href = '/post/index?searchType='+searchType+'&searchText='+searchText;
+}
+
+function enterKey_header(){
+  if(window.event.keyCode == 13){
+    goSearch_header('title,body', document.getElementsByClassName('input_search_text_header')[0].value);
+  }
+}

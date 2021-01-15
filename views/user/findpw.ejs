@@ -11,72 +11,150 @@
       </div>
       <div class="content">
         <style>
-          .content{
-            display:flex;
-            align-items: center;
-            flex-direction: column;
-            background-color: #F8F8FF;
-            width:100%;
+          @media (min-device-width: 768px){
+            .content{
+              display:flex;
+              align-items: center;
+              flex-direction: column;
+              background-color: #F8F8FF;
+              width:100%;
+            }
+            .edit_area{
+              box-shadow: 0px 1px 10px 1px #dfe3e6;
+              background-color: white;
+              margin-top: 70px;
+              margin-bottom: 70px;
+              padding-bottom: 20px;
+              width:500px;
+              border: 1px solid #dfe3e6;
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .edit_title{
+              margin-top: 40px;
+              letter-spacing: 10px;
+              font-size: 40px;
+            }
+            .edit_form{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-top: 20px;
+            }
+            .input_area{
+              display: flex;
+              flex-direction: column;
+            }
+            .input_info{
+              font-size:20px;
+              margin-top: -10px;
+              margin-bottom: 10px;
+            }
+            .edit_area input{
+              border: 1px solid #dfe3e6;
+              border-radius: 0px;
+              width: 300px;
+              height: 50px;
+              font-size: 18px;
+              margin-bottom: 20px;
+              padding-left: 10px;
+            }
+            .error{
+              text-decoration: none !important;
+              font-size: 12px;
+              color: red !important;
+              margin-top: -10px;
+              margin-bottom: 10px;
+              display: flex;
+              width: 300px;
+            }
+            .access_error{
+              color: black !important;
+              font-size: 16px !important;
+              margin-bottom: 20px !important;
+            }
+            .btn_edit{
+              color: white;
+              font-size: 20px !important;
+            }
           }
-          .edit_area{
-            background-color: white;
-            margin-top: 70px;
-            margin-bottom: 70px;
-            padding-bottom: 20px;
-            width:500px;
-            border: 1px solid #dfe3e6;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-          }
-          .edit_title{
-            margin-top: 40px;
-            letter-spacing: 10px;
-          }
-          .edit_form{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-          }
-          .input_area{
-            display: flex;
-            flex-direction: column;
-          }
-          .edit_area input{
-            border: 1px solid #dfe3e6;
-            border-radius: 0px;
-            width: 300px;
-            height: 50px;
-            font-size: 18px;
-            margin-bottom: 20px;
-          }
-          .error{
-            text-decoration: none !important;
-            font-size: 12px;
-            color: red !important;
-            margin-top: -10px;
-            margin-bottom: 10px;
-            display: flex;
-            width: 300px;
-          }
-          .access_error{
-            color: black !important;
-            font-size: 16px !important;
-            margin-bottom: 20px !important;
-          }
-          .btn_edit{
-            color: white;
-            font-size: 20px !important;
+
+          @media (max-device-width: 768px){
+            .content{
+              display:flex;
+              align-items: center;
+              flex-direction: column;
+              background-color: #F8F8FF;
+              width:100%;
+            }
+            .edit_area{
+              box-shadow: 0px 1px 10px 1px #dfe3e6;
+              background-color: white;
+              margin-top: 100px;
+              margin-bottom: 100px;
+              padding-bottom: 100px;
+              width:800px;
+              border: 1px solid #dfe3e6;
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .edit_title{
+              margin-top: 80px;
+              letter-spacing: 10px;
+              font-size: 72px;
+            }
+            .edit_form{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-top: 40px;
+            }
+            .input_area{
+              display: flex;
+              flex-direction: column;
+            }
+            .input_info{
+              font-size:40px;
+              margin-bottom: 20px;
+            }
+            .edit_area input{
+              border: 1px solid #dfe3e6;
+              border-radius: 0px;
+              width: 600px;
+              height: 100px;
+              font-size: 40px;
+              margin-bottom: 40px;
+              padding-left: 20px;
+            }
+            .error{
+              text-decoration: none !important;
+              font-size: 24px;
+              color: red !important;
+              margin-top: -20px;
+              margin-bottom: 20px;
+              display: flex;
+              width: 600px;
+            }
+            .access_error{
+              color: black !important;
+              font-size: 32px !important;
+              margin-bottom: 40px !important;
+            }
+            .btn_edit{
+              color: white;
+              font-size: 40px !important;
+            }
           }
         </style>
         <div class="edit_area">
-          <h1 class="edit_title"> 비밀번호변경 <h1>
+          <a class="edit_title a_basic"> 비밀번호변경 <a>
           <div class="edit_form">
             <% if(user) {%>
             <div class="userid" var="<%=user.id%>"></div>
             <div class="input_area">
-              <h5 class="input_info"> 코드 </h5>
+              <a class="input_info a_basic"> 코드 </a>
               <input type="code" id="code" placeholder="전송된 코드 입력">
               <a class="error code_error none"> default </a>
               <% if (errors.code){ %>
@@ -84,12 +162,12 @@
               <% } %>
             </div>
             <div class="input_area">
-              <h5 class="input_info"> 새 비밀번호 </h5>
+              <a class="input_info a_basic"> 새 비밀번호 </a>
               <input type="password" id="newPw" placeholder="새 비밀번호">
               <a class="error newPw_error none"> default </a>
             </div>
             <div class="input_area">
-              <h5 class="input_info"> 비밀번호 재입력 </h5>
+              <a class="input_info a_basic"> 비밀번호 재입력 </a>
               <input type="password" id="newPw2" placeholder="비밀번호 재입력">
               <a class="error newPw2_error none"> default </a>
             </div>

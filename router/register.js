@@ -88,6 +88,19 @@ router.post('/register/verify', function(req, res){
   });
 });
 
+router.get('/register/delete', function(req, res){
+  Account.findOneAndDelete({id:req.query.id, isVerified:false}, function(err, user){
+    if(err) return res.json(err);
+    if(!user){
+      req.session.error={'msg':"잘못된 접근입니다."};
+      return res.redirect('/');
+    }
+    req.session.success={'msg':"입력한 정보를 삭제하였습니다."};
+    Log.create({activity:'register delete'});
+    res.redirect('/register');
+  });
+});
+
 router.get('/welcome', function(req, res){
   res.render('welcome');
 });

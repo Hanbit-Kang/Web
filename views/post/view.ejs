@@ -131,12 +131,18 @@
               font-size: 24px;
             }
             .like{
-              color: #de0581 !important;
-              font-size: 40px;
               margin-left: 10px;
+              transition-duration: 0.2s;
+            }
+            .like img{
+              width:25px;
+              height:25px;
+            }
+            .like_on{
+              background-color: #de0581;
             }
             .like_cmt{
-              margin-top: 10px;
+              margin-top: 5px;
               font-size: 14px;
               margin-left: 7px;
               color: gray;
@@ -371,7 +377,7 @@
               margin-right: 45px;
             }
             .post_type{
-              border-bottom: 3px solid #dfe3e6;
+              border-bottom: 1px solid #dfe3e6;
               padding-bottom: 20px;
             }
             .post_type a{
@@ -467,7 +473,7 @@
 
             .post_footer{
               font-size: 32px;
-              margin-top: 30px;
+              margin-top: 60px;
               margin-left: 30px;
               margin-right: 30px;
               display: flex;
@@ -485,12 +491,18 @@
               font-size: 60px;
             }
             .like{
-              color: #de0581 !important;
-              font-size: 60px;
-              margin-left: 20px;
+              margin-left: 10px;
+              transition-duration: 0.2s;
+            }
+            .like img{
+              width:50px;
+              height:50px;
+            }
+            .like_on{
+              background-color: #de0581;
             }
             .like_cmt{
-              margin-top: 20px;
+              margin-top: 5px;
               font-size: 28px;
               margin-left: 14px;
               color: gray;
@@ -498,7 +510,7 @@
               transition-duration: 0.2s;
             }
             .comments{
-              border-top: 3px solid #dfe3e6;
+              border-top: 1px solid #dfe3e6;
               list-style: none;
               padding-left:0px;
               margin-top: 20px;
@@ -762,9 +774,9 @@
                 <a class="comment_amount a_basic"> 댓글 <%=post.comment%> </a>
                 <% if(whoami.passport){ %>
                   <% if(IsLike) { %>
-                <a href="/post/like/<%=post._id%>" class="a_basic like like_on"> ♥ </a>
+                    <a href="/post/like/<%=post._id%>" class="a_basic like like_on"><img src="/public/images/heart.png"></a>
                   <% } else {%>
-                    <a href="/post/like/<%=post._id%>" class="a_basic like like_off"> ♡ </a>
+                    <a href="/post/like/<%=post._id%>" class="a_basic like like_off"><img src="/public/images/heart.png"></a>
                   <% } %>
                 <% } %>
 
@@ -803,11 +815,11 @@
                       </span>
                       <% if(isAuthenticated){ %>
                       <span onclick="clickComment(this);" class="cmt_content">
-                        <a> <%=comment.text%> </a>
+                        <a> <%- comment.text.replace(/\n/g, '<br/>') %> </a>
                       </span>
                       <% } else { %>
                       <span class="cmt_content">
-                        <a> <%=comment.text%> </a>
+                        <a> <%- comment.text.replace(/\n/g, '<br/>') %> </a>
                       </span>
                       <% } %>
                     </span>

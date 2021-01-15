@@ -11,84 +11,179 @@
       </div>
       <div class="content">
         <style>
-          .content{
-            display:flex;
-            align-items: center;
-            flex-direction: column;
+          @media (min-device-width: 768px){
+            .content{
+              display:flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .content{
+              background-color: #F8F8FF;
+              width:100%;
+            }
+            .verify_area{
+              box-shadow: 0px 1px 10px 1px #dfe3e6;
+              background-color: white;
+              margin-top: 70px;
+              margin-bottom: 70px;
+              width:500px;
+              border: 1px solid #dfe3e6;
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .verify_title{
+              margin-top: 40px;
+              font-size:40px;
+              letter-spacing: 10px;
+            }
+            .verify_info{
+              padding-left: 45px;
+              padding-right: 45px;
+              margin-top: 5px;
+              margin-bottom: 10px;
+              display: flex;
+              justify-content: center;
+            }
+            .verify_info a{
+              text-align: center;
+              font-size: 14px;
+              color: gray !important;
+            }
+            .verify_form{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-top: 20px;
+              margin-bottom:30px;
+            }
+            .input_area{
+              display:flex;
+              flex-direction: column;
+            }
+            .input_info{
+              font-size:20px;
+              margin-top:-10px;
+              margin-bottom:10px;
+            }
+            .verify_area input{
+              border: 1px solid #dfe3e6;
+              border-radius: 0px;
+              width: 300px;
+              height: 50px;
+              font-size: 18px;
+              margin-bottom: 20px;
+              padding-left: 10px;
+            }
+            .error{
+              text-decoration: none !important;
+              font-size: 12px;
+              color: red !important;
+              margin-top: -10px;
+              margin-bottom: 10px;
+              display: flex;
+              width: 300px;
+            }
+            .btn_verify{
+              color: white;
+              font-size: 20px !important;
+            }
+            .redline{
+              border-color: red !important;
+            }
           }
-          .content{
-            background-color: #F8F8FF;
-            width:100%;
-          }
-          .verify_area{
-            background-color: white;
-            margin-top: 70px;
-            margin-bottom: 70px;
-            width:500px;
-            border: 1px solid #dfe3e6;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-          }
-          .verify_title{
-            margin-top: 40px;
-            letter-spacing: 10px;
-          }
-          .verify_info{
-            padding-left: 45px;
-            padding-right: 45px;
-            margin-top: 15px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: center;
-          }
-          .verify_info a{
-            text-align: center;
-            font-size: 14px;
-            color: gray !important;
-          }
-          .verify_form{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-            margin-bottom:30px;
-          }
-          .verify_area input{
-            border: 1px solid #dfe3e6;
-            border-radius: 0px;
-            width: 300px;
-            height: 50px;
-            font-size: 18px;
-            margin-bottom: 20px;
-            padding-left: 10px;
-          }
-          .error{
-            text-decoration: none !important;
-            font-size: 12px;
-            color: red !important;
-            margin-top: -10px;
-            margin-bottom: 10px;
-            display: flex;
-            width: 300px;
-          }
-          .btn_verify{
-            color: white;
-            font-size: 20px !important;
-          }
-          .redline{
-            border-color: red !important;
+
+          @media (max-device-width: 768px){
+            .content{
+              display:flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .content{
+              background-color: #F8F8FF;
+              width:100%;
+            }
+            .verify_area{
+              box-shadow: 0px 1px 10px 1px #dfe3e6;
+              background-color: white;
+              margin-top: 100px;
+              margin-bottom: 70px;
+              width:800px;
+              border: 1px solid #dfe3e6;
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .verify_title{
+              margin-top: 80px;
+              font-size:72px;
+              letter-spacing: 10px;
+            }
+            .verify_info{
+              padding-left: 45px;
+              padding-right: 45px;
+              margin-top: 5px;
+              margin-bottom: 20px;
+              display: flex;
+              justify-content: center;
+            }
+            .verify_info a{
+              text-align: center;
+              font-size: 40px;
+              color: gray !important;
+            }
+            .verify_form{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-top: 40px;
+              margin-bottom:60px;
+            }
+            .input_area{
+              display:flex;
+              flex-direction: column;
+            }
+            .input_info{
+              font-size:40px;
+              margin-top:-20px;
+              margin-bottom:20px;
+            }
+            .verify_area input{
+              border: 1px solid #dfe3e6;
+              border-radius: 0px;
+              width: 600px;
+              height: 100px;
+              font-size: 36px;
+              margin-bottom: 40px;
+              padding-left: 20px;
+            }
+            .error{
+              text-decoration: none !important;
+              font-size: 24px;
+              color: red !important;
+              margin-top: -20px;
+              margin-bottom: 20px;
+              display: flex;
+              width: 600px;
+            }
+            .btn_verify{
+              color: white;
+              font-size: 40px !important;
+            }
+            .redline{
+              border-color: red !important;
+            }
           }
         </style>
 
         <div class="verify_area">
-          <h1 class="verify_title"> 이메일인증 <h1>
+          <a class="verify_title a_basic"> 이메일인증 <a>
           <div class="verify_info">
             <a class="a_basic">해당 이메일로 인증코드가 발송되었습니다. 커뮤니티 활동을 위해서 이메일 인증이 필요합니다.</a>
           </div>
           <div class="verify_form">
             <div class="input_area">
-              <h5 class="input_info"> 인증코드 </h5>
+              <a class="input_info a_basic"> 인증코드 </a>
               <input class="input_verify" type="text" name="verify" id="verify" placeholder="인증코드">
               <% if(errors.verify){ %>
                 <a class="error verify_invalid"> <%=errors.verify.message %> </a>

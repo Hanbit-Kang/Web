@@ -11,68 +11,188 @@
       </div>
       <div class="content">
         <style>
-          .content{
-            display:flex;
-            align-items: center;
-            flex-direction: column;
+          @media (min-device-width: 768px){
+            .content{
+              display:flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .content{
+              background-color: #F8F8FF;
+              width:100%;
+            }
+            .find_area{
+              box-shadow: 0px 1px 10px 1px #dfe3e6;
+              background-color: white;
+              margin-top: 70px;
+              margin-bottom: 70px;
+              width:500px;
+              border: 1px solid #dfe3e6;
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .find_title{
+              margin-top: 40px;
+              font-size: 40px;
+              letter-spacing: 10px;
+            }
+            .find_text{
+              margin-top: 10px;
+              margin-left: 45px;
+              margin-right: 45px;
+              margin-bottom: 10px;
+              color: gray;
+              text-align: center;
+            }
+            .find_form{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-top: 20px;
+            }
+            .input_area{
+              display: flex;
+              flex-direction: column;
+            }
+            .input_info{
+              font-size: 20px;
+              margin-top: -10px;
+              margin-bottom: 10px;
+            }
+            .find_area input{
+              border: 1px solid #dfe3e6;
+              border-radius: 0px;
+              width: 300px;
+              height: 50px;
+              font-size: 18px;
+              margin-bottom: 20px;
+              padding-left: 10px;
+            }
+            .error{
+              text-decoration: none !important;
+              font-size: 12px;
+              color: red !important;
+              margin-top: -10px;
+              margin-bottom: 10px;
+              display: flex;
+              width: 300px;
+            }
+            .btn_find{
+              color: white;
+              font-size: 20px !important;
+            }
+            .login_footer{
+              display: flex;
+              justify-content: space-around;
+              width: 300px;
+              margin-bottom: 50px;
+            }
+            .login_footer a{
+              color: gray;
+              font-size: 16px;
+              cursor: pointer;
+            }
+            .redline{
+              border-color: red !important;
+            }
           }
-          .content{
-            background-color: #F8F8FF;
-            width:100%;
-          }
-          .find_area{
-            background-color: white;
-            margin-top: 70px;
-            margin-bottom: 70px;
-            width:500px;
-            border: 1px solid #dfe3e6;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-          }
-          .find_title{
-            margin-top: 40px;
-            letter-spacing: 10px;
-          }
-          .find_form{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-            margin-bottom:30px;
-          }
-          .find_area input{
-            border: 1px solid #dfe3e6;
-            border-radius: 0px;
-            width: 300px;
-            height: 50px;
-            font-size: 18px;
-            margin-bottom: 20px;
-            padding-left: 10px;
-          }
-          .error{
-            text-decoration: none !important;
-            font-size: 12px;
-            color: red !important;
-            margin-top: -10px;
-            margin-bottom: 10px;
-            display: flex;
-            width: 300px;
-          }
-          .btn_find{
-            color: white;
-            font-size: 20px !important;
-          }
-          .redline{
-            border-color: red !important;
+
+          @media (max-device-width: 768px){
+            .content{
+              display:flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .content{
+              background-color: #F8F8FF;
+              width:100%;
+            }
+            .find_area{
+              box-shadow: 0px 1px 10px 1px #dfe3e6;
+              background-color: white;
+              margin-top: 100px;
+              margin-bottom: 70px;
+              width:800px;
+              border: 1px solid #dfe3e6;
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .find_title{
+              margin-top: 80px;
+              font-size: 60px;
+              letter-spacing: 10px;
+            }
+            .find_text{
+              margin-top: 10px;
+              margin-left: 45px;
+              margin-right: 45px;
+              color: gray !important;
+              font-size: 32px;
+              text-align: center;
+            }
+            .find_form{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-top: 40px;
+            }
+            .input_area{
+              display: flex;
+              flex-direction: column;
+            }
+            .input_info{
+              font-size: 40px;
+              margin-bottom: 20px;
+            }
+            .find_area input{
+              border: 1px solid #dfe3e6;
+              border-radius: 0px;
+              width: 600px;
+              height: 100px;
+              font-size: 36px;
+              margin-bottom: 40px;
+              padding-left: 20px;
+            }
+            .error{
+              text-decoration: none !important;
+              font-size: 24px;
+              color: red !important;
+              margin-top: -20px;
+              margin-bottom: 20px;
+              display: flex;
+              width: 600px;
+            }
+            .btn_find{
+              color: white;
+              font-size: 40px !important;
+            }
+            .login_footer{
+              display: flex;
+              justify-content: space-around;
+              width: 600px;
+              margin-bottom: 100px;
+            }
+            .login_footer a{
+              color: gray;
+              font-size: 32px;
+              cursor: pointer;
+            }
+            .redline{
+              border-color: red !important;
+            }
           }
         </style>
 
         <div class="find_area">
-          <h1 class="find_title"> 비밀번호찾기 <h1>
+          <a class="find_title a_basic"> 비밀번호찾기 <a>
+          <a class="find_text a_basic">
+            회원님께서 찾으시는 계정의 아이디와 이메일을 입력해주세요. 해당 이메일로 비밀번호를 변경할 수 있는 코드가 전송됩니다.
+          </a>
           <div class="find_form">
             <div class="input_area">
-              <h5 class="input_info"> 아이디 </h5>
+              <a class="input_info a_basic"> 아이디 </a>
               <input class="input_id" value="<%=id%>" type="text" name="id" id="id" placeholder="아이디">
               <a class="error id_error none"> default </a>
               <% if(errors.id){ %>
@@ -80,7 +200,7 @@
               <% } %>
             </div>
             <div class="input_area">
-              <h5 class="input_info"> 이메일 </h5>
+              <a class="input_info a_basic"> 이메일 </a>
               <input class="input_email" value="<%=email%>" type="text" name="email" id="email" placeholder="이메일">
               <a class="error email_error none"> default </a>
               <% if(errors.email){ %>
@@ -88,6 +208,13 @@
               <% } %>
             </div>
             <input type="submit" title="입력하기" alt="입력하기" value="입력하기" class="btn_find bg-dark" onclick="findPw()">
+          </div>
+          <div class="login_footer">
+            <a href="/login/findid" class="find_id"> 아이디 찾기 </a>
+            <a class="dot"> · </a>
+            <a href="/login" class="login"> 로그인 </a>
+            <a class="dot"> · </a>
+            <a href="/register" class="register"> 회원가입 </a>
           </div>
         </div>
       </div>

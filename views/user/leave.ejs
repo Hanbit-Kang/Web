@@ -11,77 +11,155 @@
       </div>
       <div class="content">
         <style>
-          .content{
-            display:flex;
-            align-items: center;
-            flex-direction: column;
-            background-color: #F8F8FF;
-            width:100%;
+          @media (min-device-width: 768px){
+            .content{
+              display:flex;
+              align-items: center;
+              flex-direction: column;
+              background-color: #F8F8FF;
+              width:100%;
+            }
+            .leave_area{
+              box-shadow: 0px 1px 10px 1px #dfe3e6;
+              background-color: white;
+              margin-top: 70px;
+              margin-bottom: 70px;
+              padding-bottom: 20px;
+              width:500px;
+              border: 1px solid #dfe3e6;
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .leave_title{
+              margin-top: 40px;
+              letter-spacing: 10px;
+              font-size: 40px
+            }
+            .leave_form{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-top: 20px;
+            }
+            .input_info{
+              margin-left:45px;
+              margin-right:45px;
+              font-size:14px;
+              text-align:center;
+            }
+            .input_area{
+              margin-top:30px;
+              display: flex;
+              flex-direction: column;
+            }
+            .leave_area input{
+              border: 1px solid #dfe3e6;
+              border-radius: 0px;
+              width: 300px;
+              height: 50px;
+              font-size: 18px;
+              margin-bottom: 20px;
+              padding-left:10px;
+            }
+            .error{
+              text-decoration: none !important;
+              font-size: 12px;
+              color: red !important;
+              margin-top: -10px;
+              margin-bottom: 10px;
+              display: flex;
+              width: 300px;
+            }
+            .access_error{
+              color: black !important;
+              font-size: 16px !important;
+              margin-bottom: 20px !important;
+            }
+            .btn_leave{
+              color: white;
+              font-size: 20px !important;
+              cursor: not-allowed !important;
+              opacity:50%;
+            }
           }
-          .leave_area{
-            background-color: white;
-            margin-top: 70px;
-            margin-bottom: 70px;
-            padding-bottom: 20px;
-            width:500px;
-            border: 1px solid #dfe3e6;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-          }
-          .leave_title{
-            margin-top: 40px;
-            letter-spacing: 10px;
-          }
-          .leave_form{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
-          }
-          .input_info{
-            margin-left:45px;
-            margin-right:45px;
-            font-size:14px;
-            text-align:center;
-          }
-          .input_area{
-            margin-top:30px;
-            display: flex;
-            flex-direction: column;
-          }
-          .leave_area input{
-            border: 1px solid #dfe3e6;
-            border-radius: 0px;
-            width: 300px;
-            height: 50px;
-            font-size: 18px;
-            margin-bottom: 20px;
-            padding-left:10px;
-          }
-          .error{
-            text-decoration: none !important;
-            font-size: 12px;
-            color: red !important;
-            margin-top: -10px;
-            margin-bottom: 10px;
-            display: flex;
-            width: 300px;
-          }
-          .access_error{
-            color: black !important;
-            font-size: 16px !important;
-            margin-bottom: 20px !important;
-          }
-          .btn_leave{
-            color: white;
-            font-size: 20px !important;
-            cursor: not-allowed !important;
-            opacity:50%;
+
+          @media (max-device-width: 768px){
+            .content{
+              display:flex;
+              align-items: center;
+              flex-direction: column;
+              background-color: #F8F8FF;
+              width:100%;
+            }
+            .leave_area{
+              box-shadow: 0px 1px 10px 1px #dfe3e6;
+              background-color: white;
+              margin-top: 200px;
+              margin-bottom: 200px;
+              padding-bottom: 100px;
+              width:800px;
+              border: 1px solid #dfe3e6;
+              display: flex;
+              align-items: center;
+              flex-direction: column;
+            }
+            .leave_title{
+              margin-top: 80px;
+              letter-spacing: 10px;
+              font-size: 72px
+            }
+            .leave_form{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-top: 40px;
+            }
+            .input_info{
+              margin-left:45px;
+              margin-right:45px;
+              font-size:32px;
+              margin-bottom: 20px;
+              text-align:center;
+            }
+            .input_area{
+              margin-top:60px;
+              display: flex;
+              flex-direction: column;
+            }
+            .leave_area input{
+              border: 1px solid #dfe3e6;
+              border-radius: 0px;
+              width: 600px;
+              height: 100px;
+              font-size: 40px;
+              margin-bottom: 40px;
+              padding-left:20px;
+            }
+            .error{
+              text-decoration: none !important;
+              font-size: 24px;
+              color: red !important;
+              margin-top: -20px;
+              margin-bottom: 20px;
+              display: flex;
+              width: 600px;
+            }
+            .access_error{
+              color: black !important;
+              font-size: 32px !important;
+              margin-bottom: 40px !important;
+            }
+            .btn_leave{
+              color: white;
+              font-size: 40px !important;
+              cursor: not-allowed !important;
+              opacity:50%;
+            }
           }
         </style>
         <div class="leave_area">
-          <h1 class="leave_title"> 회원탈퇴 <h1>
+          <a class="leave_title a_basic"> 회원탈퇴 <a>
           <div class="leave_form">
             <% if(user) {%>
             <div class="userid" var="<%=user.id%>"></div>

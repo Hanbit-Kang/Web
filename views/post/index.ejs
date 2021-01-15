@@ -306,7 +306,7 @@
               display: flex;
               flex-direction: column;
               width: 300px;
-              margin-top:30px;
+              margin-top:15px;
               border: 1px solid #dfe3e6;
               border-radius: 5px 5px;
             }
@@ -397,6 +397,7 @@
               color: gray;
               text-align: center;
               margin-top:15px;
+              font-size:32px;
             }
 
             .index_footer{
@@ -460,8 +461,8 @@
               padding-left: 20px;
               padding-right: 20px;
               margin-right: 20px;
-              font-size: 28px;
-              height: 70px;
+              font-size: 40px;
+              height: 100px;
               width: 250px;
               cursor: pointer;
             }
@@ -471,7 +472,7 @@
               border: 1px solid #dfe3e6;
               background-color: white;
               width: 250px;
-              margin-top:34px;
+              margin-top:63px;
               padding:0;
             }
             .search_range{
@@ -481,7 +482,7 @@
               cursor:pointer;
             }
             .search_range a{
-              font-size: 28px;
+              font-size: 40px;
             }
             .search_range:hover{
               background-color: #dfe3e6;
@@ -489,9 +490,9 @@
             .input_search_text{
               border: 1px solid #dfe3e6;
               border-radius: 0px;
-              width: 600px;
-              height: 70px;
-              font-size: 28px;
+              width: 550px;
+              height: 100px;
+              font-size: 40px;
               margin-right:0;
               padding-top:10px;
               padding-left:20px;
@@ -502,8 +503,8 @@
             }
             .search_btn{
               cursor: pointer;
-              width:70px;
-              height:70px;
+              width:100px;
+              height:100px;
             }
           }
         </style>
@@ -619,9 +620,6 @@
               <% posts.forEach(function(post){ %>
                 <div class="mobile_post">
                   <div class="mp_top">
-                    <% if(whoami.passport&&whoami.passport.user.level>=1){ %>
-                    <input type="checkbox" class="checkbox_delete"></label>
-                    <% } %>
                     <a onclick="location.href='/post/view/<%=post._id%><%=getPostQueryString()%>'" data-search-highlight="title" class="a_pointerAndunderline_black"><%=post.title%></a>
                     <a onclick="location.href='/post/view/<%=post._id%><%=getPostQueryString()%>'" class="a_pointerAndunderline_red">[<%=post.comment%>]</a>
                   </div>
@@ -639,10 +637,6 @@
                 </div>
               <% }) %>
             </div>
-
-            <% if(whoami.passport&&whoami.passport.user.level>=1){ %>
-              <a href="#" class="delete_btn a_pointerAndunderline_black"> 삭제하기 </a>
-            <% } %>
             <% if(posts.length==0) { %>
               <a class="msg_nodata"> 해당하는 데이터가 존재하지 않습니다. </a>
             <% } %>
@@ -691,9 +685,8 @@
                 </li>
               </ul>
 
-              <input onkeyup="enterKey()" class="input_search_text" type="text" alt="검색" placeholder="검색어를 입력해주세요.">
+              <input onkeyup="enterKey()" class="input_search_text" type="text" alt="검색" value="<%=searchText%>" placeholder="검색어를 입력해주세요.">
               <input onclick="goSearch(document.getElementsByClassName('search_range_box_text')[0].value, document.getElementsByClassName('input_search_text')[0].value)" type="image" class="search_btn" src="/public/images/search.png">
-
             </div>
 
 

@@ -11,227 +11,489 @@
       </div>
       <div class="content">
         <style>
-          .content{
-            display:flex;
-            align-items: center;
-            flex-direction: column;
-            background-color: #F8F8FF;
-            width:100%;
+          @media (min-device-width: 768px){
+            .content{
+              display:flex;
+              align-items: center;
+              flex-direction: column;
+              background-color: #F8F8FF;
+              width:100%;
+            }
+            .index_area{
+              background-color: white;
+              margin-top: 20px;
+              margin-bottom: 70px;
+              padding-bottom: 20px;
+              width:800px;
+              border: 1px solid #dfe3e6;
+              display: flex;
+              flex-direction: column;
+            }
+            .index_title{
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              width: 100%;
+              padding-top: 20px;
+              padding-left: 20px;
+              padding-bottom: 10px;
+            }
+            .index_title_text{
+              letter-spacing: 2px;
+              font-size: 28px;
+            }
+            .img_setting{
+              margin-right: 20px;
+              margin-top: 7px;
+              width:20px;
+              height:20px;
+            }
+
+            .user_profile{
+              display:flex;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+              margin-top: 50px;
+            }
+            .up_img img{
+              width:150px;
+              height:150px;
+            }
+            .up_text{
+              margin-left: 30px;
+              display: flex;
+              flex-direction: column;
+            }
+            .up_nickname{
+              font-size:40px;
+            }
+            .up_nickname:hover{
+              color: #de0581;
+              cursor: pointer;
+            }
+            .up_id_and_email{
+              cursor: pointer;
+              margin-left: 5px;
+              margin-top: -3px;
+              font-size:20px;
+              color: gray;
+            }
+
+            .mobile_table{display:none;}
+
+            .user_index{
+              display: flex;
+              flex-direction: column;
+              margin-top: 50px;
+            }
+            .ui_type{
+              margin-top: 10px;
+              border-top: 1px solid #dfe3e6;
+            }
+            .ui_post_header{
+              padding-top:30px;
+            }
+            .ui_type_title{
+              margin-left: 30px;
+              font-size: 24px;
+            }
+
+            .ui_type table{
+              margin-top: 30px;
+              margin-left: 20px;
+              margin-right: 20px;
+              margin-bottom: 10px;
+            }
+            #PostTableTitle{
+              border-top: 1px solid #dfe3e6;
+              border-bottom: 1px solid #dfe3e6;
+              background-color: #f7f9fa;
+            }
+            #PostTableTitle th{
+              padding-top: 10px;
+              padding-bottom: 10px;
+            }
+            #PostTableTitle a{
+              font-size:14px;
+              font-weight: normal;
+            }
+            .post_title{
+              padding-left: 150px;
+            }
+
+            #PostTableContent{
+              border-bottom: 1px solid #dfe3e6;
+            }
+            #PostTableContent th{
+              padding-top: 10px;
+              padding-bottom: 10px;
+            }
+            #PostTableContent a{
+              font-weight: normal;
+            }
+            .post_table_category{
+              margin-left: 10px;
+              font-size: 12px;
+              color: black;
+            }
+            .post_table_category:hover{
+              color: black;
+              text-decoration: none;
+            }
+
+            .table_colgroup:nth-child(1){
+              width:300px;
+            }
+            .table_colgroup:nth-child(2){
+              width:400px;
+            }
+            .table_colgroup:nth-child(2){
+              width:100px;
+            }
+            #CommentTableTitle{
+              border-top: 1px solid #dfe3e6;
+              border-bottom: 1px solid #dfe3e6;
+              background-color: #f7f9fa;
+            }
+            #CommentTableTitle th{
+              padding-top: 10px;
+              padding-bottom: 10px;
+            }
+            #CommentTableTitle a{
+              font-size:14px;
+              font-weight: normal;
+            }
+            .comment_title{
+              padding-left: 150px;
+            }
+            #CommentTableContent{
+              border-bottom: 1px solid #dfe3e6;
+            }
+            #CommentTableContent th{
+              padding-top: 10px;
+              padding-bottom: 10px;
+            }
+            #CommentTableContent a{
+              font-weight: normal;
+            }
+            .comment_table_post_title{
+              margin-left: 10px;
+            }
+            .comment_table_text a{
+              margin-left: 10px;
+              margin-right: 10px;
+            }
+            .comment_table_info{
+              margin-right: 10px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+            }
+            .comment_table_info a{
+              font-size: 12px;
+              color: gray !important;
+            }
+            .comment_table_info a:hover{
+              color: gray;
+              text-decoration: none;
+            }
+            .msg_nodata{
+              text-align: center;
+              margin-top:15px;
+            }
+            .msg_nodata a{
+              color: gray !important;
+              font-size:16px;
+            }
+
+            .ui_post_footer{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              border-top: 1px solid #dfe3e6;
+              padding-top: 20px;
+              padding-bottom: 20px;
+              margin-top: 90px;
+            }
+            #page_naviagtion{
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+            }
+            #page_naviagtion a{
+              margin-left: 10px;
+              margin-right: 10px;
+              color: black;
+            }
+            .pn_prev_btn{
+              display: flex;
+              flex-direction: row;
+              cursor: pointer;
+            }
+            .direction{
+              margin-top:-5px;
+            }
+            .pn_next_btn{
+              display: flex;
+              flex-direction: row;
+              cursor: pointer;
+            }
+            .pn_number_active{
+              border: 1px solid #dfe3e6;
+              color: #de0581 !important;
+              padding-left: 7px;
+              padding-right: 7px;
+              height: 28px;
+              margin-left:3 !important;
+              margin-right:3 !important;
+            }
+
+            .access_error{
+              color: black !important;
+              font-size: 16px !important;
+            }
           }
-          .index_area{
-            background-color: white;
-            margin-top: 20px;
-            margin-bottom: 70px;
-            padding-bottom: 20px;
-            width:800px;
-            border: 1px solid #dfe3e6;
-            display: flex;
-            flex-direction: column;
-          }
-          .index_title{
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            width: 100%;
-            padding-top: 20px;
-            padding-left: 20px;
-            padding-bottom: 10px;
-          }
-          .index_title h1{
-            letter-spacing: 2px;
-          }
-          .img_setting{
-            margin-right: 20px;
-            margin-top: 7px;
+          @media (max-device-width: 768px){
+            .content{
+              display:flex;
+              align-items: center;
+              flex-direction: column;
+              background-color: #F8F8FF;
+              width:100%;
+            }
+            .index_area{
+              background-color: white;
+              margin-top: 100px;
+              margin-bottom: 100px;
+              padding-bottom: 100px;
+              width:100%;
+              border: 1px solid #dfe3e6;
+              display: flex;
+              flex-direction: column;
+            }
+            .index_title{
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              width: 100%;
+              padding-top: 40px;
+              padding-left: 40px;
+              padding-bottom: 20px;
+            }
+            .index_title_text{
+              letter-spacing: 2px;
+              font-size: 56px;
+            }
+            .img_setting{
+              margin-right: 40px;
+              margin-top: 14px;
+              width:50px;
+              height:50px;
+            }
+
+            .user_profile{
+              display:flex;
+              flex-direction: row;
+              justify-content: center;
+              align-items: center;
+              margin-top: 100px;
+            }
+            .up_img img{
+              width:300px;
+              height:300px;
+            }
+            .up_text{
+              margin-left: 60px;
+              display: flex;
+              flex-direction: column;
+            }
+            .up_nickname{
+              font-size:80px;
+            }
+            .up_nickname:hover{
+              color: #de0581;
+              cursor: pointer;
+            }
+            .up_id_and_email{
+              cursor: pointer;
+              margin-left: 10px;
+              margin-top: -6px;
+              font-size:30px;
+              color: gray;
+            }
+
+            .PC_table{display:none;}
+
+            .mobile_table{
+              display: flex;
+              flex-direction: column;
+            }
+            .mobile_post{
+              margin-top:10px;
+              margin-bottom:10px;
+              margin-left: 30px;
+              margin-right: 30px;
+              padding-top:20px;
+              border-top: 1px solid #dfe3e6;
+            }
+            .mp_top{
+              font-size: 40px;
+            }
+            .mp_bottom{
+              font-size: 30px;
+            }
+            .mp_nickname{
+              font-size: 34px !important;
+            }
+            .mp_bottom a{
+              margin-right: 10px;
+            }
+
+            .user_index{
+              display: flex;
+              flex-direction: column;
+              margin-top: 100px;
+            }
+            .ui_type{
+              margin-top: 20px;
+              border-top: 1px solid #dfe3e6;
+            }
+            .ui_post_header{
+              padding-top:30px;
+              padding-bottom:30px;
+            }
+            .ui_type_title{
+              margin-left: 60px;
+              font-size: 52px;
+            }
+
+            .ui_comment_content table{
+              width:100%;
+            }
+            .table_colgroup:nth-child(1){
+              width:40%;
+            }
+            .table_colgroup:nth-child(2){
+              width:40%;
+            }
+            .table_colgroup:nth-child(2){
+              width:20%;
+            }
+            #CommentTableTitle{
+              border-top: 1px solid #dfe3e6;
+              border-bottom: 1px solid #dfe3e6;
+              background-color: #f7f9fa;
+            }
+            #CommentTableTitle th{
+              padding-top: 20px;
+              padding-bottom: 20px;
+            }
+            #CommentTableTitle a{
+              font-size:30px;
+              font-weight: normal;
+            }
+            .comment_title{
+              padding-left: 150px;
+            }
+            #CommentTableContent{
+              border-bottom: 1px solid #dfe3e6;
+            }
+            #CommentTableContent th{
+              padding-top: 10px;
+              padding-bottom: 10px;
+            }
+            #CommentTableContent a{
+              font-weight: normal;
+            }
+            .comment_table_post_title{
+              margin-left: 20px;
+              font-size:30px;
+            }
+            .comment_table_text a{
+              margin-left: 20px;
+              margin-right: 20px;
+              font-size:30px;
+            }
+            .comment_table_info{
+              margin-right: 20px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+            }
+            .comment_table_info a{
+              font-size: 24px !important;
+              color: gray !important;
+            }
+            .comment_table_info a:hover{
+              color: gray;
+              text-decoration: none;
+            }
+            .msg_nodata{
+              text-align: center;
+              margin-top:30px;
+            }
+            .msg_nodata a{
+              color: gray !important;
+              font-size:32px;
+            }
+
+            .ui_post_footer{
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              border-top: 1px solid #dfe3e6;
+              padding-top: 20px;
+              padding-bottom: 20px;
+              margin-top: 90px;
+            }
+            #page_naviagtion{
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+            }
+            #page_naviagtion a{
+              margin-left: 10px;
+              margin-right: 10px;
+              color: black;
+            }
+            .pn_prev_btn{
+              display: flex;
+              flex-direction: row;
+              cursor: pointer;
+            }
+            .direction{
+              margin-top:-5px;
+            }
+            .pn_next_btn{
+              display: flex;
+              flex-direction: row;
+              cursor: pointer;
+            }
+            .pn_number_active{
+              border: 1px solid #dfe3e6;
+              color: #de0581 !important;
+              padding-left: 7px;
+              padding-right: 7px;
+              height: 28px;
+              margin-left:3 !important;
+              margin-right:3 !important;
+            }
+
+            .access_error{
+              color: black !important;
+              font-size: 16px !important;
+            }
           }
 
-          .user_profile{
-            display:flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            margin-top: 50px;
-          }
-          .up_text{
-            margin-left: 30px;
-          }
-          .up_nickname:hover{
-            color: #de0581;
-            cursor: pointer;
-          }
-          .up_id_and_email{
-            cursor: pointer;
-            margin-left: 5px;
-            margin-top: -3px;
-            color: gray;
-          }
-
-          .user_index{
-            display: flex;
-            flex-direction: column;
-            margin-top: 50px;
-          }
-          .ui_type{
-            margin-top: 10px;
-            border-top: 1px solid #dfe3e6;
-          }
-          .ui_type_title{
-            margin-top:30px;
-            margin-left: 30px;
-          }
-
-          .ui_type table{
-            margin-top: 30px;
-            margin-left: 20px;
-            margin-right: 20px;
-            margin-bottom: 10px;
-          }
-          #PostTableTitle{
-            border-top: 1px solid #dfe3e6;
-            border-bottom: 1px solid #dfe3e6;
-            background-color: #f7f9fa;
-          }
-          #PostTableTitle th{
-            padding-top: 10px;
-            padding-bottom: 10px;
-          }
-          #PostTableTitle a{
-            font-size:14px;
-            font-weight: normal;
-          }
-          .post_title{
-            padding-left: 150px;
-          }
-
-          #PostTableContent{
-            border-bottom: 1px solid #dfe3e6;
-          }
-          #PostTableContent th{
-            padding-top: 10px;
-            padding-bottom: 10px;
-          }
-          #PostTableContent a{
-            font-weight: normal;
-          }
-          .post_table_category{
-            margin-left: 10px;
-            font-size: 12px;
-            color: black;
-          }
-          .post_table_category:hover{
-            color: black;
-            text-decoration: none;
-          }
-
-          #CommentTableTitle{
-            border-top: 1px solid #dfe3e6;
-            border-bottom: 1px solid #dfe3e6;
-            background-color: #f7f9fa;
-          }
-          #CommentTableTitle th{
-            padding-top: 10px;
-            padding-bottom: 10px;
-          }
-          #CommentTableTitle a{
-            font-size:14px;
-            font-weight: normal;
-          }
-          .comment_title{
-            padding-left: 150px;
-          }
-          #CommentTableContent{
-            border-bottom: 1px solid #dfe3e6;
-          }
-          #CommentTableContent th{
-            padding-top: 10px;
-            padding-bottom: 10px;
-          }
-          #CommentTableContent a{
-            font-weight: normal;
-          }
-          .comment_table_post_title{
-            margin-left: 10px;
-          }
-          .comment_table_text{
-            margin-right: 10px;
-          }
-          .comment_table_info{
-            margin-right: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          }
-          .comment_table_info a{
-            font-size: 12px;
-            color: gray !important;
-          }
-          .comment_table_info a:hover{
-            color: gray;
-            text-decoration: none;
-          }
-          .msg_nodata{
-            color: gray;
-            text-align: center;
-            margin-top:15px;
-          }
-
-          .ui_post_footer{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border-top: 1px solid #dfe3e6;
-            padding-top: 20px;
-            padding-bottom: 20px;
-            margin-top: 90px;
-          }
-          #page_naviagtion{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-          }
-          #page_naviagtion a{
-            margin-left: 10px;
-            margin-right: 10px;
-            color: black;
-          }
-          .pn_prev_btn{
-            display: flex;
-            flex-direction: row;
-            cursor: pointer;
-          }
-          .pn_prev_btn h4{
-            margin-top:-5px;
-          }
-          .pn_next_btn{
-            display: flex;
-            flex-direction: row;
-            cursor: pointer;
-          }
-          .pn_next_btn h4{
-            margin-top:-5px;
-          }
-          .pn_number_active{
-            border: 1px solid #dfe3e6;
-            color: #de0581 !important;
-            padding-left: 7px;
-            padding-right: 7px;
-            height: 28px;
-            margin-left:3 !important;
-            margin-right:3 !important;
-          }
-
-          .access_error{
-            color: black !important;
-            font-size: 16px !important;
-          }
         </style>
         <div class="index_area">
           <div class="index_title">
-            <h3> 회원정보 </h3>
+            <a class="index_title_text a_basic"> 회원정보 </a>
             <% if(user && whoami.passport){%>
               <% if(user.id==whoami.passport.user.id){ %>
             <a href="/user/edit/<%=whoami.passport.user.id%>">
-              <img class="img_setting" src="/public/images/setting.png" width="20px" height="20px">
+              <img class="img_setting" src="/public/images/setting.png">
             </a>
               <% } %>
             <% } %>
@@ -241,24 +503,24 @@
             <% if(user) {%>
             <div class="user_profile">
               <span class="up_img">
-                <img src="/public/images/user_gray.png" width="150px" height="150px">
+                <img src="/public/images/user_gray.png">
               </span>
               <span class="up_text">
                 <%if(whoami.passport && whoami.passport.user.level>=1){%>
-                <h1 class="up_nickname" onclick="var input_date = prompt('정지 기간을 입력하세요.'); var input_reason = prompt('정지 사유를 입력하세요.'); window.location.href='/user/suspend/<%=user.id%>?date='+input_date+'&reason='+input_reason;"> <%=user.nickname%> </h1>
+                <a class="up_nickname a_basic" onclick="var input_date = prompt('정지 기간을 입력하세요.'); var input_reason = prompt('정지 사유를 입력하세요.'); window.location.href='/user/suspend/<%=user.id%>?date='+input_date+'&reason='+input_reason;"> <%=user.nickname%> </a>
                 <%}else{%>
-                <h1 class="up_nickname"> <%=user.nickname%> </h1>
+                <a class="up_nickname a_basic"> <%=user.nickname%> </a>
                 <%}%>
-                <h5 class="up_id_and_email"> <%=user.id%> / <%=user.email%> </h5>
+                <a class="up_id_and_email"> <%=user.id%> / <%=user.email%> </a>
               </span>
             </div>
             <div class="user_index">
               <div class="ui_type">
                 <div class="ui_post_header">
-                  <h4 class="ui_type_title"> 게시글 <%=postcount%> </h4>
+                  <a class="ui_type_title a_basic"> 게시글 <%=postcount%> </a>
                 </div>
                 <div class="ui_post_content">
-                  <table>
+                  <table class="PC_table">
                     <colgroup>
                       <col style="width:100px">
                       <col style="width:400px">
@@ -314,9 +576,31 @@
                       <% }) %>
                     </tbody>
                   </table>
+                  <div class="mobile_table">
+                    <% posts.forEach(function(post){ %>
+                      <div class="mobile_post">
+                        <div class="mp_top">
+                          <a onclick="location.href='/post/view/<%=post._id%><%=getPostQueryString()%>'" data-search-highlight="title" class="a_pointerAndunderline_black"><%=post.title%></a>
+                          <a onclick="location.href='/post/view/<%=post._id%><%=getPostQueryString()%>'" class="a_pointerAndunderline_red">[<%=post.comment%>]</a>
+                        </div>
+                        <div class="mp_bottom">
+                          <% const today = new Date(); %>
+                          <% if(post.createdAt.getFullYear()==today.getFullYear() && post.createdAt.getMonth()==today.getMonth() && post.createdAt.getDate()==today.getDate()) {%>
+                          <a> <%= post.createdAt.getHours()>=10? post.createdAt.getHours():'0'+String(post.createdAt.getHours())%>:<%= post.createdAt.getMinutes()>=10?post.createdAt.getMinutes():'0'+String(post.createdAt.getMinutes())%> </a>
+                          <%} else { %>
+                          <a> <%= post.createdAt.getYear()-100 %>.<%= post.createdAt.getMonth()+1>=10?post.createdAt.getMonth()+1:'0'+String(post.createdAt.getMonth()+1) %>.<%= post.createdAt.getDate()>=10?post.createdAt.getDate():'0'+String(post.createdAt.getDate()) %> </a>
+                          <% } %>
+                          <a> 조회 <%=post.view%> </a>
+                          <a> 좋아요 <%=post.like%> </a>
+                        </div>
+                      </div>
+                    <% }) %>
+                  </div>
 
                   <% if(posts.length==0) { %>
-                    <h6 class="msg_nodata"> 해당하는 데이터가 존재하지 않습니다. </h6>
+                  <div class="msg_nodata">
+                    <a class="a_basic"> 해당하는 데이터가 존재하지 않습니다. </a>
+                  </div>
                   <% } %>
                 </div>
                 <div class="ui_post_footer">
@@ -328,7 +612,7 @@
                       var nextBtnEnabled = postmaxPage>startpage+offset-1 && postcurrentPage<startpage+offset;
                     %>
                     <span class="pn_prev_btn <%=previousBtnEnabled?'':'none'%>" onclick="location.href='/user/index/<%=user.id+getPostQueryString(false, {postpage:startpage-1})%>'">
-                      <h4> < </h4>
+                      <a class="direction a_basic"> < </a>
                       <a class="a_pointerAndunderline_black"> 이전 </a>
                     </span>
                     <% for(i=startpage;i<=Math.min(startpage+offset-1, postmaxPage);i++){%>
@@ -336,7 +620,7 @@
                     <%}%>
                     <span class="pn_next_btn <%=nextBtnEnabled?'':'none'%>" onclick="location.href='/user/index/<%=user.id+getPostQueryString(false, {postpage:startpage+offset})%>'">
                       <a class="a_pointerAndunderline_black"> 다음 </a>
-                      <h4> > </h4>
+                      <a class="direction a_basic"> > </a>
                     </span>
                   </div>
                 </div>
@@ -344,14 +628,14 @@
               </div>
               <div class="ui_type">
                 <div class="ui_post_header">
-                  <h4 class="ui_type_title"> 댓글 <%=commentcount%> </h4>
+                  <a class="ui_type_title a_basic"> 댓글 <%=commentcount%> </a>
                 </div>
                 <div class="ui_comment_content">
                   <table>
-                    <colgroup>
-                      <col style="width:300px;">
-                      <col style="width:400px;">
-                      <col style="width:100px;">
+                    <colgroup class="table_colgroup">
+                      <col>
+                      <col>
+                      <col>
                     </colgroup>
                     <thead>
                       <tr id="CommentTableTitle">
@@ -389,9 +673,10 @@
                       <% }) %>
                     </tbody>
                   </table>
-
                   <% if(comments.length==0) { %>
-                    <h6 class="msg_nodata"> 해당하는 데이터가 존재하지 않습니다. </h6>
+                    <div class="msg_nodata">
+                      <a class="a_basic"> 해당하는 데이터가 존재하지 않습니다. </a>
+                    </div>
                   <% } %>
                 </div>
                 <div class="ui_post_footer">
@@ -403,7 +688,7 @@
                       var nextBtnEnabled = commentmaxPage>startpage+offset-1 && commentcurrentPage<startpage+offset;
                     %>
                     <span class="pn_prev_btn <%=previousBtnEnabled?'':'none'%>" onclick="location.href='/user/index/<%=user.id+getPostQueryString(false, {commentpage:startpage-1})%>'">
-                      <h4> < </h4>
+                      <a class="direction a_basic"> < </a>
                       <a class="a_pointerAndunderline_black"> 이전 </a>
                     </span>
                     <% for(i=startpage;i<=Math.min(startpage+offset-1, commentmaxPage);i++){%>
@@ -411,7 +696,7 @@
                     <%}%>
                     <span class="pn_next_btn <%=nextBtnEnabled?'':'none'%>" onclick="location.href='/user/index/<%=user.id+getPostQueryString(false, {commentpage:startpage+offset})%>'">
                       <a class="a_pointerAndunderline_black"> 다음 </a>
-                      <h4> > </h4>
+                      <a class="direction a_basic"> > </a>
                     </span>
                   </div>
                 </div>
