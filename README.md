@@ -9,7 +9,7 @@ HTML, CSS, Javascript(Jquery), Node JS(Express, Mongoose)
 - Login, Register
   - Nodemailer를 통한 이메일 인증 방식
   - pw는 Hash 보안처리되어 저장
-- Nickname Update, Leave
+- User Update, Leave
 - User Indexing
   - 특정 유저의 정보와 작성했던 게시글, 댓글 열람
 - Find ID, PW
