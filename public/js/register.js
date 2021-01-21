@@ -128,18 +128,20 @@ $(document).ready(function(){
   JQregisterBtn.click(function(e){
     if($('.tou_checkbox').prop("checked")){
       e.preventDefault();
-      alert('ssl 처리를 하지 않아 개인정보수집이 불가능하여, 회원가입 기능을 막아두었습니다.');
-      /*
-      if (IsVaild()){
-        post_to_url('/register',
-        {
-          id:$('#id').val(),
-          nickname:$('#nickname').val(),
-          password:$('#password').val(),
-          email:$('#email').val()
-        },
-      'post');
-    }*/
+      if(document.location.protocol=='http:'){
+        alert('현재 SSL 처리가 되지 않은 상태로, 개인정보수집이 불가능하여 회원가입 기능이 비활성화 되었습니다.');
+      }else if(document.location.protocol=='https:'){
+        if (IsVaild()){
+          post_to_url('/register',
+          {
+            id:$('#id').val(),
+            nickname:$('#nickname').val(),
+            password:$('#password').val(),
+            email:$('#email').val()
+          },
+        'post');
+        }
+      }
     }
   });
 });
