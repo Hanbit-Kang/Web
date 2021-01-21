@@ -128,6 +128,8 @@ $(document).ready(function(){
   JQregisterBtn.click(function(e){
     if($('.tou_checkbox').prop("checked")){
       e.preventDefault();
+      alert('ssl 처리를 하지 않아 개인정보수집이 불가능하여, 회원가입 기능을 막아두었습니다.');
+      /*
       if (IsVaild()){
         post_to_url('/register',
         {
@@ -137,7 +139,7 @@ $(document).ready(function(){
           email:$('#email').val()
         },
       'post');
-      }
+    }*/
     }
   });
 });
