@@ -70,8 +70,4 @@ router.get('/', async function(req, res){
   });
 });
 
-router.get('/.well-known/pki-validation/8EA3A7504EA52412F4264F541F041394.txt', function(req, res){
-  res.render('.well-known/acme-challenge/8EA3A7504EA52412F4264F541F041394.html');
-});
-
 module.exports = router;
