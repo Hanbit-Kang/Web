@@ -637,6 +637,9 @@
                 </div>
               <% }) %>
             </div>
+            <% if(whoami.passport&&whoami.passport.user.level>=1){ %>
+              <a href="#" class="PC_table delete_btn a_pointerAndunderline_black"> 삭제하기 </a>
+            <% } %>
             <% if(posts.length==0) { %>
               <a class="msg_nodata"> 해당하는 데이터가 존재하지 않습니다. </a>
             <% } %>
