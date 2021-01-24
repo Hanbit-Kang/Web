@@ -10,7 +10,7 @@ HTML, CSS, Javascript, Node JS(Express), MongoDB
     npm i -g nodemon
     nodemon
 
-# 기능(Model을 위주로)
+## 기능(Model을 위주로)
 > ### User
   - Login, Register(Create)
     - Nodemailer를 통한 이메일 인증 방식
