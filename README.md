@@ -24,7 +24,7 @@ HTML, CSS, Javascript, Node JS(Express), MongoDB
   - Level
     - Level을 통해 일반 유저와 관리자를 구분합니다.
     - 관리자 계정으로 접속하면, 유저의 게시글을 삭제할 수도 있고 계정을 일정 기간 동안 정지시킬 수도 있습니다.
-### Post
+> ### Post
   - CRUD
   - Like 
   - 자체 제작한 글 편집기(color, font-size, text-align 수정)
@@ -32,9 +32,9 @@ HTML, CSS, Javascript, Node JS(Express), MongoDB
   - Post Search
     - 제목+내용, 제목, 내용, 작성자 중 하나를 선택하여 검색 범위 지정
     - 일치하는 text에 하이라이트 처리
-### Comment
+> ### Comment
   - CRUD
   - 답글 기능
-### Alert
+> ### Alert
   - 자신의 게시글 및 댓글에 댓글 또는 답글이 생성되었을 경우 Alert 생성
-### Views For Mobile
+> ### Views For Mobile
