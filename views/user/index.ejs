@@ -507,7 +507,7 @@
               </span>
               <span class="up_text">
                 <%if(whoami.passport && whoami.passport.user.level>=1){%>
-                <a class="up_nickname a_basic" onclick="var input_date = prompt('정지 기간을 입력하세요.'); var input_reason = prompt('정지 사유를 입력하세요.'); window.location.href='/user/suspend/<%=user.id%>?date='+input_date+'&reason='+input_reason;"> <%=user.nickname%> </a>
+                <a class="up_nickname a_basic" onclick="var input_date = prompt('정지 기간을 입력하세요.'); var input_reason = prompt('정지 사유를 입력하세요.'); if(input_date) window.location.href='/user/suspend/<%=user.id%>?date='+input_date+'&reason='+input_reason;"> <%=user.nickname%> </a>
                 <%}else{%>
                 <a class="up_nickname a_basic"> <%=user.nickname%> </a>
                 <%}%>
