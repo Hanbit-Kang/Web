@@ -2,15 +2,15 @@
 Classic Music에 대한 커뮤니티 컨셉의 프로젝트로, 2020년 10월에 html부터 시작한 웹 공부의 첫 성과물입니다.
 해당 CRUD 프로젝트의 제작 기간은 2020.12-2021.01, 약 한 달간 진행되었습니다.
 
-## 개발환경
-HTML, CSS, Javascript, Node JS(Express), MongoDB
+![main](https://user-images.githubusercontent.com/58168528/131151734-49e21d0d-c179-4b6a-b068-a8d74ef1a534.png)
+
 
 ## Installation & Run
     npm i
     npm i -g nodemon
     nodemon
 
-## 기능(Model을 위주로)
+## 기능
 > ### User
   - Login, Register(Create)
     - Nodemailer를 통한 이메일 인증 방식
@@ -38,3 +38,6 @@ HTML, CSS, Javascript, Node JS(Express), MongoDB
 > ### Alert
   - 자신의 게시글 및 댓글에 댓글 또는 답글이 생성되었을 경우 Alert 생성
 > ### Views For Mobile
+
+## 개발환경
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) 	![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB) ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
